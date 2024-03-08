@@ -4,7 +4,7 @@ import Link from "next/link";
 import "swiper/swiper-bundle.css";
 import { PiCheck } from "react-icons/pi";
 
-export const home = [
+export const homee = [
   { name: "منازل" },
   { name: "شقق" },
   { name: "محال تجارية" },
@@ -63,7 +63,7 @@ export default function Home() {
       <div className="flex justify-center items-center flex-col">
         <h1 className="text-white text-2xl my-5">الأعلا تقييماً</h1>
         <div className="flex flex-row gap-7">
-          {home.map((link, index) => {
+          {homee.map((link, index) => {
             return (
               <div
                 key={index}
