@@ -7,7 +7,6 @@ import MobileSidpar from "./components/mobileSidpar";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/react";
-
 import { Roboto } from 'next/font/google'
  
 const roboto = Roboto({
@@ -29,13 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={roboto.className}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* تحديد أيقونة الموقع هنا */}
         <link rel="icon" href="/icon.png" />
       </Head>
-      <body className={roboto.className}>
+      <body>
         <div>
           <Header />
           <div className="hidden xl:block">
