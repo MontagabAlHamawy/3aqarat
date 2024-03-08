@@ -5,11 +5,11 @@ import "swiper/swiper-bundle.css";
 import { PiCheck } from "react-icons/pi";
 
 export const hom = [
-  { name: "منازل" },
-  { name: "شقق" },
-  { name: "محال تجارية" },
-  { name: "أراضي" },
-  { name: "محاضر" },
+  { name: "منازل", title: "" },
+  { name: "شقق", title: "" },
+  { name: "محال تجارية", title: "" },
+  { name: "أراضي", title: "" },
+  { name: "محاضر", title: "" },
 ];
 
 export const whyus = [
@@ -151,7 +151,13 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <Image width={370} height={0} alt="logo" className="mb-10" src={'/home/hero.png'}/>
+          <Image
+            width={370}
+            height={0}
+            alt="logo"
+            className="mb-10"
+            src={"/home/hero.png"}
+          />
         </div>
       </div>
     </div>
