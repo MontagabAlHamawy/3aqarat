@@ -4,10 +4,11 @@ import Link from "next/link";
 import "swiper/swiper-bundle.css";
 import { PiCheck } from "react-icons/pi";
 import { house, whyus, hom } from "./components/links";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className="p-0 mt-32 mx-4 xl:mx-10 h-[150vh]">
+    <div className="mt-16 xl:mt-32 m-0  px-4 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
         <h1 className="text-white text-xl font-bold xl:font-medium xl:text-3xl w-full xl:w-[50%]">
           مرحباً بك في عالم العقارات، حيث ينتظرك منزل أحلامك. ابحث، اكتشف، واختر
@@ -17,7 +18,7 @@ export default function Home() {
           <p className="mb-10">
             خدمة وخبرة استثنائية , نحن الحل المثالي لتعثر على منزل احلامك{" "}
           </p>
-          <Link href={"/"}>
+          <Link href={"/building"}>
             <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
               عرض المنازل
             </div>
@@ -33,8 +34,8 @@ export default function Home() {
           className="w-96 xl:w-[1080px]"
         />
       </div>
-      <div className="flex justify-center items-center flex-col">
-        <h1 className="text-white text-2xl my-5">الأعلا تقييماً</h1>
+      <div className="flex justify-center items-center flex-col ">
+        <h1 className="text-white text-2xl my-5">الأعلى تقييماً</h1>
         <div className="grid grid-cols-2 xl:grid-cols-5 gap-x-5 gap-y-5 xl:gap-x-16 xl:mb-6">
           {hom.map((link, index) => {
             return (
@@ -47,7 +48,7 @@ export default function Home() {
             );
           })}
         </div>
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 my-5  ">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 my-5 w-full">
           {house.map((houss, index) => {
             return (
               <div key={index} className="bg-sidpar rounded-xl ">
@@ -74,7 +75,7 @@ export default function Home() {
             );
           })}
         </div>
-        <Link href={"/"}>
+        <Link href={"/building"}>
           <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
             عرض المزيد
           </div>

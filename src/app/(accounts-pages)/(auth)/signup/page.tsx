@@ -5,8 +5,9 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import apiUrl from "../utils/apiConfig";
+import apiUrl from "../../../utils/apiConfig";
 import { PiEyeThin, PiEyeSlashThin } from "react-icons/pi";
+import Image from "next/image";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -55,7 +56,9 @@ const SignUp = () => {
       <div className="flex flex-col xl:flex-row-reverse xl:px-20 items-center justify-center">
         {/* القسم الأول: الصورة */}
         <div className="xl:w-1/2 xl:pr-8 mb-4 xl:mb-0">
-          <img
+        <Image
+          width={400}
+          height={0}
             src="/sinup/signup.png" // قم بتعيين مسار الصورة الخاصة بك هنا
             alt="صورة تسجيل الدخول"
             className="w-[400px] h-auto"

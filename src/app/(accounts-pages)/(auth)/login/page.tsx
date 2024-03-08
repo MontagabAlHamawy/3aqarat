@@ -3,8 +3,9 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import apiUrl from "../utils/apiConfig";
+import apiUrl from "../../../utils/apiConfig";
 import { PiEyeThin, PiEyeSlashThin } from "react-icons/pi";
+import Image from "next/image";
 
 const Login = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
@@ -39,7 +40,9 @@ const Login = () => {
       <div className="flex flex-col xl:flex-row-reverse xl:px-20 items-center justify-start xl:justify-center">
         {/* القسم الأول: الصورة */}
         <div className="xl:w-1/2 xl:pr-8 mb-4 xl:mb-0">
-          <img
+          <Image
+          width={400}
+          height={0}
             src="/login/login.png" // قم بتعيين مسار الصورة الخاصة بك هنا
             alt="صورة تسجيل الدخول"
             className="w-[400px] h-auto"
@@ -90,11 +93,18 @@ const Login = () => {
             </button>
           </form>
 
-          <Link href="/signup">
+         <div className="flex flex-row justify-between items-center gap-3">
+         <Link href="/signup">
             <p className="mt-4 mb-5 xl:mb-0 cursor-pointer text-accent">
               تسجيل مستخدم جديد
             </p>
           </Link>
+          <Link href="/forget-password">
+            <p className="mt-4 mb-5 xl:mb-0 cursor-pointer text-accent">
+              نسيت كلمة المرور
+            </p>
+          </Link>
+         </div>
         </div>
       </div>
     </div>

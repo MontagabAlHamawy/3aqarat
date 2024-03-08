@@ -45,7 +45,10 @@ body{
     @apply text-primary bg-body font-sans;
   }
   p {
-    @apply text-secondary;
+    @apply text-white;
+  }
+  div {
+    @apply text-white;
   }
   .h1 {
     @apply text-4xl xl:text-[64px] text-primary xl:leading-[72px] font-extrabold mb-[18px];

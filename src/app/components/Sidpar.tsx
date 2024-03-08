@@ -42,7 +42,7 @@ function Sidpar() {
       >
         <Link
           href="/"
-          className={`bg-body rounded-xl mt-8 mb-[-5px] cursor-pointer flex flex-row items-center  gap-x-3 w-full
+          className={`bg-body rounded-xl mt-1 mb-[-5px] cursor-pointer flex flex-row items-center  gap-x-3 w-full
         ${sidebarWidth === 16 ? "justify-center" : "justify-start"}
       `}
         >

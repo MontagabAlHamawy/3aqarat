@@ -1,19 +1,18 @@
+
 import {
   PiHouse,
   PiUser,
   PiBuildings,
   PiHeart,
-  PiBellSimpleThin,
-  PiSpeakerHigh,
+  PiMegaphone,
 } from "react-icons/pi";
 
 export const navData = [
   { name: "الرئيسية", path: "/", icone: <PiHouse /> },
   { name: "العقارات", path: "/building", icone: <PiBuildings /> },
-  { name: "حسابي", path: "/login", icone: <PiUser /> },
+  { name: "حسابي", path: "/account", icone: <PiUser /> },
   { name: "المفضلة", path: "/love", icone: <PiHeart /> },
-//   { name: "الاشعارات", path: "/signup", icone: <PiBellSimpleThin /> },
-  { name: "مطلوي", path: "/my-requests", icone: <PiSpeakerHigh /> },
+  { name: "مطلوب", path: "/my-requests", icone: <PiMegaphone /> },
 ];
 
 export const house = [
@@ -47,8 +46,8 @@ export const hom = [
 
 export const whyus = [
   {
-    title: "اسعار مقبولة",
-    discrep: "اسعار مقبولة اسعار مقبولة اسعار مقبولة اسعار مقبولة اسعار مقبولة",
+    title: "أسعار مقبولة",
+    discrep: "أسعار مقبولة أسعار مقبولة أسعار مقبولة أسعار مقبولة أسعار مقبولة",
   },
   {
     title: "نضمن جودة خدمة عالى",
@@ -66,3 +65,4 @@ export const whyus = [
       " نمنح ثقة متبادلة نمنح ثقة متبادلة نمنح ثقة متبادلة نمنح ثقة متبادلةنمنح ثقة متبادلة",
   },
 ];
+
