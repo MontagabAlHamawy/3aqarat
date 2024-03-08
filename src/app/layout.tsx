@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 import Sidpar from "./components/Sidpar";
@@ -8,7 +8,15 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
+import { Roboto } from 'next/font/google'
+ 
+const roboto = Roboto({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+})
+ 
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,9 +35,9 @@ export default function RootLayout({
         {/* تحديد أيقونة الموقع هنا */}
         <link rel="icon" href="/icon.png" />
       </Head>
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <div>
-          {/* <Header /> */}
+          <Header />
           <div className="hidden xl:block">
             <Sidpar />
           </div>

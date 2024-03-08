@@ -17,7 +17,7 @@ function Sidpar() {
 
   return (
     <div
-      className={`flex flex-col  justify-center xl:justify-start gap-y-4 top-0 fixed h-max bg-transparent xl:bg-sidpar z-20 w-full xl:h-[100vh]
+      className={`flex flex-col  justify-center xl:justify-start gap-y-4 top-0 fixed h-max bg-transparent xl:bg-sidpar z-50 w-full xl:h-[100vh]
       ${
         sidebarWidth === 16
           ? "items-center xl:w-16"

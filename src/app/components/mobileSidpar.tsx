@@ -27,7 +27,7 @@ export default function MobileSidpar() {
         {navData.map((link, index) => {
           const isActive = route === link.path;
           return (
-            <Link href={link.path} key={index} className={`flex flex-col items-center ${isActive ? 'bg-accent py-1 px-2 rounded-md' : 'text-gray-400'}`}>
+            <Link href={link.path} key={index} className={`flex flex-col items-center ${isActive ? 'bg-accent p-3  rounded-full w-16 h-16 mt-[-40px]' : 'text-gray-400'}`}>
               <p className={`text-lg ${isActive ? 'text-white' : 'text-gray-400'}`}>{link.icone}</p>
               <p className={`text-sm ${isActive ? 'text-white' : 'text-gray-400'}`}>{link.name}</p>
             </Link>
