@@ -1,21 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import {
-  PiHouse,
-  PiUser,
-  PiCode,
-  PiCaretDoubleLeftBold,
-  PiCaretDoubleRightBold,
-} from "react-icons/pi";
+import { PiCaretDoubleLeftBold, PiCaretDoubleRightBold } from "react-icons/pi";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-
-export const navData = [
-  { name: "الرئيسية", path: "/", icone: <PiHouse /> },
-  { name: "تسجيل الدخول", path: "/login", icone: <PiUser /> },
-  { name: "تسجيل", path: "/signup", icone: <PiCode /> },
-];
+import Image from "next/image";
+import { navData } from "./links.js";
 
 function Sidpar() {
   const route = usePathname();
@@ -56,7 +46,13 @@ function Sidpar() {
         ${sidebarWidth === 16 ? "justify-center" : "justify-start"}
       `}
         >
-          <img src="/3aqarat1.png" className="w-10 m-2" />
+          <Image
+            width={200}
+            height={200}
+            alt="icon"
+            src="/3aqarat1.png"
+            className="w-10 h-10 m-2"
+          />
           <p
             className={`text-2xl text-accent
           ${sidebarWidth === 16 ? "hidden" : "block"}

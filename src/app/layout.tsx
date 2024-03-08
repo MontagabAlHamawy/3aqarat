@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
+import { Roboto_Mono  } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 import Sidpar from "./components/Sidpar";
+import MobileSidpar from "./components/mobileSidpar";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+export const roboto = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,22 +27,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      {/* تحديد أيقونة الموقع هنا */}
-      <link rel="icon" href="/icon.png" />
-    </Head>
-    <body className={inter.className}>
-      <div>
-        {/* <Header /> */}
-        <Sidpar />
-        <div className="wrapper min-h-[100vh] xl:min-h-[92vh] py-10 xl:pr-20 xl:pt-10">
-          {children}
-          <Analytics />
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* تحديد أيقونة الموقع هنا */}
+        <link rel="icon" href="/icon.png" />
+      </Head>
+      <body className={roboto.className}>
+        <div>
+          {/* <Header /> */}
+          <div className="hidden xl:block">
+            <Sidpar />
+          </div>
+          <div className="block xl:hidden">
+            <MobileSidpar />
+          </div>
+          <div className="wrapper min-h-[100vh] xl:min-h-[92vh] py-10 xl:pr-20 xl:pt-10">
+            {children}
+            <Analytics />
+          </div>
+          {/* <Footer /> */}
         </div>
-        <Footer />
-      </div>
-    </body>
-  </html>
+      </body>
+    </html>
   );
 }
