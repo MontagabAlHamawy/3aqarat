@@ -36,7 +36,7 @@ export default function RootLayout({
       </Head>
       <body>
         <div>
-          <Header />
+          {/* <Header /> */}
           <div className="hidden xl:block">
             <Sidpar />
           </div>
