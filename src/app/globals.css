@@ -5,7 +5,7 @@
 *{
   font-family: 'Cairo',sans-serif;
 }
-body{
+body {
   direction: rtl;
 }
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,

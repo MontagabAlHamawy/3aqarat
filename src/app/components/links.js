@@ -66,3 +66,99 @@ export const whyus = [
   },
 ];
 
+export const houses = [
+  {
+    img: "/home/gg.jpg",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "200$",
+  },
+  {
+    img: "/home/rr.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "1300$",
+  },
+  {
+    img: "/home/qwe.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },
+  {
+    img: "/home/we.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },
+  {
+    img: "/home/gg.jpg",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "200$",
+  },
+  {
+    img: "/home/rr.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "1300$",
+  },
+  {
+    img: "/home/qwe.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },
+  {
+    img: "/home/we.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },{
+    img: "/home/gg.jpg",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "200$",
+  },
+  {
+    img: "/home/rr.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "1300$",
+  },
+  {
+    img: "/home/qwe.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },
+  {
+    img: "/home/we.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },{
+    img: "/home/gg.jpg",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "200$",
+  },
+  {
+    img: "/home/rr.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "1300$",
+  },
+  {
+    img: "/home/qwe.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },
+  {
+    img: "/home/we.png",
+    title: "مدينة الاحلام ",
+    discrep: "مساحة 250 م مفروش ",
+    prise: "670$",
+  },
+];
