@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-  font-family: 'Cairo',sans-serif;
-}
-body {
+body{
+  font-family: "Cairo", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   direction: rtl;
 }
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,

@@ -10,9 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Cairo } from "next/font/google";
 
 const cairo = Cairo({
-  weight: '400',
   subsets: ['latin'],
-  display: 'swap',
 });
 
 export const metadata: Metadata = {
