@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 body{
-  font-family: "Cairo", sans-serif;
+  /* font-family: "Cairo", sans-serif;
   font-optical-sizing: auto;
-  font-style: normal;
+  font-style: normal; */
   direction: rtl;
 }
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
