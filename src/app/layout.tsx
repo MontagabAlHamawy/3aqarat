@@ -30,7 +30,7 @@ export default function RootLayout({
         {/* تحديد أيقونة الموقع هنا */}
         <link rel="icon" href="/icon.png" />
       </Head>
-      <body>
+      <body className={cairo.className}>
         <div>
           <Header />
           <div className="hidden xl:block">

@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 body{
-  font-family: "Cairo", sans-serif;
   direction: rtl;
 }
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
