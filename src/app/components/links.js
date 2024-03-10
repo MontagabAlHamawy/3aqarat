@@ -16,25 +16,32 @@ export const navData = [
 
 export const house = [
   {
-    img: "/home/gg.jpg",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "200$",
-    link:'/buildings/house'
+    img: "/home/psd.jpg",
+    title: "شقة سكنية",
+    discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
+    prise: "450K ل.س",
+    link: "/buildings/flat",
   },
   {
     img: "/home/rr.png",
     title: "منزل",
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
-    link:'/buildings/house'
+    link: "/buildings/house",
   },
   {
-    img: "/home/qwe.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
+    img: "/home/store.jpg",
+    title: "محل تجاري ",
+    discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
+    prise: "1M ل.س",
+    link: "/buildings/store",
+  },
+  {
+    img: "/home/land.jpg",
+    title: "أرض سكنية ",
+    discrep: "أرض سكنية طابو أخضر ",
+    prise: "120M ل.س",
+    link: "/buildings/land",
   },
 ];
 
@@ -59,131 +66,200 @@ export const whyus = [
   },
   {
     title: "حجز مباشر",
-    discrep:
-      "يمكنك ان تقوم بحجز وحدتك عبر الموقع الالكتروني بضغطة واحدة",
+    discrep: "يمكنك ان تقوم بحجز وحدتك عبر الموقع الالكتروني بضغطة واحدة",
   },
   {
     title: "أماكن مميزة",
-    discrep:
-      "يمكنك البحث عن العقار في المناطق التي تفضل السكن فيها",
+    discrep: "يمكنك البحث عن العقار في المناطق التي تفضل السكن فيها",
   },
 ];
 
 export const houses = [
   {
-    img: "/home/gg.jpg",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "200$",
-    link:'/buildings/house'
+    img: "/home/psd.jpg",
+    title: "شقة سكنية",
+    discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
+    prise: "450K ل.س",
+    link: "/buildings/flat",
   },
   {
     img: "/home/rr.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "1300$",
-    link:'/buildings/house'
+    title: "منزل",
+    discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
+    prise: "210M ل.س",
+    link: "/buildings/house",
   },
   {
-    img: "/home/qwe.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
+    img: "/home/store.jpg",
+    title: "محل تجاري ",
+    discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
+    prise: "1M ل.س",
+    link: "/buildings/store",
   },
   {
-    img: "/home/we.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
+    img: "/home/land.jpg",
+    title: "أرض سكنية ",
+    discrep: "أرض سكنية طابو أخضر ",
+    prise: "120M ل.س",
+    link: "/buildings/land",
   },
   {
-    img: "/home/gg.jpg",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "200$",
-    link:'/buildings/house'
+    img: "/home/building.png",
+    title: "محضر سكني ",
+    discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
+    prise: "2.100M ل.س",
+    link: "/buildings/building",
   },
   {
-    img: "/home/rr.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "1300$",
-    link:'/buildings/house'
-  },
-  {
-    img: "/home/qwe.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
-  },
-  {
-    img: "/home/we.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
-  },
-  {
-    img: "/home/gg.jpg",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "200$",
-    link:'/buildings/house'
+    img: "/home/psd.jpg",
+    title: "شقة سكنية",
+    discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
+    prise: "450K ل.س",
+    link: "/buildings/flat",
   },
   {
     img: "/home/rr.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "1300$",
-    link:'/buildings/house'
+    title: "منزل",
+    discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
+    prise: "210M ل.س",
+    link: "/buildings/house",
   },
   {
-    img: "/home/qwe.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
+    img: "/home/store.jpg",
+    title: "محل تجاري ",
+    discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
+    prise: "1M ل.س",
+    link: "/buildings/store",
   },
   {
-    img: "/home/we.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
+    img: "/home/land.jpg",
+    title: "أرض سكنية ",
+    discrep: "أرض سكنية طابو أخضر ",
+    prise: "120M ل.س",
+    link: "/buildings/land",
   },
   {
-    img: "/home/gg.jpg",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "200$",
-    link:'/buildings/house'
+    img: "/home/building.png",
+    title: "محضر سكني ",
+    discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
+    prise: "2.100M ل.س",
+    link: "/buildings/building",
+  },
+  {
+    img: "/home/psd.jpg",
+    title: "شقة سكنية",
+    discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
+    prise: "450K ل.س",
+    link: "/buildings/flat",
   },
   {
     img: "/home/rr.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "1300$",
-    link:'/buildings/house'
+    title: "منزل",
+    discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
+    prise: "210M ل.س",
+    link: "/buildings/house",
   },
   {
-    img: "/home/qwe.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
+    img: "/home/store.jpg",
+    title: "محل تجاري ",
+    discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
+    prise: "1M ل.س",
+    link: "/buildings/store",
   },
   {
-    img: "/home/we.png",
-    title: "مدينة الاحلام ",
-    discrep: "مساحة 250 م مفروش ",
-    prise: "670$",
-    link:'/buildings/house'
+    img: "/home/land.jpg",
+    title: "أرض سكنية ",
+    discrep: "أرض سكنية طابو أخضر ",
+    prise: "120M ل.س",
+    link: "/buildings/land",
+  },
+  {
+    img: "/home/building.png",
+    title: "محضر سكني ",
+    discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
+    prise: "2.100M ل.س",
+    link: "/buildings/building",
   },
 ];
 
-export const HouseInfo =[
-  {title:'منزل',discrep:'منزل مجهز بافضل الخدمات وبتصميم مميز',numRoom:'3',size:'105',direction:'غربي',numFloor:'1',sizeGarden:'30',prise:'210.000.000',display:'للبيع',place:'حمص - الوعر',image:'/home/rr.png',seller:'مكتب النور',imageSeller:'/6.png',sellerNum:'00963945866342'}
-]
+export const HouseInfo = [
+  {
+    title: "منزل",
+    discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
+    numRoom: "3",
+    size: "105",
+    direction: "غربي",
+    numFloor: "1",
+    sizeGarden: "30",
+    prise: "210.000.000",
+    display: "للبيع",
+    place: "حمص - الوعر",
+    image: "/home/rr.png",
+    seller: "مكتب النور",
+    imageSeller: "/6.png",
+    sellerNum: "00963945866342",
+  },
+];
+export const FlatInfo = [
+  {
+    title: "شقة سكنية",
+    discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
+    numRoom: "2",
+    size: "90",
+    direction: "شرقي",
+    numFloor: "3",
+    prise: "450.000",
+    display: "للإجار",
+    place: "دمشق - دوما",
+    image: "/home/psd.jpg",
+    seller: "أحمد سعيد",
+    imageSeller: "/6.png",
+    sellerNum: "00963945865342",
+  },
+];
+export const StoreInfo = [
+  {
+    title: "محل تجاري",
+    discrep: "محل تجاري مجهز وعلى شارع رئيسي",
+    size: "50",
+    direction: "جنوبي",
+    prise: "1.000.000",
+    display: "للإجار",
+    place: "دمشق - مزة86",
+    image: "/home/store.jpg",
+    seller: "مكتب الإخلاص",
+    imageSeller: "/6.png",
+    sellerNum: "00963937785439",
+  },
+];
+export const LandInfo = [
+  {
+    title: "أرض سكنية",
+    discrep: "أرض سكنية طابو أخضر",
+    size: "470",
+    prise: "120.000.000",
+    display: "للبيع",
+    place: "حمص - الأوراس",
+    image: "/home/land.jpg",
+    seller: "Mohammad Ahmad",
+    imageSeller: "/6.png",
+    sellerNum: "00963937785439",
+  },
+];
+export const BuildingInfo = [
+  {
+    title: "محضر سكني",
+    discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية",
+    numFlat: "6",
+    FlatSize: "100",
+    direction: "غربي",
+    numFloor: "3",
+    prise: "2.100.000.000",
+    display: "للبيع",
+    place: "حمص - الوعر",
+    image: "/home/building.png",
+    seller: "مكتب النور",
+    imageSeller: "/6.png",
+    sellerNum: "00963945866342",
+  },
+];

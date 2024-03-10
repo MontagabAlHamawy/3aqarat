@@ -15,7 +15,7 @@ export default function Home() {
           سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
           العقاريين الذين يتمتعون بخبرة ف بلا شك ان{" "}
           <span className="text-accent">3aqarat</span> سوف تقوم بارشادك بكل خطوة
-          لضمان حصولك على تحربة عقارية ناجحة والخصول على رضائك
+        لضمان حصولك على تجربة عقارية ناجحة والحصول على رضاك
         </h1>
         <div className="flex justify-center  items-center flex-col  xl:mt-10">
           <p className="mb-10 text-center xl:text-right text-base xl:text-xl">
@@ -59,7 +59,7 @@ export default function Home() {
             );
           })}
         </div>
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 my-5 w-full">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 my-5 w-full">
           {house.map((houss, index) => {
             return (
               <Link href={houss.link} key={index} className="bg-sidpar rounded-xl ">
