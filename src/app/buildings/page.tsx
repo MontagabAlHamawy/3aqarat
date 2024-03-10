@@ -9,7 +9,7 @@ export default function Building() {
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
         <h1 className="text-2xl">العقارات</h1>
       </div>
-      <div className="grid grid-cols-2 xl:grid-cols-5 gap-x-5 gap-y-5 xl:gap-x-16 xl:mb-6">
+      <div className="grid grid-cols-2 xl:grid-cols-5 gap-x-5 gap-y-5 xl:gap-x-16 xl:mb-6 mt-10">
         {hom.map((link, index) => {
           return (
             <div
