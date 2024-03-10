@@ -1,6 +1,7 @@
 import React from "react";
 import { hom, houses } from "../components/links";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Building() {
   return (
@@ -23,7 +24,7 @@ export default function Building() {
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
       {houses.map((houss, index) => {
         return (
-          <div key={index} className="bg-sidpar rounded-xl ">
+          <Link href={houss.link} key={index} className="bg-sidpar rounded-xl ">
             <Image
               src={houss.img}
               width={1000}
@@ -43,7 +44,7 @@ export default function Building() {
                 عرض
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import apiUrl from "../../../utils/apiConfig";
-import { PiEyeThin, PiEyeSlashThin } from "react-icons/pi";
+import { PiEyeDuotone , PiEyeSlashDuotone} from "react-icons/pi";
 import Image from "next/image";
 
 const SignUp = () => {
@@ -109,7 +109,7 @@ const SignUp = () => {
                 onClick={toggleShowPassword}
                 className="absolute top-12 text-2xl left-2 transform -translate-y-1/2 cursor-pointer text-accent"
               >
-                {showPassword ? <PiEyeSlashThin /> : <PiEyeThin />}
+                {showPassword ? <PiEyeSlashDuotone /> : <PiEyeDuotone />}
               </span>
             </div>
 
@@ -127,7 +127,7 @@ const SignUp = () => {
                 onClick={toggleShowConfirmPassword}
                 className="absolute top-12 left-2 transform -translate-y-1/2 cursor-pointer text-2xl text-accent"
               >
-                {showConfirmPassword ? <PiEyeSlashThin /> : <PiEyeThin />}
+                {showConfirmPassword ? <PiEyeSlashDuotone /> : <PiEyeDuotone />}
               </span>
             </div>
 

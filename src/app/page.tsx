@@ -5,6 +5,7 @@ import "swiper/swiper-bundle.css";
 import { PiCheck } from "react-icons/pi";
 import { house, whyus, hom } from "./components/links";
 import Footer from "./components/Footer";
+import { link } from "fs";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
             خدمات فريدة تميزنا عن غيرنا <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في مهمتك
             وتجعل الامر اكثر مرونة
           </p>
-          <Link href={"/building"}>
+          <Link href={"/buildings"}>
             <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
               عرض المنازل
             </div>
@@ -61,7 +62,7 @@ export default function Home() {
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 my-5 w-full">
           {house.map((houss, index) => {
             return (
-              <div key={index} className="bg-sidpar rounded-xl ">
+              <Link href={houss.link} key={index} className="bg-sidpar rounded-xl ">
                 <Image
                   src={houss.img}
                   width={1000}
@@ -81,11 +82,11 @@ export default function Home() {
                     عرض
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
-        <Link href={"/building"}>
+        <Link href={"/buildings"}>
           <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
             عرض المزيد
           </div>
