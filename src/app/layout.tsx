@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 // import { Inter } from "next/font/google";
-import Head from "next/head";
 import "./globals.css";
 import Sidpar from "./components/Sidpar";
 import MobileSidpar from "./components/mobileSidpar";
@@ -25,11 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cairo.className}>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* تحديد أيقونة الموقع هنا */}
-        <link rel="icon" href="/icon.png" />
-      </Head>
+      
       <body className={cairo.className}>
         <div>
           <Header />

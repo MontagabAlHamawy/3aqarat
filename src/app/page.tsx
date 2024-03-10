@@ -10,13 +10,16 @@ export default function Home() {
   return (
     <div className="mt-16 xl:mt-32 m-0  px-4 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
-        <h1 className="text-white text-xl font-bold xl:font-medium xl:text-3xl w-full xl:w-[50%]">
-          مرحباً بك في عالم العقارات، حيث ينتظرك منزل أحلامك. ابحث، اكتشف، واختر
-          مساحتك الجميلة الآن
+        <h1 className="text-white text-xl font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
+          سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
+          العقاريين الذين يتمتعون بخبرة ف بلا شك ان{" "}
+          <span className="text-accent">3aqarat</span> سوف تقوم بارشادك بكل خطوة
+          لضمان حصولك على تحربة عقارية ناجحة والخصول على رضائك
         </h1>
         <div className="flex justify-center  items-center flex-col  xl:mt-10">
           <p className="mb-10">
-            خدمة وخبرة استثنائية , نحن الحل المثالي لتعثر على منزل احلامك{" "}
+            خدمات فريدة تميزنا عن غيرنا <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في مهمتك
+            وتجعل الامر اكثر مرونة
           </p>
           <Link href={"/building"}>
             <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
@@ -25,13 +28,13 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <div>
+      <div className=" p-2 mt-16 bg-section rounded-xl">
         <Image
-          src={"/ds.png"}
-          width={600}
+          src={"/home/wer.png"}
+          width={1200}
           height={0}
           alt="montagab"
-          className="w-96 xl:w-[1080px]"
+          className=" rounded-xl"
         />
       </div>
       <div className="flex justify-center items-center flex-col ">
@@ -84,7 +87,7 @@ export default function Home() {
       <div className="flex flex-col xl:flex-row justify-between items-center gap-6 mt-10">
         <div>
           <h1 className="text-2xl text-white mb-5 items-center">
-            لماذا تختارنا:
+          المميزات
           </h1>
           <div className="grid grid-cols-2 xl:grid-cols-1 gap-x-5 gap-y-5 xl:gap-x-16">
             {whyus.map((link, index) => {
