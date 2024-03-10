@@ -4,6 +4,7 @@
 
 body{
   direction: rtl;
+  /* font-family: "Cairo", sans-serif; */
 }
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,

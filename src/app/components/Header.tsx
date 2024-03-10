@@ -4,7 +4,7 @@ import { PiUser, PiMagnifyingGlass, PiBellSimpleDuotone } from "react-icons/pi";
 
 function Header() {
   return (
-    <div className="xl:sticky top-0 w-full h-16 bg-sidpar shadow-lg  z-40 xl:pr-20 flex flex-row justify-between items-center">
+    <div className="sticky top-0 w-full h-16 bg-sidpar shadow-lg  z-40 xl:pr-20 flex flex-row justify-between items-center">
       <div>
         <Image
           width={40}

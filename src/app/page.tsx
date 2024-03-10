@@ -8,16 +8,16 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className="mt-16 xl:mt-32 m-0  px-4 xl:px-10 h-full z-40">
+    <div className="mt-14 xl:mt-32 m-0  px-4 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
-        <h1 className="text-white text-xl font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
+        <h1 className="text-white  text-lg text-center xl:text-right font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
           سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
           العقاريين الذين يتمتعون بخبرة ف بلا شك ان{" "}
           <span className="text-accent">3aqarat</span> سوف تقوم بارشادك بكل خطوة
           لضمان حصولك على تحربة عقارية ناجحة والخصول على رضائك
         </h1>
         <div className="flex justify-center  items-center flex-col  xl:mt-10">
-          <p className="mb-10">
+          <p className="mb-10 text-center xl:text-right text-base xl:text-xl">
             خدمات فريدة تميزنا عن غيرنا <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في مهمتك
             وتجعل الامر اكثر مرونة
           </p>
