@@ -23,7 +23,7 @@ export default function MobileSidpar() {
   const route = usePathname();
   return (
     <div className="fixed bottom-0 left-0 w-full bg-sidpar p-2 flex justify-center items-center z-50">
-      <div className="flex flex-row justify-between items-center space-x-4 gap-4">
+      <div className="flex flex-row justify-between items-center space-x-4 gap-4 px-2">
         {navData.map((link, index) => {
           const isActive = route === link.path;
           return (

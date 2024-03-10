@@ -33,8 +33,15 @@ export default function Home() {
           src={"/home/wer.png"}
           width={1200}
           height={0}
-          alt="montagab"
-          className=" rounded-xl"
+          alt="logo"
+          className=" rounded-xl hidden xl:block"
+        />
+        <Image
+          src={"/home/wer2.jpg"}
+          width={600}
+          height={0}
+          alt="logo"
+          className=" rounded-xl block xl:hidden"
         />
       </div>
       <div className="flex justify-center items-center flex-col ">
@@ -84,7 +91,7 @@ export default function Home() {
           </div>
         </Link>
       </div>
-      <div className="flex flex-col xl:flex-row justify-between items-center gap-6 mt-10">
+      <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
         <div>
           <h1 className="text-2xl text-white mb-5 items-center">
           المميزات
@@ -97,7 +104,7 @@ export default function Home() {
                     <PiCheck className="text-2xl font-black ml-8 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <p className="text-white">{link.title}</p>
+                    <p className="text-white text-lg">{link.title}</p>
                     <p className="text-gray-400 text-base">{link.discrep}</p>
                   </div>
                 </div>
@@ -105,9 +112,9 @@ export default function Home() {
             })}
           </div>
         </div>
-        <div>
+        <div >
           <Image
-            width={370}
+            width={400}
             height={0}
             alt="logo"
             className="mb-10"
