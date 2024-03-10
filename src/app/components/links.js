@@ -1,17 +1,17 @@
 import {
-  PiHouse,
-  PiUser,
-  PiBuildings,
-  PiHeart,
-  PiMegaphone,
+  PiHouseDuotone,
+  PiUserDuotone,
+  PiBuildingsDuotone,
+  PiHeartDuotone,
+  PiMegaphoneDuotone,
 } from "react-icons/pi";
 
 export const navData = [
-  { name: "الرئيسية", path: "/", icone: <PiHouse /> },
-  { name: "العقارات", path: "/building", icone: <PiBuildings /> },
-  { name: "حسابي", path: "/account", icone: <PiUser /> },
-  { name: "المفضلة", path: "/love", icone: <PiHeart /> },
-  { name: "مطلوب", path: "/my-requests", icone: <PiMegaphone /> },
+  { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
+  { name: "العقارات", path: "/building", icone: <PiBuildingsDuotone /> },
+  { name: "حسابي", path: "/account", icone: <PiUserDuotone /> },
+  { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
+  { name: "مطلوب", path: "/my-requests", icone: <PiMegaphoneDuotone /> },
 ];
 
 export const house = [

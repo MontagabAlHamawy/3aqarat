@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PiUser, PiMagnifyingGlass, PiBellSimpleDuotone } from "react-icons/pi";
+import { PiUserDuotone, PiMagnifyingGlassDuotone, PiBellSimpleDuotone } from "react-icons/pi";
 
 function Header() {
   return (
@@ -14,18 +14,18 @@ function Header() {
           className="xl:hidden mr-3 "
         />
         <Link href={"/search"}>
-          <PiMagnifyingGlass className="text-4xl text-white p-2 bg-body rounded-md cursor-pointer hidden xl:block " />
+          <PiMagnifyingGlassDuotone className="text-4xl text-white p-2 bg-body rounded-md cursor-pointer hidden xl:block " />
         </Link>
       </div>
       <div className="mx-2 flex flex-row gap-2">
         <Link href={"/search"}>
-          <PiMagnifyingGlass className="text-4xl text-white p-2 bg-body rounded-md cursor-pointer xl:hidden" />
+          <PiMagnifyingGlassDuotone className="text-4xl text-white p-2 bg-body rounded-md cursor-pointer xl:hidden" />
         </Link>
         <Link href={"/notification"}>
           <PiBellSimpleDuotone className="text-4xl text-white p-2 bg-body rounded-md cursor-pointer" />
         </Link>
         <Link href={"/account"}>
-          <PiUser className="text-4xl text-white p-2 bg-body rounded-md cursor-pointer" />
+          <PiUserDuotone className="text-4xl text-white p-2 bg-body rounded-md cursor-pointer" />
         </Link>
       </div>
     </div>
