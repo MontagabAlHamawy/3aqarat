@@ -84,7 +84,7 @@ export default function House() {
                       <p className="text-accent text-lg">
                         <PiParkDuotone />
                       </p>
-                      مساحة الحديقة:
+                      الحديقة:
                     </div>
                     <p className="text-gray-300">
                       {link.sizeGarden}M<sup>2</sup>
