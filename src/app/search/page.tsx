@@ -44,21 +44,23 @@ export default function Search(): JSX.Element {
             <PiMagnifyingGlassDuotone />
           </button>
         </div>
+        <div className="flex flex-row justify-between items-center gap-36">
         <div>
-          <select className="bg-secondary text-accent xl:text-white rounded-md px-1 h-8 focus:outline-none">
+          <select className="bg-secondary text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
             <option value="sale">للبيع</option>
             <option value="rent">للإيجار</option>
             <option value="mortgage">للرهن</option>
           </select>
         </div>
         <div>
-          <select className="bg-secondary text-accent xl:text-white rounded-md px-1 h-8 focus:outline-none">
+          <select className="bg-secondary text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
             <option value="house">منزل</option>
             <option value="flat">شقة</option>
             <option value="building">محضر</option>
             <option value="store">محل</option>
             <option value="land">أرض</option>
           </select>
+        </div>
         </div>
         <div>
           <div className="flex items-center gap-2">
