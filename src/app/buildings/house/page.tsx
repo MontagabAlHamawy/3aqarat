@@ -41,7 +41,7 @@ export default function House() {
                   {link.discrep}
                 </p>
                 <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16">
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2 ">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiRulerDuotone />
@@ -52,7 +52,7 @@ export default function House() {
                       {link.size}M<sup>2</sup>
                     </p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2 ">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiArmchairDuotone />
@@ -61,7 +61,7 @@ export default function House() {
                     </div>
                     <p className="text-gray-300">{link.numRoom}</p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2 ">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiCompassDuotone />
@@ -70,7 +70,7 @@ export default function House() {
                     </div>
                     <p className="text-gray-300">{link.direction}</p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2 ">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiBuildingsDuotone />
@@ -79,7 +79,7 @@ export default function House() {
                     </div>
                     <p className="text-gray-300">{link.numFloor}</p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2 ">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiParkDuotone />
@@ -90,14 +90,14 @@ export default function House() {
                       {link.sizeGarden}M<sup>2</sup>
                     </p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2 ">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiMapPinDuotone />
                       </p>
                       الموقع:
                     </div>
-                    <p className="text-gray-300 w-32">{link.place}</p>
+                    <p className="text-gray-300">{link.place}</p>
                   </div>
                   <p className="text-xl text-accent">{link.prise} ل.س</p>
                 </div>

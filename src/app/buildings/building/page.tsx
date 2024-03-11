@@ -41,8 +41,8 @@ export default function Building() {
                   {link.discrep}
                 </p>
                 <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-1 gap-y-5 xl:gap-x-10">
-                  <div className="flex gap-2 justify-center items-center">
-                    <div className="flex justify-center items-center gap-1">
+                  <div className="flex gap-2">
+                    <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiRulerDuotone />
                       </p>
@@ -52,7 +52,7 @@ export default function Building() {
                       {link.FlatSize}M<sup>2</sup>
                     </p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiHouseDuotone />
@@ -61,7 +61,7 @@ export default function Building() {
                     </div>
                     <p className="text-gray-300">{link.numFlat}</p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiCompassDuotone />
@@ -70,7 +70,7 @@ export default function Building() {
                     </div>
                     <p className="text-gray-300">{link.direction}</p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiBuildingsDuotone />
@@ -79,7 +79,7 @@ export default function Building() {
                     </div>
                     <p className="text-gray-300">{link.numFloor}</p>
                   </div>
-                  <div className="flex gap-2 justify-center items-center">
+                  <div className="flex gap-2">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiMapPinDuotone />
