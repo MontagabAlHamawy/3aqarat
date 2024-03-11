@@ -21,7 +21,7 @@ export default function Home() {
           <p className="mb-10 text-center xl:text-right text-base xl:text-xl">
             خدمات فريدة تميزنا عن غيرنا{" "}
             <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في
-            مهمتك وتجعل الامر أكثر مرونة
+            مهمتك وتجعل الأمر أكثر مرونة
           </p>
           <Link href={"/buildings"}>
             <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
