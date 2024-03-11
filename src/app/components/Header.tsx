@@ -41,12 +41,13 @@ function Header() {
             } rounded-md cursor-pointer xl:hidden`}
           />
         </Link>
-        <Link href={"/notification"}>
+        <Link href={"/notification"} className="relative">
           <PiBellSimpleDuotone
             className={` text-4xl text-white p-2 ${
               notActive ? "bg-accent" : "bg-body "
             } rounded-md cursor-pointer`}
           />
+          <div className="w-2 h-2 bg-red-600 rounded-full absolute top-[-1px] right-[-1px]"></div>
         </Link>
         <Link href={"/account"}>
           <PiUserDuotone

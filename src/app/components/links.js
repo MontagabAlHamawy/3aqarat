@@ -298,3 +298,12 @@ export const add=[
   {title:'شقة للبيع',discrep:'بحاجة شقة للسكن 3 غرف تجهيز ممتاز ',minPrice:'150M ل.س',maxPrice:'210M ل.س',display:'للييع'},
   {title:'منزل للرهن',discrep:'بحاجة منزل للرهن غرفتين',minPrice:'70M ل.س',maxPrice:'79M ل.س',display:'للرهن'}
 ]
+
+export const nots=[
+  {title:'شقة  جديدة',discrep:'تم اضافة شقة  جديدة ',time:'10:02 2024/3/10 ',link:'/buildings/flat'},
+  {title:'منزل جديد',discrep:'تم اضافة منزل جديد ',time:'09:13 2024/3/10 ',link:'/buildings/house'},
+  {title:'محل  جديد',discrep:'تم اضافة محل  جديد ',time:'12:40 2024/3/9 ',link:'/buildings/store'},
+  {title:'أرض  جديدة',discrep:'تم اضافة أرض  جديدة ',time:'05:35 2024/3/4 ',link:'/buildings/land'},
+  {title:'محضر  جديد',discrep:'تم اضافة محضر  جديد ',time:'11:09 2024/3/3 ',link:'/buildings/building'},
+  {title:'منزل جديد',discrep:'تم اضافة منزل جديد ',time:'01:12 2024/3/2 ',link:'/buildings/house'},
+]

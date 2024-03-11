@@ -51,7 +51,7 @@ export default function Requests() {
               placeholder="الحد الأعلى للسعر"
             />
             <div>
-              <select className="bg-secondary text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
+              <select className="bg-section text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
                 <option value="sale">للبيع</option>
                 <option value="rent">للإيجار</option>
                 <option value="mortgage">للرهن</option>

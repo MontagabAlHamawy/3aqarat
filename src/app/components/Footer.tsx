@@ -7,9 +7,9 @@ function Footer() {
       <Link href={"/"}>
         <Image width={100} height={0} src={"/3aqarat.png"} alt="logo" />
       </Link>
-      <p className="text-sm xl:text-base font-extralight text-white/80 xl:ml-5">
-        Made with love <span className="text-accent">❤</span> by Montagab
-        AL-Hamawy
+      <p className="text-center xl:text-right text-base xl:text-sm xl:pl-5">
+        خدمات فريدة تميزنا عن غيرنا <span className="text-accent">3aqarat</span>{" "}
+        من شأنها ان تساعدك في مهمتك وتجعل الامر أكثر مرونة
       </p>
     </div>
   );
