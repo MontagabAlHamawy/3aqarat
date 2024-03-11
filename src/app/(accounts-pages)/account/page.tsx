@@ -1,19 +1,102 @@
+import { UserInfo, house } from "@/app/components/links";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import {
+  PiFacebookLogoDuotone,
+  PiInstagramLogoDuotone,
+  PiTelegramLogoDuotone,
+} from "react-icons/pi";
 
 export default function Acount() {
   return (
-    <div className="flex justify-center items-center felx-col gap-5 xl:gap-10 h-[40vh] xl:h-[70vh]">
-      <Link href={"/login"}>
-        <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
-          تسجيل الدخول
+    <div className="relative">
+      <div>
+        {UserInfo.map((link, index) => {
+          return (
+            <div
+              key={index}
+              className="flex flex-col mt-10 xl:mt-0 xl:flex-row justify-start items-center gap-8"
+            >
+              <div>
+                <Image
+                  src={link.image}
+                  width={290}
+                  height={290}
+                  alt="user"
+                  className="w-80 h-50 rounded-full"
+                />
+              </div>
+              <div className="flex flex-col justify-center items-start gap-3">
+                <h1 className="text-accent text-2xl font-bold">{link.name}</h1>
+                <Link href={`tel:${link.phone}`}>{link.phone}</Link>
+                <div className="flex flex-row justify-center items-center gap-3">
+                  <Link href={link.facebook} className="text-accent text-4xl">
+                    {" "}
+                    <PiFacebookLogoDuotone />{" "}
+                  </Link>
+                  <Link href={link.instagram} className="text-accent text-4xl">
+                    {" "}
+                    <PiInstagramLogoDuotone />{" "}
+                  </Link>
+                  <Link href={link.telegram} className="text-accent text-3xl">
+                    {" "}
+                    <PiTelegramLogoDuotone />{" "}
+                  </Link>
+                </div>
+              </div>
+              <div className="absolute top-[-70px] xl:top-1 lext-20 xl:left-5 flex flex-row xl:flex-col gap-5">
+                <Link href={"/login"}>
+                  <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
+                    تسجيل الدخول
+                  </div>
+                </Link>
+                <Link href={"/signup"}>
+                  <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
+                    تسجيل مستخدم
+                  </div>
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div>
+        <h1 className="text-2xl mt-10 bg-section xl:mr-[-8px]  rounded-t-md py-2 px-3 w-min">
+          عقاراتي
+        </h1>
+        <div className="grid grid-cols-2 xl:grid-cols-4 bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
+          {house.map((houss, index) => {
+            return (
+              <Link
+                href={houss.link}
+                key={index}
+                className="bg-sidpar rounded-xl relative"
+              >
+                <Image
+                  src={houss.img}
+                  width={1000}
+                  height={0}
+                  alt="montagab"
+                  className="w-[1080px] rounded-tl-xl rounded-tr-xl"
+                />
+                <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
+                  {houss.title}
+                </p>
+                <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
+                  {houss.discrep}
+                </p>
+                <div className="flex flex-row justify-between items-center my-3 xl:my-1 mx-5 mb-4">
+                  <p>{houss.prise}</p>
+                </div>
+                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+                  {houss.display}
+                </div>
+              </Link>
+            );
+          })}
         </div>
-      </Link>
-      <Link href={"/signup"}>
-        <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
-          تسجيل مستخدم
-        </div>
-      </Link>
+      </div>
     </div>
   );
 }

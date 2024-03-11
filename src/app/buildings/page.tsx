@@ -27,7 +27,7 @@ export default function Building() {
             <Link
               href={houss.link}
               key={index}
-              className="bg-sidpar rounded-xl "
+              className="bg-sidpar rounded-xl relative"
             >
               <Image
                 src={houss.img}
@@ -36,7 +36,7 @@ export default function Building() {
                 alt="montagab"
                 className="w-[1080px] rounded-tl-xl rounded-tr-xl"
               />
-              <p className="text-lg xl:text-xl text-white mt-2 px-2 xl:px-5">
+              <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
                 {houss.title}
               </p>
               <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
@@ -44,9 +44,9 @@ export default function Building() {
               </p>
               <div className="flex flex-row justify-between items-center my-3 xl:my-1 mx-5 mb-4">
                 <p>{houss.prise}</p>
-                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded hover:scale-110  ease-in duration-300">
-                  عرض
-                </div>
+              </div>
+              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+                {houss.display}
               </div>
             </Link>
           );

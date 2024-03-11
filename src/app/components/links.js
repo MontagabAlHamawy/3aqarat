@@ -13,6 +13,13 @@ export const navData = [
   { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
   { name: "مطلوب", path: "/my-requests", icone: <PiMegaphoneDuotone /> },
 ];
+export const MobData = [
+  { name: "حسابي", path: "/account", icone: <PiUserDuotone /> },
+  { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
+  { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
+  { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
+  { name: "مطلوب", path: "/my-requests", icone: <PiMegaphoneDuotone /> },
+];
 
 export const house = [
   {
@@ -21,6 +28,7 @@ export const house = [
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
+    display: "للإجار",
   },
   {
     img: "/home/rr.png",
@@ -28,6 +36,7 @@ export const house = [
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
+    display: "للبيع",
   },
   {
     img: "/home/store.jpg",
@@ -35,6 +44,7 @@ export const house = [
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
+    display: "للإجار",
   },
   {
     img: "/home/land.jpg",
@@ -42,15 +52,16 @@ export const house = [
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
+    display: "للبيع",
   },
 ];
 
 export const hom = [
-  { name: "منازل", title: "" },
-  { name: "شقق", title: "" },
-  { name: "محال تجارية", title: "" },
-  { name: "أراضي", title: "" },
-  { name: "محاضر", title: "" },
+  { name: "منازل" },
+  { name: "شقق" },
+  { name: "محال تجارية" },
+  { name: "أراضي" },
+  { name: "محاضر" },
 ];
 
 export const whyus = [
@@ -81,6 +92,7 @@ export const houses = [
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
+    display: "للبيع",
   },
   {
     img: "/home/rr.png",
@@ -88,6 +100,7 @@ export const houses = [
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
+    display: "للإجار",
   },
   {
     img: "/home/store.jpg",
@@ -95,6 +108,7 @@ export const houses = [
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
+    display: "للإجار",
   },
   {
     img: "/home/land.jpg",
@@ -102,6 +116,7 @@ export const houses = [
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
+    display: "للبيع",
   },
   {
     img: "/home/building.png",
@@ -109,6 +124,7 @@ export const houses = [
     discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
     prise: "2.100M ل.س",
     link: "/buildings/building",
+    display: "للبيع",
   },
   {
     img: "/home/psd.jpg",
@@ -116,6 +132,7 @@ export const houses = [
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
+    display: "للبيع",
   },
   {
     img: "/home/rr.png",
@@ -123,6 +140,7 @@ export const houses = [
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
+    display: "للإجار",
   },
   {
     img: "/home/store.jpg",
@@ -130,6 +148,7 @@ export const houses = [
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
+    display: "للإجار",
   },
   {
     img: "/home/land.jpg",
@@ -137,6 +156,7 @@ export const houses = [
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
+    display: "للبيع",
   },
   {
     img: "/home/building.png",
@@ -144,6 +164,7 @@ export const houses = [
     discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
     prise: "2.100M ل.س",
     link: "/buildings/building",
+    display: "للبيع",
   },
   {
     img: "/home/psd.jpg",
@@ -151,6 +172,7 @@ export const houses = [
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
+    display: "للبيع",
   },
   {
     img: "/home/rr.png",
@@ -158,6 +180,7 @@ export const houses = [
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
+    display: "للإجار",
   },
   {
     img: "/home/store.jpg",
@@ -165,6 +188,7 @@ export const houses = [
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
+    display: "للإجار",
   },
   {
     img: "/home/land.jpg",
@@ -172,6 +196,7 @@ export const houses = [
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
+    display: "للبيع",
   },
   {
     img: "/home/building.png",
@@ -179,6 +204,7 @@ export const houses = [
     discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
     prise: "2.100M ل.س",
     link: "/buildings/building",
+    display: "للبيع",
   },
 ];
 
@@ -263,3 +289,6 @@ export const BuildingInfo = [
     sellerNum: "00963945866342",
   },
 ];
+export const UserInfo=[
+  {name:'Ahmad Tarek',phone:'00963996742843',facebook:'https://www.facebook.com/',instagram:'https://www.instagram.com/',telegram:'https://t.me/',image:'/user.png'}
+]

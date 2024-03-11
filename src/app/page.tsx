@@ -15,12 +15,13 @@ export default function Home() {
           سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
           العقاريين الذين يتمتعون بخبرة ف بلا شك ان{" "}
           <span className="text-accent">3aqarat</span> سوف تقوم بارشادك بكل خطوة
-        لضمان حصولك على تجربة عقارية ناجحة والحصول على رضاك
+          لضمان حصولك على تجربة عقارية ناجحة والحصول على رضاك
         </h1>
         <div className="flex justify-center  items-center flex-col  xl:mt-10">
           <p className="mb-10 text-center xl:text-right text-base xl:text-xl">
-            خدمات فريدة تميزنا عن غيرنا <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في مهمتك
-            وتجعل الامر اكثر مرونة
+            خدمات فريدة تميزنا عن غيرنا{" "}
+            <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في
+            مهمتك وتجعل الامر اكثر مرونة
           </p>
           <Link href={"/buildings"}>
             <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
@@ -62,7 +63,11 @@ export default function Home() {
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 my-5 w-full">
           {house.map((houss, index) => {
             return (
-              <Link href={houss.link} key={index} className="bg-sidpar rounded-xl ">
+              <Link
+                href={houss.link}
+                key={index}
+                className="bg-sidpar rounded-xl relative "
+              >
                 <Image
                   src={houss.img}
                   width={1000}
@@ -70,7 +75,7 @@ export default function Home() {
                   alt="montagab"
                   className="w-[1080px] rounded-tl-xl rounded-tr-xl"
                 />
-                <p className="text-lg xl:text-xl text-white mt-2 px-2 xl:px-5">
+                <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
                   {houss.title}
                 </p>
                 <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
@@ -78,9 +83,9 @@ export default function Home() {
                 </p>
                 <div className="flex flex-row justify-between items-center my-3 xl:my-1 mx-5 mb-4">
                   <p>{houss.prise}</p>
-                  <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded hover:scale-110  ease-in duration-300">
-                    عرض
-                  </div>
+                </div>
+                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+                  {houss.display}
                 </div>
               </Link>
             );
@@ -94,9 +99,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
         <div>
-          <h1 className="text-2xl text-white mb-5 items-center">
-          المميزات
-          </h1>
+          <h1 className="text-2xl text-white mb-5 items-center">المميزات</h1>
           <div className="grid grid-cols-2 xl:grid-cols-1 gap-x-5 gap-y-5 xl:gap-x-16">
             {whyus.map((link, index) => {
               return (
@@ -113,7 +116,7 @@ export default function Home() {
             })}
           </div>
         </div>
-        <div >
+        <div>
           <Image
             width={400}
             height={0}
