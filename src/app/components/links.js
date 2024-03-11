@@ -11,14 +11,14 @@ export const navData = [
   { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
   { name: "حسابي", path: "/account", icone: <PiUserDuotone /> },
   { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
-  { name: "مطلوب", path: "/my-requests", icone: <PiMegaphoneDuotone /> },
+  { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
 ];
 export const MobData = [
   { name: "حسابي", path: "/account", icone: <PiUserDuotone /> },
   { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
   { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
   { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
-  { name: "مطلوب", path: "/my-requests", icone: <PiMegaphoneDuotone /> },
+  { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
 ];
 
 export const house = [
@@ -291,4 +291,10 @@ export const BuildingInfo = [
 ];
 export const UserInfo=[
   {name:'Ahmad Tarek',phone:'00963996742843',facebook:'https://www.facebook.com/',instagram:'https://www.instagram.com/',telegram:'https://t.me/',image:'/user.png'}
+]
+
+export const add=[
+  {title:'منزل للإجار',discrep:'بحاجة منزل للإجار غرفتين مساحة 90 متر مربع',minPrice:'500 ل.س',maxPrice:'800 ل.س',display:'للإجار'},
+  {title:'شقة للبيع',discrep:'بحاجة شقة للسكن 3 غرف تجهيز ممتاز ',minPrice:'150M ل.س',maxPrice:'210M ل.س',display:'للييع'},
+  {title:'منزل للرهن',discrep:'بحاجة منزل للرهن غرفتين',minPrice:'70M ل.س',maxPrice:'79M ل.س',display:'للرهن'}
 ]
