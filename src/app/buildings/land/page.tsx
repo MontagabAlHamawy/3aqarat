@@ -37,7 +37,7 @@ export default function Land() {
                   {link.discrep}
                 </p>
                 <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-1 gap-y-5 xl:gap-x-10">
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 justify-center items-center">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiRulerDuotone />
@@ -48,14 +48,14 @@ export default function Land() {
                       {link.size}M<sup>2</sup>
                     </p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 justify-center items-center">
                     <div className="flex justify-center items-center gap-1 ">
                       <p className="text-accent text-lg">
                         <PiMapPinDuotone />
                       </p>
                       الموقع:
                     </div>
-                    <p className="text-gray-300">{link.place}</p>
+                    <p className="text-gray-300 w-32">{link.place}</p>
                   </div>
                 </div>
                 <p className="text-xl text-accent">{link.prise} ل.س</p>
