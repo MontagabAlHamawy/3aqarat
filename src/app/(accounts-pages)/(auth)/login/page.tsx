@@ -8,7 +8,7 @@ import { PiEyeDuotone , PiEyeSlashDuotone} from "react-icons/pi";
 import Image from "next/image";
 
 const Login = () => {
-  const [usernameOrEmailnp, setUsernameOrEmail] = useState("");
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
