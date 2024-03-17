@@ -8,11 +8,11 @@ import { PiEyeDuotone , PiEyeSlashDuotone} from "react-icons/pi";
 import Image from "next/image";
 
 const Login = () => {
-  const [usernameOrEmail, setUsernameOrEmail] = useState("");
+  const [usernameOrEmailnp, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-
+  
   const handleLogin = async () => {
     try {
       const response = await axios.post(`${apiUrl}/login`, {

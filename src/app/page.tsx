@@ -30,24 +30,24 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <div className=" p-2 mt-16 bg-section rounded-xl">
+      <div className=" p-2 mt-16 bg-section rounded-xl flex justify-center items-center">
         <Image
           src={"/home/wer.png"}
           width={1200}
           height={0}
           alt="logo"
-          className=" rounded-xl hidden xl:block"
+          className=" rounded-xl hidden md:block"
         />
         <Image
           src={"/home/wer2.jpg"}
           width={600}
           height={0}
           alt="logo"
-          className=" rounded-xl block xl:hidden"
+          className=" rounded-xl block md:hidden "
         />
       </div>
       <div className="flex justify-center items-center flex-col ">
-        <h1 className="text-white text-2xl my-5">الأعلى تقييماً</h1>
+        <h1 className="text-white text-2xl my-5">الأحدث</h1>
         <div className="grid grid-cols-2 xl:grid-cols-5 gap-x-5 gap-y-5 xl:gap-x-16 xl:mb-6">
           {hom.map((link, index) => {
             return (
