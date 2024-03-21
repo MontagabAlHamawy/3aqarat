@@ -1,4 +1,6 @@
 "use client";
+
+import Map, { NavigationControl, GeolocateControl } from "react-map-gl";
 import React, { useState } from "react";
 import { PiMagnifyingGlassDuotone, PiMinus, PiPlus } from "react-icons/pi";
 import Image from "next/image";
@@ -8,6 +10,7 @@ import Link from "next/link";
 export default function Search(): JSX.Element {
   const initialPrice: number = 10000000;
   const [price, setPrice] = useState<number>(initialPrice);
+  const mapboxToken: any = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(parseInt(e.target.value, 10));
@@ -33,7 +36,7 @@ export default function Search(): JSX.Element {
 
   return (
     <div>
-      <div className="flex flex-col xl:flex-row gap-5 justify-center xl:justify-between items-center bg-section xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
+      <div className="flex xl:fixed top-24 w-full px-40 right-10 flex-col xl:flex-row gap-5 xl:gap-40 justify-center items-center bg-section xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
         <div className="flex flex-row items-center justify-center gap-1">
           <input
             type="text"
@@ -45,22 +48,22 @@ export default function Search(): JSX.Element {
           </button>
         </div>
         <div className="flex flex-row justify-between items-center gap-36">
-        <div>
-          <select className="bg-secondary text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
-            <option value="sale">للبيع</option>
-            <option value="rent">للإيجار</option>
-            <option value="mortgage">للرهن</option>
-          </select>
-        </div>
-        <div>
-          <select className="bg-secondary text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
-            <option value="house">منزل</option>
-            <option value="flat">شقة</option>
-            <option value="building">محضر</option>
-            <option value="store">محل</option>
-            <option value="land">أرض</option>
-          </select>
-        </div>
+          <div>
+            <select className="bg-secondary text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
+              <option value="sale">للبيع</option>
+              <option value="rent">للإيجار</option>
+              <option value="mortgage">للرهن</option>
+            </select>
+          </div>
+          <div>
+            <select className="bg-secondary text-black xl:text-white rounded-md px-1 h-8 focus:outline-none">
+              <option value="house">منزل</option>
+              <option value="flat">شقة</option>
+              <option value="building">محضر</option>
+              <option value="store">محل</option>
+              <option value="land">أرض</option>
+            </select>
+          </div>
         </div>
         <div>
           <div className="flex items-center gap-2">
@@ -91,10 +94,10 @@ export default function Search(): JSX.Element {
       </div>
       <div className="flex  justify-center">
         <div className="w-full overflow-y-auto">
-          <div className="flex flex-col xl:flex-row">
-            <div className="sticky xl:w-2/3">
-              <div className="flex justify-center items-center mt-10 xl:h-[70vh]  bg-section mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
-                <div className="flex flex-col gap-3 absolute top-2 right-2">
+          <div className="flex flex-col xl:flex-row-reverse gap-5">
+            <div className="xl:fixed top-[80px] right-[50px] xl:w-2/3">
+              <div className="flex relative justify-center items-center mt-10 xl:h-[70vh]  rounded-md  cursor-pointer">
+                <div className="flex flex-col gap-3 absolute px-10 xl:px-0  top-2 right-[-10px] md:right-14 xl:top-6  xl:right-10">
                   <p className="bg-body rounded-md p-2">
                     <PiPlus />
                   </p>
@@ -104,11 +107,28 @@ export default function Search(): JSX.Element {
                 </div>
                 <Image
                   src={"/map.jpg"}
-                  width={950}
+                  width={850}
                   height={0}
                   alt="map"
                   className="rounded-md"
                 />
+
+                <div>
+                  {/* <Map
+                    mapboxAccessToken={mapboxToken}
+                    mapStyle="mapbox://styles/mapbox/streets-v12"
+                    initialViewState={{
+                      latitude: 35.668641,
+                      longitude: 139.750567,
+                      zoom: 10,
+                    }}
+                    maxZoom={20}
+                    minZoom={3}
+                  >
+                    <GeolocateControl position="top-left" />
+                    <NavigationControl position="top-left" />
+                  </Map> */}
+                </div>
               </div>
             </div>
             <div className="xl:w-1/3 p-4">
