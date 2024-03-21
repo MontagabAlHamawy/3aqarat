@@ -36,7 +36,7 @@ export default function Search(): JSX.Element {
 
   return (
     <div>
-      <div className="flex xl:fixed top-24 w-full px-40 right-10 flex-col xl:flex-row gap-5 xl:gap-40 justify-center items-center bg-section xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
+      <div className="flex xl:fixed top-26 w-full px-40 right-10 flex-col xl:flex-row gap-5 xl:gap-40 justify-center items-center bg-section xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
         <div className="flex flex-row items-center justify-center gap-1">
           <input
             type="text"
@@ -92,10 +92,10 @@ export default function Search(): JSX.Element {
           </div>
         </div>
       </div>
-      <div className="flex  justify-center">
+      <div className="flex justify-center">
         <div className="w-full overflow-y-auto">
           <div className="flex flex-col xl:flex-row-reverse gap-5">
-            <div className="xl:fixed top-[80px] right-[50px] xl:w-2/3">
+            <div className="xl:fixed top-[103px] right-[50px] xl:w-2/3">
               <div className="flex relative justify-center items-center mt-10 xl:h-[70vh]  rounded-md  cursor-pointer">
                 <div className="flex flex-col gap-3 absolute px-10 xl:px-0  top-2 right-[-10px] md:right-14 xl:top-6  xl:right-10">
                   <p className="bg-body rounded-md p-2">
@@ -131,7 +131,7 @@ export default function Search(): JSX.Element {
                 </div>
               </div>
             </div>
-            <div className="xl:w-1/3 p-4">
+            <div className="xl:w-1/3 p-4 mt-6">
               {houses.map((house, index) => {
                 return (
                   <Link
