@@ -7,8 +7,9 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useState } from "react";
 
+type Coordinate = [number, number];
 export default function Map() {
-  const [coord, setCoord] = useState([34.6985, 36.7237]);
+  const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
 
   const SearchLocation = () => {
     return (
@@ -41,10 +42,6 @@ export default function Map() {
       {/* <SearchLocation />
             <GetMyLocation /> */}
       <MapContainer
-        // style={{
-        //   height: "68vh",
-        //   width: "60vw",
-        // }}
         className=" w-[90vw] h-[200px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md"
         center={coord}
         zoom={13}
