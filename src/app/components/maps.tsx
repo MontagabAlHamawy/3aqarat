@@ -7,8 +7,10 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useState } from "react";
 
+type Coordinate = [number, number];
 export default function Maps() {
-  const [coord, setCoord] = useState([34.6985, 36.7237]);
+  const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
+
 
   const SearchLocation = () => {
     return (
