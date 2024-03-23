@@ -11,7 +11,6 @@ type Coordinate = [number, number];
 export default function Maps() {
   const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
 
-
   const SearchLocation = () => {
     return (
       <div className="search-location">
@@ -58,22 +57,21 @@ export default function Maps() {
         />
 
         <Marker
-          icon={
-            new L.Icon({
-              iconUrl: MarkerIcon.src,
-              iconRetinaUrl: MarkerIcon.src,
-              iconSize: [25, 41],
-              iconAnchor: [12.5, 41],
-              popupAnchor: [0, -41],
-              shadowUrl: MarkerShadow.src,
-              shadowSize: [41, 41],
-            })
-          }
-          position={[34.6985, 36.7237]}
-        >
-          <Popup >
-           <p className="text-accent"> A pretty CSS3 popup</p>
-           <p className="text-accent">Easily customizable.</p>
+        icon={
+          new L.Icon({
+            iconUrl: MarkerIcon.src,
+            iconRetinaUrl: MarkerIcon.src,
+            iconSize: [25, 41],
+            iconAnchor: [12.5, 41],
+            popupAnchor: [0, -41],
+            shadowUrl: MarkerShadow.src,
+            shadowSize: [41, 41],
+          })
+        }
+        position={[34.6985, 36.7237]}>
+          <Popup>
+            <p className="text-accent"> A pretty CSS3 popup</p>
+            <p className="text-accent">Easily customizable.</p>
           </Popup>
         </Marker>
       </MapContainer>
