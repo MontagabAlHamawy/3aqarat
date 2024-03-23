@@ -1,4 +1,5 @@
 import { LandInfo } from "@/app/components/links";
+import Maps from "@/app/components/maps";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -82,8 +83,8 @@ export default function Land() {
           );
         })}
       </div>
-      <div className="flex justify-center items-center mt-10 bg-section mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
-        <div className="flex flex-col gap-3 absolute top-2 right-2">
+      <div className="flex justify-center items-center mt-10  mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
+        {/* <div className="flex flex-col gap-3 absolute top-2 right-2">
           <p className="bg-body rounded-md p-2">
             <PiPlus />
           </p>
@@ -97,7 +98,8 @@ export default function Land() {
           height={0}
           alt="map"
           className="rounded-md"
-        />
+        /> */}
+        <Maps/>
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 "use client";
 
-import Map, { NavigationControl, GeolocateControl } from "react-map-gl";
+import { NavigationControl, GeolocateControl } from "react-map-gl";
 import React, { useState } from "react";
 import { PiMagnifyingGlassDuotone, PiMinus, PiPlus } from "react-icons/pi";
 import Image from "next/image";
 import { houses } from "../components/links";
 import Link from "next/link";
+import Map from "@/app/components/map";
 
 export default function Search(): JSX.Element {
   const initialPrice: number = 10000000;
@@ -95,9 +96,10 @@ export default function Search(): JSX.Element {
       <div className="flex justify-center">
         <div className="w-full overflow-y-auto">
           <div className="flex flex-col xl:flex-row-reverse gap-5">
-            <div className="xl:fixed top-[103px] right-[50px] xl:w-2/3">
-              <div className="flex relative justify-center items-center mt-10 xl:h-[70vh]  rounded-md  cursor-pointer">
-                <div className="flex flex-col gap-3 absolute px-10 xl:px-0  top-2 right-[-10px] md:right-14 xl:top-6  xl:right-10">
+            <div className="xl:fixed xl:top-[110px] xl:right-[50px] xl:w-2/3">
+              <div className="flex relative justify-center items-center mt-3 xl:mt-10 xl:h-[70vh]  rounded-md  cursor-pointer">
+                <div>
+                  {/* <div className="flex flex-col gap-3 absolute px-10 xl:px-0  top-2 right-[-10px] md:right-14 xl:top-6  xl:right-10">
                   <p className="bg-body rounded-md p-2">
                     <PiPlus />
                   </p>
@@ -111,27 +113,14 @@ export default function Search(): JSX.Element {
                   height={0}
                   alt="map"
                   className="rounded-md"
-                />
-
+                /> */}
+                </div>
                 <div>
-                  {/* <Map
-                    mapboxAccessToken={mapboxToken}
-                    mapStyle="mapbox://styles/mapbox/streets-v12"
-                    initialViewState={{
-                      latitude: 35.668641,
-                      longitude: 139.750567,
-                      zoom: 10,
-                    }}
-                    maxZoom={20}
-                    minZoom={3}
-                  >
-                    <GeolocateControl position="top-left" />
-                    <NavigationControl position="top-left" />
-                  </Map> */}
+                  <Map />
                 </div>
               </div>
             </div>
-            <div className="xl:w-1/3 p-4 mt-6">
+            <div className="xl:w-1/3 p-4 mt-[-20px] xl:mt-6">
               {houses.map((house, index) => {
                 return (
                   <Link
