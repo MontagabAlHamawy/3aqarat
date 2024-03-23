@@ -71,8 +71,9 @@ export default function Maps() {
           }
           position={[34.6985, 36.7237]}
         >
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+          <Popup >
+           <p className="text-accent"> A pretty CSS3 popup</p>
+           <p className="text-accent">Easily customizable.</p>
           </Popup>
         </Marker>
       </MapContainer>
