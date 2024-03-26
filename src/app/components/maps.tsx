@@ -6,6 +6,9 @@ import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shado
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { FlatInfo } from "./links";
 
 type Coordinate = [number, number];
 export default function Maps() {
@@ -56,24 +59,55 @@ export default function Maps() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <Marker
-        icon={
-          new L.Icon({
-            iconUrl: MarkerIcon.src,
-            iconRetinaUrl: MarkerIcon.src,
-            iconSize: [25, 41],
-            iconAnchor: [12.5, 41],
-            popupAnchor: [0, -41],
-            shadowUrl: MarkerShadow.src,
-            shadowSize: [41, 41],
-          })
-        }
-        position={[34.6985, 36.7237]}>
-          <Popup>
-            <p className="text-accent"> A pretty CSS3 popup</p>
-            <p className="text-accent">Easily customizable.</p>
-          </Popup>
-        </Marker>
+        {FlatInfo.map((houss, index) => {
+          let xloc = Number(houss.location_x);
+          let yloc = Number(houss.location_y);
+          return (
+            <Marker
+              key={index}
+              icon={
+                new L.Icon({
+                  iconUrl: MarkerIcon.src,
+                  iconRetinaUrl: MarkerIcon.src,
+                  iconSize: [25, 41],
+                  iconAnchor: [12.5, 41],
+                  popupAnchor: [0, -41],
+                  shadowUrl: MarkerShadow.src,
+                  shadowSize: [41, 41],
+                })
+              }
+              position={[xloc, yloc]}
+            >
+              <Popup className="w-72">
+                <div
+                  key={index}
+                  className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]"
+                >
+                  <Image
+                    src={houss.image}
+                    width={150}
+                    height={0}
+                    alt="montagab"
+                    className="mt-5 rounded-md"
+                  />
+                  <div className="flex flex-col justify-center items-center mt-[-10px]">
+                    <p className="text-lg xl:text-xl text-accent">
+                      {houss.title}
+                    </p>
+                    <div className="flex flex-row justify-between items-center mt-[-40px]">
+                      <p className="text-sidpar text-base font-semibold">
+                        {houss.prise}
+                      </p>
+                    </div>
+                    <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
+                      {houss.display}
+                    </div>
+                  </div>
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
     </div>
   );

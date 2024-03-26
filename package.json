@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@next/font": "^14.1.4",
     "@vercel/analytics": "^1.2.2",
     "axios": "^1.6.2",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.5",
     "leaflet": "^1.9.4",
+    "leaflet-defaulticon-compatibility": "^0.1.2",
     "next": "14.1.1",
     "next-google-fonts": "^2.2.0",
     "react": "^18",

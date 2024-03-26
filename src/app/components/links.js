@@ -29,6 +29,8 @@ export const house = [
     prise: "450K ل.س",
     link: "/buildings/flat",
     display: "للإجار",
+    location_x: "34.6985",
+    location_y:"36.7237",
   },
   {
     img: "/home/rr.png",
@@ -37,6 +39,8 @@ export const house = [
     prise: "210M ل.س",
     link: "/buildings/house",
     display: "للبيع",
+    location_x: "32.6285",
+    location_y:"36.7357",
   },
   {
     img: "/home/store.jpg",
@@ -45,6 +49,8 @@ export const house = [
     prise: "1M ل.س",
     link: "/buildings/store",
     display: "للإجار",
+    location_x: "34.6965",
+    location_y:"36.2437",
   },
   {
     img: "/home/land.jpg",
@@ -53,6 +59,8 @@ export const house = [
     prise: "120M ل.س",
     link: "/buildings/land",
     display: "للبيع",
+    location_x: "35.6985",
+    location_y:"36.7137",
   },
 ];
 
@@ -241,6 +249,8 @@ export const FlatInfo = [
     seller: "أحمد سعيد",
     imageSeller: "/6.png",
     sellerNum: "00963945865342",
+    location_x: "34.6985",
+    location_y:"36.7237",
   },
 ];
 export const StoreInfo = [
