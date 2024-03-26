@@ -1,16 +1,15 @@
 "use client";
-
-import L from "leaflet";
-import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
-import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
-import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useState } from "react";
-import { house } from "./links";
-import Image from "next/image";
-import Link from "next/link";
+import { useState } from 'react';
+import L from 'leaflet';
+import MarkerIcon from '../../../node_modules/leaflet/dist/images/marker-icon.png';
+import MarkerShadow from '../../../node_modules/leaflet/dist/images/marker-shadow.png';
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import Image from 'next/image';
+import { house } from './links';
 
 type Coordinate = [number, number];
+
 export default function Map() {
   const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
 
@@ -29,7 +28,7 @@ export default function Map() {
           setCoord([position.coords.latitude, position.coords.longitude]);
         });
       } else {
-        console.log("Geolocation is not supported by this browser.");
+        console.log('Geolocation is not supported by this browser.');
       }
     };
 
@@ -43,9 +42,9 @@ export default function Map() {
   return (
     <div className="z-30">
       {/* <SearchLocation />
-            <GetMyLocation /> */}
+      <GetMyLocation /> */}
       <MapContainer
-        className=" w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md"
+        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md"
         center={coord}
         zoom={13}
         scrollWheelZoom={false}
@@ -74,22 +73,16 @@ export default function Map() {
               position={[xloc, yloc]}
             >
               <Popup className="w-72">
-                <Link
-                  href={houss.link}
-                  key={index}
-                  className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]"
-                >
+                <a href={houss.link} key={index} className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]">
                   <Image
                     src={houss.img}
                     width={150}
-                    height={0}
+                    height={100}
                     alt="montagab"
                     className="mt-5 rounded-md"
                   />
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
-                    <p className="text-lg xl:text-xl text-accent">
-                      {houss.title}
-                    </p>
+                    <p className="text-lg xl:text-xl text-accent">{houss.title}</p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
                       <p className="text-sidpar text-base font-semibold">{houss.prise}</p>
                     </div>
@@ -97,7 +90,7 @@ export default function Map() {
                       {houss.display}
                     </div>
                   </div>
-                </Link>
+                </a>
               </Popup>
             </Marker>
           );

@@ -1,55 +1,38 @@
 "use client";
-
-import L from "leaflet";
-import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
-import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
-import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { FlatInfo } from "./links";
+import { useEffect, useState } from 'react';
+import L from 'leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import MarkerIcon from '../../../node_modules/leaflet/dist/images/marker-icon.png';
+import MarkerShadow from '../../../node_modules/leaflet/dist/images/marker-shadow.png';
+import Image from 'next/image';
+import { FlatInfo } from './links';
 
 type Coordinate = [number, number];
+
 export default function Maps() {
   const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
 
-  const SearchLocation = () => {
-    return (
-      <div className="search-location">
-        <input type="text" placeholder="Search Location" />
-      </div>
-    );
-  };
-
-  const GetMyLocation = () => {
-    const getMyLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          setCoord([position.coords.latitude, position.coords.longitude]);
-        });
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
-    };
-
-    return (
-      <div className="get-my-location">
-        <button onClick={getMyLocation}>Get My Location</button>
-      </div>
-    );
-  };
+  useEffect(() => {
+    // تأكد من أننا في الواجهة الأمامية قبل تنفيذ الكود
+    if (typeof window !== 'undefined') {
+      const getMyLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            setCoord([position.coords.latitude, position.coords.longitude]);
+          });
+        } else {
+          console.log('Geolocation is not supported by this browser.');
+        }
+      };
+      getMyLocation();
+    }
+  }, []); // فقط عند التحميل الأول للصفحة
 
   return (
     <div className="z-30">
-      {/* <SearchLocation />
-            <GetMyLocation /> */}
       <MapContainer
-        // style={{
-        //   height: "68vh",
-        //   width: "60vw",
-        // }}
-        className=" w-[90vw] h-[200px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
+        className="w-[90vw] h-[200px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
         center={coord}
         zoom={13}
         scrollWheelZoom={false}
@@ -86,18 +69,14 @@ export default function Maps() {
                   <Image
                     src={houss.image}
                     width={150}
-                    height={0}
+                    height={100}
                     alt="montagab"
                     className="mt-5 rounded-md"
                   />
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
-                    <p className="text-lg xl:text-xl text-accent">
-                      {houss.title}
-                    </p>
+                    <p className="text-lg xl:text-xl text-accent">{houss.title}</p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar text-base font-semibold">
-                        {houss.prise}
-                      </p>
+                      <p className="text-sidpar text-base font-semibold">{houss.prise}</p>
                     </div>
                     <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
                       {houss.display}
