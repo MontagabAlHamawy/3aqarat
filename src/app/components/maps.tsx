@@ -45,7 +45,7 @@ export default function MapS() {
       {/* <SearchLocation />
       <GetMyLocation /> */}
       <MapContainer
-        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md"
+        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
         center={[34.6985, 36.7237]}
         zoom={13}
         scrollWheelZoom={false}
