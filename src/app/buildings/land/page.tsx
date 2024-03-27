@@ -1,5 +1,5 @@
+"use client";
 import { LandInfo } from "@/app/components/links";
-import Maps from "@/app/components/maps";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -9,6 +9,9 @@ import {
   PiPlus,
   PiMinus,
 } from "react-icons/pi";
+import dynamic from "next/dynamic";
+
+const Maps = dynamic(()=>import('@/app/components/maps'),{ssr:false})
 
 export default function Land() {
   return (

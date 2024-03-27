@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { hom, houses } from "../components/links";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 export default function Building() {
   return (

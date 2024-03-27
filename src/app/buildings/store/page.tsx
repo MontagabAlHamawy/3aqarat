@@ -1,5 +1,6 @@
+"use client";
 import { StoreInfo } from "@/app/components/links";
-import Maps from "@/app/components/maps";
+// import Maps from "";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -12,6 +13,10 @@ import {
   PiPlus,
   PiMinus,
 } from "react-icons/pi";
+
+import dynamic from "next/dynamic";
+
+const Maps = dynamic(()=>import('@/app/components/maps'),{ssr:false})
 
 export default function Store() {
   return (

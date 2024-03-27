@@ -1,39 +1,52 @@
-"use client";
-import { useEffect, useState } from 'react';
-import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import MarkerIcon from '../../../node_modules/leaflet/dist/images/marker-icon.png';
-import MarkerShadow from '../../../node_modules/leaflet/dist/images/marker-shadow.png';
-import Image from 'next/image';
-import { FlatInfo } from './links';
+// "use client";
+// import { useState } from 'react';
+import L from "leaflet";
+import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
+import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import Image from "next/image";
+import { FlatInfo } from "./links";
+import Link from "next/link";
 
-type Coordinate = [number, number];
+// type Coordinate = [number, number];
 
-export default function Maps() {
-  const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
+export default function MapS() {
+  // const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
 
-  useEffect(() => {
-    // تأكد من أننا في الواجهة الأمامية قبل تنفيذ الكود
-    if (typeof window !== 'undefined') {
-      const getMyLocation = () => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            setCoord([position.coords.latitude, position.coords.longitude]);
-          });
-        } else {
-          console.log('Geolocation is not supported by this browser.');
-        }
-      };
-      getMyLocation();
-    }
-  }, []); // فقط عند التحميل الأول للصفحة
+  // const SearchLocation = () => {
+  //   return (
+  //     <div className="search-location">
+  //       <input type="text" placeholder="Search Location" />
+  //     </div>
+  //   );
+  // };
+
+  // const GetMyLocation = () => {
+  //   const getMyLocation = () => {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition((position) => {
+  //         setCoord([position.coords.latitude, position.coords.longitude]);
+  //       });
+  //     } else {
+  //       console.log('Geolocation is not supported by this browser.');
+  //     }
+  //   };
+
+  //   return (
+  //     <div className="get-my-location">
+  //       <button onClick={getMyLocation}>Get My Location</button>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="z-30">
+      {/* <SearchLocation />
+      <GetMyLocation /> */}
       <MapContainer
-        className="w-[90vw] h-[200px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
-        center={coord}
+        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md"
+        center={[34.6985, 36.7237]}
         zoom={13}
         scrollWheelZoom={false}
       >
@@ -41,7 +54,6 @@ export default function Maps() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
         {FlatInfo.map((houss, index) => {
           let xloc = Number(houss.location_x);
           let yloc = Number(houss.location_y);
@@ -74,9 +86,13 @@ export default function Maps() {
                     className="mt-5 rounded-md"
                   />
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
-                    <p className="text-lg xl:text-xl text-accent">{houss.title}</p>
+                    <p className="text-lg xl:text-xl text-accent">
+                      {houss.title}
+                    </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar text-base font-semibold">{houss.prise}</p>
+                      <p className="text-sidpar text-base font-semibold">
+                        {houss.prise}
+                      </p>
                     </div>
                     <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
                       {houss.display}

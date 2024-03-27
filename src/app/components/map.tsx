@@ -1,5 +1,5 @@
-"use client";
-import { useState } from 'react';
+// "use client";
+// import { useState } from 'react';
 import L from 'leaflet';
 import MarkerIcon from '../../../node_modules/leaflet/dist/images/marker-icon.png';
 import MarkerShadow from '../../../node_modules/leaflet/dist/images/marker-shadow.png';
@@ -7,37 +7,38 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Image from 'next/image';
 import { house } from './links';
+import Link from 'next/link';
 
-type Coordinate = [number, number];
+// type Coordinate = [number, number];
 
 export default function Map() {
-  const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
+  // const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
 
-  const SearchLocation = () => {
-    return (
-      <div className="search-location">
-        <input type="text" placeholder="Search Location" />
-      </div>
-    );
-  };
+  // const SearchLocation = () => {
+  //   return (
+  //     <div className="search-location">
+  //       <input type="text" placeholder="Search Location" />
+  //     </div>
+  //   );
+  // };
 
-  const GetMyLocation = () => {
-    const getMyLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          setCoord([position.coords.latitude, position.coords.longitude]);
-        });
-      } else {
-        console.log('Geolocation is not supported by this browser.');
-      }
-    };
+  // const GetMyLocation = () => {
+  //   const getMyLocation = () => {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition((position) => {
+  //         setCoord([position.coords.latitude, position.coords.longitude]);
+  //       });
+  //     } else {
+  //       console.log('Geolocation is not supported by this browser.');
+  //     }
+  //   };
 
-    return (
-      <div className="get-my-location">
-        <button onClick={getMyLocation}>Get My Location</button>
-      </div>
-    );
-  };
+  //   return (
+  //     <div className="get-my-location">
+  //       <button onClick={getMyLocation}>Get My Location</button>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="z-30">
@@ -45,7 +46,7 @@ export default function Map() {
       <GetMyLocation /> */}
       <MapContainer
         className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md"
-        center={coord}
+        center={[34.6985, 36.7237]}
         zoom={13}
         scrollWheelZoom={false}
       >
@@ -73,7 +74,7 @@ export default function Map() {
               position={[xloc, yloc]}
             >
               <Popup className="w-72">
-                <a href={houss.link} key={index} className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]">
+                <Link href={houss.link} key={index} className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]">
                   <Image
                     src={houss.img}
                     width={150}
@@ -90,7 +91,7 @@ export default function Map() {
                       {houss.display}
                     </div>
                   </div>
-                </a>
+                </Link>
               </Popup>
             </Marker>
           );
