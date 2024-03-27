@@ -6,6 +6,9 @@ body{
   direction: rtl;
   font-family: "Cairo", sans-serif;
 }
+.leaflet-bottom.leaflet-right{
+  display: none;
+}
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,

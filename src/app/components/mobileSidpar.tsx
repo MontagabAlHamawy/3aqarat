@@ -9,7 +9,7 @@ export default function MobileSidpar() {
   const route = usePathname();
   return (
     <div className="fixed bottom-0 left-0 w-full bg-sidpar py-3 pr-6 flex justify-center items-center z-50">
-      <div className="flex flex-row justify-center items-center space-x-4 gap-2 ">
+      <div className="flex flex-row justify-center items-center space-x-4 gap-2 md:gap-20">
         {MobData.map((link, index) => {
           const isActive = route === link.path;
           return (

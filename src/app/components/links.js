@@ -70,6 +70,7 @@ export const hom = [
   { name: "محال تجارية" },
   { name: "أراضي" },
   { name: "محاضر" },
+  { name: "أبراج" },
 ];
 
 export const whyus = [

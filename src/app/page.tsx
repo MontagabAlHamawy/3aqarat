@@ -48,7 +48,7 @@ export default function Home() {
       </div>
       <div className="flex justify-center items-center flex-col ">
         <h1 className="text-white text-2xl my-5">الأحدث</h1>
-        <div className="grid grid-cols-2 xl:grid-cols-5 gap-x-5 gap-y-5 xl:gap-x-16 xl:mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-5 gap-y-5 xl:gap-x-16 xl:mb-6">
           {hom.map((link, index) => {
             return (
               <div
