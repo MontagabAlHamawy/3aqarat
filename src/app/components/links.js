@@ -349,7 +349,7 @@ export const LandInfo = [
     display: "للبيع",
     place: "حمص - الأوراس",
     images: [
-      "/home/land.j pg",
+      "/home/land.jpg",
       "/home/rr.png",
       "/home/psd.jpg",
       "/home/building.png",
