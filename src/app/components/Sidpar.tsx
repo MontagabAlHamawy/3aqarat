@@ -74,7 +74,15 @@ function Sidpar() {
         }`}
       >
         {navData.map((link, index) => {
-          const isActive = route === link.path;
+          let isActive = route === link.path; // Default isActive value
+
+          if (route !== "/" && route.startsWith(link.path)) {
+            // If the route is not homepage and starts with link.path
+            if (link.path !== "/") {
+              // If link.path is not the homepage
+              isActive = true;
+            }
+          }
 
           return (
             <Link

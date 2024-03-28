@@ -1,12 +1,18 @@
 // "use client";
 // import { useState } from 'react';
 import L from 'leaflet';
-import MarkerIcon from '../../../node_modules/leaflet/dist/images/marker-icon.png';
-import MarkerShadow from '../../../node_modules/leaflet/dist/images/marker-shadow.png';
+// import MarkerIcon from '../../../node_modules/leaflet/dist/images/marker-icon.png';
+// import MarkerShadow from '../../../node_modules/leaflet/dist/images/marker-shadow.png';
+import House from '../../../public/map/house.svg'
+import Building from '../../../public/map/building.svg'
+import Flat from '../../../public/map/flar.svg'
+import Land from '../../../public/map/land.svg'
+import Store from '../../../public/map/store.svg'
+import Tower from '../../../public/map/tower.svg'
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Image from 'next/image';
-import { house } from './links';
+import { houses } from './links';
 import Link from 'next/link';
 
 // type Coordinate = [number, number];
@@ -54,20 +60,39 @@ export default function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {house.map((houss, index) => {
+        {houses.map((houss, index) => {
           let xloc = Number(houss.location_x);
           let yloc = Number(houss.location_y);
+          let iconee
+          if(houss.type==='flat'){
+            iconee= Flat
+          }
+          else if(houss.type==='store'){
+            iconee= Store
+          }
+          else if(houss.type==='house'){
+            iconee= House
+          }
+          else if(houss.type==='building'){
+            iconee= Building
+          }
+          else if(houss.type==='land'){
+            iconee= Land
+          }
+          else if(houss.type==='tower'){
+            iconee= Tower
+          }
           return (
             <Marker
               key={index}
               icon={
                 new L.Icon({
-                  iconUrl: MarkerIcon.src,
-                  iconRetinaUrl: MarkerIcon.src,
-                  iconSize: [25, 41],
+                  iconUrl: iconee.src,
+                  iconRetinaUrl: iconee.src,
+                  iconSize: [34, 34],
                   iconAnchor: [12.5, 41],
                   popupAnchor: [0, -41],
-                  shadowUrl: MarkerShadow.src,
+                  // shadowUrl: iconee.src,
                   shadowSize: [41, 41],
                 })
               }

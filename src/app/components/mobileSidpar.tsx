@@ -11,7 +11,16 @@ export default function MobileSidpar() {
     <div className="fixed bottom-0 left-0 w-full bg-sidpar py-3 pr-6 flex justify-center items-center z-50">
       <div className="flex flex-row justify-center items-center space-x-4 gap-2 md:gap-20">
         {MobData.map((link, index) => {
-          const isActive = route === link.path;
+           let isActive = route === link.path; // Default isActive value
+
+           if (route !== "/" && route.startsWith(link.path)) {
+             // If the route is not homepage and starts with link.path
+             if (link.path !== "/") {
+               // If link.path is not the homepage
+               isActive = true;
+             }
+           }
+          
           return (
             <Link
               href={link.path}
