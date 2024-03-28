@@ -37,7 +37,7 @@ export default function Store() {
                 navigation
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
-                className="mt-5 w-[370px] md:w-[600px] h-[300px] flex justify-center items-center"
+                className="mt-5 w-[320px] md:w-[600px] h-[200px] md:h-[300px] flex justify-center items-center"
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
               >
                 {link.images.map((image, imageIndex) => (
