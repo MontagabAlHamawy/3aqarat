@@ -306,8 +306,8 @@ export const FlatInfo = [
     display: "للإجار",
     place: "دمشق - دوما",
     images: [
-      "/home/rr.png",
       "/home/psd.jpg",
+      "/home/rr.png",
       "/home/building.png",
       "/home/land.jpg",
       "/home/store.jpg",
