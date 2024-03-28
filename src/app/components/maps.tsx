@@ -104,7 +104,7 @@ export default function MapS() {
                   className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
-                    src={houss.image}
+                    src={houss.images[0]}
                     width={150}
                     height={100}
                     alt="montagab"
