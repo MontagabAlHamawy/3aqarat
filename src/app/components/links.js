@@ -20,6 +20,13 @@ export const MobData = [
   { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
   { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
 ];
+export const Imag = [
+  { name: "/home/building.png" },
+  { name: "/home/psd.jpg" },
+  { name: "/home/land.jpg" },
+  { name: "/home/rr.png" },
+  { name: "/home/we.png" },
+];
 
 export const house = [
   {
@@ -30,7 +37,7 @@ export const house = [
     link: "/buildings/flat",
     display: "للإجار",
     location_x: "34.6985",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/rr.png",
@@ -40,7 +47,7 @@ export const house = [
     link: "/buildings/house",
     display: "للبيع",
     location_x: "32.6285",
-    location_y:"36.7357",
+    location_y: "36.7357",
   },
   {
     img: "/home/store.jpg",
@@ -50,7 +57,7 @@ export const house = [
     link: "/buildings/store",
     display: "للإجار",
     location_x: "34.6965",
-    location_y:"36.2437",
+    location_y: "36.2437",
   },
   {
     img: "/home/land.jpg",
@@ -60,7 +67,7 @@ export const house = [
     link: "/buildings/land",
     display: "للبيع",
     location_x: "35.6985",
-    location_y:"36.7137",
+    location_y: "36.7137",
   },
 ];
 
@@ -101,10 +108,10 @@ export const houses = [
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
-    type:'flat',
+    type: "flat",
     display: "للبيع",
     location_x: "34.4985",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/rr.png",
@@ -112,10 +119,10 @@ export const houses = [
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
-    type:'house',
+    type: "house",
     display: "للإجار",
     location_x: "34.6682",
-    location_y:"36.7234",
+    location_y: "36.7234",
   },
   {
     img: "/home/store.jpg",
@@ -123,10 +130,10 @@ export const houses = [
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
-    type:'store',
+    type: "store",
     display: "للإجار",
     location_x: "34.6985",
-    location_y:"36.7235",
+    location_y: "36.7235",
   },
   {
     img: "/home/land.jpg",
@@ -134,10 +141,10 @@ export const houses = [
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
-    type:'land',
+    type: "land",
     display: "للبيع",
     location_x: "34.6975",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/building.png",
@@ -145,10 +152,10 @@ export const houses = [
     discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
     prise: "2.100M ل.س",
     link: "/buildings/building",
-    type:'building',
+    type: "building",
     display: "للبيع",
     location_x: "34.6285",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/psd.jpg",
@@ -156,10 +163,10 @@ export const houses = [
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
-    type:'flat',
+    type: "flat",
     display: "للبيع",
     location_x: "34.6932",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/rr.png",
@@ -167,10 +174,10 @@ export const houses = [
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
-    type:'house',
+    type: "house",
     display: "للإجار",
     location_x: "34.6985",
-    location_y:"36.7231",
+    location_y: "36.7231",
   },
   {
     img: "/home/store.jpg",
@@ -178,10 +185,10 @@ export const houses = [
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
-    type:'store',
+    type: "store",
     display: "للإجار",
     location_x: "32.6985",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/land.jpg",
@@ -189,10 +196,10 @@ export const houses = [
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
-    type:'land',
+    type: "land",
     display: "للبيع",
     location_x: "34.6245",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/building.png",
@@ -200,10 +207,10 @@ export const houses = [
     discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
     prise: "2.100M ل.س",
     link: "/buildings/building",
-    type:'building',
+    type: "building",
     display: "للبيع",
     location_x: "34.6915",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/psd.jpg",
@@ -211,10 +218,10 @@ export const houses = [
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
-    type:'flat',
+    type: "flat",
     display: "للبيع",
     location_x: "34.6985",
-    location_y:"36.7337",
+    location_y: "36.7337",
   },
   {
     img: "/home/rr.png",
@@ -222,10 +229,10 @@ export const houses = [
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
-    type:'house',
+    type: "house",
     display: "للإجار",
     location_x: "34.6985",
-    location_y:"32.7237",
+    location_y: "32.7237",
   },
   {
     img: "/home/store.jpg",
@@ -233,10 +240,10 @@ export const houses = [
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
-    type:'store',
+    type: "store",
     display: "للإجار",
     location_x: "34.6385",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/land.jpg",
@@ -244,10 +251,10 @@ export const houses = [
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
-    type:'land',
+    type: "land",
     display: "للبيع",
     location_x: "34.6922",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
   {
     img: "/home/building.png",
@@ -255,10 +262,10 @@ export const houses = [
     discrep: "محضر سكني جاهز للسكن شجميع الشقق مكسية ",
     prise: "2.100M ل.س",
     link: "/buildings/building",
-    type:'building',
+    type: "building",
     display: "للبيع",
     location_x: "34.2985",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
 ];
 
@@ -274,7 +281,13 @@ export const HouseInfo = [
     prise: "210.000.000",
     display: "للبيع",
     place: "حمص - الوعر",
-    image: "/home/rr.png",
+    images: [
+      "/home/rr.png",
+      "/home/psd.jpg",
+      "/home/building.png",
+      "/home/land.jpg",
+      "/home/store.jpg",
+    ],
     seller: "مكتب النور",
     imageSeller: "/6.png",
     sellerNum: "00963945866342",
@@ -284,7 +297,7 @@ export const FlatInfo = [
   {
     title: "شقة سكنية",
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
-    type:'flat',
+    type: "flat",
     numRoom: "2",
     size: "90",
     direction: "شرقي",
@@ -292,12 +305,18 @@ export const FlatInfo = [
     prise: "450.000",
     display: "للإجار",
     place: "دمشق - دوما",
-    image: "/home/psd.jpg",
+    images: [
+      "/home/rr.png",
+      "/home/psd.jpg",
+      "/home/building.png",
+      "/home/land.jpg",
+      "/home/store.jpg",
+    ],
     seller: "أحمد سعيد",
     imageSeller: "/6.png",
     sellerNum: "00963945865342",
     location_x: "34.6985",
-    location_y:"36.7237",
+    location_y: "36.7237",
   },
 ];
 export const StoreInfo = [
@@ -309,7 +328,13 @@ export const StoreInfo = [
     prise: "1.000.000",
     display: "للإجار",
     place: "دمشق - مزة86",
-    image: "/home/store.jpg",
+    images: [
+      "/home/store.jpg",
+      "/home/rr.png",
+      "/home/psd.jpg",
+      "/home/building.png",
+      "/home/land.jpg",
+    ],
     seller: "مكتب الإخلاص",
     imageSeller: "/6.png",
     sellerNum: "00963937785439",
@@ -323,7 +348,13 @@ export const LandInfo = [
     prise: "120.000.000",
     display: "للبيع",
     place: "حمص - الأوراس",
-    image: "/home/land.jpg",
+    images: [
+      "/home/land.j pg",
+      "/home/rr.png",
+      "/home/psd.jpg",
+      "/home/building.png",
+      "/home/store.jpg",
+    ],
     seller: "Mohammad Ahmad",
     imageSeller: "/6.png",
     sellerNum: "00963937785439",
@@ -340,27 +371,88 @@ export const BuildingInfo = [
     prise: "2.100.000.000",
     display: "للبيع",
     place: "حمص - الوعر",
-    image: "/home/building.png",
+    images: [
+      "/home/building.png",
+      "/home/rr.png",
+      "/home/psd.jpg",
+      "/home/land.jpg",
+      "/home/store.jpg",
+    ],
     seller: "مكتب النور",
     imageSeller: "/6.png",
     sellerNum: "00963945866342",
   },
 ];
-export const UserInfo=[
-  {name:'Ahmad Tarek',phone:'00963996742843',facebook:'https://www.facebook.com/',instagram:'https://www.instagram.com/',telegram:'https://t.me/',image:'/user.png'}
-]
+export const UserInfo = [
+  {
+    name: "Ahmad Tarek",
+    phone: "00963996742843",
+    facebook: "https://www.facebook.com/",
+    instagram: "https://www.instagram.com/",
+    telegram: "https://t.me/",
+    image: "/user.png",
+  },
+];
 
-export const add=[
-  {title:'منزل للإجار',discrep:'بحاجة منزل للإجار غرفتين مساحة 90 متر مربع',minPrice:'500 ل.س',maxPrice:'800 ل.س',display:'للإجار'},
-  {title:'شقة للبيع',discrep:'بحاجة شقة للسكن 3 غرف تجهيز ممتاز ',minPrice:'150M ل.س',maxPrice:'210M ل.س',display:'للييع'},
-  {title:'منزل للرهن',discrep:'بحاجة منزل للرهن غرفتين',minPrice:'70M ل.س',maxPrice:'79M ل.س',display:'للرهن'}
-]
+export const add = [
+  {
+    title: "منزل للإجار",
+    discrep: "بحاجة منزل للإجار غرفتين مساحة 90 متر مربع",
+    minPrice: "500 ل.س",
+    maxPrice: "800 ل.س",
+    display: "للإجار",
+  },
+  {
+    title: "شقة للبيع",
+    discrep: "بحاجة شقة للسكن 3 غرف تجهيز ممتاز ",
+    minPrice: "150M ل.س",
+    maxPrice: "210M ل.س",
+    display: "للييع",
+  },
+  {
+    title: "منزل للرهن",
+    discrep: "بحاجة منزل للرهن غرفتين",
+    minPrice: "70M ل.س",
+    maxPrice: "79M ل.س",
+    display: "للرهن",
+  },
+];
 
-export const nots=[
-  {title:'شقة  جديدة',discrep:'تم اضافة شقة  جديدة ',time:'10:02 2024/3/10 ',link:'/buildings/flat'},
-  {title:'منزل جديد',discrep:'تم اضافة منزل جديد ',time:'09:13 2024/3/10 ',link:'/buildings/house'},
-  {title:'محل  جديد',discrep:'تم اضافة محل  جديد ',time:'12:40 2024/3/9 ',link:'/buildings/store'},
-  {title:'أرض  جديدة',discrep:'تم اضافة أرض  جديدة ',time:'05:35 2024/3/4 ',link:'/buildings/land'},
-  {title:'محضر  جديد',discrep:'تم اضافة محضر  جديد ',time:'11:09 2024/3/3 ',link:'/buildings/building'},
-  {title:'منزل جديد',discrep:'تم اضافة منزل جديد ',time:'01:12 2024/3/2 ',link:'/buildings/house'},
-]
+export const nots = [
+  {
+    title: "شقة  جديدة",
+    discrep: "تم اضافة شقة  جديدة ",
+    time: "10:02 2024/3/10 ",
+    link: "/buildings/flat",
+  },
+  {
+    title: "منزل جديد",
+    discrep: "تم اضافة منزل جديد ",
+    time: "09:13 2024/3/10 ",
+    link: "/buildings/house",
+  },
+  {
+    title: "محل  جديد",
+    discrep: "تم اضافة محل  جديد ",
+    time: "12:40 2024/3/9 ",
+    link: "/buildings/store",
+  },
+  {
+    title: "أرض  جديدة",
+    discrep: "تم اضافة أرض  جديدة ",
+    time: "05:35 2024/3/4 ",
+    link: "/buildings/land",
+  },
+  {
+    title: "محضر  جديد",
+    discrep: "تم اضافة محضر  جديد ",
+    time: "11:09 2024/3/3 ",
+    link: "/buildings/building",
+  },
+  {
+    title: "منزل جديد",
+    discrep: "تم اضافة منزل جديد ",
+    time: "01:12 2024/3/2 ",
+    link: "/buildings/house",
+  },
+];

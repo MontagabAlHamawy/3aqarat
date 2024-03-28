@@ -3,6 +3,11 @@ import { LandInfo } from "@/app/components/links";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import {
   PiRulerDuotone,
   PiMapPinDuotone,
@@ -15,23 +20,36 @@ const Maps = dynamic(()=>import('@/app/components/maps'),{ssr:false})
 
 export default function Land() {
   return (
-    <div>
-      <div>
-        {LandInfo.map((link, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col xl:flex-row justify-center gap-5 items-center"
-            >
-              <div className="mx-2 xl:mx-0">
-                <Image
-                  src={link.image}
-                  width={600}
-                  height={0}
-                  alt="house"
-                  className=" rounded-md"
-                />
-              </div>
+    <div className="mx-auto mt-[-10px] md:mt-auto">
+      <div className="flex justify-center xl:justify-between  items-center w-full">
+        {LandInfo.map((link, index) => (
+          <div
+            key={index}
+            className="flex flex-col xl:flex-row gap-5 items-center"
+          >
+            <div className="mx-2 xl:mx-0 flex justify-center items-center">
+              <Swiper
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                className="mt-5 w-[370px] md:w-[600px] h-[300px] flex justify-center items-center"
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+              >
+                {link.images.map((image, imageIndex) => (
+                  <SwiperSlide key={imageIndex}>
+                    <div className="flex justify-center items-center ">
+                      <Image
+                        src={image}
+                        width={500}
+                        height={400}
+                        alt={`Gallery Image ${index}`}
+                        className=" object-cover rounded-md"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
               <div className="flex flex-col gap-3">
                 <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
                   {link.display}
@@ -83,8 +101,7 @@ export default function Land() {
                 </div>
               </div>
             </div>
-          );
-        })}
+          ))}
       </div>
       <div className="flex justify-center items-center mt-10  mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
         {/* <div className="flex flex-col gap-3 absolute top-2 right-2">
