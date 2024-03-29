@@ -281,6 +281,7 @@ export const HouseInfo = [
     prise: "210.000.000",
     display: "للبيع",
     place: "حمص - الوعر",
+    type: "flat",
     images: [
       "/home/rr.png",
       "/home/psd.jpg",
