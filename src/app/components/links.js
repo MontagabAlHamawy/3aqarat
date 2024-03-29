@@ -281,7 +281,6 @@ export const HouseInfo = [
     prise: "210.000.000",
     display: "للبيع",
     place: "حمص - الوعر",
-    type: "flat",
     images: [
       "/home/rr.png",
       "/home/psd.jpg",
@@ -292,6 +291,9 @@ export const HouseInfo = [
     seller: "مكتب النور",
     imageSeller: "/6.png",
     sellerNum: "00963945866342",
+    type:'house',
+    location_x: "34.6985",
+    location_y: "36.7237",
   },
 ];
 export const FlatInfo = [
@@ -329,6 +331,7 @@ export const StoreInfo = [
     prise: "1.000.000",
     display: "للإجار",
     place: "دمشق - مزة86",
+    type:'store',
     images: [
       "/home/store.jpg",
       "/home/rr.png",
@@ -339,6 +342,8 @@ export const StoreInfo = [
     seller: "مكتب الإخلاص",
     imageSeller: "/6.png",
     sellerNum: "00963937785439",
+    location_x: "34.6985",
+    location_y: "36.7237",
   },
 ];
 export const LandInfo = [
@@ -359,6 +364,9 @@ export const LandInfo = [
     seller: "Mohammad Ahmad",
     imageSeller: "/6.png",
     sellerNum: "00963937785439",
+    type:'land',
+    location_x: "34.6985",
+    location_y: "36.7237",
   },
 ];
 export const BuildingInfo = [
@@ -382,6 +390,9 @@ export const BuildingInfo = [
     seller: "مكتب النور",
     imageSeller: "/6.png",
     sellerNum: "00963945866342",
+    type:'building',
+    location_x: "34.6985",
+    location_y: "36.7237",
   },
 ];
 export const UserInfo = [

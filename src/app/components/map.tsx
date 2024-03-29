@@ -66,38 +66,9 @@ function LocationMarker() {
 }
 
 export default function Map() {
-  // const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
-
-  // const SearchLocation = () => {
-  //   return (
-  //     <div className="search-location">
-  //       <input type="text" placeholder="Search Location" />
-  //     </div>
-  //   );
-  // };
-
-  // const GetMyLocation = () => {
-  //   const getMyLocation = () => {
-  //     if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition((position) => {
-  //         setCoord([position.coords.latitude, position.coords.longitude]);
-  //       });
-  //     } else {
-  //       console.log('Geolocation is not supported by this browser.');
-  //     }
-  //   };
-
-  //   return (
-  //     <div className="get-my-location">
-  //       <button onClick={getMyLocation}>Get My Location</button>
-  //     </div>
-  //   );
-  // };
 
   return (
     <div className="z-30">
-      {/* <SearchLocation />
-      <GetMyLocation /> */}
         <MapContainer
       className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md "
         center={{ lat: 51.505, lng: -0.09 }}
@@ -174,6 +145,7 @@ export default function Map() {
           );
         })}
       </MapContainer>
+      
     </div>
   );
 }

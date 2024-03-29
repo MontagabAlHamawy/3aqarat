@@ -1,20 +1,33 @@
-// "use client";
-// import { useState } from 'react';
 import L from "leaflet";
 import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
 import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
-import { useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
-import { LatLngLiteral } from 'leaflet';
+import {
+  JSXElementConstructor,
+  Key,
+  PromiseLikeOfReactNode,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useState,
+} from "react";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
+import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import House from '../../../public/map/house.svg'
-import Building from '../../../public/map/building.svg'
-import Flat from '../../../public/map/flar.svg'
-import Land from '../../../public/map/land.svg'
-import Store from '../../../public/map/store.svg'
-import Tower from '../../../public/map/tower.svg'
+import House from "../../../public/map/house.svg";
+import Building from "../../../public/map/building.svg";
+import Flat from "../../../public/map/flar.svg";
+import Land from "../../../public/map/land.svg";
+import Store from "../../../public/map/store.svg";
+import Tower from "../../../public/map/tower.svg";
 import Image from "next/image";
-import { FlatInfo } from "./links";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+// import { FlatInfo } from "./links";
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
 
@@ -27,14 +40,17 @@ function LocationMarker() {
       map.flyTo(e.latlng, map.getZoom());
     },
     locationerror(e) {
-      alert("Couldn't access your location. Please enable location services and try again.");
+      alert(
+        "Couldn't access your location. Please enable location services and try again."
+      );
       console.error(e);
-    }
+    },
   });
 
   return position === null ? null : (
-    <Marker position={position}
-    icon={
+    <Marker
+      position={position}
+      icon={
         new L.Icon({
           iconUrl: MarkerIcon.src,
           iconRetinaUrl: MarkerIcon.src,
@@ -44,53 +60,20 @@ function LocationMarker() {
           shadowUrl: MarkerShadow.src,
           shadowSize: [41, 41],
         })
-      }>
+      }
+    >
       <Popup>
-        <p className="text-accent">
-        You are here
-        </p>
+        <p className="text-accent">You are here</p>
       </Popup>
     </Marker>
   );
 }
 
-// type Coordinate = [number, number];
-
-export default function MapS() {
-  // const [coord, setCoord] = useState<Coordinate>([34.6985, 36.7237]);
-
-  // const SearchLocation = () => {
-  //   return (
-  //     <div className="search-location">
-  //       <input type="text" placeholder="Search Location" />
-  //     </div>
-  //   );
-  // };
-
-  // const GetMyLocation = () => {
-  //   const getMyLocation = () => {
-  //     if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition((position) => {
-  //         setCoord([position.coords.latitude, position.coords.longitude]);
-  //       });
-  //     } else {
-  //       console.log('Geolocation is not supported by this browser.');
-  //     }
-  //   };
-
-  //   return (
-  //     <div className="get-my-location">
-  //       <button onClick={getMyLocation}>Get My Location</button>
-  //     </div>
-  //   );
-  // };
-
+export default function Maps({ building }:any) {
   return (
     <div className="z-30">
-      {/* <SearchLocation />
-      <GetMyLocation /> */}
       <MapContainer
-      className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
+        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
         center={{ lat: 51.505, lng: -0.09 }}
         zoom={13}
         scrollWheelZoom={false}
@@ -99,28 +82,23 @@ export default function MapS() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarker/>
-        {FlatInfo.map((houss, index) => {
+        <LocationMarker />
+        {building.map((houss: any, index: any) => {
           let xloc = Number(houss.location_x);
           let yloc = Number(houss.location_y);
-          let iconee
-          if(houss.type==='flat'){
-            iconee= Flat
-          }
-          else if(houss.type==='store'){
-            iconee= Store
-          }
-          else if(houss.type==='house'){
-            iconee= House
-          }
-          else if(houss.type==='building'){
-            iconee= Building
-          }
-          else if(houss.type==='land'){
-            iconee= Land
-          }
-          else if(houss.type==='tower'){
-            iconee= Tower
+          let iconee;
+          if (houss.type === "flat") {
+            iconee = Flat;
+          } else if (houss.type === "store") {
+            iconee = Store;
+          } else if (houss.type === "house") {
+            iconee = House;
+          } else if (houss.type === "building") {
+            iconee = Building;
+          } else if (houss.type === "land") {
+            iconee = Land;
+          } else if (houss.type === "tower") {
+            iconee = Tower;
           }
           return (
             <Marker

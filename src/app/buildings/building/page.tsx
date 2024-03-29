@@ -1,29 +1,89 @@
 "use client";
-import { BuildingInfo } from "@/app/components/links";
-// import Maps from "@/app/components/maps";
+
+import { BuildingInfo, HouseInfo } from "@/app/components/links";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import {
+  A11y,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Virtual,
+  Keyboard,
+  Mousewheel,
+  Parallax,
+  FreeMode,
+  Grid,
+  Zoom,
+  Autoplay,
+  EffectFade,
+  Thumbs,
+} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+import "swiper/css/virtual";
+import "swiper/css/keyboard";
+import "swiper/css/mousewheel";
 import "swiper/css/pagination";
+import "swiper/css/parallax";
+import "swiper/css/autoplay";
+import "swiper/css/grid";
+import "swiper/css/effect-fade";
+import "swiper/css/free-mode";
+import "swiper/css/zoom";
+import "swiper/css/thumbs";
+
 import {
   PiArmchairDuotone,
-  PiHouseDuotone,
   PiRulerDuotone,
   PiCompassDuotone,
   PiBuildingsDuotone,
+  PiParkDuotone,
   PiMapPinDuotone,
   PiPlus,
   PiMinus,
+  PiHouseDuotone,
 } from "react-icons/pi";
 import dynamic from "next/dynamic";
+import SwiperCore from "swiper";
+// import "swiper/swiper-bundle.min.css";
+
+// Initialize Swiper core components
+SwiperCore.use([
+  A11y,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Virtual,
+  Keyboard,
+  Mousewheel,
+  Parallax,
+  FreeMode,
+  Grid,
+  Zoom,
+  Autoplay,
+  EffectFade,
+  Thumbs,
+]);
+import { SwiperProps } from "swiper/react";
 
 const Maps = dynamic(() => import("@/app/components/maps"), { ssr: false });
-
 export default function Building() {
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
+
+  type SwiperType = Omit<SwiperCore, "translate"> & {
+    slideTo?: (index: number) => void;
+  };
+
+  const slideTo = (index: number) => {
+    if (swiper && swiper.slideTo) {
+      swiper.slideTo(index);
+    }
+  };
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
@@ -36,19 +96,20 @@ export default function Building() {
               <Swiper
                 navigation
                 pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
+                effect="fade"
+                onSwiper={(swiper: SwiperType) => setSwiper(swiper)}
                 className="mt-5 w-[320px] md:w-[600px] h-[200px] md:h-[300px] flex justify-center items-center"
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
               >
                 {link.images.map((image, imageIndex) => (
                   <SwiperSlide key={imageIndex}>
-                    <div className="flex justify-center items-center ">
+                    <div className="flex justify-center items-center">
                       <Image
                         src={image}
                         width={500}
                         height={400}
                         alt={`Gallery Image ${index}`}
-                        className=" object-cover rounded-md"
+                        className="object-cover rounded-md"
+                        onClick={() => slideTo(imageIndex)}
                       />
                     </div>
                   </SwiperSlide>
@@ -134,22 +195,7 @@ export default function Building() {
         ))}
       </div>
       <div className="flex justify-center items-center mt-10 mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
-        {/* <div className="flex flex-col gap-3 absolute top-2 right-2">
-          <p className="bg-body rounded-md p-2">
-            <PiPlus />
-          </p>
-          <p className="bg-body rounded-md p-2">
-            <PiMinus />
-          </p>
-        </div>
-        <Image
-          src={"/map.jpg"}
-          width={900}
-          height={0}
-          alt="map"
-          className="rounded-md"
-        /> */}
-        <Maps />
+      <Maps building={BuildingInfo}/>
       </div>
     </div>
   );
