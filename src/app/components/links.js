@@ -32,6 +32,7 @@ export const house = [
   {
     img: "/home/psd.jpg",
     title: "شقة سكنية",
+    type:'flat',
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
@@ -42,6 +43,7 @@ export const house = [
   {
     img: "/home/rr.png",
     title: "منزل",
+    type:'house',
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
@@ -52,6 +54,7 @@ export const house = [
   {
     img: "/home/store.jpg",
     title: "محل تجاري ",
+    type:'store',
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
@@ -62,6 +65,7 @@ export const house = [
   {
     img: "/home/land.jpg",
     title: "أرض سكنية ",
+    type:'land',
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
@@ -72,12 +76,13 @@ export const house = [
 ];
 
 export const hom = [
-  { name: "منازل" },
-  { name: "شقق" },
-  { name: "محال تجارية" },
-  { name: "أراضي" },
-  { name: "محاضر" },
-  { name: "أبراج" },
+  { name: "الكل", type:'all' },
+  { name: "منازل",type:'house' },
+  { name: "شقق",type:'flat'},
+  { name: "محال تجارية",type:'store' },
+  { name: "أراضي" , type:'land'},
+  { name: "محاضر",type:'building' },
+  { name: "أبراج",type:'tower' },
 ];
 
 export const whyus = [
