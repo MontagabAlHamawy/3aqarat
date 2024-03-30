@@ -1,6 +1,6 @@
 "use client";
 
-import { BuildingInfo, HouseInfo } from "@/app/components/links";
+import { BuildingInfo } from "@/app/components/links";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -84,6 +84,19 @@ export default function Building() {
       swiper.slideTo(index);
     }
   };
+
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const openPopup = (images: any) => {
+    setSelectedImages(images);
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setSelectedImages([]);
+    setPopupOpen(false);
+  };
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
@@ -93,11 +106,10 @@ export default function Building() {
             className="flex flex-col xl:flex-row gap-5 items-center"
           >
             <div className="mx-2 xl:mx-0 flex justify-center items-center">
-              <Swiper
+            <Swiper
                 navigation
                 pagination={{ clickable: true }}
                 effect="fade"
-                onSwiper={(swiper: SwiperType) => setSwiper(swiper)}
                 className="mt-5 w-[320px] md:w-[600px] h-[200px] md:h-[300px] flex justify-center items-center"
               >
                 {link.images.map((image, imageIndex) => (
@@ -108,8 +120,8 @@ export default function Building() {
                         width={500}
                         height={400}
                         alt={`Gallery Image ${index}`}
-                        className="object-cover rounded-md"
-                        onClick={() => slideTo(imageIndex)}
+                        className="object-cover rounded-md cursor-pointer"
+                        onClick={() => openPopup(link.images)}
                       />
                     </div>
                   </SwiperSlide>
@@ -194,8 +206,48 @@ export default function Building() {
           </div>
         ))}
       </div>
+      {popupOpen && (
+        <div className="fixed inset-0 flex items-center justify-center my-0 z-50 bg-gray-900 bg-opacity-50">
+          <div className=" w-full md:h-full text-center bg-body  p-8 rounded-lg flex justify-center items-center">
+            <Swiper navigation effect="fade" className="w-full h-full flex justify-center items-center">
+              {selectedImages.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <div className="flex justify-center items-center">
+                    <Image
+                      src={image}
+                      width={900}
+                      height={700}
+                      alt={`Popup Image ${index}`}
+                      className="object-contain rounded-md text-center"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              onClick={closePopup}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
       <div className="flex justify-center items-center mt-10 mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
-      <Maps building={BuildingInfo}/>
+        <Maps building={BuildingInfo} />
       </div>
     </div>
   );
