@@ -1,3 +1,4 @@
+"use client";
 import { UserInfo, house } from "@/app/components/links";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,12 @@ import {
   PiTelegramLogoDuotone,
 } from "react-icons/pi";
 
+
 export default function Acount() {
+  // const handleMapClick = (lat: number, lng: number) => {
+  //   // يمكنك استخدام الإحداثيات هنا كما تشاء، مثلاً إرسالها إلى الخلفية باستخدام AJAX
+  //   console.log("Clicked on map at coordinates:", lat, lng);
+  // };
   return (
     <div className="relative">
       <div>
@@ -61,6 +67,7 @@ export default function Acount() {
           );
         })}
       </div>
+      
       <div>
         <h1 className="text-2xl mt-10 bg-section xl:mr-[-8px]  rounded-t-md py-2 px-3 w-min">
           عقاراتي

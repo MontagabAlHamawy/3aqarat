@@ -4,12 +4,16 @@ import Link from "next/link";
 import "swiper/swiper-bundle.css";
 import { PiCheck } from "react-icons/pi";
 import { house, whyus, hom } from "./components/links";
-import Footer from "./components/Footer";
 import { link } from "fs";
 import { useState } from "react";
-
+// import dynamic from "next/dynamic";
+// const Mapp = dynamic(() => import("@/app/components/mapp"), { ssr: false });
 export default function Home() {
   const [filterType, setFilterType] = useState("all");
+  // function handleMapClick(lat: number, lng: number): void {
+  //   throw new Error("Function not implemented.");
+  // }
+
   return (
     <div className="mt-14 xl:mt-32 m-0  px-4 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
@@ -103,6 +107,10 @@ export default function Home() {
           </div>
         </Link>
       </div>
+      {/* <div className="w-[90vw] h-[400px] bg-red-200">
+        <Mapp onMapClick={handleMapClick} />
+        <Mapp/>
+      </div> */}
       <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
         <div>
           <h1 className="text-2xl text-white mb-5 items-center">المميزات</h1>

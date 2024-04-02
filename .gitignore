@@ -12,6 +12,7 @@
 # next.js
 /.next/
 /out/
+/src/app/components/mapp.tsx
 
 # production
 /build

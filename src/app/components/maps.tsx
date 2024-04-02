@@ -69,38 +69,41 @@ function LocationMarker() {
   );
 }
 
-export default function Maps({ building }:any) {
+export default function Maps({ building }: any) {
   return (
     <div className="z-30">
-      <MapContainer
-        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
-        center={{ lat: 51.505, lng: -0.09 }}
-        zoom={13}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <LocationMarker />
-        {building.map((houss: any, index: any) => {
-          let xloc = Number(houss.location_x);
-          let yloc = Number(houss.location_y);
-          let iconee;
-          if (houss.type === "flat") {
-            iconee = Flat;
-          } else if (houss.type === "store") {
-            iconee = Store;
-          } else if (houss.type === "house") {
-            iconee = House;
-          } else if (houss.type === "building") {
-            iconee = Building;
-          } else if (houss.type === "land") {
-            iconee = Land;
-          } else if (houss.type === "tower") {
-            iconee = Tower;
-          }
-          return (
+      {building.map((houss: any, index: any) => {
+        let xloc = Number(houss.location_x);
+        let yloc = Number(houss.location_y);
+        let iconee;
+        if (houss.type === "flat") {
+          iconee = Flat;
+        } else if (houss.type === "store") {
+          iconee = Store;
+        } else if (houss.type === "house") {
+          iconee = House;
+        } else if (houss.type === "building") {
+          iconee = Building;
+        } else if (houss.type === "land") {
+          iconee = Land;
+        } else if (houss.type === "tower") {
+          iconee = Tower;
+        }
+        console.log(xloc , yloc)
+        return (
+          <MapContainer
+            key={index}
+            className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
+            center={{ lat: xloc, lng: yloc }}
+            zoom={13}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <LocationMarker />
+
             <Marker
               key={index}
               icon={
@@ -110,7 +113,7 @@ export default function Maps({ building }:any) {
                   iconSize: [40, 40],
                   iconAnchor: [12.5, 41],
                   popupAnchor: [0, -41],
-                  // shadowUrl: MarkerShadow.src,
+                  shadowUrl: MarkerShadow.src,
                   shadowSize: [41, 41],
                 })
               }
@@ -144,9 +147,9 @@ export default function Maps({ building }:any) {
                 </div>
               </Popup>
             </Marker>
-          );
-        })}
-      </MapContainer>
+          </MapContainer>
+        );
+      })}
     </div>
   );
 }
