@@ -65,12 +65,12 @@ function LocationMarker() {
   );
 }
 
-export default function Map() {
+export default function HomeMap() {
 
   return (
     <div className="z-30">
         <MapContainer
-      className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md "
+      className="w-[98vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
         center={{ lat: 34.6985, lng: 36.7237 }}
         zoom={7}
         scrollWheelZoom={false}

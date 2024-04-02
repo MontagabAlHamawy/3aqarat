@@ -6,8 +6,8 @@ import { PiCheck } from "react-icons/pi";
 import { house, whyus, hom } from "./components/links";
 import { link } from "fs";
 import { useState } from "react";
-// import dynamic from "next/dynamic";
-// const Mapp = dynamic(() => import("@/app/components/mapp"), { ssr: false });
+import dynamic from "next/dynamic";
+const HomeMap = dynamic(() => import("@/app/components/homeMap"), { ssr: false });
 export default function Home() {
   const [filterType, setFilterType] = useState("all");
   // function handleMapClick(lat: number, lng: number): void {
@@ -36,8 +36,8 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <div className=" p-2 mt-16 bg-section rounded-xl flex justify-center items-center">
-        <Image
+      <div className=" mt-10 mx-[-10px] rounded-xl flex justify-center items-center">
+        {/* <Image
           src={"/home/wer.png"}
           width={1200}
           height={0}
@@ -50,7 +50,8 @@ export default function Home() {
           height={0}
           alt="logo"
           className=" rounded-xl block md:hidden "
-        />
+        /> */}
+        <HomeMap/>
       </div>
       <div className="flex justify-center items-center flex-col ">
         <h1 className="text-white text-2xl my-5 ">الأحدث</h1>
@@ -107,9 +108,9 @@ export default function Home() {
           </div>
         </Link>
       </div>
-      {/* <div className="w-[90vw] h-[400px] bg-red-200">
+      {/* <div className="flex justify-center items-center my-16">
         <Mapp onMapClick={handleMapClick} />
-        <Mapp/>
+        <HomeMap/>
       </div> */}
       <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
         <div>
