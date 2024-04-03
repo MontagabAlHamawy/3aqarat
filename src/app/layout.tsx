@@ -24,7 +24,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cairo.className}>
-      
       <body className={cairo.className}>
         <div>
           <Header />

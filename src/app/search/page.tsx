@@ -103,23 +103,6 @@ export default function Search(): JSX.Element {
             <div className="xl:fixed xl:top-[110px] xl:right-[50px] xl:w-2/3">
               <div className="flex relative justify-center items-center mt-3 xl:mt-10 xl:h-[70vh]  rounded-md  cursor-pointer">
                 <div>
-                  {/* <div className="flex flex-col gap-3 absolute px-10 xl:px-0  top-2 right-[-10px] md:right-14 xl:top-6  xl:right-10">
-                  <p className="bg-body rounded-md p-2">
-                    <PiPlus />
-                  </p>
-                  <p className="bg-body rounded-md p-2">
-                    <PiMinus />
-                  </p>
-                </div>
-                <Image
-                  src={"/map.jpg"}
-                  width={850}
-                  height={0}
-                  alt="map"
-                  className="rounded-md"
-                /> */}
-                </div>
-                <div>
                   <Map/>
                 </div>
               </div>

@@ -10,9 +10,6 @@ import dynamic from "next/dynamic";
 const HomeMap = dynamic(() => import("@/app/components/homeMap"), { ssr: false });
 export default function Home() {
   const [filterType, setFilterType] = useState("all");
-  // function handleMapClick(lat: number, lng: number): void {
-  //   throw new Error("Function not implemented.");
-  // }
 
   return (
     <div className="mt-14 xl:mt-32 m-0  px-4 xl:px-10 h-full z-40">
@@ -37,20 +34,6 @@ export default function Home() {
         </div>
       </div>
       <div className=" mt-10 mx-[-10px] rounded-xl flex justify-center items-center">
-        {/* <Image
-          src={"/home/wer.png"}
-          width={1200}
-          height={0}
-          alt="logo"
-          className=" rounded-xl hidden md:block"
-        />
-        <Image
-          src={"/home/wer2.jpg"}
-          width={600}
-          height={0}
-          alt="logo"
-          className=" rounded-xl block md:hidden "
-        /> */}
         <HomeMap/>
       </div>
       <div className="flex justify-center items-center flex-col ">

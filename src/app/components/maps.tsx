@@ -1,15 +1,7 @@
 import L from "leaflet";
 import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
 import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
-import {
-  JSXElementConstructor,
-  Key,
-  PromiseLikeOfReactNode,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-  useState,
-} from "react";
+import { useState } from "react";
 import {
   MapContainer,
   Marker,
@@ -89,7 +81,7 @@ export default function Maps({ building }: any) {
         } else if (houss.type === "tower") {
           iconee = Tower;
         }
-        console.log(xloc , yloc)
+        console.log(xloc, yloc);
         return (
           <MapContainer
             key={index}
@@ -113,7 +105,6 @@ export default function Maps({ building }: any) {
                   iconSize: [40, 40],
                   iconAnchor: [12.5, 41],
                   popupAnchor: [0, -41],
-                  shadowUrl: MarkerShadow.src,
                   shadowSize: [41, 41],
                 })
               }
