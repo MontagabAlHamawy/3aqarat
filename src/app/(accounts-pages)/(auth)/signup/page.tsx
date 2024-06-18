@@ -1,40 +1,52 @@
-// pages/register.js
-"use client"; // pages/register.js
-// pages/register.js
-// pages/register.js
+"use client";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import apiUrl from "../../../utils/apiConfig";
-import { PiEyeDuotone , PiEyeSlashDuotone} from "react-icons/pi";
+import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState("");
 
   const handleRegister = async () => {
-    try {
-      if (password !== confirmPassword) {
-        setError("حقل كلمة المرور وتأكيد كلمة المرور غير متطابقين.");
-        return;
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === "" ||
+      first_name === "" ||
+      last_name === ""
+    ) {
+      toast.info("يرجى ملء الحقول");
+    } else {
+      try {
+        if (password !== confirmPassword) {
+          toast.error("حقل كلمة المرور وتأكيد كلمة المرور غير متطابقين");
+          return;
+        }
+        await axios.post(`${apiUrl}/auth/users/`, {
+          email,
+          first_name,
+          last_name,
+          username,
+          password,
+        });
+        router.replace("/login");
+        toast.success("تم تسجيل المستخدم بنجاح");
+      } catch (error) {
+        toast.error("فشل تسجيل المستخدم");
       }
-
-      const response = await axios.post(`${apiUrl}/register`, {
-        username,
-        email,
-        password,
-        confirmPassword,
-      });
-
-      console.log("تم تسجيل المستخدم بنجاح!", response.data);
-    } catch (error) {
-      setError("فشل تسجيل المستخدم. يرجى التحقق من المعلومات المدخلة.");
     }
   };
 
@@ -51,23 +63,25 @@ const SignUp = () => {
   return (
     <div>
       <div>
-        <h1 className="text-3xl text-center text-accent xl:text-right font-bold mb-9">تسجيل مستخدم جديد</h1>
+        <h1 className="text-3xl text-center text-accent xl:text-right font-bold mb-9">
+          تسجيل مستخدم جديد
+        </h1>
       </div>
       <div className="flex flex-col xl:flex-row-reverse xl:px-20 items-center justify-center">
         {/* القسم الأول: الصورة */}
         <div className="xl:w-1/2 xl:pr-8 mb-4 xl:mb-0">
         <Image
-          width={400}
-          height={0}
-            src="/sinup/signup.png" // قم بتعيين مسار الصورة الخاصة بك هنا
+            width={600}
+            height={0}
+            src="/login/login.png"
             alt="صورة تسجيل الدخول"
-            className="w-[400px] h-auto"
+            className="w-[600px] h-auto"
           />
         </div>
 
         {/* القسم الثاني: الفورم */}
         <div className=" xl:pl-20 w-full max-w-md px-10 xl:px-0">
-          {error && <p className="text-red-500 w-100 mb-4">{error}</p>}
+          {/* {error && <p className="text-red-500 w-100 mb-4">{error}</p>} */}
 
           <form className="w-full max-w-md">
             <div className="mb-4">
@@ -81,6 +95,35 @@ const SignUp = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full border p-2 rounded-lg bg-section border-section text-white"
               />
+            </div>
+            <div className="flex justify-center items-center flex-row gap-3 mb-4">
+            <div>
+                {" "}
+                <label className="block text-white text-sm font-semibold mb-2">
+                  الاسم الأول:
+                </label>
+                <input
+                  type="text"
+                  value={first_name}
+                  required={true}
+                  onChange={(e) => setFirst_name(e.target.value)}
+                  className="w-full border p-2 rounded-lg bg-section border-section text-white"
+                />
+              </div>
+              <div>
+                {" "}
+                <label className="block text-white text-sm font-semibold mb-2">
+                  الاسم الأخير:
+                </label>
+                <input
+                  type="text"
+                  value={last_name}
+                  required={true}
+                  onChange={(e) => setLast_name(e.target.value)}
+                  className="w-full border p-2 rounded-lg bg-section border-section text-white"
+                />
+              </div>
+              
             </div>
 
             <div className="mb-4">
@@ -121,7 +164,7 @@ const SignUp = () => {
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full border p-2 pr-10 flex rounded-lg bg-section border-section text-white  border-section"
+                className="w-full border p-2 pr-10 flex rounded-lg bg-section text-white  border-section"
               />
               <span
                 onClick={toggleShowConfirmPassword}

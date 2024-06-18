@@ -13,7 +13,7 @@
     "@next/font": "^14.1.4",
     "@react-leaflet/core": "^2.1.0",
     "@vercel/analytics": "^1.2.2",
-    "axios": "^1.6.2",
+    "axios": "^1.7.2",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.5",
     "leaflet": "^1.9.4",
@@ -30,6 +30,7 @@
     "react-map-gl": "^7.1.7",
     "react-responsive": "^9.0.2",
     "react-scroll": "^1.9.0",
+    "react-toastify": "^10.0.5",
     "sharp": "^0.33.3",
     "swiper": "^11.1.0"
   },

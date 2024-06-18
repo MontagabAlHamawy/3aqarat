@@ -1,3 +1,3 @@
-const apiUrl = 'https://fake-api-url.com';
+const apiUrl = 'http://gruafahim.pythonanywhere.com';
 
 export default apiUrl;
