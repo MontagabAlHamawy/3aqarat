@@ -28,7 +28,7 @@ const SignUp = () => {
       first_name === "" ||
       last_name === ""
     ) {
-      toast.info("يرجى ملء الحقول");
+      toast.info("يرجى ملئ الحقول");
     } else {
       try {
         if (password !== confirmPassword) {
