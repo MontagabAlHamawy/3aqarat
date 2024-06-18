@@ -1,6 +1,6 @@
 "use client";
 
-import { HouseInfo, LandInfo } from "@/app/components/links";
+import { HouseInfo, LandInfo } from "@/components/links";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -70,7 +70,7 @@ SwiperCore.use([
 ]);
 import { SwiperProps } from "swiper/react";
 
-const Maps = dynamic(() => import("@/app/components/maps"), { ssr: false });
+const Maps = dynamic(() => import("@/components/maps"), { ssr: false });
 export default function Land() {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
 

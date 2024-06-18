@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import "swiper/swiper-bundle.css";
 import { PiCheck } from "react-icons/pi";
-import { house, whyus, hom } from "./components/links";
+import { house, whyus, hom } from "../components/links";
 import { link } from "fs";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-const HomeMap = dynamic(() => import("@/app/components/homeMap"), { ssr: false });
+const HomeMap = dynamic(() => import("@/components/homeMap"), { ssr: false });
 export default function Home() {
   const [filterType, setFilterType] = useState("all");
 

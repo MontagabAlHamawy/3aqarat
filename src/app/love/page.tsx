@@ -1,5 +1,5 @@
 import React from "react";
-import { house, } from "../components/links";
+import { house, } from "../../components/links";
 import Image from "next/image";
 import Link from "next/link";
 import { PiHeartDuotone } from "react-icons/pi";

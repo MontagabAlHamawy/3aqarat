@@ -1,5 +1,5 @@
 import React from "react";
-import { nots } from "../components/links";
+import { nots } from "../../components/links";
 import Link from "next/link";
 
 export default function Notification() {

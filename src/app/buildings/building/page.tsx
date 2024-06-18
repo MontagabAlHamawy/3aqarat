@@ -1,6 +1,6 @@
 "use client";
 
-import { BuildingInfo } from "@/app/components/links";
+import { BuildingInfo } from "@/components/links";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -71,7 +71,7 @@ SwiperCore.use([
 ]);
 import { SwiperProps } from "swiper/react";
 
-const Maps = dynamic(() => import("@/app/components/maps"), { ssr: false });
+const Maps = dynamic(() => import("@/components/maps"), { ssr: false });
 export default function Building() {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
 

@@ -1,14 +1,14 @@
 "use client";
 // import { useState } from 'react';
 import L from "leaflet";
-import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
-import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
-import House from "../../../public/map/house.svg";
-import Building from "../../../public/map/building.svg";
-import Flat from "../../../public/map/flar.svg";
-import Land from "../../../public/map/land.svg";
-import Store from "../../../public/map/store.svg";
-import Tower from "../../../public/map/tower.svg";
+import MarkerIcon from "../../node_modules/leaflet/dist/images/marker-icon.png";
+import MarkerShadow from "../../node_modules/leaflet/dist/images/marker-shadow.png";
+import House from "../../public/map/house.svg";
+import Building from "../../public/map/building.svg";
+import Flat from "../../public/map/flar.svg";
+import Land from "../../public/map/land.svg";
+import Store from "../../public/map/store.svg";
+import Tower from "../../public/map/tower.svg";
 import { useState } from "react";
 import {
   MapContainer,
@@ -65,12 +65,12 @@ function LocationMarker() {
   );
 }
 
-export default function HomeMap() {
+export default function Map() {
 
   return (
     <div className="z-30">
         <MapContainer
-      className="w-[98vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
+      className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md "
         center={{ lat: 34.6985, lng: 36.7237 }}
         zoom={7}
         scrollWheelZoom={false}

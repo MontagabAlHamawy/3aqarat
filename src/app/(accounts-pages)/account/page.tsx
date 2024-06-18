@@ -1,5 +1,5 @@
 "use client";
-import { UserInfo, house } from "@/app/components/links";
+import { UserInfo, house } from "@/components/links";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

@@ -4,12 +4,12 @@ import { NavigationControl, GeolocateControl } from "react-map-gl";
 import React, { useState } from "react";
 import { PiMagnifyingGlassDuotone, PiMinus, PiPlus } from "react-icons/pi";
 import Image from "next/image";
-import { houses } from "../components/links";
+import { houses } from "../../components/links";
 import Link from "next/link";
 // import Map from "@/app/components/map";
 import dynamic from "next/dynamic";
 
-const Map = dynamic(()=>import('@/app/components/map'),{ssr:false})
+const Map = dynamic(()=>import('@/components/map'),{ssr:false})
 
 
 export default function Search(): JSX.Element {

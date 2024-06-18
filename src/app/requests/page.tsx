@@ -1,5 +1,5 @@
 import React from "react";
-import { add } from "../components/links";
+import { add } from "../../components/links";
 import { PiArrowFatLeftDuotone } from "react-icons/pi";
 
 export default function Requests() {
