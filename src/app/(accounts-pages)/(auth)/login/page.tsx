@@ -3,6 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import apiUrl from "../../../../utils/apiConfig";
 import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -35,7 +36,7 @@ const Login = () => {
       toast.warning("يرجى ملئ الحقول");
     } else {
       try {
-        const response = await axios.post(`${process.env.API_URL}/auth/jwt/create/`, {
+        const response = await axios.post(`${apiUrl}/auth/jwt/create/`, {
           username,
           email,
           password,

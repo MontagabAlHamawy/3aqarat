@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import apiUrl from "../../../../utils/apiConfig";
 import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -34,7 +35,7 @@ const SignUp = () => {
           toast.error("حقل كلمة المرور وتأكيد كلمة المرور غير متطابقين");
           return;
         }
-        await axios.post(`${process.env.API_URL}/auth/users/`, {
+        await axios.post(`${apiUrl}/auth/users/`, {
           email,
           first_name,
           last_name,
