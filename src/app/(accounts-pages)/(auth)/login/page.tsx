@@ -35,7 +35,7 @@ const Login = () => {
       toast.warning("يرجى ملئ الحقول");
     } else {
       try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/jwt/create/`, {
+        const response = await axios.post(`${process.env.API_URL}/auth/jwt/create/`, {
           username,
           email,
           password,
