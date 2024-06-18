@@ -35,7 +35,7 @@ const SignUp = () => {
           toast.error("حقل كلمة المرور وتأكيد كلمة المرور غير متطابقين");
           return;
         }
-        await axios.post(`${apiUrl}/auth/users/`, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/`, {
           email,
           first_name,
           last_name,
@@ -49,6 +49,8 @@ const SignUp = () => {
       }
     }
   };
+
+
 
   const toggleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -81,9 +83,8 @@ const SignUp = () => {
 
         {/* القسم الثاني: الفورم */}
         <div className=" xl:pl-20 w-full max-w-md px-10 xl:px-0">
-          {/* {error && <p className="text-red-500 w-100 mb-4">{error}</p>} */}
 
-          <form className="w-full max-w-md">
+          <form className="w-full max-w-md" onSubmit={handleRegister}>
             <div className="mb-4">
               <label className="block text-white text-sm font-semibold mb-2">
                 اسم المستخدم:

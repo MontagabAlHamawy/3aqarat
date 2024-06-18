@@ -3,7 +3,6 @@
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import apiUrl from "../../../../utils/apiConfig";
 import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -36,14 +35,14 @@ const Login = () => {
       toast.warning("يرجى ملئ الحقول");
     } else {
       try {
-        const response = await axios.post(`${apiUrl}/auth/jwt/create/`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/jwt/create/`, {
           username,
           email,
           password,
         });
         router.replace("/");
         console.log("Authorization:JWT ",response.data?.access);
-        
+      
         toast.success("تم تسجيل الدخول بنجاح");
       } catch (error: any) {
         toast.error("فشل تسجيل الدخول");
