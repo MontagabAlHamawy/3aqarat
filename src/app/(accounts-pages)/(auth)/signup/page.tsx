@@ -28,7 +28,7 @@ const SignUp = () => {
       first_name === "" ||
       last_name === ""
     ) {
-      toast.info("يرجى ملئ الحقول");
+      toast.warning("يرجى ملئ الحقول");
     } else {
       try {
         if (password !== confirmPassword) {
@@ -70,7 +70,7 @@ const SignUp = () => {
       <div className="flex flex-col xl:flex-row-reverse xl:px-20 items-center justify-center">
         {/* القسم الأول: الصورة */}
         <div className="xl:w-1/2 xl:pr-8 mb-4 xl:mb-0">
-        <Image
+          <Image
             width={600}
             height={0}
             src="/login/login.png"
@@ -90,6 +90,7 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
+                placeholder="Username"
                 value={username}
                 required={true}
                 onChange={(e) => setUsername(e.target.value)}
@@ -97,13 +98,14 @@ const SignUp = () => {
               />
             </div>
             <div className="flex justify-center items-center flex-row gap-3 mb-4">
-            <div>
+              <div>
                 {" "}
                 <label className="block text-white text-sm font-semibold mb-2">
                   الاسم الأول:
                 </label>
                 <input
                   type="text"
+                  placeholder="English First Name"
                   value={first_name}
                   required={true}
                   onChange={(e) => setFirst_name(e.target.value)}
@@ -117,13 +119,13 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
+                  placeholder="English Last Name"
                   value={last_name}
                   required={true}
                   onChange={(e) => setLast_name(e.target.value)}
                   className="w-full border p-2 rounded-lg bg-section border-section text-white"
                 />
               </div>
-              
             </div>
 
             <div className="mb-4">
@@ -132,6 +134,7 @@ const SignUp = () => {
               </label>
               <input
                 type="email"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full border p-2 rounded-lg bg-section border-section text-white"
@@ -144,9 +147,10 @@ const SignUp = () => {
               </label>
               <input
                 type={showPassword ? "text" : "password"}
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border p-2 pr-10 rounded-lg bg-section border-section text-white"
+                className="w-full border p-2  rounded-lg bg-section border-section text-white"
               />
               <span
                 onClick={toggleShowPassword}
@@ -161,10 +165,11 @@ const SignUp = () => {
                 تأكيد كلمة المرور:
               </label>
               <input
+                placeholder="Confirm Password"
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full border p-2 pr-10 flex rounded-lg bg-section text-white  border-section"
+                className="w-full border p-2  flex rounded-lg bg-section text-white  border-section"
               />
               <span
                 onClick={toggleShowConfirmPassword}

@@ -35,7 +35,7 @@ export default function RootLayout({
           <div className="block xl:hidden">
             <MobileSidpar />
           </div>
-          <ToastContainer theme="dark" position="top-left"/>
+          <ToastContainer stacked theme="dark" position="top-left" className=' mt-14'/>
           <div className="wrapper min-h-[71vh] md:min-h-[68vh] xl:min-h-[82.5vh] py-10 xl:pr-20 xl:pt-10">
             {children}
             <Analytics />

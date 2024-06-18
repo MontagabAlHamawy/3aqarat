@@ -33,7 +33,7 @@ const Login = () => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     if (emus === "" || password === "") {
-      toast.info("يرجى ملئ الحقول");
+      toast.warning("يرجى ملئ الحقول");
     } else {
       try {
         const response = await axios.post(`${apiUrl}/auth/jwt/create/`, {
@@ -80,6 +80,7 @@ const Login = () => {
               </label>
               <input
                 type="text"
+                placeholder="Email or Username"
                 value={emus}
                 onChange={(e) => setEmus(e.target.value)}
                 className="w-full border p-2 rounded-lg bg-section border-section text-white"
@@ -92,9 +93,10 @@ const Login = () => {
               </label>
               <input
                 type={showPassword ? "text" : "password"}
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border p-2 pr-10 rounded-lg bg-section border-section text-white"
+                className="w-full border p-2 rounded-lg bg-section border-section text-white"
               />
               <span
                 onClick={toggleShowPassword}

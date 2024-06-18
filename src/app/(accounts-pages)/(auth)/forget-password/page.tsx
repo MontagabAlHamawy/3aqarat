@@ -32,12 +32,12 @@ const ForgetPassword = () => {
       <div className="flex flex-col xl:flex-row-reverse xl:px-20 items-center justify-start xl:justify-center">
         {/* القسم الأول: الصورة */}
         <div className="xl:w-1/2 xl:pr-8 mb-4 xl:mb-0">
-          <Image
-            width={400}
+        <Image
+            width={600}
             height={0}
-            src="/login/login.png" // قم بتعيين مسار الصورة الخاصة بك هنا
+            src="/login/login.png"
             alt="صورة تسجيل الدخول"
-            className="w-[400px] h-auto"
+            className="w-[600px] h-auto"
           />
         </div>
 
@@ -53,6 +53,7 @@ const ForgetPassword = () => {
               <input
                 type="text"
                 value={usernameOrEmail}
+                placeholder="Email or Username"
                 onChange={(e) => setUsernameOrEmail(e.target.value)}
                 className="w-full border p-2 rounded-lg bg-section border-section text-white"
               />
