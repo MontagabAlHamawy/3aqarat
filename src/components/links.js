@@ -28,6 +28,14 @@ export const Imag = [
   { name: "/home/we.png" },
 ];
 
+export const ImagBuilding =[
+  {img:"/home/rr.png"},
+  {img:"/home/psd.jpg"},
+  {img:"/home/building.png"},
+  {img:"/home/land.jpg"},
+  {img:"/home/store.jpg"}
+]
+
 export const house = [
   {
     img: "/home/psd.jpg",

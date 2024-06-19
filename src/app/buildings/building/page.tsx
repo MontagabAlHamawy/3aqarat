@@ -72,18 +72,21 @@ SwiperCore.use([
 import { SwiperProps } from "swiper/react";
 
 const Maps = dynamic(() => import("@/components/maps"), { ssr: false });
+
+
+
 export default function Building() {
-  const [swiper, setSwiper] = useState<SwiperType | null>(null);
+  // const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
   type SwiperType = Omit<SwiperCore, "translate"> & {
     slideTo?: (index: number) => void;
   };
 
-  const slideTo = (index: number) => {
-    if (swiper && swiper.slideTo) {
-      swiper.slideTo(index);
-    }
-  };
+  // const slideTo = (index: number) => {
+  //   if (swiper && swiper.slideTo) {
+  //     swiper.slideTo(index);
+  //   }
+  // };
 
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -106,7 +109,7 @@ export default function Building() {
             className="flex flex-col xl:flex-row gap-5 items-center"
           >
             <div className="mx-2 xl:mx-0 flex justify-center items-center">
-            <Swiper
+              <Swiper
                 navigation
                 pagination={{ clickable: true }}
                 effect="fade"
@@ -209,7 +212,11 @@ export default function Building() {
       {popupOpen && (
         <div className="fixed inset-0 flex items-center justify-center my-0 z-50 bg-gray-900 bg-opacity-50">
           <div className=" w-full md:h-full text-center bg-body  p-8 rounded-lg flex justify-center items-center">
-            <Swiper navigation effect="fade" className="w-full h-full flex justify-center items-center">
+            <Swiper
+              navigation
+              effect="fade"
+              className="w-full h-full flex justify-center items-center"
+            >
               {selectedImages.map((image, index) => (
                 <SwiperSlide key={index}>
                   <div className="flex justify-center items-center">

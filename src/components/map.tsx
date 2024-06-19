@@ -107,7 +107,6 @@ export default function Map() {
                   iconSize: [34, 34],
                   iconAnchor: [12.5, 41],
                   popupAnchor: [0, -41],
-                  // shadowUrl: iconee.src,
                   shadowSize: [41, 41],
                 })
               }

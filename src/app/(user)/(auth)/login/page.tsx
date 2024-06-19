@@ -15,8 +15,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  let email = "";
-  let username = "";
+  let email = null;
+  let username = null;
 
   const isEmail = (value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

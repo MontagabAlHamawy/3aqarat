@@ -5,20 +5,27 @@ import axios from "axios";
 import Link from "next/link";
 import apiUrl from "../../../../utils/apiConfig";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const ForgetPassword = () => {
+  const router = useRouter();
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
-  const [error, setError] = useState("");
-
   const handleLogin = async () => {
-    try {
-      const response = await axios.post(`${apiUrl}/login`, {
-        usernameOrEmail,
-      });
+    if (usernameOrEmail === "") {
+      toast.warning("يرجى ملئ الحقول");
+    } else {
+      try {
+        await axios.post(`${apiUrl}/login`, {
+          usernameOrEmail,
+        });
 
-      console.log("تم تسجيل الدخول بنجاح!", response.data);
-    } catch (error) {
-      setError("اسم المستخدم أو البريد الإلكتروني غير صحيح");
+        toast.success("تم إرسال الكود بنجاح");
+        router.replace("/login");
+      } catch (error) {
+        toast.error("اسم المستخدم أو البريد الإلكتروني غير صحيح");
+        router.replace("/login");
+      }
     }
   };
 
@@ -32,7 +39,7 @@ const ForgetPassword = () => {
       <div className="flex flex-col xl:flex-row-reverse xl:px-20 items-center justify-start xl:justify-center">
         {/* القسم الأول: الصورة */}
         <div className="xl:w-1/2 xl:pr-8 mb-4 xl:mb-0">
-        <Image
+          <Image
             width={600}
             height={0}
             src="/login/login.png"
@@ -43,8 +50,6 @@ const ForgetPassword = () => {
 
         {/* القسم الثاني: الفورم */}
         <div className="xl:pl-20 w-full max-w-md px-10 xl:px-0">
-          {error && <p className="text-red-500 w-100 mb-4">{error}</p>}
-
           <form className="w-full xl:max-w-md ">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
