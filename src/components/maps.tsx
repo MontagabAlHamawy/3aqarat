@@ -21,8 +21,7 @@ import Tower from "../../public/map/tower.svg";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Link from "next/link";
-import { houses } from "./links";
-// import { FlatInfo } from "./links";
+
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
 
@@ -65,8 +64,8 @@ function LocationMarker() {
 }
 
 export default function Maps({ building }: any) {
-  let [locationX, setLocationX] = useState(null);
-  let [locationY, setLocationY] = useState(null);
+  const [locationX, setLocationX] = useState<string | null>(null);
+  const [locationY, setLocationY] = useState<string | null>(null);
 
   useEffect(() => {
     if (building && building.address && building.address.geo_address) {
@@ -75,29 +74,45 @@ export default function Maps({ building }: any) {
       setLocationY(y);
     }
   }, [building]);
+
+  if (!locationX || !locationY) {
+    return <p>Loading map...</p>;
+  }
+
   const xloc = Number(locationX);
   const yloc = Number(locationY);
 
-  var iconee;
-  if (building.property_object.property_type === "apartment") {
-    iconee = Flat;
-  } else if (building.property_object.property_type === "store") {
-    iconee = Store;
-  } else if (building.property_object.property_type === "house") {
-    iconee = House;
-  } else if (building.property_object.property_type === "building") {
-    iconee = Building;
-  } else if (building.property_object.property_type === "land") {
-    iconee = Land;
-  } else if (building.property_object.property_type === "tower") {
-    iconee = Tower;
+  let iconee;
+  switch (building.property_object.property_type) {
+    case "apartment":
+      iconee = Flat;
+      break;
+    case "store":
+      iconee = Store;
+      break;
+    case "house":
+      iconee = House;
+      break;
+    case "building":
+      iconee = Building;
+      break;
+    case "land":
+      iconee = Land;
+      break;
+    case "tower":
+      iconee = Tower;
+      break;
+    default:
+      iconee = MarkerIcon;
   }
+  console.log();
   
+
   return (
     <div className="z-30">
       <MapContainer
-        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
-        center={{ lat: 34.6985, lng: 36.7237 }}
+        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
+        center={{ lat: xloc, lng: yloc }}
         zoom={13}
         scrollWheelZoom={false}
       >
@@ -112,8 +127,8 @@ export default function Maps({ building }: any) {
               iconUrl: iconee.src,
               iconRetinaUrl: iconee.src,
               iconSize: [34, 34],
-              iconAnchor: [12.5, 41],
-              popupAnchor: [0, -41],
+              iconAnchor: [17, 34],
+              popupAnchor: [0, -34],
               shadowSize: [41, 41],
             })
           }
@@ -121,12 +136,11 @@ export default function Maps({ building }: any) {
         >
           <Popup className="w-72">
             <Link
-              href={building.link}
-              className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]"
+              href={`/buildings/${building.id}`}
+              className="flex flex-row justify-center md:justify-start gap-4 items-center"
             >
               <Image
-                // src={building.img}
-                src={'/home/gg.jpg'}
+                src={"/home/gg.jpg"}
                 width={150}
                 height={100}
                 alt="montagab"

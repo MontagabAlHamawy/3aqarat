@@ -30,7 +30,8 @@ import Slide from "@/components/Slide";
 const Maps = dynamic(() => import("@/components/maps"), { ssr: false });
 
 export default async function Buildin(props: any) {
-  const response = await fetch(`${apiUrl}/property/properties/${3}`);
+  const page = props.params.building[0];
+  const response = await fetch(`${apiUrl}/property/properties/${page}`);
   if (!response.ok) {
     toast.error("خطاء في جلب البيانات ");
   }
