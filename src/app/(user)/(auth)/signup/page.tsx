@@ -35,7 +35,7 @@ const SignUp = () => {
           toast.error("حقل كلمة المرور وتأكيد كلمة المرور غير متطابقين");
           return;
         }
-        await axios.post(`${apiUrl}/auth/users/`, {
+        const response = await axios.post(`${apiUrl}/auth/users/`, {
           email,
           first_name,
           last_name,
@@ -43,6 +43,7 @@ const SignUp = () => {
           password,
         });
         router.replace("/login");
+        console.log("Authorization:JWT ", response.data?.detail);
         toast.success("تم تسجيل المستخدم بنجاح");
       } catch (error) {
         toast.error("فشل تسجيل المستخدم");

@@ -28,10 +28,8 @@ export default function MapLoade({ building }: any) {
 
   if (!locationX || !locationY || locationX === "x" || locationY === "y") {
     // return <p>... Loading map</p>;
-    setLocationX("34.69498")
-    setLocationY("36.7237")
-    // locationY = 36.7237;
-
+    setLocationX("34.69498");
+    setLocationY("36.7237");
   }
   let loc = [
     locationX,
@@ -42,8 +40,5 @@ export default function MapLoade({ building }: any) {
     building[4],
     building[5],
   ];
-  return (
-    // <></>
-    <Maps loc={loc} />
-  );
+  return <Maps loc={loc} />;
 }

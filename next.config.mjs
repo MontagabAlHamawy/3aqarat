@@ -1,11 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  rewrites: [
-    {
-      source: "/api/:path*",
-      destination: "https://gruafahim.pythonanywhere.com/:path*",
-    },
-  ],
-};
+const nextConfig = {};
 
 export default nextConfig;

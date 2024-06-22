@@ -10,7 +10,7 @@ import BuildingFilter from "@/components/BuildingFilter";
 import AllBuildings from "@/components/AllBuildings";
 
 export default async function Building(props: any) {
-  const response:any = await fetch(`${apiUrl}/property/properties/`);
+  const response:any = await fetch(`${apiUrl}/properties/`);
   if (!response.ok) {
     toast.error("خطاء في جلب البيانات ");
   }

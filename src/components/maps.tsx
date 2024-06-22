@@ -64,20 +64,17 @@ function LocationMarker() {
   );
 }
 
-export default function Maps({ loc }: any,{}) {
+export default function Maps({ loc }: any, {}) {
   // console.log(building);
-  
-  
 
   const xloc = Number(loc[0]);
   const yloc = Number(loc[1]);
   // console.log(xloc);
   // console.log(yloc);
-  
 
   let iconee;
   // console.log(Flat2.src);
-  
+
   switch (loc[6]) {
     case "apartment":
       iconee = Flat2;
@@ -100,14 +97,6 @@ export default function Maps({ loc }: any,{}) {
     default:
       iconee = MarkerIcon;
   }
-  console.log(loc[0]);
-  console.log(loc[1]);
-  console.log(loc[2]);
-  console.log(loc[3]);
-  console.log(loc[4]);
-  console.log(loc[5]);
-  console.log(loc[6]);
-  
 
   return (
     <div className="z-30">
@@ -148,9 +137,7 @@ export default function Maps({ loc }: any,{}) {
                 className="mt-5 rounded-md"
               />
               <div className="flex flex-col justify-center items-center mt-[-10px]">
-                <p className="text-lg xl:text-xl text-accent">
-                  {loc[3]}
-                </p>
+                <p className="text-lg xl:text-xl text-accent">{loc[3]}</p>
                 <div className="flex flex-row justify-between items-center mt-[-40px]">
                   <p className="text-sidpar text-base font-semibold">
                     {loc[4]}
