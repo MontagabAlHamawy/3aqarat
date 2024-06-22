@@ -35,15 +35,8 @@ const Maps = dynamic(() => import("@/components/maps"), { ssr: false });
 export default async function Buildin(props: any) {
   const page = props.params.building[0];
 
-  console.log(`${apiUrl}/property/properties/${page}`);
-
-  // const response = await axios.get(`${apiUrl}/property/properties/${page}`);
-  // console.log(building);
-
   try {
-    const building: any = await axios.get(
-      `${apiUrl}/properties/${page}/`
-    );
+    const building: any = await axios.get(`${apiUrl}/properties/${page}/`);
     if (!building.data) {
       toast.error("خطاء في جلب البيانات ");
     }
