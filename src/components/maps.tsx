@@ -15,6 +15,7 @@ import "leaflet/dist/leaflet.css";
 import House from "../../public/map/house.svg";
 import Building from "../../public/map/building.svg";
 import Flat from "../../public/map/flar.svg";
+import Flat2 from "../../public/map/flar.svg";
 import Land from "../../public/map/land.svg";
 import Store from "../../public/map/store.svg";
 import Tower from "../../public/map/tower.svg";
@@ -63,29 +64,23 @@ function LocationMarker() {
   );
 }
 
-export default function Maps({ building }: any) {
-  const [locationX, setLocationX] = useState<string | null>(null);
-  const [locationY, setLocationY] = useState<string | null>(null);
+export default function Maps({ loc }: any,{}) {
+  // console.log(building);
+  
+  
 
-  useEffect(() => {
-    if (building && building.address && building.address.geo_address) {
-      const [x, y] = building.address.geo_address.split(", ");
-      setLocationX(x);
-      setLocationY(y);
-    }
-  }, [building]);
-
-  if (!locationX || !locationY) {
-    return <p>Loading map...</p>;
-  }
-
-  const xloc = Number(locationX);
-  const yloc = Number(locationY);
+  const xloc = Number(loc[0]);
+  const yloc = Number(loc[1]);
+  // console.log(xloc);
+  // console.log(yloc);
+  
 
   let iconee;
-  switch (building.property_object.property_type) {
+  // console.log(Flat2.src);
+  
+  switch (loc[6]) {
     case "apartment":
-      iconee = Flat;
+      iconee = Flat2;
       break;
     case "store":
       iconee = Store;
@@ -105,7 +100,13 @@ export default function Maps({ building }: any) {
     default:
       iconee = MarkerIcon;
   }
-  console.log();
+  console.log(loc[0]);
+  console.log(loc[1]);
+  console.log(loc[2]);
+  console.log(loc[3]);
+  console.log(loc[4]);
+  console.log(loc[5]);
+  console.log(loc[6]);
   
 
   return (
@@ -136,7 +137,7 @@ export default function Maps({ building }: any) {
         >
           <Popup className="w-72">
             <Link
-              href={`/buildings/${building.id}`}
+              href={`/buildings/${loc[2]}`}
               className="flex flex-row justify-center md:justify-start gap-4 items-center"
             >
               <Image
@@ -148,15 +149,15 @@ export default function Maps({ building }: any) {
               />
               <div className="flex flex-col justify-center items-center mt-[-10px]">
                 <p className="text-lg xl:text-xl text-accent">
-                  {building.title}
+                  {loc[3]}
                 </p>
                 <div className="flex flex-row justify-between items-center mt-[-40px]">
                   <p className="text-sidpar text-base font-semibold">
-                    {building.price}
+                    {loc[4]}
                   </p>
                 </div>
                 <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
-                  {building.description}
+                  {loc[5]}
                 </div>
               </div>
             </Link>

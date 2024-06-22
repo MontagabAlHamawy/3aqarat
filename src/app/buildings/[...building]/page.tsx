@@ -26,6 +26,8 @@ import apiUrl from "@/utils/apiConfig";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import Slide from "@/components/Slide";
+import { notFound } from "next/navigation";
+import MapLoade from "@/components/MapLoade";
 
 const Maps = dynamic(() => import("@/components/maps"), { ssr: false });
 
@@ -34,9 +36,12 @@ export default async function Buildin(props: any) {
   const response = await fetch(`${apiUrl}/property/properties/${page}`);
   if (!response.ok) {
     toast.error("خطاء في جلب البيانات ");
+    // notFound();
   }
 
   const building = await response.json();
+  // console.log(building);
+  let build = [building.address.geo_address ,building.id,building.title,building.price,building.description, building.property_object.property_type]
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
@@ -139,7 +144,7 @@ export default async function Buildin(props: any) {
         </div>
       </div>
       <div className="flex justify-center items-center mt-10 mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
-        <Maps building={building} />
+        <MapLoade building={build} />
       </div>
     </div>
   );
