@@ -1,9 +1,0 @@
-{
-    "rewrites": [
-      {
-        "source": "/:path*",
-        "destination": "http://gruafahim.pythonanywhere.com/:path*"
-      }
-    ]
-  }
-  
