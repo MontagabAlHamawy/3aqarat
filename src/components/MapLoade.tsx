@@ -26,8 +26,10 @@ export default function MapLoade({ building }: any) {
     }
   }, [building]);
 
-  if (!locationX || !locationY || locationX === "x" || locationY === "y") {
-    // return <p>... Loading map</p>;
+  if (!locationX || !locationY) {
+    return <p>... Loading map</p>;
+  }
+  if (locationX === "x" || locationY === "y") {
     setLocationX("34.69498");
     setLocationY("36.7237");
   }

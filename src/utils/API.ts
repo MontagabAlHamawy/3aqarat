@@ -30,12 +30,22 @@ export async function SignUpApi(email: string, first_name: string, last_name: st
 }
 
 export async function BuildingApi() {
-  const response = await axios.get(`${apiUrl}/properties/`);
-  return response.data;
-
+  const response = await fetch(`${apiUrl}/properties/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  
+  return response.json();
 }
 
 export async function SingelBuildingApi(page: any) {
-  const response = await axios.get(`${apiUrl}/properties/${page}/`);
-  return response;
+  const response = await fetch(`${apiUrl}/properties/${page}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.json();
 }

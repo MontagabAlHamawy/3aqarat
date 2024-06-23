@@ -2,7 +2,7 @@
 import L from "leaflet";
 import MarkerIcon from "../../node_modules/leaflet/dist/images/marker-icon.png";
 import MarkerShadow from "../../node_modules/leaflet/dist/images/marker-shadow.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   MapContainer,
   Marker,
@@ -15,17 +15,14 @@ import "leaflet/dist/leaflet.css";
 import House from "../../public/map/house.svg";
 import Building from "../../public/map/building.svg";
 import Flat from "../../public/map/flar.svg";
-import Flat2 from "../../public/map/flar.svg";
 import Land from "../../public/map/land.svg";
 import Store from "../../public/map/store.svg";
 import Tower from "../../public/map/tower.svg";
 import Image from "next/image";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Link from "next/link";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
-
   const map = useMapEvents({
     click() {
       map.locate();
@@ -65,38 +62,20 @@ function LocationMarker() {
 }
 
 export default function Maps({ loc }: any, {}) {
-  // console.log(building);
-
   const xloc = Number(loc[0]);
   const yloc = Number(loc[1]);
-  // console.log(xloc);
-  // console.log(yloc);
-
-  let iconee;
-  // console.log(Flat2.src);
-
-  switch (loc[6]) {
-    case "apartment":
-      iconee = Flat2;
-      break;
-    case "store":
-      iconee = Store;
-      break;
-    case "house":
-      iconee = House;
-      break;
-    case "building":
-      iconee = Building;
-      break;
-    case "land":
-      iconee = Land;
-      break;
-    case "tower":
-      iconee = Tower;
-      break;
-    default:
-      iconee = MarkerIcon;
-  }
+  const mapp = [
+    {
+      title: loc[3],
+      description: loc[5],
+      price: loc[4],
+      link: loc[2],
+      type: loc[6],
+      display: "للبيع",
+      location_x: loc[0],
+      location_y: loc[1],
+    },
+  ];
 
   return (
     <div className="z-30">
@@ -111,45 +90,70 @@ export default function Maps({ loc }: any, {}) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
-        <Marker
-          icon={
-            new L.Icon({
-              iconUrl: iconee.src,
-              iconRetinaUrl: iconee.src,
-              iconSize: [34, 34],
-              iconAnchor: [17, 34],
-              popupAnchor: [0, -34],
-              shadowSize: [41, 41],
-            })
+        {mapp.map((houss, index) => {
+          const xloc = Number(houss.location_x);
+          const yloc = Number(houss.location_y);
+
+          let iconee;
+          if (houss.type === "apartment") {
+            iconee = Flat;
+          } else if (houss.type === "store") {
+            iconee = Store;
+          } else if (houss.type === "house") {
+            iconee = House;
+          } else if (houss.type === "building") {
+            iconee = Building;
+          } else if (houss.type === "land") {
+            iconee = Land;
+          } else if (houss.type === "tower") {
+            iconee = Tower;
           }
-          position={[xloc, yloc]}
-        >
-          <Popup className="w-72">
-            <Link
-              href={`/buildings/${loc[2]}`}
-              className="flex flex-row justify-center md:justify-start gap-4 items-center"
+          return (
+            <Marker
+              key={index}
+              icon={
+                new L.Icon({
+                  iconUrl: iconee.src,
+                  iconRetinaUrl: iconee.src,
+                  iconSize: [34, 34],
+                  iconAnchor: [12.5, 41],
+                  popupAnchor: [0, -41],
+                  shadowSize: [41, 41],
+                })
+              }
+              position={[xloc, yloc]}
             >
-              <Image
-                src={"/home/gg.jpg"}
-                width={150}
-                height={100}
-                alt="montagab"
-                className="mt-5 rounded-md"
-              />
-              <div className="flex flex-col justify-center items-center mt-[-10px]">
-                <p className="text-lg xl:text-xl text-accent">{loc[3]}</p>
-                <div className="flex flex-row justify-between items-center mt-[-40px]">
-                  <p className="text-sidpar text-base font-semibold">
-                    {loc[4]}
-                  </p>
-                </div>
-                <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
-                  {loc[5]}
-                </div>
-              </div>
-            </Link>
-          </Popup>
-        </Marker>
+              <Popup className="w-72">
+                <Link
+                  href={`/buildings/${houss.link}`}
+                  key={index}
+                  className="flex flex-col justify-center font-serif mx-[-30px] gap-0 items-center relative my[-25px] mt-[-20px]"
+                >
+                  <Image
+                    src="/home/gg.jpg"
+                    width={150}
+                    height={100}
+                    alt="montagab"
+                    className="mt-5 rounded-md"
+                  />
+                  <div className="flex flex-col justify-center items-center mt-[-10px]">
+                    <p className="text-lg xl:text-xl text-accent">
+                      {houss.title}
+                    </p>
+                    <div className="flex flex-row justify-between items-center mt-[-40px]">
+                      <p className="text-sidpar text-base font-semibold">
+                        {houss.description}
+                      </p>
+                    </div>
+                    <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
+                      {houss.price} ل.س
+                    </div>
+                  </div>
+                </Link>
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
     </div>
   );

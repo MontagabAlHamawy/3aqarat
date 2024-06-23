@@ -37,16 +37,17 @@ export default async function Buildin(props: any) {
   const page = props.params.building[0];
 
   const building: any = await SingelBuildingApi(page);
-  if (!building.data) {
+  
+  if (!building) {
     toast.error("خطاء في جلب البيانات ");
   }
   let build = [
-    building.data.address.geo_address,
-    building.data.id,
-    building.data.title,
-    building.data.price,
-    building.data.description,
-    building.data.property_object.property_type,
+    building.address.geo_address,
+    building.id,
+    building.title,
+    building.price,
+    building.description,
+    building.property_object.property_type,
   ];
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
@@ -58,18 +59,18 @@ export default async function Buildin(props: any) {
           <div className="flex flex-col gap-3 mx-2 xl:mx-0">
             <div className="flex justify-between xl:justify-start items-center gap-10">
               <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
-                {building.data.offer}
+                {building.offer}
               </p>
               <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
-                {building.data.property_object.property_type}
+                {building.property_object.property_type}
               </p>
             </div>
-            <h1 className="text-3xl font-bold">{building.data.title}</h1>
+            <h1 className="text-3xl font-bold">{building.title}</h1>
             <p className="text-lg font-thin text-gray-400">
-              {building.data.description}
+              {building.description}
             </p>
             <p className="text-xl font-thin text-accent">
-              {building.data.tabu}
+              {building.tabu}
             </p>
             <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16">
               <div className="flex gap-2">
@@ -80,7 +81,7 @@ export default async function Buildin(props: any) {
                   المساحة:
                 </div>
                 <p className="text-gray-300">
-                  {building.data.area}M<sup>2</sup>
+                  {building.area}M<sup>2</sup>
                 </p>
               </div>
               <div className="flex gap-2">
@@ -91,7 +92,7 @@ export default async function Buildin(props: any) {
                   عدد الغرف:
                 </div>
                 <p className="text-gray-300">
-                  {building.data.property_object.number_of_rooms}
+                  {building.property_object.number_of_rooms}
                 </p>
               </div>
               <div className="flex gap-2">
@@ -102,7 +103,7 @@ export default async function Buildin(props: any) {
                   الإتجاه:
                 </div>
                 <p className="text-gray-300">
-                  {building.data.property_object.direction}
+                  {building.property_object.direction}
                 </p>
               </div>
               <div className="flex gap-2">
@@ -113,7 +114,7 @@ export default async function Buildin(props: any) {
                   الطابق:
                 </div>
                 <p className="text-gray-300">
-                  {building.data.property_object.floor_number}
+                  {building.property_object.floor_number}
                 </p>
               </div>
               <div className="flex gap-2 w-max max-w-80 xl:max-w-96">
@@ -124,14 +125,14 @@ export default async function Buildin(props: any) {
                   الموقع:
                 </div>
                 <p className="text-gray-300 w-full">
-                  {building.data.address.city.name} /{" "}
-                  {building.data.address.region} /{" "}
-                  {building.data.address.street} /{" "}
-                  {building.data.address.description}
+                  {building.address.city.name} /{" "}
+                  {building.address.region} /{" "}
+                  {building.address.street} /{" "}
+                  {building.address.description}
                 </p>
               </div>
             </div>
-            <p className="text-xl text-accent">{building.data.price} ل.س</p>
+            <p className="text-xl text-accent">{building.price} ل.س</p>
             <div className="flex justify-between items-center mx-3 cursor-pointer">
               <div className="flex gap-2 justify-center items-center">
                 <Image
@@ -141,7 +142,7 @@ export default async function Buildin(props: any) {
                   alt="seller"
                   className="p-1 bg-accent rounded-full"
                 />
-                <p>{building.data.seller}</p>
+                <p>{building.seller}</p>
               </div>
               <Link
                 href={`tel://00963997867735`}
