@@ -8,8 +8,9 @@ import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import {LoginApi} from "@/utils/API";
 
-const Login = () => {
+export default function Login() {
   const router = useRouter();
   const [emus, setEmus] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +29,6 @@ const Login = () => {
   } else {
     username = emus;
   }
-  
 
   const handleLogin = async (event: any) => {
     event.preventDefault();
@@ -36,14 +36,8 @@ const Login = () => {
       toast.warning("يرجى ملئ الحقول");
     } else {
       try {
-        const response = await axios.post(`${apiUrl}/auth/jwt/create/`, {
-          username,
-          email,
-          password,
-        });
+        await LoginApi(username, email, password);
         router.replace("/");
-        console.log("Authorization:JWT ",response.data?.access);
-      
         toast.success("تم تسجيل الدخول بنجاح");
       } catch (error: any) {
         toast.error("فشل تسجيل الدخول");
@@ -130,6 +124,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

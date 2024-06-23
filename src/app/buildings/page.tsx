@@ -3,17 +3,14 @@ import apiUrl from "@/utils/apiConfig";
 import { toast } from "react-toastify";
 import AllBuildings from "@/components/AllBuildings";
 import axios from "axios";
+import { BuildingApi } from "@/utils/API";
 
-export default async function Building(props: any) {
-  try {
-    const response: any = await axios.get(`${apiUrl}/properties/`);
-    if (!response.data) {
-      toast.error("خطاء في جلب البيانات ");
-    }
-    const building = response.data
-
-    return <AllBuildings Building={building} />;
-  } catch (error) {
-    console.log(error);
+export default async function Building() {
+  const response: any = await BuildingApi();
+  if (!response) {
+    toast.error("خطاء في جلب البيانات ");
   }
+  const building = response;
+
+  return <AllBuildings Building={building} />;
 }

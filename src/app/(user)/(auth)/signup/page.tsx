@@ -7,6 +7,7 @@ import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { SignUpApi } from "@/utils/API";
 
 const SignUp = () => {
   const router = useRouter();
@@ -35,15 +36,8 @@ const SignUp = () => {
           toast.error("حقل كلمة المرور وتأكيد كلمة المرور غير متطابقين");
           return;
         }
-        const response = await axios.post(`${apiUrl}/auth/users/`, {
-          email,
-          first_name,
-          last_name,
-          username,
-          password,
-        });
-        router.replace("/login");
-        console.log("Authorization:JWT ", response.data?.detail);
+        await SignUpApi(email, first_name, last_name, username, password);
+        router.replace("/");
         toast.success("تم تسجيل المستخدم بنجاح");
       } catch (error) {
         toast.error("فشل تسجيل المستخدم");
