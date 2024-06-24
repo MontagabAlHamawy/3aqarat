@@ -7,6 +7,7 @@ export default function Pagination() {
   const router = useRouter();
   const [pagination, SetPagination] = useState("/buildings/?page=1");
   router.replace(pagination);
+
   return (
     <div className="flex flex-row justify-center items-center w-max px-8 py-2 rounded-lg  gap-10 bg-white/10">
       <div className="p-2 rounded-lg text-xl xl:text-2xl bg-accent cursor-pointer">

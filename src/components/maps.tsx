@@ -14,9 +14,9 @@ import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import House from "../../public/map/house.svg";
 import Building from "../../public/map/building.svg";
-import Flat from "../../public/map/flar.svg";
+import Apartment from "../../public/map/flar.svg";
 import Land from "../../public/map/land.svg";
-import Store from "../../public/map/store.svg";
+import Commercialproperty from "../../public/map/store.svg";
 import Tower from "../../public/map/tower.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -93,12 +93,12 @@ export default function Maps({ loc }: any, {}) {
         {mapp.map((houss, index) => {
           const xloc = Number(houss.location_x);
           const yloc = Number(houss.location_y);
-
+          console.log("houss=");
           let iconee;
           if (houss.type === "apartment") {
-            iconee = Flat;
-          } else if (houss.type === "store") {
-            iconee = Store;
+            iconee = Apartment;
+          } else if (houss.type === "commercialproperty") {
+            iconee = Commercialproperty;
           } else if (houss.type === "house") {
             iconee = House;
           } else if (houss.type === "building") {
@@ -108,6 +108,7 @@ export default function Maps({ loc }: any, {}) {
           } else if (houss.type === "tower") {
             iconee = Tower;
           }
+
           return (
             <Marker
               key={index}

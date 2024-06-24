@@ -3,8 +3,6 @@ import apiUrl from "./apiConfig";
 import Cookies from "js-cookie";
 
 export function SaveToken(token: string) {
-  console.log(token);
-
   Cookies.set("authToken", token, { expires: 30 }); // تخزين التوكن في الكوكيز لمدة 7 أيام
 };
 
@@ -31,6 +29,10 @@ export async function SignUpApi(email: string, first_name: string, last_name: st
 
 export async function BuildingApi(page: any) {
   const response = await fetch(`${apiUrl}/properties/?page=${page}`);
+  return response.json();
+}
+export async function LimitBuildingApi(limit: any) {
+  const response = await fetch(`${apiUrl}/properties/?limit=${limit}`);
   return response.json();
 }
 

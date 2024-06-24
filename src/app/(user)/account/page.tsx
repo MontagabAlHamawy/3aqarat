@@ -65,7 +65,7 @@ export default function Acount() {
                   </Link>
                 </div>
               </div>
-              <div className="absolute top-[-70px] xl:top-1 lext-20 xl:left-5 flex flex-row xl:flex-col gap-5">
+              <div className="absolute top-[-70px] left-2 xl:top-1 xl:left-5 ">
                 <div onClick={() => logout()}>
                   <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300">
                     تسجيل الخروج

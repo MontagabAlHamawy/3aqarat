@@ -1,37 +1,15 @@
-import { BuildingInfo, ImagBuilding } from "@/components/links";
+import { ImagBuilding } from "@/components/links";
 import Image from "next/image";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/scrollbar";
-import "swiper/css/virtual";
-import "swiper/css/keyboard";
-import "swiper/css/mousewheel";
-import "swiper/css/pagination";
-import "swiper/css/parallax";
-import "swiper/css/autoplay";
-import "swiper/css/grid";
-import "swiper/css/effect-fade";
-import "swiper/css/free-mode";
-import "swiper/css/zoom";
-import "swiper/css/thumbs";
-import {
-  PiRulerDuotone,
-  PiCompassDuotone,
-  PiBuildingsDuotone,
-  PiMapPinDuotone,
-  PiArmchairDuotone,
-} from "react-icons/pi";
-import dynamic from "next/dynamic";
-import apiUrl from "@/utils/apiConfig";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import Slide from "@/components/Slide";
-import { notFound } from "next/navigation";
 import MapLoade from "@/components/MapLoade";
-import axios from "axios";
 import { SingelBuildingApi } from "@/utils/API";
-
-const Maps = dynamic(() => import("@/components/maps"), { ssr: false });
+import Apartment from "@/components/Buildings/apartment";
+import Commercialproperty from "@/components/Buildings/commercialproperty";
+import BBuilding from "@/components/Buildings/bbuilding";
+import House from "@/components/Buildings/house";
+import Land from "@/components/Buildings/land";
 
 export default async function Buildin(props: any) {
   const page = props.params.building[0];
@@ -41,6 +19,7 @@ export default async function Buildin(props: any) {
   if (!building) {
     toast.error("خطاء في جلب البيانات ");
   }
+console.log(building);
 
   let build = [
     building.address.geo_address,
@@ -48,8 +27,32 @@ export default async function Buildin(props: any) {
     building.title,
     building.price,
     building.description,
-    building.property_object.property_type,
+    building.property_object.property_type.en,
   ];
+  const type: any = building.property_object.property_type.en;
+  console.log(type);
+
+  let isApartment = false;
+  let isCommercialproperty = false;
+  let isHouse = false;
+  let isLand = false;
+  let isBuilding = false;
+  if (type === "apartment") {
+    isApartment = true;
+  }
+  if (type === "commercialproperty") {
+    isCommercialproperty = true;
+  }
+  if (type === "house") {
+    isHouse = true;
+  }
+  if (type === "land") {
+    isLand = true;
+  }
+  if (type === "building") {
+    isBuilding = true;
+  }
+
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
@@ -57,13 +60,13 @@ export default async function Buildin(props: any) {
           <div className="mx-2 xl:mx-0 flex justify-center items-center">
             <Slide image={ImagBuilding} />
           </div>
-          <div className="flex flex-col gap-3 mx-2 xl:mx-0">
-            <div className="flex justify-between xl:justify-start items-center gap-10">
+          <div className="flex flex-col  gap-3 mx-2 xl:mx-0">
+            <div className="flex justify-between items-center  gap-10">
               <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
                 {building.offer}
               </p>
-              <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
-                {building.property_object.property_type}
+              <p className="text-lg  py-2 px-3 bg-accent w-max ml-3 rounded-md">
+                {building.property_object.property_type.ar}
               </p>
             </div>
             <h1 className="text-3xl font-bold">{building.title}</h1>
@@ -71,63 +74,20 @@ export default async function Buildin(props: any) {
               {building.description}
             </p>
             <p className="text-xl font-thin text-accent">{building.tabu}</p>
-            <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16">
-              <div className="flex gap-2">
-                <div className="flex justify-center items-center gap-1">
-                  <p className="text-accent text-lg">
-                    <PiRulerDuotone />
-                  </p>
-                  المساحة:
-                </div>
-                <p className="text-gray-300">
-                  {building.area}M<sup>2</sup>
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <div className="flex justify-center items-center gap-1">
-                  <p className="text-accent text-lg">
-                    <PiArmchairDuotone />
-                  </p>
-                  عدد الغرف:
-                </div>
-                <p className="text-gray-300">
-                  {building.property_object.number_of_rooms}
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <div className="flex justify-center items-center gap-1">
-                  <p className="text-accent text-lg">
-                    <PiCompassDuotone />
-                  </p>
-                  الإتجاه:
-                </div>
-                <p className="text-gray-300">
-                  {building.property_object.direction}
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <div className="flex justify-center items-center gap-1">
-                  <p className="text-accent text-lg">
-                    <PiBuildingsDuotone />
-                  </p>
-                  الطابق:
-                </div>
-                <p className="text-gray-300">
-                  {building.property_object.floor_number}
-                </p>
-              </div>
-              <div className="flex gap-2 w-max max-w-80 xl:max-w-96">
-                <div className="flex justify-center items-center gap-1">
-                  <p className="text-accent text-lg">
-                    <PiMapPinDuotone />
-                  </p>
-                  الموقع:
-                </div>
-                <p className="text-gray-300 w-full">
-                  {building.address.city.name} / {building.address.region} /{" "}
-                  {building.address.street} / {building.address.description}
-                </p>
-              </div>
+            <div className={`${isApartment ? "block" : "hidden"}`}>
+              <Apartment building={building} />
+            </div>
+            <div className={`${isCommercialproperty ? "block" : "hidden"}`}>
+              <Commercialproperty building={building} />
+            </div>
+            <div className={`${isBuilding ? "block" : "hidden"}`}>
+              <BBuilding building={building} />
+            </div>
+            <div className={`${isHouse ? "block" : "hidden"}`}>
+              <House building={building} />
+            </div>
+            <div className={`${isLand ? "block" : "hidden"}`}>
+              <Land building={building} />
             </div>
             <p className="text-xl text-accent">{building.price} ل.س</p>
             <div className="flex justify-between items-center mx-3 cursor-pointer">
