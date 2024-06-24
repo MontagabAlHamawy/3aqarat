@@ -37,12 +37,11 @@ export default async function Buildin(props: any) {
   const page = props.params.building[0];
 
   const building: any = await SingelBuildingApi(page);
-  
+
   if (!building) {
     toast.error("خطاء في جلب البيانات ");
   }
-  console.log(building);
-  
+
   let build = [
     building.address.geo_address,
     building.id,
@@ -71,9 +70,7 @@ export default async function Buildin(props: any) {
             <p className="text-lg font-thin text-gray-400">
               {building.description}
             </p>
-            <p className="text-xl font-thin text-accent">
-              {building.tabu}
-            </p>
+            <p className="text-xl font-thin text-accent">{building.tabu}</p>
             <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16">
               <div className="flex gap-2">
                 <div className="flex justify-center items-center gap-1">
@@ -127,10 +124,8 @@ export default async function Buildin(props: any) {
                   الموقع:
                 </div>
                 <p className="text-gray-300 w-full">
-                  {building.address.city.name} /{" "}
-                  {building.address.region} /{" "}
-                  {building.address.street} /{" "}
-                  {building.address.description}
+                  {building.address.city.name} / {building.address.region} /{" "}
+                  {building.address.street} / {building.address.description}
                 </p>
               </div>
             </div>
