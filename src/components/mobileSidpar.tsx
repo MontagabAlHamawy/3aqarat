@@ -21,7 +21,7 @@ export default function MobileSidpar() {
       setAccount("/login");
       setAccountNam("الدخول");
     }
-  }, []);
+  }, [route]);
   const MobData = [
     { name: accountName, path: account, icone: <PiUserDuotone /> },
     { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },

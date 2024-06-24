@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import apiUrl from "../../../../utils/apiConfig";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { SignUpApi } from "@/utils/API";
+import Cookies from "js-cookie";
 
 const SignUp = () => {
   const router = useRouter();
@@ -19,7 +20,14 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const [account, setAccount] = useState("signup");
+  useEffect(() => {
+    const token = Cookies.get("authToken");
+    if (token) {
+      setAccount("account");
+    }
+  }, [router]);
+  router.replace(`/${account}`);
   const handleRegister = async () => {
     if (
       username === "" ||

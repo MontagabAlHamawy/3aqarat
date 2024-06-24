@@ -21,7 +21,7 @@ function Header() {
       setAccount("account");
     }
     console.log(!token);
-  }, []);
+  }, [route]);
   const searchActive = route === "/search";
   const notActive = route === "/notification";
   const accountActive = route === account;

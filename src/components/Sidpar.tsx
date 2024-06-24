@@ -31,7 +31,7 @@ function Sidpar() {
       setAccount("/login");
       setAccountNam("تسجيل الدخول");
     }
-  }, []);
+  }, [route]);
   const navData = [
     { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
     { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },

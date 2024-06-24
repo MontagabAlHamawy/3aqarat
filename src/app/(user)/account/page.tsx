@@ -2,19 +2,26 @@
 import { UserInfo, house } from "@/components/links";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   PiFacebookLogoDuotone,
   PiInstagramLogoDuotone,
   PiTelegramLogoDuotone,
 } from "react-icons/pi";
-
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Acount() {
-  // const handleMapClick = (lat: number, lng: number) => {
-  //   // يمكنك استخدام الإحداثيات هنا كما تشاء، مثلاً إرسالها إلى الخلفية باستخدام AJAX
-  //   console.log("Clicked on map at coordinates:", lat, lng);
-  // };
+  const router = useRouter();
+  const [account, setAccount] = useState("account");
+  useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("login");
+    }
+    console.log(token);
+  }, [router]);
+  router.replace(`/${account}`);
   return (
     <div className="relative">
       <div>
@@ -67,7 +74,7 @@ export default function Acount() {
           );
         })}
       </div>
-      
+
       <div>
         <h1 className="text-2xl mt-10 bg-section xl:mr-[-8px]  rounded-t-md py-2 px-3 w-min">
           عقاراتي
