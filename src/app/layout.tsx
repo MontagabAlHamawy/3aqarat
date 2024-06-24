@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import Sidpar from "../components/Sidpar";
-import MobileSidpar from "../components/mobileSidpar";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Sidpar from "../components/component/Sidpar";
+import MobileSidpar from "../components/component/mobileSidpar";
+import Footer from "../components/component/Footer";
+import Header from "../components/component/Header";
 import { Analytics } from "@vercel/analytics/react";
 import { Cairo } from "@next/font/google";
 import { ToastContainer } from "react-toastify";

@@ -1,14 +1,14 @@
 "use client";
 // import { useState } from 'react';
 import L from "leaflet";
-import MarkerIcon from "../../node_modules/leaflet/dist/images/marker-icon.png";
-import MarkerShadow from "../../node_modules/leaflet/dist/images/marker-shadow.png";
-import House from "../../public/map/house.svg";
-import Building from "../../public/map/building.svg";
-import Flat from "../../public/map/flar.svg";
-import Land from "../../public/map/land.svg";
-import Store from "../../public/map/store.svg";
-import Tower from "../../public/map/tower.svg";
+import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
+import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
+import House from "../../../public/map/house.svg";
+import Building from "../../../public/map/building.svg";
+import Flat from "../../../public/map/flar.svg";
+import Land from "../../../public/map/land.svg";
+import Store from "../../../public/map/store.svg";
+import Tower from "../../../public/map/tower.svg";
 import { useState } from "react";
 import {
   MapContainer,
@@ -20,7 +20,7 @@ import {
 import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
-import { houses } from "./links";
+import { houses } from "../links";
 import Link from "next/link";
 
 // type Coordinate = [number, number];

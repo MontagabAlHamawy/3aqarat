@@ -6,8 +6,8 @@ import { whyus } from "../components/links";
 import dynamic from "next/dynamic";
 import { LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
-import AllBuildings from "@/components/AllBuildings";
-const HomeMap = dynamic(() => import("@/components/homeMap"), { ssr: false });
+import AllBuildings from "@/components/BuildingCom/AllBuildings";
+const HomeMap = dynamic(() => import("@/components/map/homeMap"), { ssr: false });
 export default async function Home() {
   let limit = 4;
   const response = await LimitBuildingApi(limit);

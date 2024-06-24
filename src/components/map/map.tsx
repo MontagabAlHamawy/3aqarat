@@ -1,7 +1,14 @@
 "use client";
+// import { useState } from 'react';
 import L from "leaflet";
-import MarkerIcon from "../../node_modules/leaflet/dist/images/marker-icon.png";
-import MarkerShadow from "../../node_modules/leaflet/dist/images/marker-shadow.png";
+import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
+import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
+import House from "../../../public/map/house.svg";
+import Building from "../../../public/map/building.svg";
+import Flat from "../../../public/map/flar.svg";
+import Land from "../../../public/map/land.svg";
+import Store from "../../../public/map/store.svg";
+import Tower from "../../../public/map/tower.svg";
 import { useState } from "react";
 import {
   MapContainer,
@@ -12,17 +19,14 @@ import {
 } from "react-leaflet";
 import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import House from "../../public/map/house.svg";
-import Building from "../../public/map/building.svg";
-import Apartment from "../../public/map/flar.svg";
-import Land from "../../public/map/land.svg";
-import Commercialproperty from "../../public/map/store.svg";
-import Tower from "../../public/map/tower.svg";
 import Image from "next/image";
+import { houses } from "../links";
 import Link from "next/link";
 
+// type Coordinate = [number, number];
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
+
   const map = useMapEvents({
     click() {
       map.locate();
@@ -61,28 +65,14 @@ function LocationMarker() {
   );
 }
 
-export default function Maps({ loc }: any, {}) {
-  const xloc = Number(loc[0]);
-  const yloc = Number(loc[1]);
-  const mapp = [
-    {
-      title: loc[3],
-      description: loc[5],
-      price: loc[4],
-      link: loc[2],
-      type: loc[6],
-      display: "للبيع",
-      location_x: loc[0],
-      location_y: loc[1],
-    },
-  ];
+export default function Map() {
 
   return (
     <div className="z-30">
-      <MapContainer
-        className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
-        center={{ lat: xloc, lng: yloc }}
-        zoom={13}
+        <MapContainer
+      className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[60vw] xl:h-[68vh] z-10 rounded-md "
+        center={{ lat: 34.6985, lng: 36.7237 }}
+        zoom={7}
         scrollWheelZoom={false}
       >
         <TileLayer
@@ -90,14 +80,14 @@ export default function Maps({ loc }: any, {}) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
-        {mapp.map((houss, index) => {
-          const xloc = Number(houss.location_x);
-          const yloc = Number(houss.location_y);
+        {houses.map((houss, index) => {
+          let xloc = Number(houss.location_x);
+          let yloc = Number(houss.location_y);
           let iconee;
-          if (houss.type === "apartment") {
-            iconee = Apartment;
-          } else if (houss.type === "commercialproperty") {
-            iconee = Commercialproperty;
+          if (houss.type === "flat") {
+            iconee = Flat;
+          } else if (houss.type === "store") {
+            iconee = Store;
           } else if (houss.type === "house") {
             iconee = House;
           } else if (houss.type === "building") {
@@ -107,7 +97,6 @@ export default function Maps({ loc }: any, {}) {
           } else if (houss.type === "tower") {
             iconee = Tower;
           }
-
           return (
             <Marker
               key={index}
@@ -125,12 +114,12 @@ export default function Maps({ loc }: any, {}) {
             >
               <Popup className="w-72">
                 <Link
-                  href={`/buildings/${houss.link}`}
+                  href={houss.link}
                   key={index}
-                  className="flex flex-col justify-center font-serif  gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
-                    src="/home/gg.jpg"
+                    src={houss.img}
                     width={150}
                     height={100}
                     alt="montagab"
@@ -141,12 +130,12 @@ export default function Maps({ loc }: any, {}) {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar  text-base font-semibold">
-                        {houss.description}
+                      <p className="text-sidpar text-base font-semibold">
+                        {houss.prise}
                       </p>
                     </div>
                     <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
-                      {houss.price} ل.س
+                      {houss.display}
                     </div>
                   </div>
                 </Link>
@@ -155,6 +144,7 @@ export default function Maps({ loc }: any, {}) {
           );
         })}
       </MapContainer>
+      
     </div>
   );
 }

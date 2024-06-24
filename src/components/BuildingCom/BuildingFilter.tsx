@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { hom } from './links';
+import { hom } from '../links';
 
 export default function BuildingFilter({ onFilterChange }: any) {
     const [filterType, setFilterType] = useState("all");

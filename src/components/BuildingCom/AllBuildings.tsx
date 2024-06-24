@@ -15,18 +15,18 @@ export default function AllBuildings({ Building }: any) {
         throw new Error("خطاء في جلب البيانات");
       }
       setBuildings(Building);
-      // setBuildings(data.filter((building: any) => filter === "all" || building.type === filter));
     } catch (error) {
       toast.error("خطاء في جلب البيانات");
     }
   };
+
   return (
     <div>
       <BuildingFilter onFilterChange={setFilterType} />
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
           console.log(building.property_object.property_type.ar);
-          
+
           return (
             <Link
               href={`/buildings/${building.id}`}

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import apiUrl from "@/utils/apiConfig";
 import { toast } from "react-toastify";
-import AllBuildings from "@/components/AllBuildings";
 import axios from "axios";
 import { BuildingApi } from "@/utils/API";
 // import { Pagination } from "swiper/modules";
-import Pagination from "@/components/pagination";
+import Pagination from "@/components/pagination/pagination";
+import AllBuildings from "@/components/BuildingCom/AllBuildings";
 
 export default async function Buildin(props: any) {
   let page = props.searchParams.page || null;
