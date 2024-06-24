@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
-import { Imag } from "./links";
+import { Imag } from "../links";
 
 export default function GallerySlider(){
   return (
