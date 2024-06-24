@@ -14,14 +14,17 @@ export default function Login() {
   const [emus, setEmus] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [account, setAccount] = useState("login");
+  const [account, setAccount] = useState("/account");
   useEffect(() => {
-    const token = Cookies.get("authToken");
-    if (token) {
-      setAccount("account");
-    } 
-  }, [router]);
-  router.replace(`/${account}`);
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("/login");
+    }
+  }, []);
+
+  useEffect(() => {
+    router.replace(account);
+  }, [account, router]);
 
   let email: string | null = null;
   let username: string | null = null;

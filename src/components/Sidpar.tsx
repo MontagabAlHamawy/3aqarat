@@ -23,13 +23,16 @@ function Sidpar() {
     setSidebarWidth(sidebarWidth === 16 ? 100 : 16);
   };
 
-  const [account  , setAccount ] = useState("/account");
   const [accountName, setAccountNam] = useState("حسابي");
+  const [account, setAccount] = useState("");
   useEffect(() => {
-    const token = Cookies.get("authToken");
+    const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/login");
-      setAccountNam("تسجيل الدخول");
+      setAccount("login");
+      setAccountNam('تسجيل الدخول');
+    } else {
+      setAccount("account");
+      setAccountNam('حسابي');
     }
   }, [route]);
   const navData = [

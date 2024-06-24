@@ -13,15 +13,17 @@ import { useRouter } from "next/navigation";
 
 export default function Acount() {
   const router = useRouter();
-  const [account, setAccount] = useState("account");
+  const [account, setAccount] = useState("/account");
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("login");
+      setAccount("/login");
     }
-    console.log(token);
-  }, [router]);
-  router.replace(`/${account}`);
+  }, []);
+
+  useEffect(() => {
+    router.replace(account);
+  }, [account, router]);
   return (
     <div className="relative">
       <div>

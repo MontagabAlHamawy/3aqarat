@@ -12,14 +12,17 @@ import {
 } from "react-icons/pi";
 
 export default function MobileSidpar() {
-  const route = usePathname();
-  const [account, setAccount] = useState("/account");
   const [accountName, setAccountNam] = useState("حسابي");
+  const route = usePathname();
+  const [account, setAccount] = useState("");
   useEffect(() => {
-    const token = Cookies.get("authToken");
+    const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/login");
-      setAccountNam("الدخول");
+      setAccount("login");
+      setAccountNam('تسجيل');
+    } else {
+      setAccount("account");
+      setAccountNam('حسابي');
     }
   }, [route]);
   const MobData = [

@@ -20,14 +20,17 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [account, setAccount] = useState("signup");
+  const [account, setAccount] = useState("/account");
   useEffect(() => {
-    const token = Cookies.get("authToken");
-    if (token) {
-      setAccount("account");
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("/signup");
     }
-  }, [router]);
-  router.replace(`/${account}`);
+  }, []);
+
+  useEffect(() => {
+    router.replace(account);
+  }, [account, router]);
   const handleRegister = async () => {
     if (
       username === "" ||

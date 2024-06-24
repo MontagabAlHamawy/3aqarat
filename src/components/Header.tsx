@@ -20,7 +20,6 @@ function Header() {
     } else {
       setAccount("account");
     }
-    console.log(!token);
   }, [route]);
   const searchActive = route === "/search";
   const notActive = route === "/notification";
