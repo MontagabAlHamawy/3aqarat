@@ -93,7 +93,6 @@ export default function Maps({ loc }: any, {}) {
         {mapp.map((houss, index) => {
           const xloc = Number(houss.location_x);
           const yloc = Number(houss.location_y);
-          console.log("houss=");
           let iconee;
           if (houss.type === "apartment") {
             iconee = Apartment;
@@ -128,7 +127,7 @@ export default function Maps({ loc }: any, {}) {
                 <Link
                   href={`/buildings/${houss.link}`}
                   key={index}
-                  className="flex flex-col justify-center font-serif mx-[-30px] gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-col justify-center font-serif  gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
                     src="/home/gg.jpg"
@@ -142,7 +141,7 @@ export default function Maps({ loc }: any, {}) {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar text-base font-semibold">
+                      <p className="text-sidpar  text-base font-semibold">
                         {houss.description}
                       </p>
                     </div>

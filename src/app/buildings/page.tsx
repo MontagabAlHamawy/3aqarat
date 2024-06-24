@@ -20,7 +20,7 @@ export default async function Buildin(props: any) {
   const building = response.results;
 
   return (
-    <div  className="mx-2 xl:mx-0 xl:ml-3">
+    <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
         <h1 className="text-2xl">العقارات</h1>
       </div>

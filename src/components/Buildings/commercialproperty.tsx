@@ -42,6 +42,7 @@ export default function Commercialproperty(Building: any) {
           </div>
           <p className="text-gray-300">{direction}</p>
         </div>
+      </div>
         <div className="flex gap-2 w-full">
           <div className="flex justify-center gap-1 ">
             <p className="text-accent text-lg">
@@ -49,12 +50,11 @@ export default function Commercialproperty(Building: any) {
             </p>
             الموقع:
           </div>
-          <p className="text-gray-300 max-w-80  xl:max-w-96 ">
+          <p className="text-gray-300 max-w-64  xl:max-w-96 ">
             {building.address.city.name} / {building.address.region} /{" "}
             {building.address.street} / {building.address.description}{" "}
           </p>
         </div>
-      </div>
     </div>
   );
 }

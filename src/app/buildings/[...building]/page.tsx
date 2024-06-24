@@ -1,9 +1,34 @@
-import { ImagBuilding } from "@/components/links";
+import { BuildingInfo, ImagBuilding } from "@/components/links";
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+import "swiper/css/virtual";
+import "swiper/css/keyboard";
+import "swiper/css/mousewheel";
+import "swiper/css/pagination";
+import "swiper/css/parallax";
+import "swiper/css/autoplay";
+import "swiper/css/grid";
+import "swiper/css/effect-fade";
+import "swiper/css/free-mode";
+import "swiper/css/zoom";
+import "swiper/css/thumbs";
+import {
+  PiRulerDuotone,
+  PiCompassDuotone,
+  PiBuildingsDuotone,
+  PiMapPinDuotone,
+  PiArmchairDuotone,
+} from "react-icons/pi";
+import dynamic from "next/dynamic";
+import apiUrl from "@/utils/apiConfig";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import Slide from "@/components/Slide";
+import { notFound } from "next/navigation";
 import MapLoade from "@/components/MapLoade";
+import axios from "axios";
 import { SingelBuildingApi } from "@/utils/API";
 import Apartment from "@/components/Buildings/apartment";
 import Commercialproperty from "@/components/Buildings/commercialproperty";
@@ -19,7 +44,6 @@ export default async function Buildin(props: any) {
   if (!building) {
     toast.error("خطاء في جلب البيانات ");
   }
-console.log(building);
 
   let build = [
     building.address.geo_address,

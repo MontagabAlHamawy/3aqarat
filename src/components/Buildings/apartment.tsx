@@ -26,7 +26,7 @@ export default function Apartment(Building: any) {
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16">
         <div className="flex gap-2">
-          <div className="flex justify-center items-center gap-1">
+          <div className="flex justify-center gap-1">
             <p className="text-accent text-lg">
               <PiRulerDuotone />
             </p>
@@ -37,7 +37,7 @@ export default function Apartment(Building: any) {
           </p>
         </div>
         <div className="flex gap-2">
-          <div className="flex justify-center items-center gap-1">
+          <div className="flex justify-center gap-1">
             <p className="text-accent text-lg">
               <PiArmchairDuotone />
             </p>
@@ -48,7 +48,7 @@ export default function Apartment(Building: any) {
           </p>
         </div>
         <div className="flex gap-2">
-          <div className="flex justify-center items-center gap-1">
+          <div className="flex justify-center gap-1">
             <p className="text-accent text-lg">
               <PiCompassDuotone />
             </p>
@@ -57,29 +57,29 @@ export default function Apartment(Building: any) {
           <p className="text-gray-300">{direction}</p>
         </div>
         <div className="flex gap-2">
-          <div className="flex justify-center items-center gap-1">
+          <div className="flex justify-center gap-1">
             <p className="text-accent text-lg">
               <PiBuildingsDuotone />
             </p>
             الطابق:
           </div>
           <p className="text-gray-300">
-            {building.property_objectزfloor_number}
+            {building.property_object.floor_number}
           </p>
         </div>
-        <div className="flex gap-2 w-max">
-          <div className="flex justify-center items-center gap-1">
+      </div>
+        <div className="flex gap-2  w-full">
+          <div className="flex  gap-1">
             <p className="text-accent text-lg">
               <PiMapPinDuotone />
             </p>
             الموقع:
           </div>
-          <p className="text-gray-300 max-w-80  xl:max-w-96 ">
+          <p className="text-gray-300 max-w-64  xl:max-w-96 ">
             {building.address.city.name} / {building.address.region} /{" "}
             {building.address.street} / {building.address.description}{" "}
           </p>
         </div>
-      </div>
     </div>
   );
 }
