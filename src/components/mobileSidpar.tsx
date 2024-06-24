@@ -18,10 +18,10 @@ export default function MobileSidpar() {
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("login");
+      setAccount("/login");
       setAccountNam('تسجيل');
     } else {
-      setAccount("account");
+      setAccount("/account");
       setAccountNam('حسابي');
     }
   }, [route]);
@@ -38,12 +38,15 @@ export default function MobileSidpar() {
         {MobData.map((link, index) => {
           let isActive = route === link.path; // Default isActive value
 
-          if (route !== "/" && route.startsWith(link.path)) {
+          if (route !== "/" && route.startsWith(link.path) ) {
             // If the route is not homepage and starts with link.path
             if (link.path !== "/") {
               // If link.path is not the homepage
               isActive = true;
             }
+          }
+          if(route === '/signup' && link.name === 'تسجيل'){
+            isActive = true;
           }
 
           return (

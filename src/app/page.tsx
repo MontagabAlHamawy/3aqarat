@@ -27,7 +27,7 @@ export default function Home() {
             مهمتك وتجعل الأمر أكثر مرونة
           </p>
           <Link href={"/buildings"}>
-            <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
+            <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300">
               عرض العقارات
             </div>
           </Link>

@@ -42,7 +42,7 @@ export default function RootLayout({
             position="top-left"
             className=" mt-14"
           />
-          <div className="wrapper min-h-[71vh] md:min-h-[68vh] xl:min-h-[82.5vh] py-10 xl:pr-20 xl:pt-10">
+          <div className="wrapper min-h-[71vh] md:min-h-[68vh] xl:min-h-[84.3vh] py-10 xl:pr-20 xl:pt-10">
             {children}
             <Analytics />
           </div>

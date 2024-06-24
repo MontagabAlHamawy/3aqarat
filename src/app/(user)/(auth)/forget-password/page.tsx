@@ -67,7 +67,7 @@ const ForgetPassword = () => {
             <button
               type="button"
               onClick={handleLogin}
-              className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300"
+              className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300"
             >
               استعادة كلمة المرور
             </button>

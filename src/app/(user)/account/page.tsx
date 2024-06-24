@@ -21,6 +21,11 @@ export default function Acount() {
     }
   }, []);
 
+  function logout() {
+    Cookies.set("authToken", "");
+    router.replace('/login')
+  }
+
   useEffect(() => {
     router.replace(account);
   }, [account, router]);
@@ -61,16 +66,11 @@ export default function Acount() {
                 </div>
               </div>
               <div className="absolute top-[-70px] xl:top-1 lext-20 xl:left-5 flex flex-row xl:flex-col gap-5">
-                <Link href={"/login"}>
-                  <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
-                    تسجيل الدخول
+                <div onClick={() => logout()}>
+                  <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300">
+                    تسجيل الخروج
                   </div>
-                </Link>
-                <Link href={"/signup"}>
-                  <div className="bg-accent text-white px-4 py-2 rounded hover:scale-110  ease-in duration-300">
-                    تسجيل مستخدم
-                  </div>
-                </Link>
+                </div>
               </div>
             </div>
           );
