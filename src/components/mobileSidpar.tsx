@@ -1,26 +1,48 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
 import { usePathname } from "next/navigation";
-import { MobData } from "./links.js";
+import Cookies from "js-cookie";
+import {
+  PiBuildingsDuotone,
+  PiHeartDuotone,
+  PiHouseDuotone,
+  PiMegaphoneDuotone,
+  PiUserDuotone,
+} from "react-icons/pi";
 
 export default function MobileSidpar() {
   const route = usePathname();
+  const [account, setAccount] = useState("/account");
+  const [accountName, setAccountNam] = useState("حسابي");
+  useEffect(() => {
+    const token = Cookies.get("authToken");
+    if (!token) {
+      setAccount("/login");
+      setAccountNam("الدخول");
+    }
+  }, []);
+  const MobData = [
+    { name: accountName, path: account, icone: <PiUserDuotone /> },
+    { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
+    { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
+    { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
+    { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
+  ];
   return (
     <div className="fixed bottom-0 left-0 w-full bg-sidpar py-3 pr-6 flex justify-center items-center z-50">
       <div className="flex flex-row justify-center items-center space-x-4 gap-2 md:gap-20">
         {MobData.map((link, index) => {
-           let isActive = route === link.path; // Default isActive value
+          let isActive = route === link.path; // Default isActive value
 
-           if (route !== "/" && route.startsWith(link.path)) {
-             // If the route is not homepage and starts with link.path
-             if (link.path !== "/") {
-               // If link.path is not the homepage
-               isActive = true;
-             }
-           }
-          
+          if (route !== "/" && route.startsWith(link.path)) {
+            // If the route is not homepage and starts with link.path
+            if (link.path !== "/") {
+              // If link.path is not the homepage
+              isActive = true;
+            }
+          }
+
           return (
             <Link
               href={link.path}

@@ -41,6 +41,8 @@ export default async function Buildin(props: any) {
   if (!building) {
     toast.error("خطاء في جلب البيانات ");
   }
+  console.log(building);
+  
   let build = [
     building.address.geo_address,
     building.id,

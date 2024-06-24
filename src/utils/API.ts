@@ -29,23 +29,18 @@ export async function SignUpApi(email: string, first_name: string, last_name: st
   SaveToken(response.data?.access);
 }
 
-export async function BuildingApi() {
-  const response = await fetch(`${apiUrl}/properties/`, {
+export async function BuildingApi(page: any) {
+  const response = await fetch(`${apiUrl}/properties/?page=${page}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   });
-  
   return response.json();
 }
 
 export async function SingelBuildingApi(page: any) {
-  const response = await fetch(`${apiUrl}/properties/${page}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const response = await fetch(`${apiUrl}/properties/${page}`);
+  
   return response.json();
 }

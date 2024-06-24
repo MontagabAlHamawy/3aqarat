@@ -8,7 +8,8 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { Analytics } from "@vercel/analytics/react";
 import { Cairo } from "@next/font/google";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+import { usePathname } from "next/navigation";
 
 const cairo = Cairo({
   subsets: ["latin"],
@@ -35,7 +36,12 @@ export default function RootLayout({
           <div className="block xl:hidden">
             <MobileSidpar />
           </div>
-          <ToastContainer stacked theme="dark" position="top-left" className=' mt-14'/>
+          <ToastContainer
+            stacked
+            theme="dark"
+            position="top-left"
+            className=" mt-14"
+          />
           <div className="wrapper min-h-[71vh] md:min-h-[68vh] xl:min-h-[82.5vh] py-10 xl:pr-20 xl:pt-10">
             {children}
             <Analytics />

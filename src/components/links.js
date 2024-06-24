@@ -1,25 +1,6 @@
-import {
-  PiHouseDuotone,
-  PiUserDuotone,
-  PiBuildingsDuotone,
-  PiHeartDuotone,
-  PiMegaphoneDuotone,
-} from "react-icons/pi";
 
-export const navData = [
-  { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
-  { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
-  { name: "حسابي", path: "/account", icone: <PiUserDuotone /> },
-  { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
-  { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
-];
-export const MobData = [
-  { name: "حسابي", path: "/account", icone: <PiUserDuotone /> },
-  { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
-  { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
-  { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
-  { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
-];
+
+
 export const Imag = [
   { name: "/home/building.png" },
   { name: "/home/psd.jpg" },
@@ -28,19 +9,19 @@ export const Imag = [
   { name: "/home/we.png" },
 ];
 
-export const ImagBuilding =[
-  {img:"/home/rr.png"},
-  {img:"/home/psd.jpg"},
-  {img:"/home/building.png"},
-  {img:"/home/land.jpg"},
-  {img:"/home/store.jpg"}
-]
+export const ImagBuilding = [
+  { img: "/home/rr.png" },
+  { img: "/home/psd.jpg" },
+  { img: "/home/building.png" },
+  { img: "/home/land.jpg" },
+  { img: "/home/store.jpg" },
+];
 
 export const house = [
   {
     img: "/home/psd.jpg",
     title: "شقة سكنية",
-    type:'flat',
+    type: "flat",
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     prise: "450K ل.س",
     link: "/buildings/flat",
@@ -51,7 +32,7 @@ export const house = [
   {
     img: "/home/rr.png",
     title: "منزل",
-    type:'house',
+    type: "house",
     discrep: "منزل مجهز بافضل الخدمات وبتصميم مميز",
     prise: "210M ل.س",
     link: "/buildings/house",
@@ -62,7 +43,7 @@ export const house = [
   {
     img: "/home/store.jpg",
     title: "محل تجاري ",
-    type:'store',
+    type: "store",
     discrep: "محل تجاري مجهز وعلى شارع رئيسي ",
     prise: "1M ل.س",
     link: "/buildings/store",
@@ -73,7 +54,7 @@ export const house = [
   {
     img: "/home/land.jpg",
     title: "أرض سكنية ",
-    type:'land',
+    type: "land",
     discrep: "أرض سكنية طابو أخضر ",
     prise: "120M ل.س",
     link: "/buildings/land",
@@ -84,13 +65,13 @@ export const house = [
 ];
 
 export const hom = [
-  { name: "الكل", type:'all' },
-  { name: "منازل",type:'house' },
-  { name: "شقق",type:'flat'},
-  { name: "محال تجارية",type:'store' },
-  { name: "أراضي" , type:'land'},
-  { name: "محاضر",type:'building' },
-  { name: "أبراج",type:'tower' },
+  { name: "الكل", type: "all" },
+  { name: "منازل", type: "house" },
+  { name: "شقق", type: "flat" },
+  { name: "محال تجارية", type: "store" },
+  { name: "أراضي", type: "land" },
+  { name: "محاضر", type: "building" },
+  { name: "أبراج", type: "tower" },
 ];
 
 export const whyus = [
@@ -304,8 +285,8 @@ export const HouseInfo = [
     seller: "مكتب النور",
     imageSeller: "/6.png",
     sellerNum: "00963945866342",
-    type:'house',
-    type_ar:'منزل',
+    type: "house",
+    type_ar: "منزل",
     location_x: "34.6985",
     location_y: "36.7237",
   },
@@ -315,7 +296,7 @@ export const FlatInfo = [
     title: "شقة سكنية",
     discrep: "شقة سكنية مجهز بافضل الخدمات وبتصميم مميز",
     type: "flat",
-    type_ar:'شقة',
+    type_ar: "شقة",
     numRoom: "2",
     size: "90",
     direction: "شرقي",
@@ -346,8 +327,8 @@ export const StoreInfo = [
     prise: "1.000.000",
     display: "للإجار",
     place: "دمشق - مزة86",
-    type:'store',
-    type_ar:'محل تجاري',
+    type: "store",
+    type_ar: "محل تجاري",
     images: [
       "/home/store.jpg",
       "/home/rr.png",
@@ -380,8 +361,8 @@ export const LandInfo = [
     seller: "Mohammad Ahmad",
     imageSeller: "/6.png",
     sellerNum: "00963937785439",
-    type:'land',
-    type_ar:'أرض',
+    type: "land",
+    type_ar: "أرض",
     location_x: "34.6985",
     location_y: "36.7237",
   },
@@ -407,8 +388,8 @@ export const BuildingInfo = [
     seller: "مكتب النور",
     imageSeller: "/6.png",
     sellerNum: "00963945866342",
-    type:'building',
-    type_ar:'محضر',
+    type: "building",
+    type_ar: "محضر",
     location_x: "34.6985",
     location_y: "36.7237",
   },

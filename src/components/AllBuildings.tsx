@@ -40,18 +40,22 @@ export default function AllBuildings({ Building }: any) {
                     alt="montagab"
                     className="w-[1080px] rounded-tl-xl rounded-tr-xl"
                 />
+                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
+                    {building.property_object.property_type}
+                </div>
                 <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
                     {building.title}
                 </p>
                 <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
                     {building.description}
                 </p>
-                <div className="flex flex-row justify-between items-center my-3 xl:my-1 mx-5 mb-4">
-                    <p>{building.price}</p>
+                <div className="flex flex-row justify-between  items-center my-3 px-2 xl:my-1 xl:mb-7">
+                    <p className='text-accent'>{building.price}ل.س</p>
                 </div>
                 <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                     {building.offer}
                 </div>
+                
             </Link>
         ))}
     </div>

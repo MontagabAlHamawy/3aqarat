@@ -1,11 +1,19 @@
 "use client";
-import React, { useState } from "react";
-import { PiCaretDoubleLeftBold, PiCaretDoubleRightBold } from "react-icons/pi";
+import React, { useEffect, useState } from "react";
+import {
+  PiBuildingsDuotone,
+  PiCaretDoubleLeftBold,
+  PiCaretDoubleRightBold,
+  PiHeartDuotone,
+  PiHouseDuotone,
+  PiMegaphoneDuotone,
+  PiUserDuotone,
+} from "react-icons/pi";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { navData } from "./links.js";
+import Cookies from "js-cookie";
 
 function Sidpar() {
   const route = usePathname();
@@ -14,6 +22,23 @@ function Sidpar() {
   const toggleSidebar = () => {
     setSidebarWidth(sidebarWidth === 16 ? 100 : 16);
   };
+
+  const [account  , setAccount ] = useState("/account");
+  const [accountName, setAccountNam] = useState("حسابي");
+  useEffect(() => {
+    const token = Cookies.get("authToken");
+    if (!token) {
+      setAccount("/login");
+      setAccountNam("تسجيل الدخول");
+    }
+  }, []);
+  const navData = [
+    { name: "الرئيسية", path: "", icone: <PiHouseDuotone /> },
+    { name: "العقارات", path: "buildings", icone: <PiBuildingsDuotone /> },
+    { name: accountName , path: account , icone: <PiUserDuotone /> },
+    { name: "المفضلة", path: "love", icone: <PiHeartDuotone /> },
+    { name: "مطلوب", path: "requests", icone: <PiMegaphoneDuotone /> },
+  ];
 
   return (
     <div

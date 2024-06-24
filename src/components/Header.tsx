@@ -2,14 +2,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   PiUserDuotone,
   PiMagnifyingGlassDuotone,
   PiBellSimpleDuotone,
 } from "react-icons/pi";
+import Cookies from "js-cookie";
 
 function Header() {
   const route = usePathname();
+  const [account, setAccount] = useState("account");
+  useEffect(() => {
+    const token = Cookies.get("authToken");
+    if (!token) {
+      setAccount("login");
+    }
+  }, []);
   const searchActive = route === "/search";
   const notActive = route === "/notification";
   const accountActive = route === "/account";
@@ -49,7 +58,7 @@ function Header() {
           />
           <div className="w-2 h-2 bg-red-600 rounded-full absolute top-[-1px] right-[-1px]"></div>
         </Link>
-        <Link href={"/account"}>
+        <Link href={`/${account}`}>
           <PiUserDuotone
             className={`text-4xl text-white p-2 ${
               accountActive ? "bg-accent" : "bg-body "
