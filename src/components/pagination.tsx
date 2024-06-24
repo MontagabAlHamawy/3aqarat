@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { PiCaretLeftDuotone, PiCaretRightDuotone } from "react-icons/pi";
 export default function Pagination() {
-    const router = useRouter();
+  const router = useRouter();
   const [pagination, SetPagination] = useState("/buildings/?page=1");
   router.replace(pagination);
   return (

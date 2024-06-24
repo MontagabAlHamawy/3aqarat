@@ -12,16 +12,19 @@ import Cookies from "js-cookie";
 
 function Header() {
   const route = usePathname();
-  const [account, setAccount] = useState("account");
+  const [account, setAccount] = useState("");
   useEffect(() => {
-    const token = Cookies.get("authToken");
+    const token = Cookies.get("authToken") || false;
     if (!token) {
       setAccount("login");
+    } else {
+      setAccount("account");
     }
+    console.log(!token);
   }, []);
   const searchActive = route === "/search";
   const notActive = route === "/notification";
-  const accountActive = route === "/account";
+  const accountActive = route === account;
   return (
     <div className="sticky top-0 w-full h-16 bg-sidpar shadow-lg  z-40 xl:pr-20 flex flex-row justify-between items-center">
       <div>

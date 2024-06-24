@@ -8,11 +8,11 @@ import { BuildingApi } from "@/utils/API";
 import Pagination from "@/components/pagination";
 
 export default async function Building(props: any) {
-  let page: any = props.searchParams.page;
+  let page = props.searchParams.page || null;
   if (!page) {
     page = 1;
   }
-  const response: any = await BuildingApi(page);
+  const response = await BuildingApi(page);
 
   if (!response) {
     toast.error("خطاء في جلب البيانات ");

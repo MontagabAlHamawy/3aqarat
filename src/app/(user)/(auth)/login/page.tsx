@@ -1,20 +1,30 @@
 "use client";
 // pages/login.js
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import apiUrl from "../../../../utils/apiConfig";
 import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import {LoginApi} from "@/utils/API";
+import { LoginApi } from "@/utils/API";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const router = useRouter();
   const [emus, setEmus] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [account, setAccount] = useState("");
+  useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("account");
+      setAccount("login");
+    } else {
+    }
+    console.log(!token);
+  }, []);
+  router.replace(`/${account}`);
 
   let email: string | null = null;
   let username: string | null = null;
