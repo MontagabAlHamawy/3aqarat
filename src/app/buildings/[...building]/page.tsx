@@ -40,12 +40,13 @@ import NotFound from "@/app/not-found";
 export default async function Buildin(props: any) {
   const page = props.params.building[0];
 
+  
+
   const building: any = await SingelBuildingApi(page);
   if (building === null) {
     toast.error("خطاء في جلب البيانات ");
     NotFound();
   }
-  console.log(building);
 
   let build = [
     building.address.geo_address,
@@ -55,8 +56,8 @@ export default async function Buildin(props: any) {
     building.description,
     building.property_object.property_type.en,
   ];
-  const type: any = building.property_object.property_type.en;
-  console.log(type);
+  const type: any = building.property_object.property_type.en || null;
+  // console.log(type);
 
   let isApartment = false;
   let isCommercialproperty = false;
@@ -78,7 +79,6 @@ export default async function Buildin(props: any) {
   if (type === "building") {
     isBuilding = true;
   }
-
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
@@ -96,7 +96,6 @@ export default async function Buildin(props: any) {
               </p>
             </div>
             <h1 className="text-3xl font-bold">{building.title}</h1>
-
             <p className="text-lg font-thin text-gray-400">
               {building.description}
             </p>
@@ -140,7 +139,7 @@ export default async function Buildin(props: any) {
         </div>
       </div>
       <div className="flex justify-center items-center mt-10 mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
-        <MapLoade building={build} />
+        {/* <MapLoade building={build} /> */}
       </div>
     </div>
   );

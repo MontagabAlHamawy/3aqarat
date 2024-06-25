@@ -9,7 +9,6 @@ const Maps = dynamic(() => import("./maps"), {
 });
 
 export default function MapLoade({ building }: any) {
-  console.log(building);
 
   const [mapLoaded, setMapLoaded] = useState(false);
   useEffect(() => {
@@ -48,7 +47,5 @@ export default function MapLoade({ building }: any) {
     building[4],
     building[5],
   ];
-  console.log(locationX);
-  console.log(locationY);
   return <Maps loc={loc} />;
 }

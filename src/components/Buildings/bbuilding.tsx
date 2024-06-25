@@ -8,7 +8,6 @@ import {
 
 export default function BBuilding(Building: any) {
   let building: any = Building.building;
-  console.log(building);
 
   let direction = "";
   if (building.property_object.direction === "E") {
