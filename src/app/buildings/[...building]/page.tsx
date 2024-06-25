@@ -35,14 +35,15 @@ import Commercialproperty from "@/components/Buildings/commercialproperty";
 import BBuilding from "@/components/Buildings/bbuilding";
 import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
+import NotFound from "@/app/not-found";
 
 export default async function Buildin(props: any) {
   const page = props.params.building[0];
 
   const building: any = await SingelBuildingApi(page);
-
-  if (!building) {
+  if (building === null) {
     toast.error("خطاء في جلب البيانات ");
+    NotFound()
   }
 
   let build = [
