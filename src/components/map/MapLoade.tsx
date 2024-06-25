@@ -1,17 +1,21 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Maps from "./maps";
+import dynamic from "next/dynamic";
+
+// تأخير تحميل مكون Maps إلى أن يكون على جانب العميل فقط
+const Maps = dynamic(() => import("./maps"), {
+  ssr: false,
+});
 
 export default function MapLoade({ building }: any) {
-  //   console.log(building);
+  console.log(building);
 
   const [mapLoaded, setMapLoaded] = useState(false);
   useEffect(() => {
-    // Simulate map loading completion after 2 seconds (replace with actual map load event)
     const timer = setTimeout(() => {
       setMapLoaded(true);
-    }, 2000);
+    }, 200);
 
     return () => clearTimeout(timer);
   }, []);
@@ -21,18 +25,20 @@ export default function MapLoade({ building }: any) {
   useEffect(() => {
     if (building[0]) {
       const [x, y] = building[0].split(", ");
-      setLocationX(x);
-      setLocationY(y);
+      if (x === "x" || y === "y") {
+        setLocationX("34.69498");
+        setLocationY("36.7237");
+      } else {
+        setLocationX(x);
+        setLocationY(y);
+      }
     }
   }, [building]);
 
   if (!locationX || !locationY) {
     return <p>... Loading map</p>;
   }
-  if (locationX === "x" || locationY === "y") {
-    setLocationX("34.69498");
-    setLocationY("36.7237");
-  }
+
   let loc = [
     locationX,
     locationY,
@@ -42,5 +48,7 @@ export default function MapLoade({ building }: any) {
     building[4],
     building[5],
   ];
+  console.log(locationX);
+  console.log(locationY);
   return <Maps loc={loc} />;
 }

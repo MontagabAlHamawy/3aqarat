@@ -96,10 +96,14 @@ export default async function Buildin(props: any) {
               </p>
             </div>
             <h1 className="text-3xl font-bold">{building.title}</h1>
+
             <p className="text-lg font-thin text-gray-400">
               {building.description}
             </p>
             <p className="text-xl font-thin text-accent">{building.tabu}</p>
+            <div className={`${isLand ? "block" : "hidden"}`}>
+              <Land building={building} />
+            </div>
             <div className={`${isApartment ? "block" : "hidden"}`}>
               <Apartment building={building} />
             </div>
@@ -112,9 +116,7 @@ export default async function Buildin(props: any) {
             <div className={`${isHouse ? "block" : "hidden"}`}>
               <House building={building} />
             </div>
-            <div className={`${isLand ? "block" : "hidden"}`}>
-              <Land building={building} />
-            </div>
+
             <p className="text-xl text-accent">{building.price} ل.س</p>
             <div className="flex justify-between items-center mx-3 cursor-pointer">
               <div className="flex gap-2 justify-center items-center">
