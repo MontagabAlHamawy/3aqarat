@@ -18,6 +18,7 @@ export default async function Buildin(props: any) {
     toast.error("خطاء في جلب البيانات ");
   }
   const building = response.results;
+  const pagee = response;
 
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
@@ -26,7 +27,7 @@ export default async function Buildin(props: any) {
       </div>
       <AllBuildings Building={building} />
       <div className="w-full flex justify-center items-center">
-        <Pagination />
+        <Pagination page={pagee}/>
       </div>
     </div>
   );
