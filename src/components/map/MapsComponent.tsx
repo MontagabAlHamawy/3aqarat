@@ -21,45 +21,45 @@ import Image from "next/image";
 import Link from "next/link";
 
 function LocationMarker() {
-    const [position, setPosition] = useState<LatLngLiteral | null>(null);
-  
-    const map = useMapEvents({
-      click() {
-        map.locate();
-      },
-      locationfound(e) {
-        setPosition(e.latlng);
-        map.flyTo(e.latlng, map.getZoom());
-      },
-      locationerror(e) {
-        alert(
-          "Couldn't access your location. Please enable location services and try again."
-        );
-        console.error(e);
-      },
-    });
-  
-    return position === null ? null : (
-      <Marker
-        position={position}
-        icon={
-          new L.Icon({
-            iconUrl: MarkerIcon.src,
-            iconRetinaUrl: MarkerIcon.src,
-            iconSize: [21, 35],
-            iconAnchor: [12.5, 41],
-            popupAnchor: [0, -41],
-            shadowUrl: MarkerShadow.src,
-            shadowSize: [41, 41],
-          })
-        }
-      >
-        <Popup>
-          <p className="text-accent">You are here</p>
-        </Popup>
-      </Marker>
-    );
-  }
+  const [position, setPosition] = useState<LatLngLiteral | null>(null);
+
+  const map = useMapEvents({
+    click() {
+      map.locate();
+    },
+    locationfound(e) {
+      setPosition(e.latlng);
+      map.flyTo(e.latlng, map.getZoom());
+    },
+    locationerror(e) {
+      alert(
+        "Couldn't access your location. Please enable location services and try again."
+      );
+      console.error(e);
+    },
+  });
+
+  return position === null ? null : (
+    <Marker
+      position={position}
+      icon={
+        new L.Icon({
+          iconUrl: MarkerIcon.src,
+          iconRetinaUrl: MarkerIcon.src,
+          iconSize: [21, 35],
+          iconAnchor: [12.5, 41],
+          popupAnchor: [0, -41],
+          shadowUrl: MarkerShadow.src,
+          shadowSize: [41, 41],
+        })
+      }
+    >
+      <Popup>
+        <p className="text-accent">You are here</p>
+      </Popup>
+    </Marker>
+  );
+}
 
 export default function MapsComponent({ loc }: any) {
   const xloc = Number(loc[0]);
@@ -102,10 +102,10 @@ export default function MapsComponent({ loc }: any) {
             iconee = House;
           } else if (houss.type === "building") {
             iconee = Building;
-          } else if (houss.type === "land") {
-            iconee = Land;
           } else if (houss.type === "tower") {
             iconee = Tower;
+          } else {
+            iconee = Land;
           }
 
           return (
