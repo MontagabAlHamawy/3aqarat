@@ -9,7 +9,7 @@ import AllBuildings from "@/components/BuildingCom/AllBuildings";
 
 export default async function Buildin(props: any) {
   let page = props.searchParams.page || null;
-  if (!page) {
+  if (page === null) {
     page = 1;
   }
   const response = await BuildingApi(page);
@@ -27,7 +27,7 @@ export default async function Buildin(props: any) {
       </div>
       <AllBuildings Building={building} />
       <div className="w-full flex justify-center items-center">
-        <Pagination page={pagee}/>
+        <Pagination page={pagee} />
       </div>
     </div>
   );

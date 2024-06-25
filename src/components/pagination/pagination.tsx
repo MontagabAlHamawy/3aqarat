@@ -14,14 +14,12 @@ export default function Pagination(page: any) {
   if (url1 !== null) {
     path1 = new URL(url1).search;
   }
-  console.log(path1);
 
   const url2 = page.page.previous;
   let path2: any = "/";
   if (url2 !== null) {
     path2 = new URL(url2).search;
   }
-  console.log(path2);
 
   useEffect(() => {
     if (pagination !== null) {
