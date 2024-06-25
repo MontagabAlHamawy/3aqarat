@@ -43,8 +43,9 @@ export default async function Buildin(props: any) {
   const building: any = await SingelBuildingApi(page);
   if (building === null) {
     toast.error("خطاء في جلب البيانات ");
-    NotFound()
+    NotFound();
   }
+  console.log(building);
 
   let build = [
     building.address.geo_address,

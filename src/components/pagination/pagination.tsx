@@ -7,7 +7,6 @@ import { PiCaretLeftDuotone, PiCaretRightDuotone } from "react-icons/pi";
 export default function Pagination(page: any) {
   const router = useRouter();
   const [pagination, SetPagination] = useState<string | null>(null);
-  console.log(page.page.next);
 
   const url1 = page.page.next;
   let path1 = "/";
