@@ -6,6 +6,8 @@ import { BuildingApi } from "@/utils/API";
 // import { Pagination } from "swiper/modules";
 import Pagination from "@/components/pagination/pagination";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
+import { notFound } from "next/navigation";
+import NotFound from "../not-found";
 
 export default async function Buildin(props: any) {
   let page = props.searchParams.page || null;
@@ -14,8 +16,9 @@ export default async function Buildin(props: any) {
   }
   const response = await BuildingApi(page);
 
-  if (!response) {
+  if (response === null) {
     toast.error("خطاء في جلب البيانات ");
+    NotFound()
   }
   const building = response.results;
   const pagee = response;
