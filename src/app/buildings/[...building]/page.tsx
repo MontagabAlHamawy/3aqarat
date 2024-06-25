@@ -139,7 +139,7 @@ export default async function Buildin(props: any) {
         </div>
       </div>
       <div className="flex justify-center items-center mt-10 mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
-        {/* <MapLoade building={build} /> */}
+        <MapLoade building={build} />
       </div>
     </div>
   );
