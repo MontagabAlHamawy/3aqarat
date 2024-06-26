@@ -8,7 +8,9 @@ import { LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-const HomeMap = dynamic(() => import("@/components/map/homeMap"), { ssr: false });
+const HomeMap = dynamic(() => import("@/components/map/homeMap"), {
+  ssr: false,
+});
 export default async function Home() {
   let limit = 4;
   const response = await LimitBuildingApi(limit);
@@ -43,9 +45,11 @@ export default async function Home() {
       <div className=" mt-10 mx-[-10px] rounded-xl flex justify-center items-center">
         <HomeMap />
       </div>
-      <div className="flex justify-center w-full items-center flex-col ">
+      <div className="flex justify-center w-full  items-center flex-col ">
         <h1 className="text-white text-2xl my-5 ">الأحدث</h1>
-        <BuildingFilter linked={linked} />
+        <div className=" w-full">
+          <BuildingFilter linked={linked} />
+        </div>
         <AllBuildings Building={building} />
         <Link href={"/buildings"}>
           <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300">
