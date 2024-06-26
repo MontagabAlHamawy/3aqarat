@@ -12,16 +12,20 @@ import {
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import NotFound from "@/app/not-found";
-import { userProfile } from "@/utils/API";
+import { MyBuilding, userProfile } from "@/utils/API";
+import AllBuildings from "@/components/BuildingCom/AllBuildings";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
+  const [Building, setBuilding] = useState<any>(null);
 
   useEffect(() => {
     const myData = async () => {
       try {
         const response = await userProfile(props.params.username[0]);
+        const responseB = await MyBuilding();
         setUser(response);
+        setBuilding(responseB.results);
         if (!response) {
           toast.error("kkk");
           NotFound();
@@ -34,6 +38,7 @@ export default function Username(props: any) {
     };
     myData();
   }, [props.params.username]);
+  console.log(Building);
 
   const router = useRouter();
   function logout() {
@@ -61,7 +66,7 @@ export default function Username(props: any) {
               </div>
               <div className="flex flex-col justify-center items-start gap-3">
                 <h1 className="text-accent text-2xl font-bold">
-                  {user?.username}
+                  {user?.first_name} {user?.last_name}
                 </h1>
                 <Link href={`tel:${link.phone}`}>{link.phone}</Link>
                 <div className="flex flex-row justify-center items-center gap-3">
@@ -92,8 +97,9 @@ export default function Username(props: any) {
         <h1 className="text-2xl mt-10 bg-section xl:mr-[-8px] rounded-t-md py-2 px-3 w-min">
           عقاراتي
         </h1>
-        <div className="grid grid-cols-2 xl:grid-cols-4 bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
-          {house.map((houss, index) => {
+        <div className=" bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
+          <AllBuildings Building={Building} />
+          {/* {house.map((houss, index) => {
             return (
               <Link
                 href={houss.link}
@@ -121,7 +127,7 @@ export default function Username(props: any) {
                 </div>
               </Link>
             );
-          })}
+          })} */}
         </div>
       </div>
     </div>

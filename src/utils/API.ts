@@ -139,3 +139,21 @@ export async function userProfile(username:any) {
     throw error;
   }
 }
+export async function MyBuilding() {
+  let token = GetToken();
+  try {
+    const response = await axios.get(`${apiUrl}/properties/me`, {
+      headers: {
+        'Authorization': `JWT ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.status === 404) {
+      return notFound();
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    throw error;
+  }
+}
