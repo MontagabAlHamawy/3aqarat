@@ -42,16 +42,15 @@ export default function Acount() {
     }
   }, []);
 
-  
 
   useEffect(() => {
     router.replace(account);
   }, [account, router]);
   return (
-    <div className="mx-2 mt-5 h-full xl:mx-0 xl:ml-3">
-      <div className="bg-sidpar h-[50vh] flex justify-center items-center xl:h-40 rounded-md">
-        <h1 className="text-2xl">...Loading</h1>
-      </div>
-    </div>
+    <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
+          <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+            <h1 className="text-2xl">جاري جلب البيانات...</h1>
+          </div>
+        </div>
   );
 }

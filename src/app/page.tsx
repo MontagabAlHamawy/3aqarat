@@ -1,58 +1,93 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import "swiper/swiper-bundle.css";
 import { PiCheck } from "react-icons/pi";
 import { whyus } from "../components/links";
 import dynamic from "next/dynamic";
-import { LimitBuildingApi } from "@/utils/API";
+import { BuildingApi, LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
+import React, { useEffect, useState } from "react";
+
 const HomeMap = dynamic(() => import("@/components/map/homeMap"), {
   ssr: false,
 });
-export default async function Home() {
-  let limit = 4;
-  const response = await LimitBuildingApi(limit);
-  if (!response) {
-    toast.error("خطاء في جلب البيانات ");
+
+export default function Home() {
+  const [loading, setLoading] = useState(true);
+  const [building, setBuilding] = useState<any>(null);
+  const [bil, setBui] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let limit = 4;
+        const response = await LimitBuildingApi(limit);
+        const res = await BuildingApi(1);
+        const build = await LimitBuildingApi(res.count);
+        if (!response) {
+          toast.error("خطاء في جلب البيانات ");
+        } else {
+          setBuilding(response.results);
+          setBui(build.results);
+        }
+      } catch (error) {
+        toast.error("خطاء في جلب البيانات ");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">جاري جلب البيانات...</h1>
+        </div>
+      </div>
+    );
   }
+
   const linked = "/buildings/";
 
-  const building = response.results;
   return (
-    <div className="mt-14 xl:mt-32 m-0  px-4 xl:px-10 h-full z-40">
+    <div className="mt-14 xl:mt-32 m-0 px-4 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
-        <h1 className="text-white  text-lg text-center xl:text-right font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
+        <h1 className="text-white text-lg text-center xl:text-right font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
           سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
           العقاريين الذين يتمتعون بخبرة ف بلا شك ان{" "}
           <span className="text-accent">3aqarat</span> سوف تقوم بارشادك بكل خطوة
           لضمان حصولك على تجربة عقارية ناجحة والحصول على رضاك
         </h1>
-        <div className="flex justify-center  items-center flex-col  xl:mt-10">
+        <div className="flex justify-center items-center flex-col xl:mt-10">
           <p className="mb-10 text-center xl:text-right text-base xl:text-xl">
             خدمات فريدة تميزنا عن غيرنا{" "}
             <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في
             مهمتك وتجعل الأمر أكثر مرونة
           </p>
           <Link href={"/buildings"}>
-            <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300">
+            <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
               عرض العقارات
             </div>
           </Link>
         </div>
       </div>
-      <div className=" mt-10 mx-[-10px] rounded-xl flex justify-center items-center">
-        <HomeMap building={building}/>
+      <div className="mt-10 mx-[-10px] rounded-xl flex justify-center items-center">
+        <HomeMap building={bil} />
       </div>
-      <div className="flex justify-center w-full  items-center flex-col ">
-        <h1 className="text-white text-2xl my-5 ">الأحدث</h1>
-        <div className=" w-full">
+      <div className="flex justify-center w-full items-center flex-col">
+        <h1 className="text-white text-2xl my-5">الأحدث</h1>
+        <div className="w-full">
           <BuildingFilter linked={linked} />
         </div>
         <AllBuildings Building={building} />
         <Link href={"/buildings"}>
-          <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300">
+          <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
             عرض المزيد
           </div>
         </Link>

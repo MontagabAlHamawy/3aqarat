@@ -63,7 +63,9 @@ function LocationMarker() {
 }
 
 export default function HomeMap({ building }: { building: any[] }) {
-  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>({});
+  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
+    {}
+  );
 
   useEffect(() => {
     const newLocations: { [key: string]: LatLngLiteral } = {};
@@ -80,7 +82,6 @@ export default function HomeMap({ building }: { building: any[] }) {
 
     setLocations(newLocations);
   }, [building]);
-  
 
   return (
     <div className="z-30">
@@ -101,16 +102,19 @@ export default function HomeMap({ building }: { building: any[] }) {
           if (!location) return null;
 
           let iconee;
+          console.log(houss.property_object?.property_type?.en);
 
-          if (houss.type === "apartment") {
+          if (houss.property_object?.property_type?.en === "apartment") {
             iconee = Apartment;
-          } else if (houss.type === "commercialproperty") {
+          } else if (
+            houss.property_object?.property_type?.en === "commercialproperty"
+          ) {
             iconee = Commercialproperty;
-          } else if (houss.type === "house") {
+          } else if (houss.property_object?.property_type?.en === "house") {
             iconee = House;
-          } else if (houss.type === "building") {
+          } else if (houss.property_object?.property_type?.en === "building") {
             iconee = BuildingIcon;
-          } else if (houss.type === "tower") {
+          } else if (houss.property_object?.property_type?.en === "tower") {
             iconee = Tower;
           } else {
             iconee = Land;

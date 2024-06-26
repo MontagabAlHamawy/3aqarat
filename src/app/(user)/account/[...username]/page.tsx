@@ -18,6 +18,7 @@ import AllBuildings from "@/components/BuildingCom/AllBuildings";
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
   const [Building, setBuilding] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const myData = async () => {
@@ -27,23 +28,34 @@ export default function Username(props: any) {
         setUser(response);
         setBuilding(responseB.results);
         if (!response) {
-          toast.error("kkk");
+          toast.error("حدث خطأ أثناء جلب البيانات");
           NotFound();
           return;
         }
       } catch (error) {
         toast.error("حدث خطأ أثناء جلب البيانات");
-        console.error("error:", error);
+        NotFound();
+      } finally {
+        setLoading(false);
       }
     };
     myData();
   }, [props.params.username]);
-  console.log(Building);
 
   const router = useRouter();
   function logout() {
     Cookies.set("authToken", "");
     router.replace("/login");
+  }
+
+  if (loading) {
+    return (
+      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">جاري جلب البيانات...</h1>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -64,7 +76,7 @@ export default function Username(props: any) {
                   className="w-80 h-50 rounded-full"
                 />
               </div>
-              <div className="flex flex-col justify-center items-start gap-3">
+              <div className="flex flex-col justify-center items-center xl:items-start gap-3">
                 <h1 className="text-accent text-2xl font-bold">
                   {user?.first_name} {user?.last_name}
                 </h1>
@@ -99,35 +111,6 @@ export default function Username(props: any) {
         </h1>
         <div className=" bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
           <AllBuildings Building={Building} />
-          {/* {house.map((houss, index) => {
-            return (
-              <Link
-                href={houss.link}
-                key={index}
-                className="bg-sidpar rounded-xl relative"
-              >
-                <Image
-                  src={houss.img}
-                  width={1000}
-                  height={0}
-                  alt="montagab"
-                  className="w-[1080px] rounded-tl-xl rounded-tr-xl"
-                />
-                <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
-                  {houss.title}
-                </p>
-                <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
-                  {houss.discrep}
-                </p>
-                <div className="flex flex-row justify-between items-center my-3 xl:my-1 mx-5 mb-4">
-                  <p>{houss.prise}</p>
-                </div>
-                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
-                  {houss.display}
-                </div>
-              </Link>
-            );
-          })} */}
         </div>
       </div>
     </div>
