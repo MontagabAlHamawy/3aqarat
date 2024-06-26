@@ -53,7 +53,7 @@ export default async function Buildin(props: any) {
     building.title,
     building.price,
     building.description,
-    propertyType,
+    building.property_object?.property_type?.en,
   ];
   const type: any = building.property_object?.property_type?.en || null;
   let isApartment = false;

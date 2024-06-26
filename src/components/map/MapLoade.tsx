@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Map from "./map";
 
 const Maps = dynamic(() => import("./maps"), {
   ssr: false,

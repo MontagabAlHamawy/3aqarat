@@ -94,6 +94,8 @@ export default function MapsComponent({ loc }: any) {
           const xloc = Number(houss.location_x);
           const yloc = Number(houss.location_y);
           let iconee;
+          console.log(houss.type);
+          
           if (houss.type === "apartment") {
             iconee = Apartment;
           } else if (houss.type === "commercialproperty") {
