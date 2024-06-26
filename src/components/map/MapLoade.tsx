@@ -9,7 +9,6 @@ const Maps = dynamic(() => import("./maps"), {
 });
 
 export default function MapLoade({ building }: any) {
-
   const [mapLoaded, setMapLoaded] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -35,7 +34,13 @@ export default function MapLoade({ building }: any) {
   }, [building]);
 
   if (!locationX || !locationY) {
-    return <p>... Loading map</p>;
+    return (
+      <div className="mx-2xl:mx-0 xl:ml-3 w-full">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">تحميل الخريطة..</h1>
+        </div>
+      </div>
+    );
   }
 
   let loc = [

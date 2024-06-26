@@ -1,25 +1,31 @@
 "use client";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { BuildingApi } from "@/utils/API";
-import AllBuildings from "@/components/BuildingCom/AllBuildings";
-import NotFound from "../not-found";
+import {
+  ApartmentsApi,
+  BBuildingsApi,
+  BuildingApi,
+  CommercialApi,
+} from "@/utils/API";
+import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
+import NotFound from "../../not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-import Pagination from "@/components/pagination/pagination";
+import PaginationCommercial from "@/components/pagination/paginationcommercial";
 
-export default function Building(props: any) {
+export default function Commercials(props: any) {
   const [building, setBuilding] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/";
+  const linked = "/buildings/commercials";
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       setError(false);
       try {
-        const response = await BuildingApi(page);
+        const response = await CommercialApi();
+
         if (!response || !response.results) {
           toast.error("خطاء في جلب البيانات ");
           NotFound();
@@ -78,9 +84,9 @@ export default function Building(props: any) {
         <h1 className="text-2xl">العقارات</h1>
       </div>
       <BuildingFilter linked={linked} />
-      <AllBuildings Building={building} />
+      <AllBuildingsType Building={building} />
       <div className="w-full flex justify-center items-center">
-        <Pagination page={pageInfo} />
+        <PaginationCommercial page={pageInfo} />
       </div>
     </div>
   );

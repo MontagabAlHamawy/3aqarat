@@ -65,12 +65,12 @@ export const house = [
 ];
 
 export const hom = [
-  { name: "الكل", type: "all" },
-  { name: "منازل", type: "house" },
-  { name: "شقق", type: "apartment" },
-  { name: "محال تجارية", type: "commercial" },
-  { name: "أراضي", type: "land" },
-  { name: "محاضر", type: "building" },
+  { name: "الكل",link:"/buildings/", type: "all" },
+  { name: "منازل",link:"/buildings/houses", type: "house" },
+  { name: "شقق",link:"/buildings/apartments", type: "apartment" },
+  { name: "محال تجارية",link:"/buildings/commercials", type: "commercial" },
+  { name: "أراضي",link:"/buildings/lands", type: "land" },
+  { name: "محاضر",link:"/buildings/buildings", type: "building" },
 ];
 
 export const whyus = [

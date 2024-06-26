@@ -1,25 +1,34 @@
 "use client";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { BuildingApi } from "@/utils/API";
-import AllBuildings from "@/components/BuildingCom/AllBuildings";
-import NotFound from "../not-found";
+import {
+  ApartmentsApi,
+  BBuildingsApi,
+  BuildingApi,
+  CommercialApi,
+  HousesApi,
+} from "@/utils/API";
+import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
+import NotFound from "../../not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-import Pagination from "@/components/pagination/pagination";
+import PaginationCommercial from "@/components/pagination/paginationcommercial";
+import PaginationHouses from "@/components/pagination/paginationhouses";
 
-export default function Building(props: any) {
+export default function Houses(props: any) {
   const [building, setBuilding] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/";
+  const linked = "/buildings/houses";
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       setError(false);
       try {
-        const response = await BuildingApi(page);
+        const response = await HousesApi();
+
         if (!response || !response.results) {
           toast.error("خطاء في جلب البيانات ");
           NotFound();
@@ -58,7 +67,7 @@ export default function Building(props: any) {
 
   if (error) {
     return (
-      <div className="mx-2 xl:mx-0 xl:ml-3">
+      <div className="mx-2  xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
           <h1 className="text-2xl">العقارات</h1>
         </div>
@@ -78,9 +87,9 @@ export default function Building(props: any) {
         <h1 className="text-2xl">العقارات</h1>
       </div>
       <BuildingFilter linked={linked} />
-      <AllBuildings Building={building} />
+      <AllBuildingsType Building={building} />
       <div className="w-full flex justify-center items-center">
-        <Pagination page={pageInfo} />
+        <PaginationHouses page={pageInfo} />
       </div>
     </div>
   );
