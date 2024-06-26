@@ -11,7 +11,7 @@ export default function BuildingFilter({ linked }: any) {
         <Link
           href={link.link}
           key={index}
-          className={`py-1 px-5 text-md w-full text-white rounded-xl flex justify-center items-center cursor-pointer ${
+          className={`py-1 px-3 text-md w-full text-white rounded-xl flex justify-center items-center cursor-pointer ${
             linked === link.link ? "bg-accent" : "bg-sidpar"
           }`}
         >
