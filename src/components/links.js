@@ -67,11 +67,10 @@ export const house = [
 export const hom = [
   { name: "الكل", type: "all" },
   { name: "منازل", type: "house" },
-  { name: "شقق", type: "flat" },
-  { name: "محال تجارية", type: "store" },
+  { name: "شقق", type: "apartment" },
+  { name: "محال تجارية", type: "commercial" },
   { name: "أراضي", type: "land" },
   { name: "محاضر", type: "building" },
-  { name: "أبراج", type: "tower" },
 ];
 
 export const whyus = [

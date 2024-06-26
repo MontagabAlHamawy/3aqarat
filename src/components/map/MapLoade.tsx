@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-// تأخير تحميل مكون Maps إلى أن يكون على جانب العميل فقط
 const Maps = dynamic(() => import("./maps"), {
   ssr: false,
 });

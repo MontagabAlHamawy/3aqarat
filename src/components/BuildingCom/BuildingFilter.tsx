@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { hom } from '../links';
 
@@ -10,7 +11,7 @@ export default function BuildingFilter({ onFilterChange }: any) {
     };
 
     return (
-        <div className="grid grid-cols-3 mt-7 md:grid-cols-7 xl:grid-cols-7 gap-x-2 gap-y-5 md:gap-x-3 xl:gap-x-10 xl:mb-6">
+        <div className="grid grid-cols-3 mt-7 md:grid-cols-6 xl:grid-cols-6 gap-x-2 gap-y-5 md:gap-x-3 xl:gap-x-10 xl:mb-6">
             {hom.map((link, index) => (
                 <div
                     key={index}

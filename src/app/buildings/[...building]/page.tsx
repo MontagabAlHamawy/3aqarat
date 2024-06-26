@@ -40,13 +40,12 @@ import NotFound from "@/app/not-found";
 export default async function Buildin(props: any) {
   const page = props.params.building[0];
 
-  
-
   const building: any = await SingelBuildingApi(page);
   if (building === null) {
     toast.error("خطاء في جلب البيانات ");
     NotFound();
   }
+  const propertyType = building.property_object?.property_type?.ar || "N/A";
 
   let build = [
     building.address.geo_address,
@@ -54,11 +53,9 @@ export default async function Buildin(props: any) {
     building.title,
     building.price,
     building.description,
-    building.property_object.property_type.en,
+    propertyType,
   ];
-  const type: any = building.property_object.property_type.en || null;
-  // console.log(type);
-
+  const type: any = building.property_object?.property_type?.en || null;
   let isApartment = false;
   let isCommercialproperty = false;
   let isHouse = false;
@@ -79,6 +76,7 @@ export default async function Buildin(props: any) {
   if (type === "building") {
     isBuilding = true;
   }
+
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
@@ -92,7 +90,7 @@ export default async function Buildin(props: any) {
                 {building.offer}
               </p>
               <p className="text-lg  py-2 px-3 bg-accent w-max ml-3 rounded-md">
-                {building.property_object.property_type.ar}
+                {propertyType}
               </p>
             </div>
             <h1 className="text-3xl font-bold">{building.title}</h1>

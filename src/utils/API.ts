@@ -43,6 +43,41 @@ export async function BuildingApi(page: any) {
   }
   return response.json();
 }
+export async function ApartmentsApi(page: any) {
+  const response = await fetch(`${apiUrl}/apartments/`);
+  if (response.status === 404) {
+    return notFound()
+  }
+  return response.json();
+}
+export async function BBuildingsApi(page: any) {
+  const response = await fetch(`${apiUrl}/buildings/`);
+  if (response.status === 404) {
+    return notFound()
+  }
+  return response.json();
+}
+export async function CommercialApi(page: any) {
+  const response = await fetch(`${apiUrl}/commercial-properties/`);
+  if (response.status === 404) {
+    return notFound()
+  }
+  return response.json();
+}
+export async function HousesApi(page: any) {
+  const response = await fetch(`${apiUrl}/houses/`);
+  if (response.status === 404) {
+    return notFound()
+  }
+  return response.json();
+}
+export async function LandApi(page: any) {
+  const response = await fetch(`${apiUrl}/land/`);
+  if (response.status === 404) {
+    return notFound()
+  }
+  return response.json();
+}
 export async function LimitBuildingApi(limit: any) {
   const response = await fetch(`${apiUrl}/properties/?limit=${limit}`);
   if (response.status === 404) {

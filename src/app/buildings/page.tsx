@@ -1,36 +1,74 @@
-import React, { useState } from "react";
-import apiUrl from "@/utils/apiConfig";
+"use client"
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { BuildingApi } from "@/utils/API";
-// import { Pagination } from "swiper/modules";
-import Pagination from "@/components/pagination/pagination";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
-import { notFound } from "next/navigation";
 import NotFound from "../not-found";
+import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
+import Pagination from "@/components/pagination/pagination";
 
-export default async function Buildin(props: any) {
-  let page = props.searchParams.page || null;
-  if (page === null) {
-    page = 1;
-  }
-  const response = await BuildingApi(page);
+export default function Building(props: any) {
+  const [building, setBuilding] = useState([]);
+  const [pageInfo, setPageInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const page = props.searchParams.page || 1;
 
-  if (response === null) {
-    toast.error("خطاء في جلب البيانات ");
-    NotFound()
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(false);
+      try {
+        const response = await BuildingApi(page);
+        if (!response || !response.results) {
+          toast.error("خطاء في جلب البيانات ");
+          NotFound();
+          setError(true);
+          return;
+        }
+        setBuilding(response.results);
+        setPageInfo(response);
+      } catch (error) {
+        toast.error("حدث خطأ أثناء جلب البيانات");
+        console.error("error:", error);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [page]);
+
+  if (loading) {
+    return (
+      <div className="mx-2 xl:mx-0 xl:ml-3">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">جاري جلب البيانات...</h1>
+        </div>
+      </div>
+    );
   }
-  const building = response.results;
-  const pagee = response;
+
+  if (error) {
+    return (
+      <div className="mx-2 xl:mx-0 xl:ml-3">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">حدث خطأ أثناء جلب البيانات</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
         <h1 className="text-2xl">العقارات</h1>
       </div>
+      <BuildingFilter />
       <AllBuildings Building={building} />
       <div className="w-full flex justify-center items-center">
-        <Pagination page={pagee} />
+        <Pagination page={pageInfo} />
       </div>
     </div>
   );
