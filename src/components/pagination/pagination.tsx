@@ -8,17 +8,13 @@ export default function Pagination({ page }: any) {
   const router = useRouter();
   const [pagination, setPagination] = useState<string | null>(null);
 
-  if (!page || page.length === 0) {
-    return <div>لا توجد عقارات لعرضها.</div>;
-  }
-
-  const url1 = page.page.next;
+  const url1 = page?.page?.next ?? null;
   let path1 = "/";
   if (url1 !== null) {
     path1 = new URL(url1).search;
   }
 
-  const url2 = page.page.previous;
+  const url2 = page?.page?.previous ?? null;
   let path2: any = "/";
   if (url2 !== null) {
     path2 = new URL(url2).search;
@@ -29,6 +25,10 @@ export default function Pagination({ page }: any) {
       router.replace(pagination);
     }
   }, [pagination, router]);
+
+  if (!page || page.length === 0) {
+    return <div>لا توجد عقارات لعرضها.</div>;
+  }
 
   return (
     <div className="flex flex-row justify-center items-center w-max px-8 py-2 rounded-lg gap-10 bg-white/10">
