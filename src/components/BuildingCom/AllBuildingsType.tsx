@@ -16,7 +16,7 @@ export default function AllBuildingsType({ Building }: any) {
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
           const propertyType =
-            building.property.property_object?.property_type?.ar || "N/A";
+            building.property?.property_object?.property_type?.ar || "N/A";
           return (
             <Link
               href={`/buildings/${building.property.id}`}
