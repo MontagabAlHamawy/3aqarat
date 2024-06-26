@@ -1,15 +1,6 @@
 "use client";
-// import { useState } from 'react';
 import L from "leaflet";
-import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
-import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
-import House from "../../../public/map/house.svg";
-import Building from "../../../public/map/building.svg";
-import Flat from "../../../public/map/flar.svg";
-import Land from "../../../public/map/land.svg";
-import Store from "../../../public/map/store.svg";
-import Tower from "../../../public/map/tower.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MapContainer,
   Marker,
@@ -20,10 +11,16 @@ import {
 import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
-import { houses } from "../links";
 import Link from "next/link";
+import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
+import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
+import House from "../../../public/map/house.svg";
+import BuildingIcon from "../../../public/map/building.svg";
+import Apartment from "../../../public/map/flar.svg";
+import Land from "../../../public/map/land.svg";
+import Commercialproperty from "../../../public/map/store.svg";
+import Tower from "../../../public/map/tower.svg";
 
-// type Coordinate = [number, number];
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
 
@@ -65,12 +62,30 @@ function LocationMarker() {
   );
 }
 
-export default function HomeMap() {
+export default function HomeMap({ building }: { building: any[] }) {
+  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>({});
+
+  useEffect(() => {
+    const newLocations: { [key: string]: LatLngLiteral } = {};
+
+    building.forEach((houss) => {
+      if (houss.address.geo_address) {
+        const [x, y] = houss.address.geo_address.split(", ");
+        const lat = x === "x" ? 34.69498 : parseFloat(x);
+        const lng = y === "y" ? 36.7237 : parseFloat(y);
+
+        newLocations[houss.id] = { lat, lng };
+      }
+    });
+
+    setLocations(newLocations);
+  }, [building]);
+  
 
   return (
     <div className="z-30">
-        <MapContainer
-      className="w-[98vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
+      <MapContainer
+        className="w-[98vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
         center={{ lat: 34.6985, lng: 36.7237 }}
         zoom={7}
         scrollWheelZoom={false}
@@ -80,47 +95,48 @@ export default function HomeMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
-        {houses.map((houss, index) => {
-          let xloc = Number(houss.location_x);
-          let yloc = Number(houss.location_y);
+        {building.map((houss) => {
+          const location = locations[houss.id];
+
+          if (!location) return null;
+
           let iconee;
-          if (houss.type === "flat") {
-            iconee = Flat;
-          } else if (houss.type === "store") {
-            iconee = Store;
+
+          if (houss.type === "apartment") {
+            iconee = Apartment;
+          } else if (houss.type === "commercialproperty") {
+            iconee = Commercialproperty;
           } else if (houss.type === "house") {
             iconee = House;
           } else if (houss.type === "building") {
-            iconee = Building;
-          } else if (houss.type === "land") {
-            iconee = Land;
+            iconee = BuildingIcon;
           } else if (houss.type === "tower") {
             iconee = Tower;
+          } else {
+            iconee = Land;
           }
+
           return (
             <Marker
-              key={index}
+              key={houss.id}
               icon={
                 new L.Icon({
                   iconUrl: iconee.src,
                   iconRetinaUrl: iconee.src,
-                  iconSize: [34, 34],
+                  iconSize: [35, 35],
                   iconAnchor: [12.5, 41],
                   popupAnchor: [0, -41],
-                  // shadowUrl: iconee.src,
-                  shadowSize: [41, 41],
                 })
               }
-              position={[xloc, yloc]}
+              position={location}
             >
               <Popup className="w-72">
                 <Link
-                  href={houss.link}
-                  key={index}
-                  className="flex flex-row justify-center md:justify-start gap-4 items-center relative my[-25px] mt-[-20px]"
+                  href={`/buildings/${houss.id}`}
+                  className="flex flex-col justify-center font-serif  gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
-                    src={houss.img}
+                    src="/home/gg.jpg"
                     width={150}
                     height={100}
                     alt="montagab"
@@ -131,12 +147,12 @@ export default function HomeMap() {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar text-base font-semibold">
-                        {houss.prise}
+                      <p className="text-sidpar  text-base font-semibold">
+                        {houss.description}
                       </p>
                     </div>
                     <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
-                      {houss.display}
+                      {houss.price} ل.س
                     </div>
                   </div>
                 </Link>
@@ -145,7 +161,6 @@ export default function HomeMap() {
           );
         })}
       </MapContainer>
-      
     </div>
   );
 }

@@ -43,7 +43,7 @@ export default async function Home() {
         </div>
       </div>
       <div className=" mt-10 mx-[-10px] rounded-xl flex justify-center items-center">
-        <HomeMap />
+        <HomeMap building={building}/>
       </div>
       <div className="flex justify-center w-full  items-center flex-col ">
         <h1 className="text-white text-2xl my-5 ">الأحدث</h1>
