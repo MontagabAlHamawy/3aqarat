@@ -9,7 +9,6 @@ export default function AllBuildingsType({ Building }: any) {
   if (!Building || Building.length === 0) {
     return <div>لا توجد عقارات لعرضها.</div>;
   }
-  console.log("Building:", Building);
 
   return (
     <div>
@@ -30,9 +29,9 @@ export default function AllBuildingsType({ Building }: any) {
                 alt="montagab"
                 className="w-[1080px] rounded-tl-xl rounded-tr-xl"
               />
-              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
+              {/* <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                 {propertyType}
-              </div>
+              </div> */}
               <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
                 {building.property.title}
               </p>

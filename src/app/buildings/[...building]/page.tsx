@@ -61,20 +61,26 @@ export default async function Buildin(props: any) {
   let isHouse = false;
   let isLand = false;
   let isBuilding = false;
+  let linked = "buildings";
   if (type === "apartment") {
     isApartment = true;
+    linked = "apartments";
   }
   if (type === "commercialproperty") {
     isCommercialproperty = true;
+    linked = "commercials";
   }
   if (type === "house") {
     isHouse = true;
+    linked = "houses";
   }
   if (type === "land") {
     isLand = true;
+    linked = "lands";
   }
   if (type === "building") {
     isBuilding = true;
+    linked = "buildings";
   }
 
   return (
@@ -89,9 +95,11 @@ export default async function Buildin(props: any) {
               <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
                 {building.offer}
               </p>
-              <p className="text-lg  py-2 px-3 bg-accent w-max ml-3 rounded-md">
-                {propertyType}
-              </p>
+              <Link href={`/buildings/${linked}`}>
+                <p className="text-lg  py-2 px-3 bg-accent w-max ml-3 rounded-md">
+                  {propertyType}
+                </p>
+              </Link>
             </div>
             <h1 className="text-3xl font-bold">{building.title}</h1>
             <p className="text-lg font-thin text-gray-400">
