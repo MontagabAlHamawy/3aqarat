@@ -1,23 +1,14 @@
 import axios from "axios";
 import apiUrl from "./apiConfig";
 import Cookies from "js-cookie";
-// import { notFound } from "next/navigation";
-import { toast } from "react-toastify";
 import { notFound } from "next/navigation";
 
 export function SaveToken(token: string) {
-  Cookies.set("authToken", token, { expires: 30 }); // تخزين التوكن في الكوكيز لمدة 7 أيام
+  Cookies.set("authToken", token, { expires: 5 });
 };
 
 export function GetToken(): string | undefined {
   return Cookies.get("authToken");
-}
-
-export function SaveUsername(username: string) {
-  Cookies.set("username", username);
-};
-export function GetUsername(): string | undefined {
-  return Cookies.get("username");
 }
 
 export async function LoginApi(username: string | null, email: string | null, password: any) {
@@ -103,46 +94,66 @@ export async function SingelBuildingApi(page: any) {
   }
   return response.json();
 }
-export async function MyProfile() {
-  let token = GetToken();
-  try {
-    const response = await axios.get(`${apiUrl}/profile/me`, {
-      headers: {
-        'Authorization': `JWT ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    if (response.status === 404) {
-      return notFound();
+
+export async function userProfile(username: any) {
+
+  const response = await axios.get(`${apiUrl}/profile/${username}`, {
+    headers: {
+      'Content-Type': 'application/json'
     }
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching profile:', error);
-    throw error;
+  });
+  if (response.status === 404) {
+    return notFound();
   }
-}
-export async function userProfile(username:any) {
-  let token = GetToken();
-  try {
-    const response = await axios.get(`${apiUrl}/profile/${username}`, {
-      headers: {
-        'Authorization': `JWT ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    if (response.status === 404) {
-      return notFound();
-    }
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching profile:', error);
-    throw error;
-  }
+  return response.data;
 }
 export async function MyBuilding() {
   let token = GetToken();
   try {
     const response = await axios.get(`${apiUrl}/properties/me`, {
+      headers: {
+        'Authorization': `JWT ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.status === 404) {
+      return notFound();
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    throw error;
+  }
+}
+export async function userBuilding(username: any) {
+  try {
+    const response = await axios.get(`${apiUrl}/profile/${username}/properties`);
+    if (response.status === 404) {
+      return notFound();
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    throw error;
+  }
+}
+export async function userBuildingLimit(data: any) {
+
+  try {
+    const response = await axios.get(`${apiUrl}/profile/${data.username}/properties/?limit=${data.limit}`);
+    if (response.status === 404) {
+      return notFound();
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    throw error;
+  }
+}
+export async function MyProfile() {
+  let token = GetToken();
+  try {
+    const response = await axios.get(`${apiUrl}/profile/me`, {
       headers: {
         'Authorization': `JWT ${token}`,
         'Content-Type': 'application/json'

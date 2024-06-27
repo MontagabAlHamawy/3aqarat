@@ -12,29 +12,50 @@ import {
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import NotFound from "@/app/not-found";
-import { MyBuilding, userProfile } from "@/utils/API";
+import {
+  MyBuilding,
+  MyProfile,
+  userBuilding,
+  userBuildingLimit,
+  userProfile,
+} from "@/utils/API";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
+  const [Iam, setIam] = useState<any>(false);
   const [Building, setBuilding] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
+  let photo = "/user-avatar.png";
 
   useEffect(() => {
     const myData = async () => {
+      const Bdata = {
+        username: "",
+        limit: "",
+      };
       try {
+        const ifme = await MyProfile();
+        if (ifme.username === props.params.username[0]) setIam(true);
         const response = await userProfile(props.params.username[0]);
-        const responseB = await MyBuilding();
+        const responseB = await userBuilding(props.params.username[0]);
+        Bdata.limit = responseB.count;
+        Bdata.username = props.params.username[0];
+        const responseB1 = await userBuildingLimit(Bdata);
         setUser(response);
-        setBuilding(responseB.results);
-        if (!response) {
+        setBuilding(responseB1.results);
+
+        if (response === null) {
           toast.error("حدث خطأ أثناء جلب البيانات");
           NotFound();
           return;
         }
+        if (user?.profile_photo) {
+          photo = user.profile_photo;
+        }
       } catch (error) {
-        toast.error("حدث خطأ أثناء جلب البيانات");
-        NotFound();
+        router.replace("/not-found");
       } finally {
         setLoading(false);
       }
@@ -42,7 +63,6 @@ export default function Username(props: any) {
     myData();
   }, [props.params.username]);
 
-  const router = useRouter();
   function logout() {
     Cookies.set("authToken", "");
     router.replace("/login");
@@ -69,7 +89,7 @@ export default function Username(props: any) {
             >
               <div>
                 <Image
-                  src={link.image}
+                  src={photo}
                   width={290}
                   height={290}
                   alt="user"
@@ -80,25 +100,51 @@ export default function Username(props: any) {
                 <h1 className="text-accent text-2xl font-bold">
                   {user?.first_name} {user?.last_name}
                 </h1>
-                <Link href={`tel:${link.phone}`}>{link.phone}</Link>
+                <Link href={`tel:${user?.phone_number}`}>
+                  {user?.phone_number}
+                </Link>
                 <div className="flex flex-row justify-center items-center gap-3">
-                  <Link href={link.facebook} className="text-accent text-4xl">
-                    <PiFacebookLogoDuotone />
-                  </Link>
-                  <Link href={link.instagram} className="text-accent text-4xl">
-                    <PiInstagramLogoDuotone />
-                  </Link>
-                  <Link href={link.telegram} className="text-accent text-3xl">
-                    <PiTelegramLogoDuotone />
-                  </Link>
+                  {user?.facebook_account && (
+                    <Link
+                      href={user.facebook_account}
+                      className="text-accent text-4xl"
+                    >
+                      <PiFacebookLogoDuotone />
+                    </Link>
+                  )}
+                  {user?.instagram_account && (
+                    <Link
+                      href={user.instagram_account}
+                      className="text-accent text-4xl"
+                    >
+                      <PiInstagramLogoDuotone />
+                    </Link>
+                  )}
+                  {user?.telegram_account && (
+                    <Link
+                      href={user.telegram_account}
+                      className="text-accent text-3xl"
+                    >
+                      <PiTelegramLogoDuotone />
+                    </Link>
+                  )}
                 </div>
               </div>
-              <div className="absolute top-[-70px] left-2 xl:top-1 xl:left-5 ">
+              <div
+                className={`${
+                  Iam ? "flex" : "hidden"
+                }  xl:flex-col justify-between items-center xl:items-start w-full xl:w-max xl:gap-y-5 px-5  absolute top-[-70px]  xl:top-1 xl:left-5 `}
+              >
                 <div onClick={() => logout()}>
                   <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
                     تسجيل الخروج
                   </div>
                 </div>
+                <Link href="/account/edit-account">
+                  <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
+                    تعديل الحساب
+                  </div>
+                </Link>
               </div>
             </div>
           );
