@@ -106,7 +106,7 @@ export default function Username(props: any) {
                 <div className="flex flex-row justify-center items-center gap-3">
                   {user?.facebook_account && (
                     <Link
-                      href={user.facebook_account}
+                      href={`https://${user.facebook_account}`}
                       className="text-accent text-4xl"
                     >
                       <PiFacebookLogoDuotone />
@@ -114,7 +114,7 @@ export default function Username(props: any) {
                   )}
                   {user?.instagram_account && (
                     <Link
-                      href={user.instagram_account}
+                      href={`https://${user.instagram_account}`}
                       className="text-accent text-4xl"
                     >
                       <PiInstagramLogoDuotone />
@@ -122,7 +122,7 @@ export default function Username(props: any) {
                   )}
                   {user?.telegram_account && (
                     <Link
-                      href={user.telegram_account}
+                      href={`https://${user.telegram_account}`}
                       className="text-accent text-3xl"
                     >
                       <PiTelegramLogoDuotone />
