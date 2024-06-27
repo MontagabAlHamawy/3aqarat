@@ -1,5 +1,5 @@
 "use client";
-import { MyProfile } from "@/utils/API";
+import { MyProfile, userInfo } from "@/utils/API";
 import apiUrl from "@/utils/apiConfig";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // import useRouter for navigation
@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function EditAccount() {
+  const [user, setUser] = useState<any>(null);
   const updateUserProfile = async () => {
     const url = `${apiUrl}/profile/me/`;
 
@@ -30,6 +31,7 @@ export default function EditAccount() {
   };
 
   const [formData, setFormData] = useState({
+    email: "",
     first_name: "",
     last_name: "",
     phone_number: "",
@@ -52,7 +54,10 @@ export default function EditAccount() {
     async function fetchData() {
       try {
         const data = await MyProfile();
+        const response = await userInfo();
+        setUser(response.email);
         setFormData({
+          email: response.email,
           first_name: data.first_name,
           last_name: data.last_name,
           phone_number: data.phone_number,
@@ -108,11 +113,13 @@ export default function EditAccount() {
                 البريد الإلكتروني:
               </label>
               <input
-                type="email"
-                placeholder="Your Email"
+                type="text"
                 name="email"
-                className="w-full border p-2 rounded-lg bg-section border-section text-white"
-                disabled
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                required={true}
+                className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
               />
             </div>
             <div className="flex justify-center items-center flex-row gap-3 mb-4">
@@ -157,7 +164,6 @@ export default function EditAccount() {
                   placeholder="Phone Number"
                   value={formData.phone_number}
                   onChange={handleChange}
-                  required={true}
                   className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
                 />
               </div>
@@ -171,7 +177,6 @@ export default function EditAccount() {
                   name="telegram_account"
                   value={formData.telegram_account}
                   onChange={handleChange}
-                  required={true}
                   className="w-full border p-2 rounded-lg bg-section border-section text-white"
                 />
               </div>
@@ -187,7 +192,6 @@ export default function EditAccount() {
                   placeholder="Facebook Account"
                   value={formData.facebook_account}
                   onChange={handleChange}
-                  required={true}
                   className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
                 />
               </div>
@@ -201,7 +205,6 @@ export default function EditAccount() {
                   placeholder="Instagram Account"
                   value={formData.instagram_account}
                   onChange={handleChange}
-                  required={true}
                   className="w-full border p-2 rounded-lg bg-section border-section text-white"
                 />
               </div>

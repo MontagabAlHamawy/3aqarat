@@ -107,6 +107,19 @@ export async function userProfile(username: any) {
   }
   return response.data;
 }
+export async function userInfo() {
+  let token = GetToken();
+  const response = await axios.get(`${apiUrl}/auth/users/me/`, {
+    headers: {
+      'Authorization': `JWT ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if (response.status === 404) {
+    return notFound();
+  }
+  return response.data;
+}
 export async function MyBuilding() {
   let token = GetToken();
   try {
