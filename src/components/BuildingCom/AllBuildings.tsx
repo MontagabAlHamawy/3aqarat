@@ -9,7 +9,6 @@ export default function AllBuildings({ Building }: any) {
   if (!Building || Building.length === 0) {
     return <div>لا توجد عقارات لعرضها.</div>;
   }
-  console.log("Building:", Building);
 
   return (
     <div>

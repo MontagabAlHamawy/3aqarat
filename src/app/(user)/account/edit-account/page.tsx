@@ -1,5 +1,5 @@
 "use client";
-import { MyProfile, userInfo } from "@/utils/API";
+import { GetToken, MyProfile, userInfo } from "@/utils/API";
 import apiUrl from "@/utils/apiConfig";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // import useRouter for navigation
@@ -21,9 +21,11 @@ export default function EditAccount() {
     const url = `${apiUrl}/profile/me/`;
 
     try {
+      let token = GetToken();
       const response = await fetch(url, {
         method: "PUT",
         headers: {
+          'Authorization': `JWT ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -78,6 +80,8 @@ export default function EditAccount() {
         });
       } catch (error) {
         console.error("Error fetching profile:", error);
+      }finally {
+        setLoading(false);
       }
     }
     fetchData();
