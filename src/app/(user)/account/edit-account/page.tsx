@@ -5,9 +5,18 @@ import Image from "next/image";
 import { useRouter } from "next/navigation"; // import useRouter for navigation
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export default function EditAccount() {
+  useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      router.replace("/login");
+    }
+  }, []);
+
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const updateUserProfile = async () => {
     const url = `${apiUrl}/profile/me/`;
 
@@ -27,6 +36,8 @@ export default function EditAccount() {
       await response.json();
     } catch (error) {
       toast.error("Error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,6 +99,15 @@ export default function EditAccount() {
       router.push("/account");
     } catch (error) {}
   };
+  if (loading) {
+    return (
+      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">جاري جلب البيانات...</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

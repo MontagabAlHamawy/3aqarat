@@ -30,6 +30,13 @@ export default function Username(props: any) {
   let photo = "/user-avatar.png";
 
   useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      router.replace("/login");
+    }
+  }, []);
+
+  useEffect(() => {
     const myData = async () => {
       const Bdata = {
         username: "",
