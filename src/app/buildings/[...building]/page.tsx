@@ -59,7 +59,13 @@ export default function Buildin(props: any) {
   }, [page]);
 
   if (!building) {
-    return <div>Loading...</div>; // أو أي مكون تحميل آخر تفضله
+    return (
+      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">جاري جلب البيانات...</h1>
+        </div>
+      </div>
+    );
   }
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";
