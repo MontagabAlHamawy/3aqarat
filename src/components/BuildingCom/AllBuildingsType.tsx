@@ -4,10 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import React from "react";
+import { PiBuildingsDuotone } from "react-icons/pi";
 
 export default function AllBuildingsType({ Building }: any) {
   if (!Building || Building.length === 0) {
-    return <div>لا توجد عقارات لعرضها.</div>;
+    return (
+      <div className="mx-2 my-5 xl:mx-0 h-max w-full">
+        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
+          <div className="text-[90px]">
+            <PiBuildingsDuotone />
+          </div>
+          <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -29,9 +39,6 @@ export default function AllBuildingsType({ Building }: any) {
                 alt="montagab"
                 className="w-[1080px] rounded-tl-xl rounded-tr-xl"
               />
-              {/* <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
-                {propertyType}
-              </div> */}
               <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
                 {building.property.title}
               </p>

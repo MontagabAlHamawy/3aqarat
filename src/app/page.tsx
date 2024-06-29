@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "swiper/swiper-bundle.css";
-import { PiCheck } from "react-icons/pi";
+import { PiBuildingsDuotone, PiCheck } from "react-icons/pi";
 import { whyus } from "../components/links";
 import dynamic from "next/dynamic";
 import { BuildingApi, LimitBuildingApi } from "@/utils/API";
@@ -42,6 +42,7 @@ export default function Home() {
 
     fetchData();
   }, []);
+  const linked = "/buildings/";
 
   if (loading) {
     return (
@@ -68,8 +69,27 @@ export default function Home() {
         </div>
         <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
           <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-            <h1 className="text-2xl">جاري جلب البيانات...</h1>
+            <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
           </div>
+        </div>
+        <div className="flex justify-center w-full items-center flex-col">
+          <h1 className="text-white text-2xl my-5">الأحدث</h1>
+          <div className="w-full mx-[-10px]">
+            <BuildingFilter linked={linked} />
+          </div>
+          <div className="mx-2 my-5 xl:mx-0 h-max w-full">
+            <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
+              <div className="text-[90px]">
+                <PiBuildingsDuotone />
+              </div>
+              <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
+            </div>
+          </div>
+          <Link href={"/buildings"}>
+            <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
+              عرض المزيد
+            </div>
+          </Link>
         </div>
         <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
           <div>
@@ -103,8 +123,6 @@ export default function Home() {
       </div>
     );
   }
-
-  const linked = "/buildings/";
 
   return (
     <div className="mt-14 xl:mt-32 m-0 px-4 xl:px-10 h-full z-40">

@@ -88,79 +88,74 @@ export default function Username(props: any) {
   return (
     <div className="relative">
       <div>
-        {UserInfo.map((link, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col mt-10 xl:mt-0 xl:flex-row justify-start items-center gap-8"
-            >
-              <div>
-                <Image
-                  src={photo}
-                  width={290}
-                  height={290}
-                  alt="user"
-                  className="w-80 h-50 rounded-full"
-                />
-              </div>
-              <div className="flex flex-col justify-center items-center xl:items-start gap-3">
-                <h1 className="text-accent text-2xl font-bold">
-                  {user?.first_name} {user?.last_name}
-                </h1>
-                <Link href={`tel:${user?.phone_number}`}>
-                  {user?.phone_number}
+        <div
+          className={`flex flex-col ${
+            Iam ? "mt-10 xl:mt-0" : "mt-0"
+          }  xl:flex-row justify-start items-center gap-x-8 gap-y-4`}
+        >
+          <div>
+            <Image
+              src={photo}
+              width={290}
+              height={290}
+              alt="user"
+              className="w-80 h-50 rounded-full"
+            />
+          </div>
+          <div className="flex flex-col justify-center items-center xl:items-start gap-3">
+            <h1 className="text-accent text-2xl font-bold">
+              {user?.first_name} {user?.last_name}
+            </h1>
+            <Link href={`tel:${user?.phone_number}`}>{user?.phone_number}</Link>
+            <div className="flex flex-row justify-center items-center gap-3">
+              {user?.facebook_account && (
+                <Link
+                  href={`https://${user.facebook_account}`}
+                  className="text-accent text-4xl"
+                >
+                  <PiFacebookLogoDuotone />
                 </Link>
-                <div className="flex flex-row justify-center items-center gap-3">
-                  {user?.facebook_account && (
-                    <Link
-                      href={`https://${user.facebook_account}`}
-                      className="text-accent text-4xl"
-                    >
-                      <PiFacebookLogoDuotone />
-                    </Link>
-                  )}
-                  {user?.instagram_account && (
-                    <Link
-                      href={`https://${user.instagram_account}`}
-                      className="text-accent text-4xl"
-                    >
-                      <PiInstagramLogoDuotone />
-                    </Link>
-                  )}
-                  {user?.telegram_account && (
-                    <Link
-                      href={`https://${user.telegram_account}`}
-                      className="text-accent text-3xl"
-                    >
-                      <PiTelegramLogoDuotone />
-                    </Link>
-                  )}
-                </div>
-              </div>
-              <div
-                className={`${
-                  Iam ? "flex" : "hidden"
-                }  xl:flex-col justify-between items-center xl:items-start w-full xl:w-max xl:gap-y-5 px-5  absolute top-[-70px]  xl:top-1 xl:left-5 `}
-              >
-                <div onClick={() => logout()}>
-                  <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
-                    تسجيل الخروج
-                  </div>
-                </div>
-                <Link href="/account/edit-account">
-                  <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
-                    تعديل الحساب
-                  </div>
+              )}
+              {user?.instagram_account && (
+                <Link
+                  href={`https://${user.instagram_account}`}
+                  className="text-accent text-4xl"
+                >
+                  <PiInstagramLogoDuotone />
                 </Link>
+              )}
+              {user?.telegram_account && (
+                <Link
+                  href={`https://${user.telegram_account}`}
+                  className="text-accent text-3xl"
+                >
+                  <PiTelegramLogoDuotone />
+                </Link>
+              )}
+            </div>
+          </div>
+          <div
+            className={`${
+              Iam ? "flex" : "hidden"
+            }  xl:flex-col justify-between items-center xl:items-start w-full xl:w-max xl:gap-y-5 px-5  absolute top-[-70px]  xl:top-1 xl:left-5 `}
+          >
+            <div onClick={() => logout()}>
+              <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
+                تسجيل الخروج
               </div>
             </div>
-          );
-        })}
+            <Link href="/account/edit-account">
+              <div className="bg-accent cursor-pointer text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
+                تعديل الحساب
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
 
       <div>
         <h1 className="text-2xl mt-10 bg-section xl:mr-[-8px] rounded-t-md py-2 px-3 w-min">
-          عقاراتي
+          {Iam ? "عقاراتي" : "العقارات"}
         </h1>
         <div className=" bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
           <AllBuildings Building={Building} />

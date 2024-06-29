@@ -11,6 +11,7 @@ import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
 import NotFound from "../../not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
 import PaginationCommercial from "@/components/pagination/paginationcommercial";
+import { PiBuildingsDuotone } from "react-icons/pi";
 
 export default function Commercials(props: any) {
   const [building, setBuilding] = useState([]);
@@ -53,9 +54,12 @@ export default function Commercials(props: any) {
           <h1 className="text-2xl">العقارات</h1>
         </div>
         <BuildingFilter linked={linked} />
-        <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
-          <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-            <h1 className="text-2xl">جاري جلب البيانات...</h1>
+        <div className="mx-2 my-5 xl:mx-0 h-max w-full">
+          <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
+            <div className="text-[90px]">
+              <PiBuildingsDuotone />
+            </div>
+            <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
           </div>
         </div>
       </div>
