@@ -25,9 +25,9 @@ export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
   const [Iam, setIam] = useState<any>(false);
   const [Building, setBuilding] = useState<any>(null);
+  const [photo, setPhoto] = useState("/user-avatar.png");
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
-  let photo = "/user-avatar.png";
 
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
@@ -52,14 +52,12 @@ export default function Username(props: any) {
         const responseB1 = await userBuildingLimit(Bdata);
         setUser(response);
         setBuilding(responseB1.results);
+        setPhoto(response.profile_photo);
 
         if (response === null) {
           toast.error("حدث خطأ أثناء جلب البيانات");
           NotFound();
           return;
-        }
-        if (user?.profile_photo) {
-          photo = user.profile_photo;
         }
       } catch (error) {
         router.replace("/not-found");
@@ -73,6 +71,9 @@ export default function Username(props: any) {
   function logout() {
     Cookies.set("authToken", "");
     router.replace("/login");
+  }
+  if (photo === null) {
+    setPhoto("/user-avatar.png");
   }
 
   if (loading) {

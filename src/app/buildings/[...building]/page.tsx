@@ -1,3 +1,4 @@
+"use client";
 import { BuildingInfo, ImagBuilding } from "@/components/links";
 import Image from "next/image";
 import "swiper/css";
@@ -36,17 +37,32 @@ import BBuilding from "@/components/Buildings/bbuilding";
 import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
 import NotFound from "@/app/not-found";
+import { useEffect, useState } from "react";
 
-export default async function Buildin(props: any) {
+export default function Buildin(props: any) {
   const page = props.params.building[0];
+  const [photo, setPhoto] = useState("/user-avatar.png");
+  const [building, setBuilding] = useState<any>(null);
 
-  const building: any = await SingelBuildingApi(page);
-  if (building === null) {
-    toast.error("خطاء في جلب البيانات ");
-    NotFound();
+  useEffect(() => {
+    const myData = async () => {
+      const buildingData: any = await SingelBuildingApi(page);
+      if (buildingData === null) {
+        toast.error("خطاء في جلب البيانات ");
+        NotFound();
+      } else {
+        setBuilding(buildingData);
+        setPhoto(buildingData.client.profile_photo);
+      }
+    };
+    myData();
+  }, [page]);
+
+  if (!building) {
+    return <div>Loading...</div>; // أو أي مكون تحميل آخر تفضله
   }
-  const propertyType = building.property_object?.property_type?.ar || "N/A";
 
+  const propertyType = building.property_object?.property_type?.ar || "N/A";
   let build = [
     building.address.geo_address,
     building.id,
@@ -55,7 +71,7 @@ export default async function Buildin(props: any) {
     building.description,
     building.property_object?.property_type?.en,
   ];
-  const type: any = building.property_object?.property_type?.en || null;
+  const type = building.property_object?.property_type?.en || null;
   let isApartment = false;
   let isCommercialproperty = false;
   let isHouse = false;
@@ -81,6 +97,9 @@ export default async function Buildin(props: any) {
   if (type === "building") {
     isBuilding = true;
     linked = "buildings";
+  }
+  if (photo === null) {
+    setPhoto("/user-avatar.png");
   }
 
   return (
@@ -124,21 +143,27 @@ export default async function Buildin(props: any) {
 
             <p className="text-xl text-accent">{building.price} ل.س</p>
             <div className="flex justify-between items-center mx-3 cursor-pointer">
-              <div className="flex gap-2 justify-center items-center">
-                <Image
-                  src={"/6.png"}
-                  width={40}
-                  height={40}
-                  alt="seller"
-                  className="p-1 bg-accent rounded-full"
-                />
-                <p>{building.seller}</p>
-              </div>
+              <Link href={`/account/${building.client.username}`}>
+                <div className="flex gap-2 justify-center items-center">
+                  <Image
+                    src={photo}
+                    width={40}
+                    height={40}
+                    alt="seller"
+                    className="p-1 bg-accent rounded-full"
+                  />
+                  <p>
+                    {building.client.first_name} {building.client.last_name}
+                  </p>
+                </div>
+              </Link>
               <Link
-                href={`tel://00963997867735`}
-                className="py-2 px-3 bg-accent rounded-md"
+                href={`tel://${building.client.phone_number}`}
+                className={`py-2 px-3 bg-accent rounded-md ${
+                  building.client.phone_number ? "block" : "hidden"
+                }`}
               >
-                00963997867735
+                {building.client.phone_number}
               </Link>
             </div>
           </div>

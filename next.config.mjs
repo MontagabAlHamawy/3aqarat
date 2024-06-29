@@ -22,6 +22,9 @@ const nextConfig = {
       }
     ]
   },
+  images: {
+    domains: ['gruafahim.pythonanywhere.com'],
+  },
 };
 
 export default nextConfig;
