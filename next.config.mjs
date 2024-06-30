@@ -25,6 +25,9 @@ const nextConfig = {
   images: {
     domains: ['gruafahim.pythonanywhere.com'],
   },
+  siteUrl: 'https://3aqarat.vercel.app',
+  generateRobotsTxt: true,
+  
 };
 
 export default nextConfig;
