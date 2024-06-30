@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "swiper/swiper-bundle.css";
-import { PiBuildingsDuotone, PiCheck } from "react-icons/pi";
+import { PiBuildingsDuotone, PiCheck, PiMapPinDuotone } from "react-icons/pi";
 import { whyus } from "../components/links";
 import dynamic from "next/dynamic";
 import { BuildingApi, LimitBuildingApi } from "@/utils/API";
@@ -68,9 +68,12 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
-          <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-            <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
+        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
+          <div className="text-[90px]">
+            <PiMapPinDuotone />
           </div>
+          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
+        </div>
         </div>
         <div className="flex justify-center w-full items-center flex-col">
           <h1 className="text-white text-2xl my-5">أحدث العقارات</h1>

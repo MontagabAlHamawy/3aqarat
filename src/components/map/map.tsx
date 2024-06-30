@@ -20,6 +20,7 @@ import Apartment from "../../../public/map/flar.svg";
 import Land from "../../../public/map/land.svg";
 import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
+import { PiMapPinDuotone } from "react-icons/pi";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -63,35 +64,40 @@ function LocationMarker() {
 }
 
 export default function Map({ building }: { building: any[] }) {
-  if (!building) {
-    return (
-      <div className="mx-2 mt-10 xl:ml-10">
-        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-[75vh] rounded-md">
-          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
-        </div>
-      </div>
-    );
-  }
-
   const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
     {}
   );
 
   useEffect(() => {
-    const newLocations: { [key: string]: LatLngLiteral } = {};
+    if (building) {
+      const newLocations: { [key: string]: LatLngLiteral } = {};
 
-    building.forEach((houss) => {
-      if (houss.address.geo_address) {
-        const [x, y] = houss.address.geo_address.split(", ");
-        const lat = x === "x" ? 34.69498 : parseFloat(x);
-        const lng = y === "y" ? 36.7237 : parseFloat(y);
+      building.forEach((houss) => {
+        if (houss.address.geo_address) {
+          const [x, y] = houss.address.geo_address.split(", ");
+          const lat = x === "x" ? 34.69498 : parseFloat(x);
+          const lng = y === "y" ? 36.7237 : parseFloat(y);
 
-        newLocations[houss.id] = { lat, lng };
-      }
-    });
+          newLocations[houss.id] = { lat, lng };
+        }
+      });
 
-    setLocations(newLocations);
+      setLocations(newLocations);
+    }
   }, [building]);
+
+  if (!building) {
+    return (
+      <div className="mx-2 mt-10 xl:ml-10">
+        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max xl:h-[75vh] py-10 rounded-md">
+          <div className="text-[90px]">
+            <PiMapPinDuotone />
+          </div>
+          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="z-30 mt-10 xl:mt-[-5px]">
