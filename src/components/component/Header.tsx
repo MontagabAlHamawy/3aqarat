@@ -23,7 +23,7 @@ function Header() {
   }, [route]);
   const searchActive = route === "/search";
   const notActive = route === "/notification";
-  const accountActive = route === account;
+  const accountActive = route == "/account";
   return (
     <div className="sticky top-0 w-full h-16 bg-sidpar shadow-lg  z-40 xl:pr-20 flex flex-row justify-between items-center">
       <div>
@@ -58,7 +58,7 @@ function Header() {
               notActive ? "bg-accent" : "bg-body "
             } rounded-md cursor-pointer`}
           />
-          <div className="w-2 h-2 bg-red-600 rounded-full absolute top-[-1px] right-[-1px]"></div>
+          {/* <div className="w-2 h-2 bg-red-600 rounded-full absolute top-[-1px] right-[-1px]"></div> */}
         </Link>
         <Link href={`/${account}`}>
           <PiUserDuotone

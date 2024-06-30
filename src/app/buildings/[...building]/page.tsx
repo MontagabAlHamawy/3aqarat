@@ -1,5 +1,5 @@
 "use client";
-import { BuildingInfo, ImagBuilding } from "@/components/links";
+import {  ImagBuilding } from "@/components/links";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -107,6 +107,15 @@ export default function Buildin(props: any) {
   if (photo === null) {
     setPhoto("/user-avatar.png");
   }
+  console.log(building);
+  const isoDate = building.created_at;
+  const date = new Date(isoDate);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const formattedDate = `${hours}:${minutes} ${year}/${month}/${day} `;
 
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
@@ -146,8 +155,10 @@ export default function Buildin(props: any) {
             <div className={`${isHouse ? "block" : "hidden"}`}>
               <House building={building} />
             </div>
-
-            <p className="text-xl text-accent">{building.price} ل.س</p>
+            <div className="flex justify-between items-center">
+              <p className="text-xl text-accent">{building.price} ل.س</p>
+              <p className="text-lg font-thin text-gray-400">{formattedDate}</p>
+            </div>
             <div className="flex justify-between items-center mx-3 cursor-pointer">
               <Link href={`/account/${building.client.username}`}>
                 <div className="flex gap-2 justify-center items-center">

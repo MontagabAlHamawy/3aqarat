@@ -1,5 +1,5 @@
 "use client";
-import { UserInfo, house } from "@/components/links";
+// import { UserInfo, house } from "@/components/links";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -60,7 +60,12 @@ export default function Username(props: any) {
           return;
         }
       } catch (error) {
-        router.replace("/not-found");
+        const token = Cookies.get("authToken") || false;
+        if (!token) {
+          router.replace("/login");
+        } else {
+          router.replace("/not-found");
+        }
       } finally {
         setLoading(false);
       }
