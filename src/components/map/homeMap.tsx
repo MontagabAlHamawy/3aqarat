@@ -63,15 +63,6 @@ function LocationMarker() {
 }
 
 export default function HomeMap({ building }: { building: any[] }) {
-  if (!building) {
-    return (
-      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
-        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
-        </div>
-      </div>
-    );
-  }
   const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
     {}
   );
@@ -79,7 +70,7 @@ export default function HomeMap({ building }: { building: any[] }) {
   useEffect(() => {
     const newLocations: { [key: string]: LatLngLiteral } = {};
 
-    building.forEach((houss) => {
+    building?.forEach((houss) => {
       if (houss.address.geo_address) {
         const [x, y] = houss.address.geo_address.split(", ");
         const lat = x === "x" ? 34.69498 : parseFloat(x);
@@ -91,6 +82,16 @@ export default function HomeMap({ building }: { building: any[] }) {
 
     setLocations(newLocations);
   }, [building]);
+
+  if (!building) {
+    return (
+      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="z-30">
