@@ -50,7 +50,7 @@ export default function Home() {
         <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
           <h1 className="text-white text-lg text-center xl:text-right font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
             سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
-            العقاريين الذين يتمتعون بخبرة ف بلا شك ان{" "}
+            العقاريين الذين يتمتعون بخبرة فبلا شك ان{" "}
             <span className="text-accent">3aqarat</span> سوف تقوم بارشادك بكل
             خطوة لضمان حصولك على تجربة عقارية ناجحة والحصول على رضاك
           </h1>
@@ -73,7 +73,7 @@ export default function Home() {
           </div>
         </div>
         <div className="flex justify-center w-full items-center flex-col">
-          <h1 className="text-white text-2xl my-5">الأحدث</h1>
+          <h1 className="text-white text-2xl my-5">أحدث العقارات</h1>
           <div className="w-full mx-[-10px]">
             <BuildingFilter linked={linked} />
           </div>

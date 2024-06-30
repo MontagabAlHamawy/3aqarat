@@ -111,7 +111,6 @@ export default function HomeMap({ building }: { building: any[] }) {
           if (!location) return null;
 
           let iconee;
-          console.log(houss.property_object?.property_type?.en);
 
           if (houss.property_object?.property_type?.en === "apartment") {
             iconee = Apartment;

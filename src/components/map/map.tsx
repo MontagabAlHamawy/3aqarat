@@ -63,27 +63,6 @@ function LocationMarker() {
 }
 
 export default function Map({ building }: { building: any[] }) {
-  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
-    {}
-  );
-
-  useEffect(() => {
-    const newLocations: { [key: string]: LatLngLiteral } = {};
-
-    if (building) {
-      building.forEach((houss) => {
-        if (houss.address.geo_address) {
-          const [x, y] = houss.address.geo_address.split(", ");
-          const lat = x === "x" ? 34.69498 : parseFloat(x);
-          const lng = y === "y" ? 36.7237 : parseFloat(y);
-
-          newLocations[houss.id] = { lat, lng };
-        }
-      });
-    }
-
-    setLocations(newLocations);
-  }, [building]);
   if (!building) {
     return (
       <div className="mx-2 mt-10 xl:ml-10">
@@ -94,8 +73,28 @@ export default function Map({ building }: { building: any[] }) {
     );
   }
 
+  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
+    {}
+  );
+
+  useEffect(() => {
+    const newLocations: { [key: string]: LatLngLiteral } = {};
+
+    building.forEach((houss) => {
+      if (houss.address.geo_address) {
+        const [x, y] = houss.address.geo_address.split(", ");
+        const lat = x === "x" ? 34.69498 : parseFloat(x);
+        const lng = y === "y" ? 36.7237 : parseFloat(y);
+
+        newLocations[houss.id] = { lat, lng };
+      }
+    });
+
+    setLocations(newLocations);
+  }, [building]);
+
   return (
-    <div className="z-30 mt-5 xl:mt-[-5px]">
+    <div className="z-30 mt-10 xl:mt-[-5px]">
       <MapContainer
         className="w-full h-[300px]  md:h-[60vh] xl:w-[62vw] xl:h-[68vh] z-10 rounded-md "
         center={{ lat: 34.6985, lng: 36.7237 }}
