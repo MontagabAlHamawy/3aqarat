@@ -66,9 +66,9 @@ export default function Map({ building }: { building: any[] }) {
   const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>({});
 
   useEffect(() => {
-    if (building) {
-      const newLocations: { [key: string]: LatLngLiteral } = {};
+    const newLocations: { [key: string]: LatLngLiteral } = {};
 
+    if (building) {
       building.forEach((houss) => {
         if (houss.address.geo_address) {
           const [x, y] = houss.address.geo_address.split(", ");
@@ -78,9 +78,9 @@ export default function Map({ building }: { building: any[] }) {
           newLocations[houss.id] = { lat, lng };
         }
       });
-
-      setLocations(newLocations);
     }
+
+    setLocations(newLocations);
   }, [building]);
 
   if (!building) {
@@ -146,7 +146,7 @@ export default function Map({ building }: { building: any[] }) {
               <Popup className="w-72">
                 <Link
                   href={`/buildings/${houss.id}`}
-                  className="flex flex-col justify-center font-serif  gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-col justify-center font-serif gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
                     src="/home/gg.jpg"
@@ -160,7 +160,7 @@ export default function Map({ building }: { building: any[] }) {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar  text-base font-semibold">
+                      <p className="text-sidpar text-base font-semibold">
                         {houss.description}
                       </p>
                     </div>
