@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { PiMagnifyingGlassDuotone, PiMinus, PiPlus } from "react-icons/pi";
 import Image from "next/image";
-import { houses } from "../../components/links";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { BuildingApi, LimitBuildingApi } from "@/utils/API";
@@ -23,13 +22,13 @@ export default function Search() {
     const fetchData = async () => {
       try {
         const res = await BuildingApi(1);
-        console.log("res:", res);
+
         const build = await LimitBuildingApi(res.count);
         if (!res) {
           toast.error("خطاء في جلب البيانات ");
           NotFound();
         }
-        console.log("bil:", bil);
+
         setBui(build.results);
       } catch (error) {
         toast.error("خطاء في جلب البيانات ");
@@ -126,7 +125,7 @@ export default function Search() {
           <div className="flex flex-col xl:flex-row-reverse gap-5">
             <div className="xl:fixed xl:top-[100px] mx-2 xl:mx-0 xl:right-[50px] xl:w-2/3">
               {/* <div className="flex relative justify-center items-center mt-3 xl:mt-10 xl:h-[70vh]  rounded-md  cursor-pointer"> */}
-                <div className="mt-16 xl:mr-7">
+                <div className="xl:mt-16 xl:mr-7">
                   <Map building={bil} />
                 </div>
               {/* </div> */}
