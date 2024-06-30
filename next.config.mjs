@@ -25,12 +25,9 @@ const nextConfig = {
   images: {
     domains: ['gruafahim.pythonanywhere.com'],
   },
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      require('./scripts/generate-sitemap');
-    }
-    return config;
-  },
+  siteUrl: 'https://3aqarat.vercel.app',
+  generateRobotsTxt: true,
+  
   
 };
 
