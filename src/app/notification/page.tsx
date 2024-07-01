@@ -14,6 +14,7 @@ export default function Notification() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [account, setAccount] = useState("/notification");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
@@ -37,6 +38,7 @@ export default function Notification() {
         }
       } catch (error) {
         toast.error("خطاء في جلب البيانات ");
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -45,6 +47,18 @@ export default function Notification() {
     fetchData();
   }, []);
   if (loading) {
+    return (
+      <div className="mx-2 my-5  ml-2 xl:ml-0 xl:mx-0">
+        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
+          <div className="text-[90px]">
+            <PiBellSimpleDuotone />
+          </div>
+          <h1 className="text-2xl">جاري جلب الإشعارات...</h1>
+        </div>
+      </div>
+    );
+  }
+  if (error) {
     return (
       <div className="mx-2 my-5  ml-2 xl:ml-0 xl:mx-0">
         <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
