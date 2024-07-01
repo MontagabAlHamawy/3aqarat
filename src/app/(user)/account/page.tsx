@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { MyProfile } from "@/utils/API";
 import { toast } from "react-toastify";
 import NotFound from "@/app/not-found";
+import { PiUserDuotone } from "react-icons/pi";
 
 export default function Acount() {
   useEffect(() => {
@@ -38,9 +39,12 @@ export default function Acount() {
     router.replace(account);
   }, [account, router]);
   return (
-    <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
-      <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl">جاري جلب البيانات...</h1>
+    <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
+      <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
+        <div className="text-[90px]">
+          <PiUserDuotone />
+        </div>
+        <h1 className="text-2xl">جاري جلب معلومات المستخدم...</h1>
       </div>
     </div>
   );

@@ -9,7 +9,9 @@ import { useRouter } from "next/navigation";
 import { LoginApi } from "@/utils/API";
 import Cookies from "js-cookie";
 
-export default function Login() {
+export default function Login(props: any) {
+  console.log(props);
+
   const router = useRouter();
   const [emus, setEmus] = useState("");
   const [password, setPassword] = useState("");

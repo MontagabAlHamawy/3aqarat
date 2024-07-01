@@ -1,9 +1,24 @@
-import React from "react";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PiBuildingsDuotone, PiHeartDuotone } from "react-icons/pi";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Love() {
+  const router = useRouter();
+  const [account, setAccount] = useState("/love");
+  useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("/login");
+    }
+  }, []);
+  useEffect(() => {
+    router.replace(account);
+  }, [account, router]);
   return (
     // <div className="mx-2 xl:mx-0 xl:ml-3">
     //   <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">

@@ -6,10 +6,24 @@ import { BuildingApi, LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
 import NotFound from "../not-found";
 import { PiBellSimpleDuotone } from "react-icons/pi";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Notification() {
   const [building, setBuilding] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const [account, setAccount] = useState("/notification");
+
+  useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("/login");
+    }
+  }, []);
+  useEffect(() => {
+    router.replace(account);
+  }, [account, router]);
 
   useEffect(() => {
     const fetchData = async () => {
