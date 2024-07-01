@@ -59,7 +59,7 @@ export default function Commercials(props: any) {
             <div className="text-[90px]">
               <PiBuildingsDuotone />
             </div>
-            <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
+            <h1 className="text-2xl">جاري جلب العقارات...</h1>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default function Commercials(props: any) {
             <div className="text-[90px]">
               <PiBuildingsDuotone />
             </div>
-            <h1 className="text-2xl">جاري جلب العقارات...</h1>
+            <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
           </div>
         </div>
       </div>
