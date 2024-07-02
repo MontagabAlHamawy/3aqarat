@@ -10,17 +10,28 @@ import { LoginApi } from "@/utils/API";
 import Cookies from "js-cookie";
 
 export default function Login(props: any) {
-  console.log(props);
-
   const router = useRouter();
   const [emus, setEmus] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [account, setAccount] = useState("/account");
+  let url = `/signup`;
+  if (props.searchParams.url === undefined) {
+    url = `/signup`;
+  } else {
+    url = `/signup?url=${props.searchParams.url}`;
+  }
+
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/login");
+      if (props.searchParams.url === undefined) {
+        setAccount(`/login`);
+        url = `/signup`;
+      } else {
+        setAccount(`/login?url=${props.searchParams.url}`);
+        url = `/signup?url=${props.searchParams.url}`;
+      }
     }
   }, []);
 
@@ -49,7 +60,11 @@ export default function Login(props: any) {
     } else {
       try {
         await LoginApi(username, email, password);
-        router.replace("/");
+        if (props.searchParams.url === undefined) {
+          router.replace("/account");
+        } else {
+          router.replace(`/${props.searchParams.url}`);
+        }
         toast.success("تم تسجيل الدخول بنجاح");
       } catch (error: any) {
         toast.error("فشل تسجيل الدخول");
@@ -121,7 +136,7 @@ export default function Login(props: any) {
           </form>
 
           <div className="flex flex-row justify-between items-center gap-3">
-            <Link href="/signup">
+            <Link href={url}>
               <p className="mt-4 mb-5 xl:mb-0 cursor-pointer text-accent">
                 تسجيل مستخدم جديد
               </p>

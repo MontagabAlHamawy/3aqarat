@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import React, { useState } from "react";
@@ -60,13 +60,13 @@ export default function Slide({ image }: any) {
       >
         {image.map((image: any, imageIndex: any) => (
           <SwiperSlide key={imageIndex}>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center ">
               <Image
-                src={image.img}
-                width={500}
-                height={400}
+                src={image.photo}
+                width={400}
+                height={100}
                 alt={`Gallery Image`}
-                className="object-cover rounded-md cursor-pointer"
+                className=" object-center rounded-md cursor-pointer"
                 onClick={() => openPopup(image.images)}
               />
             </div>

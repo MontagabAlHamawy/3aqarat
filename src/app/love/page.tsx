@@ -13,7 +13,7 @@ export default function Love() {
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/login");
+      setAccount("/login?url=love");
     }
   }, []);
   useEffect(() => {

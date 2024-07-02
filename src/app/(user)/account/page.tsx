@@ -31,7 +31,7 @@ export default function Acount() {
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/login");
+      setAccount("/login?url=account");
     }
   }, []);
 

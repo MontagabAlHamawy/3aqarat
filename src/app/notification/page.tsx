@@ -19,7 +19,7 @@ export default function Notification() {
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/login");
+      setAccount("/login?url=notification");
     }
   }, []);
   useEffect(() => {

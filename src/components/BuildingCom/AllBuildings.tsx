@@ -5,6 +5,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import React from "react";
 import { PiBuildingsDuotone } from "react-icons/pi";
+import { ImagApartment, ImagBuilding, ImagCommercials, ImagHouse, ImagLand } from "../links";
 
 export default function AllBuildings({ Building }: any) {
   if (!Building || Building.length === 0) {
@@ -26,6 +27,25 @@ export default function AllBuildings({ Building }: any) {
         {Building.map((building: any) => {
           const propertyType =
             building.property_object?.property_type?.ar || "N/A";
+            const type = building.property_object?.property_type?.en || null;
+            let imagee = ImagBuilding;
+            
+  if (type === "apartment") {
+    imagee = ImagApartment;
+  }
+  if (type === "commercialproperty") {
+    imagee = ImagCommercials;
+  }
+  if (type === "house") {
+    imagee = ImagHouse;
+  }
+  if (type === "land") {
+    
+    imagee = ImagLand;
+  }
+  if (type === "building") {
+    imagee = ImagBuilding;
+  }
           return (
             <Link
               href={`/buildings/${building.id}`}
@@ -33,7 +53,7 @@ export default function AllBuildings({ Building }: any) {
               className="bg-sidpar rounded-xl relative"
             >
               <Image
-                src={`/home/gg.jpg`}
+                src={building.photos.length !== 0 ? building.photos[0].photo : imagee[0].photo }
                 width={1000}
                 height={0}
                 alt="montagab"

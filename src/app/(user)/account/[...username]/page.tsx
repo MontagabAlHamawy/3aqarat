@@ -63,7 +63,7 @@ export default function Username(props: any) {
       } catch (error) {
         const token = Cookies.get("authToken") || false;
         if (!token) {
-          router.replace("/login");
+          router.replace(`/login?url=account/${props.params.username[0]}`);
         } else {
           router.replace("/not-found");
         }
@@ -76,7 +76,8 @@ export default function Username(props: any) {
 
   function logout() {
     Cookies.set("authToken", "");
-    router.replace("/login");
+    Cookies.set("refreshToken", "");
+    router.replace(`/login`);
   }
   if (photo === null) {
     setPhoto("/user-avatar.png");

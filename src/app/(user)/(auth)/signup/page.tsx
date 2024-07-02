@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { SignUpApi } from "@/utils/API";
 import Cookies from "js-cookie";
 
-const SignUp = () => {
+export default function SignUp(props: any) {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [first_name, setFirst_name] = useState("");
@@ -21,10 +21,22 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [account, setAccount] = useState("/account");
+  let url = `/login`;
+  if (props.searchParams.url === undefined) {
+    url = `/login`;
+  } else {
+    url = `/login?url=${props.searchParams.url}`;
+  }
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/signup");
+      if (props.searchParams.url === undefined) {
+        setAccount(`/signup`);
+        url = `/login`;
+      } else {
+        setAccount(`/signup?url=${props.searchParams.url}`);
+        url = `/login?url=${props.searchParams.url}`;
+      }
     }
   }, []);
 
@@ -48,7 +60,11 @@ const SignUp = () => {
           return;
         }
         await SignUpApi(email, first_name, last_name, username, password);
-        router.replace("/");
+        if (props.searchParams.url === undefined) {
+          router.replace("/account");
+        } else {
+          router.replace(`/${props.searchParams.url}`);
+        }
         toast.success("تم تسجيل المستخدم بنجاح");
       } catch (error) {
         toast.error("فشل تسجيل المستخدم");
@@ -192,7 +208,7 @@ const SignUp = () => {
             </button>
           </form>
 
-          <Link href="/login">
+          <Link href={url}>
             <p className="mt-4 mb-5 xl:mb-0 cursor-pointer text-accent">
               تسجيل الدخول
             </p>
@@ -201,6 +217,4 @@ const SignUp = () => {
       </div>
     </div>
   );
-};
-
-export default SignUp;
+}

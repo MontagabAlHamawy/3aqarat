@@ -6,9 +6,15 @@ import { notFound } from "next/navigation";
 export function SaveToken(token: string) {
   Cookies.set("authToken", token, { expires: 5 });
 };
+export function SaveRefreshToken(token: string) {
+  Cookies.set("refreshToken", token, { expires: 10 });
+};
 
 export function GetToken(): string | undefined {
   return Cookies.get("authToken");
+}
+export function GetRefreshToken(): string | undefined {
+  return Cookies.get("refreshToken");
 }
 
 export async function LoginApi(username: string | null, email: string | null, password: any) {
@@ -16,6 +22,17 @@ export async function LoginApi(username: string | null, email: string | null, pa
     username,
     email,
     password,
+  });
+  if (response.status === 404) {
+    return notFound()
+  }
+  SaveToken(response.data?.access);
+  SaveRefreshToken(response.data?.refresh);
+}
+export async function RefreshToken() {
+  let token = GetRefreshToken()
+  const response = await axios.post(`${apiUrl}/auth/jwt/refresh/`, {
+    "refresh": `JWT ${token}`
   });
   if (response.status === 404) {
     return notFound()
@@ -35,6 +52,7 @@ export async function SignUpApi(email: string, first_name: string, last_name: st
     return notFound()
   }
   SaveToken(response.data?.access);
+  SaveRefreshToken(response.data?.refresh);
 }
 
 export async function BuildingApi(page: any) {
@@ -116,6 +134,7 @@ export async function userInfo() {
     }
   });
   if (response.status === 404) {
+    RefreshToken();
     return notFound();
   }
   return response.data;
@@ -130,6 +149,7 @@ export async function MyBuilding() {
       }
     });
     if (response.status === 404) {
+      RefreshToken();
       return notFound();
     }
     return response.data;
@@ -142,6 +162,7 @@ export async function userBuilding(username: any) {
   try {
     const response = await axios.get(`${apiUrl}/profile/${username}/properties`);
     if (response.status === 404) {
+
       return notFound();
     }
     return response.data;
@@ -173,6 +194,7 @@ export async function MyProfile() {
       }
     });
     if (response.status === 404) {
+      RefreshToken();
       return notFound();
     }
     return response.data;

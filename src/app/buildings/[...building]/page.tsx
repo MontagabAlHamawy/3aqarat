@@ -1,5 +1,11 @@
 "use client";
-import {  ImagBuilding } from "@/components/links";
+import {
+  ImagBuilding,
+  ImagApartment,
+  ImagCommercials,
+  ImagHouse,
+  ImagLand,
+} from "@/components/links";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -63,7 +69,7 @@ export default function Buildin(props: any) {
       <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
         <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
           <div className="text-[90px]">
-          <PiBuildingsDuotone/>
+            <PiBuildingsDuotone />
           </div>
           <h1 className="text-2xl">جاري جلب معلومات العقار...</h1>
         </div>
@@ -87,25 +93,32 @@ export default function Buildin(props: any) {
   let isLand = false;
   let isBuilding = false;
   let linked = "buildings";
+  let imagee = ImagBuilding;
+
   if (type === "apartment") {
     isApartment = true;
     linked = "apartments";
+    imagee = ImagApartment;
   }
   if (type === "commercialproperty") {
     isCommercialproperty = true;
     linked = "commercials";
+    imagee = ImagCommercials;
   }
   if (type === "house") {
     isHouse = true;
     linked = "houses";
+    imagee = ImagHouse;
   }
   if (type === "land") {
     isLand = true;
     linked = "lands";
+    imagee = ImagLand;
   }
   if (type === "building") {
     isBuilding = true;
     linked = "buildings";
+    imagee = ImagBuilding;
   }
   if (photo === null) {
     setPhoto("/user-avatar.png");
@@ -119,13 +132,16 @@ export default function Buildin(props: any) {
   const hours = date.getHours();
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const formattedDate = `${hours}:${minutes} ${year}/${month}/${day} `;
+  console.log(building.photos);
 
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
         <div className="flex flex-col xl:flex-row gap-5 items-center">
           <div className="mx-2 xl:mx-0 flex justify-center items-center">
-            <Slide image={ImagBuilding} />
+            <Slide
+              image={building.photos.length !== 0 ? building.photos : imagee}
+            />
           </div>
           <div className="flex flex-col  gap-3 mx-2 xl:mx-0">
             <div className="flex justify-between items-center  gap-10">

@@ -10,11 +10,22 @@ export const Imag = [
 ];
 
 export const ImagBuilding = [
-  { img: "/home/rr.png" },
-  { img: "/home/psd.jpg" },
-  { img: "/home/building.png" },
-  { img: "/home/land.jpg" },
-  { img: "/home/store.jpg" },
+  { photo: "/home/building.png" },
+  { photo: "/home/building.png" },
+];
+export const ImagApartment = [
+  { photo: "/home/apartment.png" },
+  { photo: "/home/apartment.png" },
+];
+export const ImagHouse = [
+  { photo: "/home/house.png" },
+  { photo: "/home/house.png" },
+];
+export const ImagLand = [
+  { photo: "/home/land.png" },
+];
+export const ImagCommercials = [
+  { photo: "/home/commercial.png" },
 ];
 
 // export const house = [
