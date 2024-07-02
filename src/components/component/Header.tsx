@@ -58,7 +58,6 @@ function Header() {
               notActive ? "bg-accent" : "bg-body "
             } rounded-md cursor-pointer`}
           />
-          {/* <div className="w-2 h-2 bg-red-600 rounded-full absolute top-[-1px] right-[-1px]"></div> */}
         </Link>
         <Link href={`/${account}`}>
           <PiUserDuotone

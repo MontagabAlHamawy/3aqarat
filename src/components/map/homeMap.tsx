@@ -20,6 +20,7 @@ import Apartment from "../../../public/map/flar.svg";
 import Land from "../../../public/map/land.svg";
 import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
+import MapLoade from "../loade/MapLoade";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -84,13 +85,7 @@ export default function HomeMap({ building }: { building: any[] }) {
   }, [building]);
 
   if (!building) {
-    return (
-      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
-        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
-        </div>
-      </div>
-    );
+    return <MapLoade />;
   }
 
   return (

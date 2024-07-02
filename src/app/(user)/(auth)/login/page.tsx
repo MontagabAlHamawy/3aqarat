@@ -1,5 +1,5 @@
 "use client";
-// pages/login.js
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";

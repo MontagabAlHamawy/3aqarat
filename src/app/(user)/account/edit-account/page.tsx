@@ -2,10 +2,11 @@
 import { GetToken, MyProfile, userInfo } from "@/utils/API";
 import apiUrl from "@/utils/apiConfig";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; // import useRouter for navigation
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import UsersLoading from "@/components/loade/UsersLoading";
 
 export default function EditAccount() {
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function EditAccount() {
       const response = await fetch(url, {
         method: "PUT",
         headers: {
-          'Authorization': `JWT ${token}`,
+          Authorization: `JWT ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -80,7 +81,7 @@ export default function EditAccount() {
         });
       } catch (error) {
         console.error("Error fetching profile:", error);
-      }finally {
+      } finally {
         setLoading(false);
       }
     }
@@ -104,13 +105,7 @@ export default function EditAccount() {
     } catch (error) {}
   };
   if (loading) {
-    return (
-      <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
-        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">جاري جلب البيانات...</h1>
-        </div>
-      </div>
-    );
+    return <UsersLoading />;
   }
 
   return (

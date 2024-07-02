@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { ApartmentsApi, BuildingApi } from "@/utils/API";
+import { ApartmentsApi } from "@/utils/API";
 import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
 import NotFound from "../../not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
 import PaginationApartments from "@/components/pagination/paginationapartments";
-import { PiBuildingsDuotone } from "react-icons/pi";
+import BuildingLoade from "@/components/loade/BuildingLoade";
+import BuildingError from "@/components/error/BuildingError";
 
 export default function Apartments(props: any) {
   const [building, setBuilding] = useState([]);
@@ -42,7 +43,7 @@ export default function Apartments(props: any) {
 
     fetchData();
   }, [page]);
-
+  
   if (loading) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
@@ -50,14 +51,7 @@ export default function Apartments(props: any) {
           <h1 className="text-2xl">العقارات</h1>
         </div>
         <BuildingFilter linked={linked} />
-        <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-          <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-            <div className="text-[90px]">
-              <PiBuildingsDuotone />
-            </div>
-            <h1 className="text-2xl">جاري جلب العقارات...</h1>
-          </div>
-        </div>
+        <BuildingLoade />
       </div>
     );
   }
@@ -69,18 +63,11 @@ export default function Apartments(props: any) {
           <h1 className="text-2xl">العقارات</h1>
         </div>
         <BuildingFilter linked={linked} />
-        <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-          <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-            <div className="text-[90px]">
-              <PiBuildingsDuotone />
-            </div>
-            <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
-          </div>
-        </div>
+        <BuildingError />
       </div>
     );
   }
-
+  console.log("ff:",building);
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">

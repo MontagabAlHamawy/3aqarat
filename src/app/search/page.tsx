@@ -1,12 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { PiMagnifyingGlassDuotone, PiMinus, PiPlus } from "react-icons/pi";
-import Image from "next/image";
-import Link from "next/link";
+import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 import dynamic from "next/dynamic";
 import { BuildingApi, LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
-import HomeMap from "@/components/map/homeMap";
 import NotFound from "../not-found";
 import SearchBuilding from "@/components/BuildingCom/SearchBuilding";
 
@@ -125,9 +122,9 @@ export default function Search() {
           <div className="flex flex-col xl:flex-row-reverse gap-5">
             <div className="xl:fixed xl:top-[100px] mx-2 xl:mx-0 xl:right-[50px] xl:w-2/3">
               {/* <div className="flex relative justify-center items-center mt-3 xl:mt-10 xl:h-[70vh]  rounded-md  cursor-pointer"> */}
-                <div className="xl:mt-16 xl:mr-7">
-                  <Map building={bil} />
-                </div>
+              <div className="xl:mt-16 xl:mr-7">
+                <Map building={bil} />
+              </div>
               {/* </div> */}
             </div>
             <div className="xl:w-1/3 p-4 mt-[-20px] xl:mt-6">

@@ -21,6 +21,7 @@ import Land from "../../../public/map/land.svg";
 import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
 import { PiMapPinDuotone } from "react-icons/pi";
+import MapLoade from "../loade/MapLoade";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -87,16 +88,7 @@ export default function Map({ building }: { building: any[] }) {
   }, [building]);
 
   if (!building) {
-    return (
-      <div className="mx-2 mt-10 xl:ml-10">
-        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max xl:h-[75vh] py-10 rounded-md">
-          <div className="text-[90px]">
-            <PiMapPinDuotone />
-          </div>
-          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
-        </div>
-      </div>
-    );
+    return <MapLoade />;
   }
 
   return (

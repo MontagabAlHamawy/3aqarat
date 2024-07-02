@@ -19,10 +19,10 @@ export default function MobileSidpar() {
     const token = Cookies.get("authToken") || false;
     if (!token) {
       setAccount("/login");
-      setAccountNam('تسجيل');
+      setAccountNam("تسجيل");
     } else {
       setAccount("/account");
-      setAccountNam('حسابي');
+      setAccountNam("حسابي");
     }
   }, [route]);
   const MobData = [
@@ -36,16 +36,14 @@ export default function MobileSidpar() {
     <div className="fixed bottom-0 left-0 w-full bg-sidpar py-3 pr-6 flex justify-center items-center z-50">
       <div className="flex flex-row justify-center items-center space-x-4 gap-2 md:gap-20">
         {MobData.map((link, index) => {
-          let isActive = route === link.path; // Default isActive value
+          let isActive = route === link.path;
 
-          if (route !== "/" && route.startsWith(link.path) ) {
-            // If the route is not homepage and starts with link.path
+          if (route !== "/" && route.startsWith(link.path)) {
             if (link.path !== "/") {
-              // If link.path is not the homepage
               isActive = true;
             }
           }
-          if(route === '/signup' && link.name === 'تسجيل'){
+          if (route === "/signup" && link.name === "تسجيل") {
             isActive = true;
           }
 

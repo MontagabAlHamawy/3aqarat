@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { BuildingApi, LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
-import NotFound from "../not-found";
 import { PiBellSimpleDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";

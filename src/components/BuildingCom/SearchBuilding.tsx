@@ -1,20 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { PiBuildingsDuotone } from "react-icons/pi";
+import BuildingError from "../error/BuildingError";
 
 export default function SearchBuilding({ bil }: any) {
   if (!bil) {
-    return (
-      <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0 xl:h-[80vh]">
-        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max xl:h-[75vh] py-10 rounded-md">
-          <div className="text-[90px]">
-            <PiBuildingsDuotone />
-          </div>
-          <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
-        </div>
-      </div>
-    );
+    return <BuildingError />;
   }
   return (
     <div>

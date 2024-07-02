@@ -1,6 +1,5 @@
+import RequestLoade from "@/components/loade/RequestLoade";
 import React from "react";
-// import { add } from "../../components/links";
-import { PiMegaphoneDuotone } from "react-icons/pi";
 
 export default function Requests() {
   return (
@@ -27,14 +26,7 @@ export default function Requests() {
             );
           })}
         </div> */}
-        <div className="sticky xl:w-1/2 flex flex-col gap-4">
-          <div className="bg-sidpar xl:h-[73vh] flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-            <div className="text-[90px]">
-              <PiMegaphoneDuotone />
-            </div>
-            <h1 className="text-2xl">لا توجد طلبات لعرضها</h1>
-          </div>
-        </div>
+        <RequestLoade />
         <div className="xl:w-1/2 flex flex-col gap-3">
           <input
             type="text"

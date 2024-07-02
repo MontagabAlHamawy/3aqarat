@@ -2,23 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import React from "react";
-import { PiBuildingsDuotone } from "react-icons/pi";
-import { ImagApartment, ImagBuilding, ImagCommercials, ImagHouse, ImagLand } from "../links";
+import {
+  ImagApartment,
+  ImagBuilding,
+  ImagCommercials,
+  ImagHouse,
+  ImagLand,
+} from "../links";
+import BuildingError from "../error/BuildingError";
 
 export default function AllBuildings({ Building }: any) {
   if (!Building || Building.length === 0) {
-    return (
-        <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-          <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-            <div className="text-[90px]">
-            <PiBuildingsDuotone/>
-            </div>
-            <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
-          </div>
-        </div>
-    );
+    return <BuildingError />;
   }
 
   return (
@@ -27,25 +23,24 @@ export default function AllBuildings({ Building }: any) {
         {Building.map((building: any) => {
           const propertyType =
             building.property_object?.property_type?.ar || "N/A";
-            const type = building.property_object?.property_type?.en || null;
-            let imagee = ImagBuilding;
-            
-  if (type === "apartment") {
-    imagee = ImagApartment;
-  }
-  if (type === "commercialproperty") {
-    imagee = ImagCommercials;
-  }
-  if (type === "house") {
-    imagee = ImagHouse;
-  }
-  if (type === "land") {
-    
-    imagee = ImagLand;
-  }
-  if (type === "building") {
-    imagee = ImagBuilding;
-  }
+          const type = building.property_object?.property_type?.en || null;
+          let imagee = ImagBuilding;
+
+          if (type === "apartment") {
+            imagee = ImagApartment;
+          }
+          if (type === "commercialproperty") {
+            imagee = ImagCommercials;
+          }
+          if (type === "house") {
+            imagee = ImagHouse;
+          }
+          if (type === "land") {
+            imagee = ImagLand;
+          }
+          if (type === "building") {
+            imagee = ImagBuilding;
+          }
           return (
             <Link
               href={`/buildings/${building.id}`}
@@ -53,7 +48,11 @@ export default function AllBuildings({ Building }: any) {
               className="bg-sidpar rounded-xl relative"
             >
               <Image
-                src={building.photos.length !== 0 ? building.photos[0].photo : imagee[0].photo }
+                src={
+                  building.photos.length !== 0
+                    ? building.photos[0].photo
+                    : imagee[0].photo
+                }
                 width={1000}
                 height={0}
                 alt="montagab"

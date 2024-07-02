@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { PiBuildingsDuotone, PiHeartDuotone } from "react-icons/pi";
+import { PiBuildingsDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import LoveLoade from "@/components/loade/LoveLoade";
 
 export default function Love() {
   const router = useRouter();
@@ -58,11 +57,6 @@ export default function Love() {
     //   </div>
     // </div>
 
-    <div className="bg-sidpar mt-5 flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-      <div className="text-[90px]">
-        <PiBuildingsDuotone />
-      </div>
-      <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
-    </div>
+    <LoveLoade />
   );
 }

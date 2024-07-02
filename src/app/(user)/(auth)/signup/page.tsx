@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
-import apiUrl from "../../../../utils/apiConfig";
 import { PiEyeDuotone, PiEyeSlashDuotone } from "react-icons/pi";
 import Image from "next/image";
 import { toast } from "react-toastify";

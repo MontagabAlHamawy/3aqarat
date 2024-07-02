@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "swiper/swiper-bundle.css";
-import { PiBuildingsDuotone, PiCheck, PiMapPinDuotone } from "react-icons/pi";
+import { PiCheck } from "react-icons/pi";
 import { whyus } from "../components/links";
 import dynamic from "next/dynamic";
 import { BuildingApi, LimitBuildingApi } from "@/utils/API";
@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
 import React, { useEffect, useState } from "react";
+import BuildingLoade from "@/components/loade/BuildingLoade";
+import MapLoade from "@/components/loade/MapLoade";
 
 const HomeMap = dynamic(() => import("@/components/map/homeMap"), {
   ssr: false,
@@ -67,33 +69,22 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="mx-2 mt-5 xl:mx-0 xl:ml-3">
-        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-          <div className="text-[90px]">
-            <PiMapPinDuotone />
-          </div>
-          <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
-        </div>
-        </div>
+        <MapLoade />
         <div className="flex justify-center w-full items-center flex-col">
           <h1 className="text-white text-2xl my-5">أحدث العقارات</h1>
           <div className="w-full mx-[-10px]">
             <BuildingFilter linked={linked} />
           </div>
-          <div className="mx-2 my-5 xl:mx-0 h-max w-full">
-            <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-              <div className="text-[90px]">
-                <PiBuildingsDuotone />
-              </div>
-              <h1 className="text-2xl">جاري جلب العقارات...</h1>
-            </div>
-          </div>
+        </div>
+        <BuildingLoade />
+        <div className="flex justify-center items-center">
           <Link href={"/buildings"}>
-            <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
+            <div className="bg-accent w-max text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
               عرض المزيد
             </div>
           </Link>
         </div>
+
         <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
           <div>
             <h1 className="text-2xl text-white mb-5 items-center">المميزات</h1>

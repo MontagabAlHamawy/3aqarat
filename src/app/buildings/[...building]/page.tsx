@@ -21,21 +21,10 @@ import "swiper/css/effect-fade";
 import "swiper/css/free-mode";
 import "swiper/css/zoom";
 import "swiper/css/thumbs";
-import {
-  PiRulerDuotone,
-  PiCompassDuotone,
-  PiBuildingsDuotone,
-  PiMapPinDuotone,
-  PiArmchairDuotone,
-} from "react-icons/pi";
-import dynamic from "next/dynamic";
-import apiUrl from "@/utils/apiConfig";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import Slide from "@/components/Slide/Slide";
-import { notFound } from "next/navigation";
 import MapLoade from "@/components/map/MapLoade";
-import axios from "axios";
 import { SingelBuildingApi } from "@/utils/API";
 import Apartment from "@/components/Buildings/apartment";
 import Commercialproperty from "@/components/Buildings/commercialproperty";
@@ -44,6 +33,7 @@ import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
 import NotFound from "@/app/not-found";
 import { useEffect, useState } from "react";
+import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
 
 export default function Buildin(props: any) {
   const page = props.params.building[0];
@@ -65,16 +55,7 @@ export default function Buildin(props: any) {
   }, [page]);
 
   if (!building) {
-    return (
-      <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-          <div className="text-[90px]">
-            <PiBuildingsDuotone />
-          </div>
-          <h1 className="text-2xl">جاري جلب معلومات العقار...</h1>
-        </div>
-      </div>
-    );
+    return <SingleBuildingLoade />;
   }
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";

@@ -1,19 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import {
-  ApartmentsApi,
-  BBuildingsApi,
-  BuildingApi,
-  CommercialApi,
-  HousesApi,
-} from "@/utils/API";
+import { HousesApi } from "@/utils/API";
 import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
 import NotFound from "../../not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-import PaginationCommercial from "@/components/pagination/paginationcommercial";
 import PaginationHouses from "@/components/pagination/paginationhouses";
-import { PiBuildingsDuotone } from "react-icons/pi";
+import BuildingLoade from "@/components/loade/BuildingLoade";
+import BuildingError from "@/components/error/BuildingError";
 
 export default function Houses(props: any) {
   const [building, setBuilding] = useState([]);
@@ -57,14 +51,7 @@ export default function Houses(props: any) {
           <h1 className="text-2xl">العقارات</h1>
         </div>
         <BuildingFilter linked={linked} />
-        <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-          <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-            <div className="text-[90px]">
-              <PiBuildingsDuotone />
-            </div>
-            <h1 className="text-2xl">جاري جلب العقارات...</h1>
-          </div>
-        </div>
+        <BuildingLoade />
       </div>
     );
   }
@@ -76,14 +63,7 @@ export default function Houses(props: any) {
           <h1 className="text-2xl">العقارات</h1>
         </div>
         <BuildingFilter linked={linked} />
-        <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-          <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-            <div className="text-[90px]">
-              <PiBuildingsDuotone />
-            </div>
-            <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
-          </div>
-        </div>
+        <BuildingError />
       </div>
     );
   }

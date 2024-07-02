@@ -1,5 +1,4 @@
 "use client";
-// import { UserInfo, house } from "@/components/links";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -8,19 +7,18 @@ import {
   PiFacebookLogoDuotone,
   PiInstagramLogoDuotone,
   PiTelegramLogoDuotone,
-  PiUserDuotone,
 } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import NotFound from "@/app/not-found";
 import {
-  MyBuilding,
   MyProfile,
   userBuilding,
   userBuildingLimit,
   userProfile,
 } from "@/utils/API";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
+import UsersLoading from "@/components/loade/UsersLoading";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
@@ -84,16 +82,7 @@ export default function Username(props: any) {
   }
 
   if (loading) {
-    return (
-      <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-          <div className="text-[90px]">
-            <PiUserDuotone />
-          </div>
-          <h1 className="text-2xl">جاري جلب معلومات المستخدم...</h1>
-        </div>
-      </div>
-    );
+    return <UsersLoading />;
   }
 
   return (

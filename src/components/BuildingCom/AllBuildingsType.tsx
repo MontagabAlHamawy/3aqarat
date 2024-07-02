@@ -2,22 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "react-toastify";
+
 import React from "react";
-import { PiBuildingsDuotone } from "react-icons/pi";
+
+import BuildingError from "../error/BuildingError";
+import {
+  ImagApartment,
+  ImagBuilding,
+  ImagCommercials,
+  ImagHouse,
+  ImagLand,
+} from "../links";
 
 export default function AllBuildingsType({ Building }: any) {
   if (!Building || Building.length === 0) {
-    return (
-      <div className="mx-2 my-5 ml-2 xl:ml-0 xl:mx-0">
-      <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-        <div className="text-[90px]">
-        <PiBuildingsDuotone/>
-        </div>
-        <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
-      </div>
-    </div>
-    );
+    return <BuildingError />;
   }
 
   return (
@@ -26,6 +25,26 @@ export default function AllBuildingsType({ Building }: any) {
         {Building.map((building: any) => {
           const propertyType =
             building.property?.property_object?.property_type?.ar || "N/A";
+          const type = building.property_object?.property_type?.en || null;
+          let imagee = ImagBuilding;
+
+          if (type === "apartment") {
+            imagee = ImagApartment;
+          }
+          if (type === "commercialproperty") {
+            imagee = ImagCommercials;
+          }
+          if (type === "house") {
+            imagee = ImagHouse;
+          }
+          if (type === "land") {
+            imagee = ImagLand;
+          }
+          if (type === "building") {
+            imagee = ImagBuilding;
+          }
+          // console.log("ff:", building.photos.length);
+
           return (
             <Link
               href={`/buildings/${building.property.id}`}
@@ -33,7 +52,7 @@ export default function AllBuildingsType({ Building }: any) {
               className="bg-sidpar rounded-xl relative"
             >
               <Image
-                src={`/home/gg.jpg`}
+                src={"/home/land.png"}
                 width={1000}
                 height={0}
                 alt="montagab"
