@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  direction: rtl;
-  font-family: "Cairo", sans-serif;
-}
+
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+body {
+  direction: rtl;
+  font-family: 'Cairo', sans-serif;
+}
 
 
 .leaflet-bottom.leaflet-right{

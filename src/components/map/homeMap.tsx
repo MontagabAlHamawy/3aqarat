@@ -12,8 +12,8 @@ import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
 import Link from "next/link";
-import MarkerIcon from "../../../node_modules/leaflet/dist/images/marker-icon.png";
-import MarkerShadow from "../../../node_modules/leaflet/dist/images/marker-shadow.png";
+import MarkerIcon from "leaflet/dist/images/marker-icon.png";
+import MarkerShadow from "leaflet/dist/images/marker-shadow.png";
 import House from "../../../public/map/house.svg";
 import BuildingIcon from "../../../public/map/building.svg";
 import Apartment from "../../../public/map/flar.svg";
@@ -149,7 +149,7 @@ export default function HomeMap({ building }: { building: any[] }) {
               }
               position={location}
             >
-              <Popup className="w-72">
+              <Popup className="w-72 font-cairo">
                 <Link
                   href={`/buildings/${houss.id}`}
                   className="flex flex-col font-cairo justify-center  gap-0 items-center relative my[-25px] mt-[-20px]"
@@ -170,7 +170,7 @@ export default function HomeMap({ building }: { building: any[] }) {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar  text-base font-semibold">
+                      <p className="text-sidpar text-base font-semibold">
                         {houss.description}
                       </p>
                     </div>

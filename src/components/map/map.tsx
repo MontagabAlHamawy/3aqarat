@@ -146,10 +146,10 @@ export default function Map({ building }: { building: any[] }) {
               }
               position={location}
             >
-              <Popup className="w-72">
+              <Popup className="w-72 font-cairo">
                 <Link
                   href={`/buildings/${houss.id}`}
-                  className="flex flex-col justify-center font-serif gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-col justify-center font-cairo gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
                    src={
