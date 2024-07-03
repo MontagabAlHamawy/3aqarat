@@ -56,17 +56,17 @@ export default function Slide({ image }: any) {
         navigation
         pagination={{ clickable: true }}
         effect="fade"
-        className="mt-5 w-[320px] md:w-[600px] h-[200px] md:h-[300px] flex justify-center items-center"
+        className="mt-5 w-[320px] md:w-[600px] bg-sidpar rounded-md xl:h-[400px] md:h-[300px] flex justify-center items-center"
       >
         {image.map((image: any, imageIndex: any) => (
           <SwiperSlide key={imageIndex}>
-            <div className="flex justify-center items-center ">
+            <div className="flex justify-center items-center w-full h-full">
               <Image
                 src={image.photo}
                 width={400}
-                height={100}
+                height={0}
                 alt={`Gallery Image`}
-                className=" object-center rounded-md cursor-pointer"
+                className="w-full h-min object-center rounded-md cursor-pointer"
                 onClick={() => openPopup(image.images)}
               />
             </div>

@@ -99,7 +99,7 @@ export default function Username(props: any) {
               width={290}
               height={290}
               alt="user"
-              className="w-80 h-50 rounded-full"
+              className="w-80 h-80 rounded-full"
             />
           </div>
           <div className="flex flex-col justify-center items-center xl:items-start gap-3">

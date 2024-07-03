@@ -119,7 +119,7 @@ export default function Buildin(props: any) {
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
       <div className="flex justify-center xl:justify-between  items-center w-full">
-        <div className="flex flex-col xl:flex-row gap-5 items-center">
+        <div className="flex flex-col justify-center xl:flex-row gap-10 items-center w-full">
           <div className="mx-2 xl:mx-0 flex justify-center items-center">
             <Slide
               image={building.photos.length !== 0 ? building.photos : imagee}
@@ -168,7 +168,7 @@ export default function Buildin(props: any) {
                     width={40}
                     height={40}
                     alt="seller"
-                    className="p-1 bg-accent rounded-full"
+                    className="w-10 h-10 p-1 bg-accent rounded-full"
                   />
                   <p>
                     {building.client.first_name} {building.client.last_name}
