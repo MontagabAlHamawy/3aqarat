@@ -66,6 +66,7 @@ export default function Commercials(props: any) {
       </div>
     );
   }
+  console.log("building:", building);
 
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">

@@ -49,8 +49,8 @@ export default function AllBuildingsType({ Building }: any) {
           }
 
           const imageUrl =
-            building.photos && building.photos.length !== 0
-              ? building.photos[0].photo
+            building.property.photos && building.property.photos.length !== 0
+              ? building.property.photos[0].photo
               : imagee[0].photo;
 
           return (
