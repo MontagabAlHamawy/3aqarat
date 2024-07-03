@@ -21,7 +21,7 @@ export default function Lands(props: any) {
       setLoading(true);
       setError(false);
       try {
-        const response = await LandApi();
+        const response = await LandApi(page);
 
         if (!response || !response.results) {
           toast.error("خطاء في جلب البيانات ");

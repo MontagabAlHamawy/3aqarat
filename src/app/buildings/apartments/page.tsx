@@ -22,7 +22,7 @@ export default function Apartments(props: any) {
       setLoading(true);
       setError(false);
       try {
-        const response = await ApartmentsApi();
+        const response = await ApartmentsApi(page);
 
         if (!response || !response.results) {
           toast.error("خطاء في جلب البيانات ");

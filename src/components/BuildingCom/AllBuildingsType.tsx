@@ -13,19 +13,23 @@ import {
   ImagHouse,
   ImagLand,
 } from "../links";
+import BuildingLoade from "../loade/BuildingLoade";
 
 export default function AllBuildingsType({ Building }: any) {
   if (!Building || Building.length === 0) {
     return <BuildingError />;
+  }
+  if (Building === undefined) {
+    return <BuildingLoade />;
   }
 
   return (
     <div>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
-          const propertyType =
-            building.property?.property_object?.property_type?.ar || "N/A";
-          const type = building.property_object?.property_type?.en || null;
+          const propertyType = building.property_type?.ar || "N/A";
+          const type = building?.property_type?.en || null;
+
           let imagee = ImagBuilding;
 
           if (type === "apartment") {
@@ -43,7 +47,11 @@ export default function AllBuildingsType({ Building }: any) {
           if (type === "building") {
             imagee = ImagBuilding;
           }
-          // console.log("ff:", building.photos.length);
+
+          const imageUrl =
+            building.photos && building.photos.length !== 0
+              ? building.photos[0].photo
+              : imagee[0].photo;
 
           return (
             <Link
@@ -52,12 +60,15 @@ export default function AllBuildingsType({ Building }: any) {
               className="bg-sidpar rounded-xl relative"
             >
               <Image
-                src={"/home/land.png"}
+                src={imageUrl}
                 width={1000}
                 height={0}
                 alt="montagab"
                 className="w-[1080px] rounded-tl-xl rounded-tr-xl"
               />
+              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
+                {propertyType}
+              </div>
               <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
                 {building.property.title}
               </p>

@@ -47,6 +47,7 @@ export default function MapLoade({ building }: any) {
     building[3],
     building[4],
     building[5],
+    building[6],
   ];
   return <Maps loc={loc} />;
 }

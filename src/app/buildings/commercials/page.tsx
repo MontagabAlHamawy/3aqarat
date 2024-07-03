@@ -21,7 +21,7 @@ export default function Commercials(props: any) {
       setLoading(true);
       setError(false);
       try {
-        const response = await CommercialApi();
+        const response = await CommercialApi(page);
 
         if (!response || !response.results) {
           toast.error("خطاء في جلب البيانات ");

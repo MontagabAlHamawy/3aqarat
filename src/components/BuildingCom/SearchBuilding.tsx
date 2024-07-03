@@ -2,14 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BuildingError from "../error/BuildingError";
+import { ImagApartment, ImagBuilding, ImagCommercials, ImagHouse, ImagLand } from "../links";
 
 export default function SearchBuilding({ bil }: any) {
   if (!bil) {
     return <BuildingError />;
   }
+  
   return (
     <div>
       {bil.map((house: any) => {
+        let imagee = ImagBuilding;
+
+        if (house.property_object?.property_type?.en === "apartment") {
+          imagee = ImagApartment;
+        } else if (
+          house.property_object?.property_type?.en === "commercialproperty"
+        ) {
+          imagee = ImagCommercials;
+        } else if (house.property_object?.property_type?.en === "house") {
+          imagee = ImagHouse;
+        } else if (house.property_object?.property_type?.en === "building") {
+          imagee = ImagBuilding;
+        } else {
+          imagee = ImagLand;
+        }
         return (
           <Link
             href={`/buildings/${house.id}`}
@@ -25,7 +42,11 @@ export default function SearchBuilding({ bil }: any) {
             </div>
             <div>
               <Image
-                src={`/home/gg.jpg`}
+                src={
+                  house.photos.length !== 0
+                    ? house.photos[0].photo
+                    : imagee[0].photo
+                }
                 width={130}
                 height={0}
                 alt="house"

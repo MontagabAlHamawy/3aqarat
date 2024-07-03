@@ -19,6 +19,13 @@ import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ImagApartment,
+  ImagBuilding,
+  ImagCommercials,
+  ImagHouse,
+  ImagLand,
+} from "../links";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -74,6 +81,7 @@ export default function MapsComponent({ loc }: any) {
       display: "للبيع",
       location_x: loc[0],
       location_y: loc[1],
+      photos: loc[7],
     },
   ];
 
@@ -94,20 +102,25 @@ export default function MapsComponent({ loc }: any) {
           const xloc = Number(houss.location_x);
           const yloc = Number(houss.location_y);
           let iconee;
-          
+          let imagee = ImagBuilding;
+
           if (houss.type === "apartment") {
             iconee = Apartment;
+            imagee = ImagApartment;
           } else if (houss.type === "commercialproperty") {
             iconee = Commercialproperty;
+            imagee = ImagCommercials;
           } else if (houss.type === "house") {
             iconee = House;
+            imagee = ImagHouse;
           } else if (houss.type === "building") {
             iconee = Building;
-          } else if (houss.type === "tower") {
-            iconee = Tower;
+            imagee = ImagBuilding;
           } else {
             iconee = Land;
+            imagee = ImagLand;
           }
+          console.log("photos:", houss.photos);
 
           return (
             <Marker
@@ -131,7 +144,11 @@ export default function MapsComponent({ loc }: any) {
                   className="flex flex-col justify-center font-serif  gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
-                    src="/home/gg.jpg"
+                    src={
+                      houss.photos.length !== 0
+                        ? houss.photos[0].photo
+                        : imagee[0].photo
+                    }
                     width={150}
                     height={100}
                     alt="montagab"

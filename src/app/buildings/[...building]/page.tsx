@@ -57,6 +57,8 @@ export default function Buildin(props: any) {
   if (!building) {
     return <SingleBuildingLoade />;
   }
+  console.log(building);
+  
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";
   let build = [
@@ -66,6 +68,7 @@ export default function Buildin(props: any) {
     building.price,
     building.description,
     building.property_object?.property_type?.en,
+    building.photos,
   ];
   const type = building.property_object?.property_type?.en || null;
   let isApartment = false;
@@ -104,7 +107,6 @@ export default function Buildin(props: any) {
   if (photo === null) {
     setPhoto("/user-avatar.png");
   }
-  console.log(building);
   const isoDate = building.created_at;
   const date = new Date(isoDate);
   const year = date.getFullYear();
@@ -113,7 +115,6 @@ export default function Buildin(props: any) {
   const hours = date.getHours();
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const formattedDate = `${hours}:${minutes} ${year}/${month}/${day} `;
-  console.log(building.photos);
 
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">

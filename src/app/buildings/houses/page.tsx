@@ -22,7 +22,7 @@ export default function Houses(props: any) {
       setLoading(true);
       setError(false);
       try {
-        const response = await HousesApi();
+        const response = await HousesApi(page);
 
         if (!response || !response.results) {
           toast.error("خطاء في جلب البيانات ");

@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { BuildingApi, LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
-import { PiBellSimpleDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import NotificationLoade from "@/components/loade/NotificationLoade";
+import NotificationError from "@/components/error/NotificationError";
 
 export default function Notification() {
   const [building, setBuilding] = useState([]);
@@ -46,28 +47,10 @@ export default function Notification() {
     fetchData();
   }, []);
   if (loading) {
-    return (
-      <div className="mx-2 my-5  ml-2 xl:ml-0 xl:mx-0">
-        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-          <div className="text-[90px]">
-            <PiBellSimpleDuotone />
-          </div>
-          <h1 className="text-2xl">جاري جلب الإشعارات...</h1>
-        </div>
-      </div>
-    );
+    return <NotificationLoade />;
   }
   if (error) {
-    return (
-      <div className="mx-2 my-5  ml-2 xl:ml-0 xl:mx-0">
-        <div className="bg-sidpar flex flex-col gap-5 justify-center items-center h-max py-10 rounded-md">
-          <div className="text-[90px]">
-            <PiBellSimpleDuotone />
-          </div>
-          <h1 className="text-2xl">لا توجد اشعارات لعرضها</h1>
-        </div>
-      </div>
-    );
+    return <NotificationError />;
   }
 
   return (

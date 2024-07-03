@@ -62,36 +62,36 @@ export async function BuildingApi(page: any) {
   }
   return response.json();
 }
-export async function ApartmentsApi() {
-  const response = await fetch(`${apiUrl}/apartments/`);
+export async function ApartmentsApi(page: any) {
+  const response = await fetch(`${apiUrl}/apartments/?page=${page}`);
   if (response.status === 404) {
     return notFound()
   }
   return response.json();
 }
-export async function BBuildingsApi() {
-  const response = await fetch(`${apiUrl}/buildings/`);
+export async function BBuildingsApi(page: any) {
+  const response = await fetch(`${apiUrl}/buildings/?page=${page}`);
   if (response.status === 404) {
     return notFound()
   }
   return response.json();
 }
-export async function CommercialApi() {
-  const response = await fetch(`${apiUrl}/commercial-properties/`);
+export async function CommercialApi(page: any) {
+  const response = await fetch(`${apiUrl}/commercial-properties/?page=${page}`);
   if (response.status === 404) {
     return notFound()
   }
   return response.json();
 }
-export async function HousesApi() {
-  const response = await fetch(`${apiUrl}/houses/`);
+export async function HousesApi(page: any) {
+  const response = await fetch(`${apiUrl}/houses/?page=${page}`);
   if (response.status === 404) {
     return notFound()
   }
   return response.json();
 }
-export async function LandApi() {
-  const response = await fetch(`${apiUrl}/lands/`);
+export async function LandApi(page: any) {
+  const response = await fetch(`${apiUrl}/lands/?page=${page}`);
   if (response.status === 404) {
     return notFound()
   }

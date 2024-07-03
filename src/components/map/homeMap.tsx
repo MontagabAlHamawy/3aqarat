@@ -21,6 +21,13 @@ import Land from "../../../public/map/land.svg";
 import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
 import MapLoade from "../loade/MapLoade";
+import {
+  ImagApartment,
+  ImagBuilding,
+  ImagCommercials,
+  ImagHouse,
+  ImagLand,
+} from "../links";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -107,21 +114,25 @@ export default function HomeMap({ building }: { building: any[] }) {
           if (!location) return null;
 
           let iconee;
+          let imagee = ImagBuilding;
 
           if (houss.property_object?.property_type?.en === "apartment") {
             iconee = Apartment;
+            imagee = ImagApartment;
           } else if (
             houss.property_object?.property_type?.en === "commercialproperty"
           ) {
             iconee = Commercialproperty;
+            imagee = ImagCommercials;
           } else if (houss.property_object?.property_type?.en === "house") {
             iconee = House;
+            imagee = ImagHouse;
           } else if (houss.property_object?.property_type?.en === "building") {
             iconee = BuildingIcon;
-          } else if (houss.property_object?.property_type?.en === "tower") {
-            iconee = Tower;
+            imagee = ImagBuilding;
           } else {
             iconee = Land;
+            imagee = ImagLand;
           }
 
           return (
@@ -141,10 +152,14 @@ export default function HomeMap({ building }: { building: any[] }) {
               <Popup className="w-72">
                 <Link
                   href={`/buildings/${houss.id}`}
-                  className="flex flex-col justify-center font-serif  gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-col font-cairo justify-center  gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
-                    src="/home/gg.jpg"
+                    src={
+                      houss.photos.length !== 0
+                        ? houss.photos[0].photo
+                        : imagee[0].photo
+                    }
                     width={150}
                     height={100}
                     alt="montagab"

@@ -21,7 +21,7 @@ export default function Buildings(props: any) {
       setLoading(true);
       setError(false);
       try {
-        const response = await BBuildingsApi();
+        const response = await BBuildingsApi(page);
 
         if (!response || !response.results) {
           toast.error("خطاء في جلب البيانات ");
