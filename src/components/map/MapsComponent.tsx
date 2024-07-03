@@ -120,7 +120,6 @@ export default function MapsComponent({ loc }: any) {
             iconee = Land;
             imagee = ImagLand;
           }
-          console.log("photos:", houss.photos);
 
           return (
             <Marker

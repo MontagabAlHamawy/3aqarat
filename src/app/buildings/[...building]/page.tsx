@@ -57,7 +57,7 @@ export default function Buildin(props: any) {
   if (!building) {
     return <SingleBuildingLoade />;
   }
-  console.log(building);
+
   
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";

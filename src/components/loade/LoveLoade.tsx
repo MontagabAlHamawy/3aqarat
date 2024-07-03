@@ -8,7 +8,7 @@ export default function LoveLoade() {
         <div className="text-[90px]">
           <PiHeartDuotone />
         </div>
-        <h1 className="text-2xl">لا توجد مفضللة لعرضها</h1>
+        <h1 className="text-2xl">جاري جلب المفضلة...</h1>
       </div>
     </div>
   );
