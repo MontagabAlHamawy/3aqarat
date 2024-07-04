@@ -14,6 +14,7 @@ export default function Buildings(props: any) {
   const [pageInfo, setPageInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [Paginatio, setPagination] = useState(false);
   const page = props.searchParams.page || 1;
   const linked = "/buildings/buildings";
   useEffect(() => {
@@ -31,6 +32,9 @@ export default function Buildings(props: any) {
         }
         setBuilding(response.results);
         setPageInfo(response);
+        if(response.next !== null){
+          setPagination(true)
+        }
       } catch (error) {
         toast.error("حدث خطأ أثناء جلب البيانات");
         console.error("error:", error);
@@ -74,7 +78,7 @@ export default function Buildings(props: any) {
       </div>
       <BuildingFilter linked={linked} />
       <AllBuildingsType Building={building} />
-      <div className="w-full flex justify-center items-center">
+      <div className={`w-full ${Paginatio?"flex justify-center items-center":"hidden"}`}>
         <PaginationBuildings page={pageInfo} />
       </div>
     </div>

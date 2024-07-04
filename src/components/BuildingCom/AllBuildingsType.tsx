@@ -64,7 +64,7 @@ export default function AllBuildingsType({ Building }: any) {
                 width={1000}
                 height={0}
                 alt="montagab"
-                className="w-[1080px] rounded-tl-xl rounded-tr-xl"
+                className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
               />
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                 {propertyType}

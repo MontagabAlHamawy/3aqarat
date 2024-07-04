@@ -14,6 +14,7 @@ export default function Apartments(props: any) {
   const [pageInfo, setPageInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [Paginatio, setPagination] = useState(false);
   const page = props.searchParams.page || 1;
   const linked = "/buildings/apartments";
 
@@ -32,6 +33,9 @@ export default function Apartments(props: any) {
         }
         setBuilding(response.results);
         setPageInfo(response);
+        if (response.next !== null) {
+          setPagination(true);
+        }
       } catch (error) {
         toast.error("حدث خطأ أثناء جلب البيانات");
         console.error("error:", error);
@@ -43,7 +47,7 @@ export default function Apartments(props: any) {
 
     fetchData();
   }, [page]);
-  
+
   if (loading) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
@@ -67,7 +71,7 @@ export default function Apartments(props: any) {
       </div>
     );
   }
-  console.log("ff:",building);
+  console.log("ff:", building);
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
@@ -75,7 +79,11 @@ export default function Apartments(props: any) {
       </div>
       <BuildingFilter linked={linked} />
       <AllBuildingsType Building={building} />
-      <div className="w-full flex justify-center items-center">
+      <div
+        className={`w-full ${
+          Paginatio ? "flex justify-center items-center" : "hidden"
+        }`}
+      >
         <PaginationApartments page={pageInfo} />
       </div>
     </div>
