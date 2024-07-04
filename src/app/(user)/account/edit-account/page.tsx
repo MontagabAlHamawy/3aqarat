@@ -157,10 +157,10 @@ export default function EditAccount() {
         <div className="relative xl:w-1/2 xl:pr-8 mt-[-40px] mb-4 xl:mb-0">
           <Image
             src={photo}
-            width={290}
-            height={290}
+            width={300}
+            height={0}
             alt="user"
-            className="w-80 xl:w-96 h-80 xl:h-96 rounded-full"
+            className="rounded-2xl"
           />
           <button
             onClick={handleIconClick}

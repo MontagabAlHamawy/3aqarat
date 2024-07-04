@@ -91,15 +91,15 @@ export default function Username(props: any) {
         <div
           className={`flex flex-col ${
             Iam ? "mt-10 xl:mt-0" : "mt-0"
-          }  xl:flex-row justify-start items-center gap-x-8 gap-y-4`}
+          }  xl:flex-row justify-start items-center xl:mr-40 gap-x-14 gap-y-4`}
         >
           <div>
             <Image
               src={photo}
-              width={290}
-              height={290}
+              width={300}
+              height={0}
               alt="user"
-              className="w-80 h-80 rounded-full"
+              className="rounded-2xl"
             />
           </div>
           <div className="flex flex-col justify-center items-center xl:items-start gap-3">
