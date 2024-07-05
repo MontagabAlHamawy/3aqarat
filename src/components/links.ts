@@ -24,14 +24,16 @@ export const ImagCommercials = [
 ];
 
 export const hom = [
-  { name: "الكل",link:"/buildings/", type: "all" },
-  { name: "منازل",link:"/buildings/houses", type: "house" },
-  { name: "شقق",link:"/buildings/apartments", type: "apartment" },
-  { name: "محال تجارية",link:"/buildings/commercials", type: "commercial" },
-  { name: "أراضي",link:"/buildings/lands", type: "land" },
-  { name: "محاضر",link:"/buildings/buildings", type: "building" },
+  { name: "الكل", link: "/buildings/", type: "all" },
+  { name: "منازل", link: "/buildings/houses", type: "house" },
+  { name: "شقق", link: "/buildings/apartments", type: "apartment" },
+  { name: "محال تجارية", link: "/buildings/commercials", type: "commercial" },
+  { name: "أراضي", link: "/buildings/lands", type: "land" },
+  { name: "محاضر", link: "/buildings/buildings", type: "building" },
 ];
-
+export const Blogs = [
+  { id: "types-of-property-ownership", title: "أنواع ملكية العقار في سوريا", description: "هناك العديد من أنواع الملكيات العقارية في سورية وقسم كبير من الناس ربما لا تعي أو تعلم الفرق بين هذه التسميات في الملكية, لذلك سنقوم بشرحها بطريقة سهلة وبسيطة ليفهمها عامة الناس وخاصة من ناحية المخاطر والحجية القانونية", image: "/types-of-property-ownership.png" },
+];
 export const whyus = [
   {
     title: "تفاصيل شاملة",

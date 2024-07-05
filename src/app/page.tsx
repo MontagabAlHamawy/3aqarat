@@ -140,17 +140,19 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <div className="mt-10 mx-[-10px] rounded-xl flex justify-center items-center">
+      {/* <div className="mt-10 mx-[-10px] w-full rounded-xl flex justify-center items-center"> */}
         <HomeMap building={bil} />
-      </div>
+      {/* </div> */}
       <div className="flex justify-center w-full items-center flex-col">
         <h1 className="text-white text-2xl my-5">الأحدث</h1>
         <div className="w-full mx-[-10px]">
           <BuildingFilter linked={linked} />
         </div>
-        <AllBuildings Building={building} />
+      </div>
+      <AllBuildings Building={building} />
+      <div className="flex justify-center items-center">
         <Link href={"/buildings"}>
-          <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
+          <div className="bg-accent w-max text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
             عرض المزيد
           </div>
         </Link>

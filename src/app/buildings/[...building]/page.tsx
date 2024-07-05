@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import Slide from "@/components/Slide/Slide";
 import MapLoade from "@/components/map/MapLoade";
-import { SingelBuildingApi } from "@/utils/API";
+import { MyProfile, SingelBuildingApi } from "@/utils/API";
 import Apartment from "@/components/Buildings/apartment";
 import Commercialproperty from "@/components/Buildings/commercialproperty";
 import BBuilding from "@/components/Buildings/bbuilding";
@@ -39,16 +39,24 @@ export default function Buildin(props: any) {
   const page = props.params.building[0];
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [building, setBuilding] = useState<any>(null);
+  const [Iam, setIam] = useState<any>(false);
 
   useEffect(() => {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
+      if(buildingData.state){
+        
+      }
+      const ifme = await MyProfile();
       if (buildingData === null) {
         toast.error("خطاء في جلب البيانات ");
         NotFound();
       } else {
         setBuilding(buildingData);
         setPhoto(buildingData.client.profile_photo);
+        if (ifme.username === buildingData.client.username) {
+          setIam(true);
+        }
       }
     };
     myData();
@@ -57,8 +65,6 @@ export default function Buildin(props: any) {
   if (!building) {
     return <SingleBuildingLoade />;
   }
-
-  
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";
   let build = [
@@ -118,6 +124,9 @@ export default function Buildin(props: any) {
 
   return (
     <div className="mx-auto mt-[-10px] md:mt-auto">
+      <Link href={`/buildings/edit-building?url=${building.id}`} className={`${Iam ? "block" : "hidden"} bg-accent w-max py-2 px-3 rounded-md`}>
+        <p>تعديل</p>
+      </Link>
       <div className="flex justify-center xl:justify-between  items-center w-full">
         <div className="flex flex-col justify-center xl:flex-row gap-10 items-center w-full">
           <div className="mx-2 xl:mx-0 flex justify-center items-center">
@@ -140,7 +149,7 @@ export default function Buildin(props: any) {
             <p className="text-lg font-thin text-gray-400">
               {building.description}
             </p>
-            <p className="text-xl font-thin text-accent">{building.tabu}</p>
+            <p className="text-xl font-thin text-accent"><Link href={'/blog/types-of-property-ownership'}>{building.tabu}</Link></p>
             <div className={`${isLand ? "block" : "hidden"}`}>
               <Land building={building} />
             </div>
