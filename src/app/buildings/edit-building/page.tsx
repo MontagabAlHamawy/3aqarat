@@ -7,22 +7,33 @@ import Commercialproperty from "@/components/Edit Buildings/commercialproperty";
 import House from "@/components/Edit Buildings/house";
 import Land from "@/components/Edit Buildings/land";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import { SingelBuildingApi } from "@/utils/API";
+import { MyProfile, SingelBuildingApi } from "@/utils/API";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function EditBuilding(props: any) {
   const page = props.searchParams.url;
   const [building, setBuilding] = useState<any>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
+      const ifme = await MyProfile();
       if (buildingData === null) {
         toast.error("خطاء في جلب البيانات ");
         NotFound();
       } else {
         setBuilding(buildingData);
+      }
+      if (ifme.username !== buildingData.client.username) {
+        router.replace(`/building/${props.searchParams.url}`);
+      }
+      const token = Cookies.get("authToken") || false;
+      if (!token) {
+        router.replace(`/login?url=${props.searchParams.url}`);
       }
     };
     myData();
@@ -56,7 +67,7 @@ export default function EditBuilding(props: any) {
   return (
     <div>
       <div className={`${isLand ? "block" : "hidden"}`}>
-        <Land building={building} />
+        <Land apartment={building} />
       </div>
       <div className={`${isApartment ? "block" : "hidden"}`}>
         <Apartment apartment={building} />

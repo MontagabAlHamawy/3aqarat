@@ -6,6 +6,7 @@ import apiUrl from "@/utils/apiConfig";
 import { GetToken } from "@/utils/API";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function House({ apartment }: any) {
   console.log("apartment=", apartment);
@@ -85,12 +86,45 @@ export default function House({ apartment }: any) {
     { value: "SW", label: "جنوبي غربي" },
   ];
 
+  let im = false;
+  if (apartment.photos.length === 0 || apartment.photos.length === 1) {
+    im = false;
+  } else {
+    im = true;
+  }
+  console.log("photo=", apartment.photos.length);
+  console.log("im=", im);
+
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10 xl:gap-32">
+    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div className="px-2 xl:px-0">
-          <EditBSlide
-            image={apartment.photos.length !== 0 ? apartment.photos : imagee}
+        <div
+          className={`grid grid-cols-2 mt-7  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ${
+            im ? "block" : "hidden"
+          }`}
+        >
+          {imagee.map((index: any, id: any) => {
+            console.log(index);
+            return (
+              <div key={id}>
+                <Image
+                  src={index.photo}
+                  width={300}
+                  height={0}
+                  alt={`Gallery Image`}
+                  className="  object-center rounded-md cursor-pointer"
+                />
+              </div>
+            );
+          })}
+        </div>
+        <div className={`${!im ? "block" : "hidden"}`}>
+          <Image
+            src={imagee[0].photo}
+            width={390}
+            height={390}
+            alt={`Gallery Image`}
+            className="w-[500px] h-[300px] object-center rounded-md cursor-pointer"
           />
         </div>
       </div>

@@ -87,12 +87,21 @@ export default function Apartment({ apartment }: any) {
     { value: "SW", label: "جنوبي غربي" },
   ];
 
+  let im = false;
+  if (apartment.photos.length === 0 || apartment.photos.length === 1) {
+    im = false;
+  } else {
+    im = true;
+  }
+  console.log("photo=", apartment.photos.length);
+  console.log("im=", im);
+
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10 xl:gap-5">
+    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
         <div
           className={`grid grid-cols-2 mt-7  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ${
-            apartment.photos.length !== 0 || 1 ? "block" : "hidden"
+            im ? "block" : "hidden"
           }`}
         >
           {imagee.map((index: any, id: any) => {
@@ -104,23 +113,19 @@ export default function Apartment({ apartment }: any) {
                   width={300}
                   height={0}
                   alt={`Gallery Image`}
-                  className=" object-center rounded-md cursor-pointer"
+                  className="  object-center rounded-md cursor-pointer"
                 />
               </div>
             );
           })}
         </div>
-        <div
-          className={`${
-            apartment.photos.length !== 0 || 1 ? "hidden" : "block"
-          }`}
-        >
+        <div className={`${!im ? "block" : "hidden"}`}>
           <Image
             src={imagee[0].photo}
-            width={300}
-            height={0}
+            width={390}
+            height={390}
             alt={`Gallery Image`}
-            className=" object-center rounded-md cursor-pointer"
+            className="w-[500px] h-[300px] object-center rounded-md cursor-pointer"
           />
         </div>
       </div>
