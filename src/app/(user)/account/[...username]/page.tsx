@@ -19,6 +19,7 @@ import {
 } from "@/utils/API";
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import UsersLoading from "@/components/loade/UsersLoading";
+import AllMyBuildings from "@/components/BuildingCom/AllMyBuildings";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
@@ -158,7 +159,7 @@ export default function Username(props: any) {
           {Iam ? "عقاراتي" : "العقارات"}
         </h1>
         <div className=" bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
-          <AllBuildings Building={Building} />
+          <AllMyBuildings Building={Building} />
         </div>
       </div>
     </div>
