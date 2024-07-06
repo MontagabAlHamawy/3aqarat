@@ -6,7 +6,7 @@ export default function TypesOfPropertyOwnership() {
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl xl:text-3xl">أنواع ملكية العقار في سوريا</h1>
+        <h1 className="text-2xl xl:text-3xl">أنواع ملكية العقار في سورية</h1>
       </div>
       <div className="flex justify-center items-center mt-10">
         <Image

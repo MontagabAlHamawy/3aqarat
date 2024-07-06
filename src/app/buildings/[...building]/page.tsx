@@ -149,7 +149,7 @@ export default function Buildin(props: any) {
             <p className="text-lg font-thin text-gray-400">
               {building.description}
             </p>
-            <p className="text-xl font-thin text-accent"><Link href={'/blog/types-of-property-ownership'}>{building.tabu}</Link></p>
+            <p className="text-xl font-thin text-accent"><Link href={'/types-of-property-ownership'}>{building.tabu}</Link></p>
             <div className={`${isLand ? "block" : "hidden"}`}>
               <Land building={building} />
             </div>

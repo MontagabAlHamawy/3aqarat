@@ -8,8 +8,7 @@ import {
   PiHeartDuotone,
   PiHouseDuotone,
   PiMegaphoneDuotone,
-  PiUserDuotone,
-  PiArticleDuotone 
+  PiUserDuotone
 } from "react-icons/pi";
 
 export default function MobileSidpar() {
@@ -30,13 +29,12 @@ export default function MobileSidpar() {
     { name: accountName, path: account, icone: <PiUserDuotone /> },
     { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
     { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
-    { name: "المدونة", path: "/blog", icone: <PiArticleDuotone /> },
     { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
     { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
   ];
   return (
     <div className="fixed bottom-0 left-[-1px] w-full bg-sidpar py-3  flex justify-center items-center z-50">
-      <div className="flex flex-row justify-center w-full items-center gap-3 ">
+      <div className="flex flex-row justify-center w-full items-center gap-5 ">
         {MobData.map((link, index) => {
           let isActive = route === link.path;
 

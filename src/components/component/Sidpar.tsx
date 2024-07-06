@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import {
-  PiArticleDuotone,
   PiBuildingsDuotone,
   PiCaretDoubleLeftBold,
   PiCaretDoubleRightBold,
@@ -39,7 +38,6 @@ function Sidpar() {
   const navData = [
     { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
     { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
-    { name: "المدونة", path: "/blog", icone: <PiArticleDuotone /> },
     { name: accountName, path: account, icone: <PiUserDuotone /> },
     { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
     { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
@@ -114,8 +112,8 @@ function Sidpar() {
             }
           }
           if (route === "/signup" && link.name === "تسجيل الدخول") {
-            link.name = "تسجيل مستخدم جديد"
-            link.path= '/signup'
+            link.name = "تسجيل مستخدم جديد";
+            link.path = "/signup";
             isActive = true;
           }
 
