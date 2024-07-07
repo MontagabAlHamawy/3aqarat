@@ -78,7 +78,7 @@ export default function AllMyBuildings({ Building }: any) {
                 href={`/buildings/edit-building?url=${building.id}`}
                 className={`flex mb-5 mx-2 justify-start items-center gap-2   bg-accent w-max py-2 px-3 rounded-md`}
               >
-                <PiPenDuotone size={24} />
+                <PiPenDuotone size={16} />
               </Link>
             </Link>
           );
