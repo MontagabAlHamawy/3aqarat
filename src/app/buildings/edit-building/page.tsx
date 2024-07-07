@@ -28,7 +28,7 @@ export default function EditBuilding(props: any) {
         NotFound();
       } else {
         if (!token) {
-          router.replace(`/login?url=${props.searchParams.url}`);
+          router.replace(`/login?url=/buildings/${props.searchParams.url}`);
         } else if (ifme.username !== buildingData.client.username) {
           router.replace(`/buildings/${props.searchParams.url}`);
         }
