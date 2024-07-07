@@ -11,7 +11,7 @@ import {
   ImagLand,
 } from "../links";
 import BuildingError from "../error/BuildingError";
-import { PiPenDuotone } from "react-icons/pi";
+import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 
 export default function AllMyBuildings({ Building }: any) {
   if (!Building || Building.length === 0) {
@@ -74,12 +74,18 @@ export default function AllMyBuildings({ Building }: any) {
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                 {building.offer}
               </div>
-              <Link
-                href={`/buildings/edit-building?url=${building.id}`}
-                className={`flex mb-5 mx-2 justify-start items-center gap-2   bg-accent w-max py-2 px-3 rounded-md`}
-              >
-                <PiPenDuotone size={16} />
-              </Link>
+              <div className="flex justify-start items-center gap-4">
+                <Link
+                  href={`/buildings/edit-building?url=${building.id}`}
+                  className={`flex mb-5 mx-2 justify-start items-center gap-2   bg-accent w-max py-2 px-3 rounded-md`}
+                >
+                  <PiPenDuotone size={20} />
+                </Link>
+                <div className={`flex mb-5 mx-2 justify-start items-center gap-2   bg-red-600 w-max py-2 px-3 rounded-md`}>
+                  {" "}
+                  <PiTrashDuotone size={20} />
+                </div>
+              </div>
             </Link>
           );
         })}

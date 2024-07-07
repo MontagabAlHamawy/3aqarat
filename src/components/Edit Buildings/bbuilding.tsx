@@ -7,6 +7,7 @@ import { GetToken } from "@/utils/API";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { PiTrashDuotone, PiPlusCircleDuotone } from "react-icons/pi";
 
 export default function BBuilding({ building }: any) {
   const router = useRouter();
@@ -98,15 +99,11 @@ export default function BBuilding({ building }: any) {
   return (
     <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div
-          className={`grid grid-cols-2 mt-7  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ${
-            im ? "block" : "hidden"
-          }`}
-        >
+        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ">
           {imagee.map((index: any, id: any) => {
             console.log(index);
             return (
-              <div key={id}>
+              <div key={id} className="relative">
                 <Image
                   src={index.photo}
                   width={300}
@@ -114,18 +111,15 @@ export default function BBuilding({ building }: any) {
                   alt={`Gallery Image`}
                   className="  object-center rounded-md cursor-pointer"
                 />
+                 <div className="p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1">
+                  <PiTrashDuotone size={30} />
+                </div>
               </div>
             );
           })}
-        </div>
-        <div className={`${!im ? "block" : "hidden"}`}>
-          <Image
-            src={imagee[0].photo}
-            width={390}
-            height={390}
-            alt={`Gallery Image`}
-            className="w-[500px] h-[300px] object-center rounded-md cursor-pointer"
-          />
+          <div className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer">
+            <PiPlusCircleDuotone size={50} />
+          </div>
         </div>
       </div>
       <form

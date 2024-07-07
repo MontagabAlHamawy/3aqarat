@@ -34,7 +34,7 @@ import Land from "@/components/Buildings/land";
 import NotFound from "@/app/not-found";
 import { useEffect, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import { PiPenDuotone } from "react-icons/pi";
+import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 
 export default function Buildin(props: any) {
@@ -130,15 +130,23 @@ export default function Buildin(props: any) {
 
   return (
     <div className=" mt-[-10px] md:mt-auto">
-      <Link
-        href={`/buildings/edit-building?url=${building.id}`}
-        className={`${
-          Iam ? "flex justify-start items-center gap-2" : "hidden"
-        } mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 bg-accent w-max py-2 px-3 rounded-md`}
-      >
-        <PiPenDuotone size={24} />
-        <p>تعديل معلومات العقار</p>
-      </Link>
+      <div className="flex justify-center xl:justify-start items-center">
+        <Link
+          href={`/buildings/edit-building?url=${building.id}`}
+          className={`${
+            Iam ? "flex justify-start items-center gap-2" : "hidden"
+          } mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 bg-accent w-max py-2 px-3 rounded-md`}
+        >
+          <PiPenDuotone size={24} />
+          <p>تعديل معلومات العقار</p>
+        </Link>
+        <div  className={`${
+            Iam ? "flex justify-start items-center gap-2" : "hidden"
+          } mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 cursor-pointer bg-red-600 w-max py-2 px-3 rounded-md`}>
+        <PiTrashDuotone size={24} />
+        <p>حذف العقار</p>
+        </div>
+      </div>
       <div className="flex justify-center xl:justify-between  items-center w-full">
         <div className="flex flex-col justify-center xl:flex-row gap-10 items-center w-full">
           <div className="mx-2 xl:mx-0 flex justify-center items-center">
