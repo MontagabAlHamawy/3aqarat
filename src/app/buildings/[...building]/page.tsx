@@ -130,7 +130,7 @@ export default function Buildin(props: any) {
 
   return (
     <div className=" mt-[-10px] md:mt-auto">
-      <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center">
+      <div className="flex flex-col xl:flex-row justify-start items-center">
         <Link
           href={`/buildings/edit-building?url=${building.id}`}
           className={`${
