@@ -22,18 +22,17 @@ export default function EditBuilding(props: any) {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
       const ifme = await MyProfile();
+      const token = Cookies.get("authToken") || false;
       if (buildingData === null) {
         toast.error("خطاء في جلب البيانات ");
         NotFound();
       } else {
+        if (!token) {
+          router.replace(`/login?url=${props.searchParams.url}`);
+        } else if (ifme.username !== buildingData.client.username) {
+          router.replace(`/buildings/${props.searchParams.url}`);
+        }
         setBuilding(buildingData);
-      }
-      if (ifme.username !== buildingData.client.username) {
-        router.replace(`/buildings/${props.searchParams.url}`);
-      }
-      const token = Cookies.get("authToken") || false;
-      if (!token) {
-        router.replace(`/login?url=${props.searchParams.url}`);
       }
     };
     myData();
