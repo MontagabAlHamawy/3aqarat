@@ -125,7 +125,7 @@ export default function Buildin(props: any) {
 
   return (
     <div className=" mt-[-10px] md:mt-auto">
-      <Link href={`/buildings/edit-building?url=${building.id}`} className={`${Iam ? "flex justify-start items-center gap-2" : "hidden"} mt-[-10px] xl:mt-0 mx-2 xl:mx-7 bg-accent w-max py-2 px-3 rounded-md`}>
+      <Link href={`/buildings/edit-building?url=${building.id}`} className={`${Iam ? "flex justify-start items-center gap-2" : "hidden"} mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 bg-accent w-max py-2 px-3 rounded-md`}>
         <PiPenDuotone size={24} />
         <p>تعديل معلومات العقار</p>
       </Link>
