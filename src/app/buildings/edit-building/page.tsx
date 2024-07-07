@@ -29,7 +29,7 @@ export default function EditBuilding(props: any) {
         setBuilding(buildingData);
       }
       if (ifme.username !== buildingData.client.username) {
-        router.replace(`/building/${props.searchParams.url}`);
+        router.replace(`/buildings/${props.searchParams.url}`);
       }
       const token = Cookies.get("authToken") || false;
       if (!token) {
