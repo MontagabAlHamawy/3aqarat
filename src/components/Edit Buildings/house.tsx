@@ -32,10 +32,10 @@ export default function House({ apartment }: any) {
 
   const tabuMapping: any = {
     "طابو أخضر ( السجل العقاري )": 1,
-    "عقار حكم المحكمة": 2,
-    "الملكية بموجب وكالة كاتب العدل غير قابلة للعزل": 3,
-    "الملكية بعقد بيع قطعي فقط وساعة كهرباء": 4,
-    "حصة من عقار على الشيوع": 5,
+    "إقرار محكمة": 2,
+    "كاتب عدل": 3,
+    "حكم قطعي": 4,
+    "سجل مؤقت": 5,
   };
 
   const onSubmit = async (data: any) => {
@@ -166,19 +166,13 @@ export default function House({ apartment }: any) {
               className="w-80 xl:w-full h-11 border p-2 rounded-lg bg-section border-section text-white"
               {...register("tabu", { required: true })}
             >
-              <option value="طابو أخضر ( السجل العقاري )">
+             <option value="طابو أخضر ( السجل العقاري )">
                 طابو أخضر ( السجل العقاري )
               </option>
-              <option value="عقار حكم المحكمة">عقار حكم المحكمة</option>
-              <option value="الملكية بموجب وكالة كاتب العدل غير قابلة للعزل">
-                الملكية بموجب وكالة كاتب العدل غير قابلة للعزل
-              </option>
-              <option value="الملكية بعقد بيع قطعي فقط وساعة كهرباء">
-                الملكية بعقد بيع قطعي فقط وساعة كهرباء
-              </option>
-              <option value="حصة من عقار على الشيوع">
-                حصة من عقار على الشيوع
-              </option>
+              <option value="إقرار محكمة">إقرار محكمة</option>
+              <option value="كاتب عدل">كاتب عدل</option>
+              <option value="حكم قطعي">حكم قطعي</option>
+              <option value="سجل مؤقت">سجل مؤقت</option>
             </select>
             {errors.tabu && <p className="text-red-500">هذا الحقل مطلوب</p>}
           </div>
