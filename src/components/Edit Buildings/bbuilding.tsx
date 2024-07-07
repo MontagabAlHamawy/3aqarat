@@ -28,7 +28,7 @@ export default function BBuilding({ building }: any) {
   });
 
   const tabuMapping: any = {
-    "الطابو الأخضر ( السجل العقاري )": 1,
+    "طابو أخضر ( السجل العقاري )": 1,
     "عقار حكم المحكمة": 2,
     "الملكية بموجب وكالة كاتب العدل غير قابلة للعزل": 3,
     "الملكية بعقد بيع قطعي فقط وساعة كهرباء": 4,
@@ -166,8 +166,8 @@ export default function BBuilding({ building }: any) {
               className="w-80 xl:w-full h-11 border p-2 rounded-lg bg-section border-section text-white"
               {...register("tabu", { required: true })}
             >
-              <option value="الطابو الأخضر ( السجل العقاري )">
-                الطابو الأخضر ( السجل العقاري )
+              <option value="طابو أخضر ( السجل العقاري )">
+                طابو أخضر ( السجل العقاري )
               </option>
               <option value="عقار حكم المحكمة">عقار حكم المحكمة</option>
               <option value="الملكية بموجب وكالة كاتب العدل غير قابلة للعزل">
