@@ -8,23 +8,15 @@ import NotFound from "@/app/not-found";
 import UsersLoading from "@/components/loade/UsersLoading";
 
 export default function Acount() {
-  const router = useRouter();
-  const [account, setAccount] = useState("/account");
   useEffect(() => {
     const myData = async () => {
       try {
         const response = await MyProfile();
-        const token = Cookies.get("authToken") || false;
+        router.replace(`/account/${response.username}`);
         if (!response) {
-          toast.error("تحقق من اسم المستخدم");
+          toast.error("kkk");
           NotFound();
           return;
-        } else {
-          if (!token) {
-            setAccount("/login?url=account");
-          } else {
-            router.replace(`/account/${response.username}`);
-          }
         }
       } catch (error) {
         toast.error("حدث خطأ أثناء جلب البيانات");
@@ -32,6 +24,14 @@ export default function Acount() {
       }
     };
     myData();
+  }, []);
+  const router = useRouter();
+  const [account, setAccount] = useState("/account");
+  useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("/login?url=account");
+    }
   }, []);
 
   useEffect(() => {

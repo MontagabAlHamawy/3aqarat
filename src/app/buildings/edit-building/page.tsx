@@ -21,16 +21,18 @@ export default function EditBuilding(props: any) {
   useEffect(() => {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
-      const ifme = await MyProfile();
       const token = Cookies.get("authToken") || false;
       if (buildingData === null) {
         toast.error("خطاء في جلب البيانات ");
         NotFound();
       } else {
-        if (!token) {
+        if (token) {
+          const ifme = await MyProfile();
+          if (ifme.username !== buildingData.client.username) {
+            router.replace(`/buildings/${props.searchParams.url}`);
+          }
+        } else {
           router.replace(`/login?url=/buildings/${props.searchParams.url}`);
-        } else if (ifme.username !== buildingData.client.username) {
-          router.replace(`/buildings/${props.searchParams.url}`);
         }
         setBuilding(buildingData);
       }

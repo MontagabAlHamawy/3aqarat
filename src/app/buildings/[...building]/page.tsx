@@ -35,6 +35,7 @@ import NotFound from "@/app/not-found";
 import { useEffect, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
 import { PiPenDuotone } from "react-icons/pi";
+import Cookies from "js-cookie";
 
 export default function Buildin(props: any) {
   const page = props.params.building[0];
@@ -45,19 +46,23 @@ export default function Buildin(props: any) {
   useEffect(() => {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
-      if(buildingData.state){
-        
+      if (buildingData.state) {
       }
-      const ifme = await MyProfile();
+
       if (buildingData === null) {
         toast.error("خطاء في جلب البيانات ");
         NotFound();
-      } else {
-        setBuilding(buildingData);
-        setPhoto(buildingData.client.profile_photo);
+      }
+      setBuilding(buildingData);
+      setPhoto(buildingData.client.profile_photo);
+      const token = Cookies.get("authToken") || false;
+      if (token) {
+        const ifme = await MyProfile();
         if (ifme.username === buildingData.client.username) {
           setIam(true);
         }
+      } else {
+        setIam(false);
       }
     };
     myData();
@@ -125,7 +130,12 @@ export default function Buildin(props: any) {
 
   return (
     <div className=" mt-[-10px] md:mt-auto">
-      <Link href={`/buildings/edit-building?url=${building.id}`} className={`${Iam ? "flex justify-start items-center gap-2" : "hidden"} mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 bg-accent w-max py-2 px-3 rounded-md`}>
+      <Link
+        href={`/buildings/edit-building?url=${building.id}`}
+        className={`${
+          Iam ? "flex justify-start items-center gap-2" : "hidden"
+        } mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 bg-accent w-max py-2 px-3 rounded-md`}
+      >
         <PiPenDuotone size={24} />
         <p>تعديل معلومات العقار</p>
       </Link>
@@ -151,7 +161,9 @@ export default function Buildin(props: any) {
             <p className="text-lg font-thin text-gray-400">
               {building.description}
             </p>
-            <p className="text-xl font-thin text-accent"><Link href={'/types-of-property-ownership'}>{building.tabu}</Link></p>
+            <p className="text-xl font-thin text-accent">
+              <Link href={"/types-of-property-ownership"}>{building.tabu}</Link>
+            </p>
             <div className={`${isLand ? "block" : "hidden"}`}>
               <Land building={building} />
             </div>
