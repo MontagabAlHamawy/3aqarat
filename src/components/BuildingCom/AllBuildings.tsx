@@ -26,22 +26,22 @@ export default function AllBuildings({ Building }: any) {
     <div>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
-          const [Iam, setIam] = useState<any>(false);
-          const token = Cookies.get("authToken") || false;
+          // const [Iam, setIam] = useState<any>(false);
+          // const token = Cookies.get("authToken") || false;
 
-          useEffect(() => {
-            if (token) {
-              const myData = async () => {
-                try {
-                  const ifme = await MyProfile();
-                  if (ifme.username === building.client.username) setIam(true);
-                } catch (error) {
-                  toast.error("خطاء في جلب البانات");
-                }
-              };
-              myData();
-            }
-          }, [building]);
+          // useEffect(() => {
+          //   if (token) {
+          //     const myData = async () => {
+          //       try {
+          //         const ifme = await MyProfile();
+          //         if (ifme.username === building.client.username) setIam(true);
+          //       } catch (error) {
+          //         toast.error("خطاء في جلب البانات");
+          //       }
+          //     };
+          //     myData();
+          //   }
+          // }, [building]);
           const propertyType =
             building.property_object?.property_type?.ar || "N/A";
           const type = building.property_object?.property_type?.en || null;
@@ -94,7 +94,7 @@ export default function AllBuildings({ Building }: any) {
                 {building.offer}
               </div>
               </Link>
-              {Iam && (
+              {/* {Iam && (
                 <div className="flex justify-start items-center gap-4">
                   <div>
                     <Link
@@ -111,7 +111,7 @@ export default function AllBuildings({ Building }: any) {
                     <PiTrashDuotone size={20} />
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           );
         })}

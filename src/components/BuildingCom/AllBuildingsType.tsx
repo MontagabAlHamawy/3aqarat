@@ -31,23 +31,23 @@ export default function AllBuildingsType({ Building }: any) {
     <div>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
-          const [Iam, setIam] = useState<any>(false);
-          const token = Cookies.get("authToken") || false;
-          
-          useEffect(() => {
-            if (token) {
-              const myData = async () => {
-                try {
-                  const ifme = await MyProfile();
-                  if (ifme.username === building.property.client.username)
-                    setIam(true);
-                } catch (error) {
-                  toast.error("خطاء في جلب البانات");
-                }
-              };
-              myData();
-            }
-          }, [building]);
+          // const [Iam, setIam] = useState<any>(false);
+          // const token = Cookies.get("authToken") || false;
+
+          // useEffect(() => {
+          //   if (token) {
+          //     const myData = async () => {
+          //       try {
+          //         const ifme = await MyProfile();
+          //         if (ifme.username === building.property.client.username)
+          //           setIam(true);
+          //       } catch (error) {
+          //         toast.error("خطاء في جلب البانات");
+          //       }
+          //     };
+          //     myData();
+          //   }
+          // }, [building]);
           const propertyType = building.property_type?.ar || "N/A";
           const type = building?.property_type?.en || null;
 
@@ -105,7 +105,7 @@ export default function AllBuildingsType({ Building }: any) {
                   {building.property.offer}
                 </div>
               </Link>
-              <div
+              {/* <div
                 className={`${
                   Iam ? "flex justify-start items-center gap-4" : "hidden"
                 } `}
@@ -121,7 +121,7 @@ export default function AllBuildingsType({ Building }: any) {
                 >
                   <PiTrashDuotone size={20} />
                 </div>
-              </div>
+              </div> */}
             </div>
           );
         })}
