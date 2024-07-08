@@ -130,21 +130,23 @@ export default function Buildin(props: any) {
 
   return (
     <div className=" mt-[-10px] md:mt-auto">
-      <div className="flex flex-col xl:flex-row justify-start items-center">
+      <div className="flex flex-col xl:flex-row justify-start items-start xl:items-center mr-5 xl:mr-0 gap-3">
         <Link
           href={`/buildings/edit-building?url=${building.id}`}
           className={`${
             Iam ? "flex justify-start items-center gap-2" : "hidden"
-          } mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 bg-accent w-max py-2 px-3 rounded-md`}
+          } mt-[-10px] xl:mt-0 mb-5 xl:mb-0  bg-accent w-max py-2 px-3 rounded-md`}
         >
           <PiPenDuotone size={24} />
           <p>تعديل معلومات العقار</p>
         </Link>
-        <div  className={`${
+        <div
+          className={`${
             Iam ? "flex justify-start items-center gap-2" : "hidden"
-          } mt-[-10px] xl:mt-0 mx-2 mb-5 xl:mb-0 xl:mx-7 cursor-pointer bg-red-600 w-max py-2 px-3 rounded-md`}>
-        <PiTrashDuotone size={24} />
-        <p>حذف العقار</p>
+          } mt-[-10px] xl:mt-0 mb-5 xl:mb-0  cursor-pointer bg-red-600 w-max py-2 px-3 rounded-md`}
+        >
+          <PiTrashDuotone size={24} />
+          <p>حذف العقار</p>
         </div>
       </div>
       <div className="flex justify-center xl:justify-between  items-center w-full">
@@ -169,9 +171,7 @@ export default function Buildin(props: any) {
             <p className="text-lg font-thin text-gray-400">
               {building.description}
             </p>
-            <p className="text-xl font-thin text-accent">
-              <Link href={"/types-of-property-ownership"}>{building.tabu}</Link>
-            </p>
+            <p className="text-xl font-thin text-accent">{building.tabu}</p>
             <div className={`${isLand ? "block" : "hidden"}`}>
               <Land building={building} />
             </div>

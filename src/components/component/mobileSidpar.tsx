@@ -8,7 +8,7 @@ import {
   PiHeartDuotone,
   PiHouseDuotone,
   PiMegaphoneDuotone,
-  PiUserDuotone
+  PiUserDuotone,
 } from "react-icons/pi";
 
 export default function MobileSidpar() {
@@ -42,8 +42,7 @@ export default function MobileSidpar() {
             if (link.path !== "/") {
               isActive = true;
             }
-          }
-          if (route === "/signup" && link.name === "تسجيل") {
+          } else if (route === "/signup" && link.name === "تسجيل") {
             isActive = true;
           }
 

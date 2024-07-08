@@ -105,15 +105,10 @@ function Sidpar() {
           let isActive = route === link.path; // Default isActive value
 
           if (route !== "/" && route.startsWith(link.path)) {
-            // If the route is not homepage and starts with link.path
             if (link.path !== "/") {
-              // If link.path is not the homepage
               isActive = true;
             }
-          }
-          if (route === "/signup" && link.name === "تسجيل الدخول") {
-            link.name = "تسجيل مستخدم جديد";
-            link.path = "/signup";
+          } else if (route === "/signup" && link.name === "تسجيل الدخول") {
             isActive = true;
           }
 

@@ -111,7 +111,8 @@ export default function BBuilding({ building }: any) {
                   alt={`Gallery Image`}
                   className="  object-center rounded-md cursor-pointer"
                 />
-                 <div className="p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1">
+                 <div className={`${
+                    imagee === ImagBuilding? "hidden" : "block" } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}>
                   <PiTrashDuotone size={30} />
                 </div>
               </div>
@@ -249,14 +250,14 @@ export default function BBuilding({ building }: any) {
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
           </div>
-          <div className="mb-4">
-            <button
-              type="submit"
-              className="w-full h-11 border p-2 rounded-md bg-accent border-accent hover:bg-accent-hover text-white"
-            >
-              تحديث البيانات
-            </button>
           </div>
+        <div className="mb-4 flex justify-start items-center">
+          <button
+            type="submit"
+            className="w-full h-11 border p-2 rounded-md  bg-accent border-accent hover:bg-accent-hover text-white"
+          >
+            تحديث البيانات
+          </button>
         </div>
       </form>
     </div>

@@ -1,4 +1,4 @@
-import { ImagBuilding } from "../links";
+import { ImagBuilding, ImagHouse } from "../links";
 import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -64,7 +64,7 @@ export default function House({ apartment }: any) {
       await axios.patch(`${apiUrl}/houses/${apartment.id}/`, bodyContent, {
         headers: headersList,
       });
-      
+
       toast.success("تم تعديل البيانات بنجاح");
       router.replace(`/buildings/${apartment.id}`);
     } catch (error) {
@@ -74,7 +74,7 @@ export default function House({ apartment }: any) {
     console.log("bodyContent=", bodyContent);
   };
 
-  let imagee = ImagBuilding;
+  let imagee = ImagHouse;
 
   const directionOptions = [
     { value: "N", label: "شمالي" },
@@ -99,7 +99,7 @@ export default function House({ apartment }: any) {
   return (
     <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-      <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ">
+        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ">
           {imagee.map((index: any, id: any) => {
             console.log(index);
             return (
@@ -111,7 +111,11 @@ export default function House({ apartment }: any) {
                   alt={`Gallery Image`}
                   className="  object-center rounded-md cursor-pointer"
                 />
-                 <div className="p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1">
+                <div
+                  className={`${
+                    imagee === ImagHouse ? "hidden" : "block"
+                  }p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
+                >
                   <PiTrashDuotone size={30} />
                 </div>
               </div>
@@ -160,7 +164,7 @@ export default function House({ apartment }: any) {
               className="w-80 xl:w-full h-11 border p-2 rounded-lg bg-section border-section text-white"
               {...register("tabu", { required: true })}
             >
-             <option value="طابو أخضر ( السجل العقاري )">
+              <option value="طابو أخضر ( السجل العقاري )">
                 طابو أخضر ( السجل العقاري )
               </option>
               <option value="إقرار محكمة">إقرار محكمة</option>
@@ -261,14 +265,14 @@ export default function House({ apartment }: any) {
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
           </div>
-          <div className="mb-4">
-            <button
-              type="submit"
-              className="w-full h-11 border p-2 rounded-md bg-accent border-accent hover:bg-accent-hover text-white"
-            >
-              تحديث البيانات
-            </button>
-          </div>
+        </div>
+        <div className="mb-4 flex justify-start items-center">
+          <button
+            type="submit"
+            className="w-full h-11 border p-2 rounded-md  bg-accent border-accent hover:bg-accent-hover text-white"
+          >
+            تحديث البيانات
+          </button>
         </div>
       </form>
     </div>

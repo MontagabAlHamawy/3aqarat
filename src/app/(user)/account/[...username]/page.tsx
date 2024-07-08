@@ -94,7 +94,7 @@ export default function Username(props: any) {
       <div>
         <div
           className={`flex flex-col ${
-            Iam ? "mt-10 xl:mt-0" : "mt-0"
+            Iam ? "mt-20 xl:mt-0" : "mt-0"
           }  xl:flex-row justify-start items-center xl:mr-40 gap-x-14 gap-y-4`}
         >
           <div>
@@ -141,26 +141,28 @@ export default function Username(props: any) {
           <div
             className={`${
               Iam ? "flex" : "hidden"
-            }  xl:flex-col justify-between items-center xl:items-start w-full xl:w-max gap-[1px] xl:gap-5 px-1 xl:px-5  absolute top-[-70px]  xl:top-1 xl:left-5 `}
+            }  flex flex-col justify-between items-start xl:items-start mb-40 w-full xl:w-max  gap-5 px-1 xl:px-5  absolute top-[-110px]  xl:top-1 xl:left-5 `}
           >
-            <div onClick={() => logout()}>
-              <div className="bg-accent cursor-pointer flex justify-start items-center xl:gap-2 text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
-                <PiUploadSimpleDuotone size={24} />
-                <p>تسجيل الخروج</p>
+            <div className="flex flex-row xl:flex-col gap-5 justify-between items-center xl:items-start w-full">
+              <div onClick={() => logout()}>
+                <div className="bg-accent cursor-pointer flex justify-start items-center xl:gap-2 text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
+                  <PiUploadSimpleDuotone size={24} />
+                  <p>تسجيل الخروج</p>
+                </div>
               </div>
+              <Link href="/account/edit-account">
+                <div className="bg-accent flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
+                  <PiPenDuotone size={24} />
+                  <p>تعديل الحساب</p>
+                </div>
+              </Link>
             </div>
-            <Link href="/account/edit-account">
-              <div className="bg-accent flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
-                <PiPenDuotone size={24} />
-                <p>تعديل الحساب</p>
-              </div>
-            </Link>
-            {/* <div>
-              <div className="bg-red-600 hidden xl:flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300">
+            <div>
+              <div className="bg-red-600 flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300">
                 <PiTrashDuotone size={24} />
                 <p>حذف الحسب</p>
               </div>
-            </div> */}
+            </div>
           </div>
           {/* <div
             className={`${
@@ -180,7 +182,11 @@ export default function Username(props: any) {
           {Iam ? "عقاراتي" : "العقارات"}
         </h1>
         <div className=" bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
-          <AllMyBuildings Building={Building} />
+          {Iam ? (
+            <AllMyBuildings Building={Building} />
+          ) : (
+            <AllBuildings Building={Building} />
+          )}
         </div>
       </div>
     </div>
