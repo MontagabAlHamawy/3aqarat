@@ -70,7 +70,7 @@ export default function BBuilding({ building }: any) {
     }
   };
 
-  let imagee;
+  let imagee:any;
   if (building.photos.length !== 0) {
     imagee = building.photos;
   } else {
@@ -93,8 +93,6 @@ export default function BBuilding({ building }: any) {
   } else {
     im = true;
   }
-  console.log("photo=", building.photos.length);
-  console.log("im=", im);
 
   return (
     <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">

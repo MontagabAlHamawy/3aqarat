@@ -74,7 +74,12 @@ export default function House({ apartment }: any) {
     console.log("bodyContent=", bodyContent);
   };
 
-  let imagee = ImagHouse;
+  let imagee: any;
+  if (apartment.photos.length !== 0) {
+    imagee = apartment.photos;
+  } else {
+    imagee = ImagHouse;
+  }
 
   const directionOptions = [
     { value: "N", label: "شمالي" },
@@ -93,8 +98,6 @@ export default function House({ apartment }: any) {
   } else {
     im = true;
   }
-  console.log("photo=", apartment.photos.length);
-  console.log("im=", im);
 
   return (
     <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
