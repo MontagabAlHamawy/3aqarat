@@ -117,8 +117,8 @@ export default function House({ apartment }: any) {
                 <div
                   className={`${
                     imagee === ImagHouse ? "hidden" : "block"
-                  }p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-                >
+                  } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
+                >   
                   <PiTrashDuotone size={30} />
                 </div>
               </div>

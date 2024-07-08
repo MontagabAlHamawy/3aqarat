@@ -70,7 +70,7 @@ export default function Commercialproperty({ apartment }: any) {
     }
   };
 
-  let imagee:any;
+  let imagee: any;
   if (apartment.photos.length !== 0) {
     imagee = apartment.photos;
   } else {
