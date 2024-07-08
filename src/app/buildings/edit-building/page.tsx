@@ -32,7 +32,7 @@ export default function EditBuilding(props: any) {
             router.replace(`/buildings/${props.searchParams.url}`);
           }
         } else {
-          router.replace(`/login?url=/buildings/${props.searchParams.url}`);
+          router.replace(`/login?url=buildings/${props.searchParams.url}`);
         }
         setBuilding(buildingData);
       }
