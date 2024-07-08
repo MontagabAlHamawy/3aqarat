@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-import React, { useEffect, useState } from "react";
-
 import BuildingError from "../error/BuildingError";
 import {
   ImagApartment,
@@ -14,10 +11,6 @@ import {
   ImagLand,
 } from "../links";
 import BuildingLoade from "../loade/BuildingLoade";
-import { MyProfile } from "@/utils/API";
-import { toast } from "react-toastify";
-import Cookies from "js-cookie";
-import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 
 export default function AllBuildingsType({ Building }: any) {
   if (!Building || Building.length === 0) {
@@ -31,23 +24,6 @@ export default function AllBuildingsType({ Building }: any) {
     <div>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
-          // const [Iam, setIam] = useState<any>(false);
-          // const token = Cookies.get("authToken") || false;
-
-          // useEffect(() => {
-          //   if (token) {
-          //     const myData = async () => {
-          //       try {
-          //         const ifme = await MyProfile();
-          //         if (ifme.username === building.property.client.username)
-          //           setIam(true);
-          //       } catch (error) {
-          //         toast.error("خطاء في جلب البانات");
-          //       }
-          //     };
-          //     myData();
-          //   }
-          // }, [building]);
           const propertyType = building.property_type?.ar || "N/A";
           const type = building?.property_type?.en || null;
 
@@ -87,8 +63,6 @@ export default function AllBuildingsType({ Building }: any) {
                   alt="montagab"
                   className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
                 />
-              </Link>
-              <Link href={`/buildings/${building.property.id}`}>
                 <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                   {propertyType}
                 </div>
@@ -105,23 +79,6 @@ export default function AllBuildingsType({ Building }: any) {
                   {building.property.offer}
                 </div>
               </Link>
-              {/* <div
-                className={`${
-                  Iam ? "flex justify-start items-center gap-4" : "hidden"
-                } `}
-              >
-                <Link
-                  href={`/buildings/edit-building?url=${building.id}`}
-                  className={`flex mb-5 mx-2 justify-start items-center gap-2 bg-accent w-max py-2 px-3 rounded-md`}
-                >
-                  <PiPenDuotone size={20} />
-                </Link>
-                <div
-                  className={`flex mb-5 mx-2 justify-start items-center gap-2 bg-red-600 w-max py-2 px-3 rounded-md`}
-                >
-                  <PiTrashDuotone size={20} />
-                </div>
-              </div> */}
             </div>
           );
         })}
