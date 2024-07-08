@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ImagApartment,
   ImagBuilding,
@@ -11,6 +11,11 @@ import {
   ImagLand,
 } from "../links";
 import BuildingError from "../error/BuildingError";
+import { MyProfile } from "@/utils/API";
+import { error } from "console";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 
 export default function AllBuildings({ Building }: any) {
   if (!Building || Building.length === 0) {
@@ -21,6 +26,22 @@ export default function AllBuildings({ Building }: any) {
     <div>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
+          const [Iam, setIam] = useState<any>(false);
+          const token = Cookies.get("authToken") || false;
+
+          useEffect(() => {
+            if (token) {
+              const myData = async () => {
+                try {
+                  const ifme = await MyProfile();
+                  if (ifme.username === building.client.username) setIam(true);
+                } catch (error) {
+                  toast.error("خطاء في جلب البانات");
+                }
+              };
+              myData();
+            }
+          }, [building]);
           const propertyType =
             building.property_object?.property_type?.ar || "N/A";
           const type = building.property_object?.property_type?.en || null;
@@ -42,22 +63,21 @@ export default function AllBuildings({ Building }: any) {
             imagee = ImagBuilding;
           }
           return (
-            <Link
-              href={`/buildings/${building.id}`}
-              key={building.id}
-              className="bg-sidpar rounded-xl relative"
-            >
-              <Image
-                src={
-                  building.photos.length !== 0
-                    ? building.photos[0].photo
-                    : imagee[0].photo
-                }
-                width={1000}
-                height={0}
-                alt="montagab"
-                className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
-              />
+            <div key={building.id} className="bg-sidpar rounded-xl relative">
+              <Link href={`/buildings/${building.id}`}>
+                <Image
+                  src={
+                    building.photos.length !== 0
+                      ? building.photos[0].photo
+                      : imagee[0].photo
+                  }
+                  width={1000}
+                  height={0}
+                  alt="montagab"
+                  className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
+                />
+              </Link>
+              <Link href={`/buildings/${building.id}`}>
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                 {propertyType}
               </div>
@@ -73,7 +93,26 @@ export default function AllBuildings({ Building }: any) {
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                 {building.offer}
               </div>
-            </Link>
+              </Link>
+              {Iam && (
+                <div className="flex justify-start items-center gap-4">
+                  <div>
+                    <Link
+                      href={`/buildings/edit-building?url=${building.id}`}
+                      className="flex mb-5 mx-2 justify-start items-center gap-2 bg-accent w-max py-2 px-3 rounded-md"
+                    >
+                      <PiPenDuotone size={20} />
+                    </Link>
+                  </div>
+                  <div
+                    className="flex mb-5 mx-2 justify-start items-center gap-2 bg-red-600 w-max py-2 px-3 rounded-md cursor-pointer"
+                   
+                  >
+                    <PiTrashDuotone size={20} />
+                  </div>
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
