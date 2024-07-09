@@ -104,7 +104,7 @@ export default function Land({ apartment }: any) {
   return (
     <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ">
+        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
           {imagee.map((index: any, id: any) => {
             return (
               <div key={id} className="relative">
@@ -115,23 +115,31 @@ export default function Land({ apartment }: any) {
                   alt={`Gallery Image`}
                   className="  object-center rounded-md cursor-pointer"
                 />
-                <div
+                <button
                   className={`${
-                    imagee === ImagLand ? "hidden" : "block"
+                    imagee === ImagLand ? "hidden" : ""
                   } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
                 >
                   <PiTrashDuotone size={30} />
-                </div>
+                </button>
               </div>
             );
           })}
-          <Image
-            src={photo}
-            width={300}
-            height={0}
-            alt="user"
-            className={`${photo === "" ? "hidden" : "block"} rounded-md`}
-          />
+          <div className={`relative ${photo === "" ? "hidden" : "block"}`}>
+            <Image
+              src={photo}
+              width={300}
+              height={0}
+              alt="user"
+              className={` rounded-md`}
+            />
+            <button
+              onClick={() => setPhoto("")}
+              className={`p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
+            >
+              <PiTrashDuotone size={30} />
+            </button>
+          </div>
           <button
             onClick={handleIconClick}
             className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
