@@ -52,7 +52,7 @@ export default function MobileSidpar() {
               key={index}
               className={`flex flex-col items-center ${
                 isActive
-                  ? "bg-accent p-2  rounded-full w-16 h-16 mt-[-40px]"
+                  ? "bg-accent p-3  rounded-full w-16 h-16 mt-[-40px]"
                   : "text-gray-400"
               }`}
             >

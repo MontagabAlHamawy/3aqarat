@@ -85,7 +85,7 @@ export default function AllMyBuildings({ Building }: any) {
                   <PiPenDuotone size={20} />
                 </Link>
                 <div
-                  className={`flex mb-5 mx-2 justify-start items-center gap-2 bg-red-600 w-max py-2 px-3 rounded-md`}
+                  className={`flex mb-5 mx-2 cursor-pointer justify-start items-center gap-2 bg-red-600 w-max py-2 px-3 rounded-md`}
                 >
                   <PiTrashDuotone size={20} />
                 </div>

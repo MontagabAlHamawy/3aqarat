@@ -54,8 +54,7 @@ export default function AllBuildingsType({ Building }: any) {
             <Link
               key={building.property.id}
               href={`/buildings/${building.property.id}`}
-              className="bg-sidpar hover:bg-section rounded-xl relative 
-               flex justify-between items-start flex-col h-auto"
+              className="bg-body hover:bg-sidpar rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
               <Image
                 src={imageUrl}

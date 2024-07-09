@@ -205,7 +205,7 @@ export default function Commercialproperty({ apartment }: any) {
               الملكية :
             </label>
             <select
-              className="w-80 xl:w-full h-11 border p-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-full h-11 border pr-2 rounded-lg bg-section border-section text-white"
               {...register("tabu", { required: true })}
             >
               <option value="طابو أخضر ( السجل العقاري )">
