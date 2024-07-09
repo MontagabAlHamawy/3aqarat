@@ -51,35 +51,35 @@ export default function AllBuildingsType({ Building }: any) {
               : imagee[0].photo;
 
           return (
-            <div
+            <Link
               key={building.property.id}
-              className="bg-sidpar rounded-xl relative"
+              href={`/buildings/${building.property.id}`}
+              className="bg-sidpar hover:bg-section rounded-xl relative 
+               flex justify-between items-start flex-col h-auto"
             >
-              <Link href={`/buildings/${building.property.id}`}>
-                <Image
-                  src={imageUrl}
-                  width={1000}
-                  height={0}
-                  alt="montagab"
-                  className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
-                />
-                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
-                  {propertyType}
-                </div>
-                <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
-                  {building.property.title}
-                </p>
-                <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
-                  {building.property.description}
-                </p>
-                <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
-                  <p className="text-accent">{building.property.price}ل.س</p>
-                </div>
-                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
-                  {building.property.offer}
-                </div>
-              </Link>
-            </div>
+              <Image
+                src={imageUrl}
+                width={1000}
+                height={0}
+                alt="montagab"
+                className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
+              />
+              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
+                {propertyType}
+              </div>
+              <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
+                {building.property.title}
+              </p>
+              <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
+                {building.property.description}
+              </p>
+              <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
+                <p className="text-accent">{building.property.price}ل.س</p>
+              </div>
+              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+                {building.property.offer}
+              </div>
+            </Link>
           );
         })}
       </div>

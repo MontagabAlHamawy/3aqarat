@@ -43,7 +43,10 @@ export default function AllMyBuildings({ Building }: any) {
             imagee = ImagBuilding;
           }
           return (
-            <div key={building.id} className="bg-sidpar rounded-xl relative">
+            <div
+              key={building.id}
+              className="bg-body hover:bg-sidpar rounded-xl relative flex justify-between items-start flex-col h-auto"
+            >
               <Link href={`/buildings/${building.id}`}>
                 <Image
                   src={
@@ -74,17 +77,16 @@ export default function AllMyBuildings({ Building }: any) {
                   {building.offer}
                 </div>
               </Link>
-              <div className="flex justify-start items-center gap-4">
+              <div className="flex justify-between xl:justify-start w-full items-center gap-4">
                 <Link
                   href={`/buildings/edit-building?url=${building.id}`}
-                  className={`flex mb-5 mx-2 justify-start items-center gap-2   bg-accent w-max py-2 px-3 rounded-md`}
+                  className={`flex mb-5 mx-2 justify-start items-center gap-2 bg-accent w-max py-2 px-3 rounded-md`}
                 >
                   <PiPenDuotone size={20} />
                 </Link>
                 <div
-                  className={`flex mb-5 mx-2 justify-start items-center gap-2   bg-red-600 w-max py-2 px-3 rounded-md`}
+                  className={`flex mb-5 mx-2 justify-start items-center gap-2 bg-red-600 w-max py-2 px-3 rounded-md`}
                 >
-                  {" "}
                   <PiTrashDuotone size={20} />
                 </div>
               </div>

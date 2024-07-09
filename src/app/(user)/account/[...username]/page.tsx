@@ -145,35 +145,25 @@ export default function Username(props: any) {
           >
             <div className="flex flex-row xl:flex-col gap-5 justify-between items-center xl:items-start w-full">
               <div onClick={() => logout()}>
-                <div className="bg-accent cursor-pointer flex justify-start items-center xl:gap-2 text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
+                <div className="bg-indigo-600 cursor-pointer flex justify-start items-center gap-1 xl:gap-2 text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-indigo-500 ease-in duration-300">
                   <PiUploadSimpleDuotone size={24} />
                   <p>تسجيل الخروج</p>
                 </div>
               </div>
               <Link href="/account/edit-account">
-                <div className="bg-accent flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
+                <div className="bg-accent flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
                   <PiPenDuotone size={24} />
                   <p>تعديل الحساب</p>
                 </div>
               </Link>
             </div>
             <div>
-              <div className="bg-red-600 flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300">
+              <div className="bg-red-600 flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300">
                 <PiTrashDuotone size={24} />
                 <p>حذف الحسب</p>
               </div>
             </div>
           </div>
-          {/* <div
-            className={`${
-              Iam ? "flex" : "hidden"
-            }  xl:flex-col justify-between items-center xl:items-start w-full xl:w-max mb-20 gap-[1px] xl:gap-5 px-1 xl:px-5  absolute   xl:top-1 xl:left-5 `}
-          >
-            <div className="bg-red-600 flex xl:hidden  justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-1 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300">
-              <PiTrashDuotone size={24} />
-              <p>حذف الحسب</p>
-            </div>
-          </div> */}
         </div>
       </div>
 

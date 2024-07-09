@@ -191,7 +191,7 @@ export default function Buildin(props: any) {
               <p className="text-xl text-accent">{building.price} ل.س</p>
               <p className="text-lg font-thin text-gray-400">{formattedDate}</p>
             </div>
-            <div className="flex justify-between items-center mx-[-10px] xl:mx-3 cursor-pointer">
+            <div className="flex justify-between items-center mx-[-5px] xl:mx-3 cursor-pointer">
               <Link href={`/account/${building.client.username}`}>
                 <div className="flex gap-1 xl:gap-2 justify-center items-center">
                   <Image
