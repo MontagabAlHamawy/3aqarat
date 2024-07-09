@@ -67,20 +67,27 @@ export default function EditBuilding(props: any) {
   }
   return (
     <div>
-      <div className={`${isLand ? "block" : "hidden"}`}>
-        <Land apartment={building} />
+      <div>
+        <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
+          تعديل معلومات العقار
+        </h1>
       </div>
-      <div className={`${isApartment ? "block" : "hidden"}`}>
-        <Apartment apartment={building} />
-      </div>
-      <div className={`${isCommercialproperty ? "block" : "hidden"}`}>
-        <Commercialproperty apartment={building} />
-      </div>
-      <div className={`${isBuilding ? "block" : "hidden"}`}>
-        <BBuilding building={building} />
-      </div>
-      <div className={`${isHouse ? "block" : "hidden"}`}>
-        <House apartment={building} />
+      <div>
+        <div className={`${isLand ? "block" : "hidden"}`}>
+          <Land apartment={building} />
+        </div>
+        <div className={`${isApartment ? "block" : "hidden"}`}>
+          <Apartment apartment={building} />
+        </div>
+        <div className={`${isCommercialproperty ? "block" : "hidden"}`}>
+          <Commercialproperty apartment={building} />
+        </div>
+        <div className={`${isBuilding ? "block" : "hidden"}`}>
+          <BBuilding building={building} />
+        </div>
+        <div className={`${isHouse ? "block" : "hidden"}`}>
+          <House apartment={building} />
+        </div>
       </div>
     </div>
   );

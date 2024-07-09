@@ -1,3 +1,4 @@
+"use client";
 import { ImagApartment, ImagBuilding, ImagLand } from "../links";
 import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
@@ -12,8 +13,27 @@ import {
   PiBasketDuotone,
   PiTrashDuotone,
 } from "react-icons/pi";
+import { useRef, useState } from "react";
 
 export default function Land({ apartment }: any) {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [photo, setPhoto] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setSelectedFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPhoto(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const handleIconClick = () => {
+    fileInputRef.current?.click();
+  };
   const router = useRouter();
   const {
     register,
@@ -86,7 +106,6 @@ export default function Land({ apartment }: any) {
       <div>
         <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-10 xl:mb-6 ">
           {imagee.map((index: any, id: any) => {
-            console.log(index);
             return (
               <div key={id} className="relative">
                 <Image
@@ -106,9 +125,25 @@ export default function Land({ apartment }: any) {
               </div>
             );
           })}
-          <div className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer">
+          <Image
+            src={photo}
+            width={300}
+            height={0}
+            alt="user"
+            className={`${photo === "" ? "hidden" : "block"} rounded-md`}
+          />
+          <button
+            onClick={handleIconClick}
+            className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
+          >
             <PiPlusCircleDuotone size={50} />
-          </div>
+          </button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
         </div>
       </div>
       <form

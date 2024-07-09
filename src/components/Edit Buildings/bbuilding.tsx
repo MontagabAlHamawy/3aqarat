@@ -1,3 +1,4 @@
+"use client";
 import { ImagBuilding } from "../links";
 import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
@@ -8,8 +9,27 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { PiTrashDuotone, PiPlusCircleDuotone } from "react-icons/pi";
+import { useRef, useState } from "react";
 
 export default function BBuilding({ building }: any) {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [photo, setPhoto] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setSelectedFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPhoto(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const handleIconClick = () => {
+    fileInputRef.current?.click();
+  };
   const router = useRouter();
   const {
     register,
@@ -70,7 +90,7 @@ export default function BBuilding({ building }: any) {
     }
   };
 
-  let imagee:any;
+  let imagee: any;
   if (building.photos.length !== 0) {
     imagee = building.photos;
   } else {
@@ -109,16 +129,35 @@ export default function BBuilding({ building }: any) {
                   alt={`Gallery Image`}
                   className="  object-center rounded-md cursor-pointer"
                 />
-                 <div className={`${
-                    imagee === ImagBuilding? "hidden" : "block" } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}>
+                <div
+                  className={`${
+                    imagee === ImagBuilding ? "hidden" : "block"
+                  } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
+                >
                   <PiTrashDuotone size={30} />
                 </div>
               </div>
             );
           })}
-          <div className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer">
+          <Image
+            src={photo}
+            width={300}
+            height={0}
+            alt="user"
+            className={`${photo === "" ? "hidden" : "block"} rounded-md`}
+          />
+          <button
+            onClick={handleIconClick}
+            className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
+          >
             <PiPlusCircleDuotone size={50} />
-          </div>
+          </button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
         </div>
       </div>
       <form
@@ -248,7 +287,7 @@ export default function BBuilding({ building }: any) {
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
           </div>
-          </div>
+        </div>
         <div className="mb-4 flex justify-start items-center">
           <button
             type="submit"
