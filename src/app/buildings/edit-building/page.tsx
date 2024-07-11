@@ -14,38 +14,37 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function EditBuilding(props: any) {
-  console.log("props=", props);
 
   const page = props.searchParams.url;
-  console.log("page=", page);
+
   const [building, setBuilding] = useState<any>(null);
   const router = useRouter();
-
-  if (page === undefined) {
-    router.replace(`/buildings/`);
-  } else {
-    useEffect(() => {
-      const myData = async () => {
-        const buildingData: any = await SingelBuildingApi(page);
-        const token = Cookies.get("authToken") || false;
-        if (buildingData === null) {
-          toast.error("خطاء في جلب البيانات ");
-          NotFound();
-        } else {
-          if (token) {
-            const ifme = await MyProfile();
-            if (ifme.username !== buildingData.client.username) {
-              router.replace(`/buildings/${props.searchParams.url}`);
-            }
-          } else {
-            router.replace(`/login?url=buildings/${props.searchParams.url}`);
+  useEffect(() => {
+    if (page === undefined) {
+      router.replace(`/buildings/`);
+    }
+  }, [page]);
+  useEffect(() => {
+    const myData = async () => {
+      const buildingData: any = await SingelBuildingApi(page);
+      const token = Cookies.get("authToken") || false;
+      if (buildingData === null) {
+        toast.error("خطاء في جلب البيانات ");
+        NotFound();
+      } else {
+        if (token) {
+          const ifme = await MyProfile();
+          if (ifme.username !== buildingData.client.username) {
+            router.replace(`/buildings/${props.searchParams.url}`);
           }
-          setBuilding(buildingData);
+        } else {
+          router.replace(`/login?url=buildings/${props.searchParams.url}`);
         }
-      };
-      myData();
-    }, [page]);
-  }
+        setBuilding(buildingData);
+      }
+    };
+    myData();
+  }, [page]);
   if (!building) {
     return <SingleBuildingLoade />;
   }
