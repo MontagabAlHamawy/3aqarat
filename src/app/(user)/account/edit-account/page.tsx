@@ -27,12 +27,14 @@ export default function EditAccount() {
   });
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
-    let token = GetToken();
+    const token = GetToken();
     if (!token) {
       router.replace("/login");
     }
+  }, [router]);
+
+  useEffect(() => {
     async function fetchData() {
       try {
         const data = await MyProfile();
