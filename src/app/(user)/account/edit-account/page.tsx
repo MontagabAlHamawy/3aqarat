@@ -25,16 +25,12 @@ export default function EditAccount() {
     instagram_account: "",
     telegram_account: "",
   });
-
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    let token = GetToken();
-    if (!token) {
-      router.replace("/login");
-    }
-  }, [router]);
+  let token = GetToken();
+  if (!token) {
+    router.replace("/login");
+  }
 
   useEffect(() => {
     async function fetchData() {
