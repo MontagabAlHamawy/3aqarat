@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 import UsersLoading from "@/components/loade/UsersLoading";
 import { PiPenDuotone } from "react-icons/pi";
 import { handleEditAccount } from "@/components/sweetalert/handleEditAccount";
@@ -17,12 +16,21 @@ export default function EditAccount() {
     useState<string>("/user-avatar.png");
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [formData, setFormData] = useState({
+    email: "",
+    first_name: "",
+    last_name: "",
+    phone_number: "",
+    facebook_account: "",
+    instagram_account: "",
+    telegram_account: "",
+  });
 
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const token = Cookies.get("authToken") || false;
+    let token = GetToken();
     if (!token) {
       router.replace("/login");
     }
@@ -35,13 +43,13 @@ export default function EditAccount() {
         const response = await userInfo();
         setUser(response.email);
         setFormData({
-          email: response.email,
-          first_name: data.first_name,
-          last_name: data.last_name,
-          phone_number: data.phone_number,
-          facebook_account: data.facebook_account,
-          instagram_account: data.instagram_account,
-          telegram_account: data.telegram_account,
+          email: response.email || "",
+          first_name: data.first_name || "",
+          last_name: data.last_name || "",
+          phone_number: data.phone_number || "",
+          facebook_account: data.facebook_account || "",
+          instagram_account: data.instagram_account || "",
+          telegram_account: data.telegram_account || "",
         });
         if (data.profile_photo) {
           setPhoto(data.profile_photo);
@@ -56,19 +64,8 @@ export default function EditAccount() {
     fetchData();
   }, []);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    first_name: "",
-    last_name: "",
-    phone_number: "",
-    facebook_account: "",
-    instagram_account: "",
-    telegram_account: "",
-  });
-
   const updateUserProfile = async () => {
     const url = `${apiUrl}/profile/me/`;
-
     try {
       let token = GetToken();
       const formDataToSend = new FormData();
@@ -109,10 +106,10 @@ export default function EditAccount() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,7 +129,7 @@ export default function EditAccount() {
   };
 
   const handleEditAccountClick = () => {
-    handleEditAccount(handleSubmit); 
+    handleEditAccount(handleSubmit);
   };
 
   const handleSubmit = async () => {
@@ -192,7 +189,7 @@ export default function EditAccount() {
                 type="text"
                 name="email"
                 placeholder="Your Email"
-                value={formData.email}
+                value={formData.email || ""}
                 onChange={handleChange}
                 required={true}
                 className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
@@ -207,7 +204,7 @@ export default function EditAccount() {
                   type="text"
                   name="first_name"
                   placeholder="First Name (En)"
-                  value={formData.first_name}
+                  value={formData.first_name || ""}
                   onChange={handleChange}
                   required={true}
                   className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
@@ -221,7 +218,7 @@ export default function EditAccount() {
                   type="text"
                   name="last_name"
                   placeholder="Last Name (En)"
-                  value={formData.last_name}
+                  value={formData.last_name || ""}
                   onChange={handleChange}
                   required={true}
                   className="w-full border p-2 rounded-lg bg-section border-section text-white"
@@ -238,7 +235,7 @@ export default function EditAccount() {
                   type="text"
                   name="phone_number"
                   placeholder="Phone Number"
-                  value={formData.phone_number}
+                  value={formData.phone_number || ""}
                   onChange={handleChange}
                   className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
                 />
@@ -251,7 +248,7 @@ export default function EditAccount() {
                   type="text"
                   placeholder="Telegram Account"
                   name="telegram_account"
-                  value={formData.telegram_account}
+                  value={formData.telegram_account || ""}
                   onChange={handleChange}
                   className="w-full border p-2 rounded-lg bg-section border-section text-white"
                 />
@@ -266,34 +263,32 @@ export default function EditAccount() {
                   type="text"
                   name="facebook_account"
                   placeholder="Facebook Account"
-                  value={formData.facebook_account}
+                  value={formData.facebook_account || ""}
                   onChange={handleChange}
                   className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
                 />
               </div>
               <div>
                 <label className="block text-white text-sm font-semibold mb-2">
-                  حساب الانستجرام:
+                  حساب الإنستغرام:
                 </label>
                 <input
                   type="text"
-                  name="instagram_account"
                   placeholder="Instagram Account"
-                  value={formData.instagram_account}
+                  name="instagram_account"
+                  value={formData.instagram_account || ""}
                   onChange={handleChange}
                   className="w-full border p-2 rounded-lg bg-section border-section text-white"
                 />
               </div>
             </div>
 
-            <div className="flex justify-between">
-              <button
-                type="submit"
-                className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300"
-              >
-                تعديل المعلومات
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="w-full bg-accent hover:bg-hover rounded-lg p-2 text-white font-bold mt-4"
+            >
+              تعديل المعلومات
+            </button>
           </form>
         </div>
       </div>
