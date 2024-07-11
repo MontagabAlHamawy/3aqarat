@@ -27,12 +27,6 @@ export default function EditAccount() {
   });
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    const token = GetToken();
-    if (!token) {
-      router.replace("/login");
-    }
-  }, [router]);
 
   useEffect(() => {
     async function fetchData() {
@@ -61,6 +55,13 @@ export default function EditAccount() {
     }
     fetchData();
   }, []);
+  
+  useEffect(() => {
+    const token = GetToken();
+    if (!token) {
+      router.replace("/login");
+    }
+  }, [router]);
 
   const updateUserProfile = async () => {
     const url = `${apiUrl}/profile/me/`;
@@ -160,7 +161,7 @@ export default function EditAccount() {
           />
           <button
             onClick={handleIconClick}
-            className="absolute top-0 right-0 bg-accent text-white rounded-full p-2"
+            className="absolute top-1 right-1 xl:right-9 bg-accent text-white rounded-full p-2"
           >
             <PiPenDuotone size={24} />
           </button>
@@ -280,10 +281,9 @@ export default function EditAccount() {
                 />
               </div>
             </div>
-
             <button
               type="submit"
-              className="w-full bg-accent hover:bg-hover rounded-lg p-2 text-white font-bold mt-4"
+              className=" bg-accent hover:bg-hover  rounded-lg p-2 text-white font-bold mt-4"
             >
               تعديل المعلومات
             </button>
