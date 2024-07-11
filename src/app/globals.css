@@ -2,16 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");
 
 body {
   direction: rtl;
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
 }
 
-
-.leaflet-bottom.leaflet-right{
+.swal2-popup {
+  background-color: #18171d;
+}
+.leaflet-bottom.leaflet-right {
   display: none;
 }
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,

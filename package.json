@@ -37,6 +37,8 @@
     "react-scroll": "^1.9.0",
     "react-toastify": "^10.0.5",
     "sharp": "^0.33.3",
+    "sweetalert2": "^11.6.13",
+    "sweetalert2-react-content": "^5.0.7",
     "swiper": "^11.1.0"
   },
   "devDependencies": {

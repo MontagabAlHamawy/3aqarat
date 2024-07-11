@@ -203,3 +203,23 @@ export async function MyProfile() {
     throw error;
   }
 }
+
+export async function DeletMyAccount() {
+  let token = GetToken();
+  try {
+    const response = await axios.delete(`${apiUrl}/auth/users/me`, {
+      headers: {
+        'Authorization': `JWT ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.status === 404) {
+      RefreshToken();
+      return notFound();
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    throw error;
+  }
+}

@@ -8,11 +8,13 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import UsersLoading from "@/components/loade/UsersLoading";
 import { PiPenDuotone } from "react-icons/pi";
+import { handleEditAccount } from "@/components/sweetalert/handleEditAccount";
 
 export default function EditAccount() {
-  const [user, setUser] = useState<any>(null);
-  const [photo, setPhoto] = useState("/user-avatar.png");
-  const [originalPhoto, setOriginalPhoto] = useState("/user-avatar.png");
+  const [user, setUser] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string>("/user-avatar.png");
+  const [originalPhoto, setOriginalPhoto] =
+    useState<string>("/user-avatar.png");
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -41,8 +43,10 @@ export default function EditAccount() {
           instagram_account: data.instagram_account,
           telegram_account: data.telegram_account,
         });
-        setPhoto(data.profile_photo);
-        setOriginalPhoto(data.profile_photo);
+        if (data.profile_photo) {
+          setPhoto(data.profile_photo);
+          setOriginalPhoto(data.profile_photo);
+        }
       } catch (error) {
         console.error("Error fetching profile:", error);
       } finally {
@@ -51,42 +55,6 @@ export default function EditAccount() {
     }
     fetchData();
   }, []);
-
-  const updateUserProfile = async () => {
-    const url = `${apiUrl}/profile/me/`;
-
-    try {
-      let token = GetToken();
-      const formData = new FormData();
-      formData.append("first_name", data.first_name);
-      formData.append("last_name", data.last_name);
-      formData.append("phone_number", data.phone_number);
-      formData.append("facebook_account", data.facebook_account);
-      formData.append("instagram_account", data.instagram_account);
-      formData.append("telegram_account", data.telegram_account);
-      if (selectedFile) {
-        formData.append("profile_photo", selectedFile);
-      }
-
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-
-      await response.json();
-    } catch (error) {
-      toast.error("Error");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const [formData, setFormData] = useState({
     email: "",
@@ -98,13 +66,45 @@ export default function EditAccount() {
     telegram_account: "",
   });
 
-  const data = {
-    facebook_account: formData.facebook_account,
-    first_name: formData.first_name,
-    instagram_account: formData.instagram_account,
-    last_name: formData.last_name,
-    phone_number: formData.phone_number,
-    telegram_account: formData.telegram_account,
+  const updateUserProfile = async () => {
+    const url = `${apiUrl}/profile/me/`;
+
+    try {
+      let token = GetToken();
+      const formDataToSend = new FormData();
+
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("first_name", formData.first_name);
+      formDataToSend.append("last_name", formData.last_name);
+      formDataToSend.append("phone_number", formData.phone_number);
+      formDataToSend.append("facebook_account", formData.facebook_account);
+      formDataToSend.append("instagram_account", formData.instagram_account);
+      formDataToSend.append("telegram_account", formData.telegram_account);
+      if (selectedFile) {
+        formDataToSend.append("profile_photo", selectedFile);
+      }
+
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+        body: formDataToSend,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+
+      await response.json();
+      toast.success("تم تعديل المعلومات بنجاح");
+      router.replace(`/account`);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("حدث خطأ أثناء تحديث المعلومات");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -131,12 +131,13 @@ export default function EditAccount() {
     fileInputRef.current?.click();
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleEditAccountClick = () => {
+    handleEditAccount(handleSubmit); 
+  };
+
+  const handleSubmit = async () => {
     try {
       await updateUserProfile();
-      toast.success("تم تعديل المعلومات بنجاح");
-      router.push("/account");
     } catch (error) {
       toast.error("Error updating profile");
     }
@@ -176,7 +177,13 @@ export default function EditAccount() {
           />
         </div>
         <div className="xl:pl-20 w-full max-w-md px-10 xl:px-0">
-          <form className="w-full xl:max-w-md" onSubmit={handleSubmit}>
+          <form
+            className="w-full xl:max-w-md"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleEditAccountClick();
+            }}
+          >
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 البريد الإلكتروني:

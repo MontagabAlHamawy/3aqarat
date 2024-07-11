@@ -13,8 +13,11 @@ import {
 } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import NotFound from "@/app/not-found";
 import {
+  DeletMyAccount,
   MyProfile,
   userBuilding,
   userBuildingLimit,
@@ -23,6 +26,8 @@ import {
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import UsersLoading from "@/components/loade/UsersLoading";
 import AllMyBuildings from "@/components/BuildingCom/AllMyBuildings";
+import { handleDeleteAccount } from "@/components/sweetalert/handleDeleteAccount";
+import { handleLogout } from "@/components/sweetalert/handleLogout"; // استدعاء المكون الجديد
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
@@ -30,7 +35,14 @@ export default function Username(props: any) {
   const [Building, setBuilding] = useState<any>(null);
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [loading, setLoading] = useState<boolean>(true);
+
   const router = useRouter();
+  const MySwal = withReactContent(Swal);
+  function logout() {
+    Cookies.set("authToken", "");
+    Cookies.set("refreshToken", "");
+    router.replace(`/login`);
+  }
 
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
@@ -76,11 +88,14 @@ export default function Username(props: any) {
     myData();
   }, [props.params.username]);
 
-  function logout() {
-    Cookies.set("authToken", "");
-    Cookies.set("refreshToken", "");
-    router.replace(`/login`);
+  function DeletA() {
+    handleDeleteAccount(logout);
   }
+
+  function handleLogoutClick() {
+    handleLogout(logout);
+  }
+
   if (photo === null) {
     setPhoto("/user-avatar.png");
   }
@@ -110,6 +125,7 @@ export default function Username(props: any) {
             <h1 className="text-accent text-2xl font-bold">
               {user?.first_name} {user?.last_name}
             </h1>
+            <p className="text-neutral-400 font-light">{user?.username}@</p>
             <Link href={`tel:${user?.phone_number}`}>{user?.phone_number}</Link>
             <div className="flex flex-row justify-center items-center gap-3">
               {user?.facebook_account && (
@@ -144,7 +160,7 @@ export default function Username(props: any) {
             }  flex flex-col justify-between items-start xl:items-start mb-40 w-full xl:w-max  gap-5 px-1 xl:px-5  absolute top-[-110px]  xl:top-1 xl:left-5 `}
           >
             <div className="flex flex-row xl:flex-col gap-5 justify-between items-center xl:items-start w-full">
-              <div onClick={() => logout()}>
+              <div onClick={handleLogoutClick}>
                 <div className="bg-indigo-600 cursor-pointer flex justify-start items-center gap-1 xl:gap-2 text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-indigo-500 ease-in duration-300">
                   <PiUploadSimpleDuotone size={24} />
                   <p>تسجيل الخروج</p>
@@ -157,10 +173,10 @@ export default function Username(props: any) {
                 </div>
               </Link>
             </div>
-            <div>
+            <div onClick={DeletA}>
               <div className="bg-red-600 flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300">
                 <PiTrashDuotone size={24} />
-                <p>حذف الحسب</p>
+                <p>حذف الحساب</p>
               </div>
             </div>
           </div>
