@@ -2,16 +2,23 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BuildingError from "../error/BuildingError";
-import { ImagApartment, ImagBuilding, ImagCommercials, ImagHouse, ImagLand } from "../links";
+import {
+  ImagApartment,
+  ImagBuilding,
+  ImagCommercials,
+  ImagHouse,
+  ImagLand,
+} from "../links";
 
 export default function SearchBuilding({ bil }: any) {
+  console.log("bil=", bil);
   if (!bil) {
     return <BuildingError />;
   }
-  
+
   return (
     <div>
-      {bil.map((house: any) => {
+      {bil.map((house: any, index: any) => {
         let imagee = ImagBuilding;
 
         if (house.property_object?.property_type?.en === "apartment") {
@@ -30,7 +37,7 @@ export default function SearchBuilding({ bil }: any) {
         return (
           <Link
             href={`/buildings/${house.id}`}
-            key={house.id}
+            key={index}
             className="bg-sidpar rounded-xl flex flex-row justify-between items-center my-3 p-1"
           >
             <div className="flex gap-1 flex-col">
@@ -43,7 +50,7 @@ export default function SearchBuilding({ bil }: any) {
             <div>
               <Image
                 src={
-                  house.photos.length !== 0
+                  house.photos && house.photos.length !== 0
                     ? house.photos[0].photo
                     : imagee[0].photo
                 }

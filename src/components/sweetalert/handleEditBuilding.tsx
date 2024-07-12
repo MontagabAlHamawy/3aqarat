@@ -3,13 +3,13 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-export function handleLogout(logout: () => void) {
+export function handleEditBuilding(handleSubmit: () => void) {
   MySwal.fire({
     title: "هل أنت متأكد؟",
-    text: "هل تريد تسجيل الخروج؟",
+    text: "هل تريد تعديل المعلومات؟",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonText: "سجل الخروج",
+    confirmButtonText: "تعديل المعلومات",
     cancelButtonText: "تراجع",
     customClass: {
       confirmButton:
@@ -22,10 +22,10 @@ export function handleLogout(logout: () => void) {
   })
     .then((result) => {
       if (result.isConfirmed) {
-        logout();
+        handleSubmit();
         MySwal.fire({
-          title: "تم تسجيل الخروج",
-          text: "لقد تم تسجيل خروجك بنجاح.",
+          title: "تم التعديل",
+          text: "لقد تم تعديل المعلومات بنجاح.",
           confirmButtonText: "تم",
           icon: "success",
           customClass: {
@@ -40,7 +40,7 @@ export function handleLogout(logout: () => void) {
     .catch((error) => {
       MySwal.fire({
         title: "خطأ!",
-        text: "حدث خطأ أثناء تسجيل الخروج",
+        text: "حدث خطأ أثناء تعديل المعلومات.",
         confirmButtonText: "تم",
         icon: "error",
         customClass: {

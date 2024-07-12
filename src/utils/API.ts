@@ -2,6 +2,7 @@ import axios from "axios";
 import apiUrl from "./apiConfig";
 import Cookies from "js-cookie";
 import { notFound } from "next/navigation";
+import NotFound from "@/app/not-found";
 
 export function SaveToken(token: string) {
   Cookies.set("authToken", token, { expires: 5 });
@@ -104,6 +105,7 @@ export async function LimitBuildingApi(limit: any) {
   }
   return response.json();
 }
+
 
 export async function SingelBuildingApi(page: any) {
   const response = await fetch(`${apiUrl}/properties/${page}`);
@@ -222,4 +224,69 @@ export async function DeletMyAccount() {
     console.error('Error fetching profile:', error);
     throw error;
   }
+}
+
+export async function ApiCities() {
+  const response = await fetch(`${apiUrl}/cities/`);
+  if (response.status === 404) {
+    return notFound()
+  }
+  return response.json();
+}
+export async function ApiOfferTypes() {
+  const response = await fetch(`${apiUrl}/offer-types/`);
+  if (response.status === 404) {
+    return notFound()
+  }
+  return response.json();
+}
+
+
+export async function ApiSearch(search: any, offer: any, limit: any) {
+  const response = await fetch(`${apiUrl}/properties/?search=${search}&offer=${offer}&limit=${limit}`);
+
+  if (response.status === 404) {
+    return NotFound();
+  }
+  return response.json();
+}
+export async function ApiApartmentSearch(search: any, offer: any, limit: any) {
+  const response = await fetch(`${apiUrl}/apartments/?search=${search}&property__offer=${offer}&limit=${limit}`);
+
+  if (response.status === 404) {
+    return NotFound();
+  }
+  return response.json();
+}
+export async function ApiBuildingSearch(search: any, offer: any, limit: any) {
+  const response = await fetch(`${apiUrl}/buildings/?search=${search}&property__offer=${offer}&limit=${limit}`);
+
+  if (response.status === 404) {
+    return NotFound();
+  }
+  return response.json();
+}
+export async function ApiCommercialSearch(search: any, offer: any, limit: any) {
+  const response = await fetch(`${apiUrl}/commercial-properties/?search=${search}&property__offer=${offer}&limit=${limit}`);
+
+  if (response.status === 404) {
+    return NotFound();
+  }
+  return response.json();
+}
+export async function ApiHouseSearch(search: any, offer: any, limit: any) {
+  const response = await fetch(`${apiUrl}/houses/?search=${search}&property__offer=${offer}&limit=${limit}`);
+
+  if (response.status === 404) {
+    return NotFound();
+  }
+  return response.json();
+}
+export async function ApilandSearch(search: any, offer: any, limit: any) {
+  const response = await fetch(`${apiUrl}/lands/?search=${search}&property__offer=${offer}&limit=${limit}`);
+
+  if (response.status === 404) {
+    return NotFound();
+  }
+  return response.json();
 }

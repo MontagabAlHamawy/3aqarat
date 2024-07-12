@@ -19,14 +19,30 @@ export function handleEditAccount(handleSubmit: () => void) {
       popup: "text-white",
     },
     buttonsStyling: false,
-  }).then((result) => {
-    if (result.isConfirmed) {
-      handleSubmit();
+  })
+    .then((result) => {
+      if (result.isConfirmed) {
+        handleSubmit();
+        MySwal.fire({
+          title: "تم التعديل",
+          text: "لقد تم تعديل المعلومات بنجاح.",
+          confirmButtonText: "تم",
+          icon: "success",
+          customClass: {
+            confirmButton:
+              "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
+            popup: "text-white",
+          },
+          buttonsStyling: false,
+        });
+      }
+    })
+    .catch((error) => {
       MySwal.fire({
-        title: "تم التعديل",
-        text: "لقد تم تعديل المعلومات بنجاح.",
+        title: "خطأ!",
+        text: "حدث خطأ أثناء تعديل المعلومات.",
         confirmButtonText: "تم",
-        icon: "success",
+        icon: "error",
         customClass: {
           confirmButton:
             "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
@@ -34,6 +50,5 @@ export function handleEditAccount(handleSubmit: () => void) {
         },
         buttonsStyling: false,
       });
-    }
-  });
+    });
 }
