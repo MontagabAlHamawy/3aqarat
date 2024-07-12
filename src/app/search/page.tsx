@@ -227,10 +227,10 @@ export default function Search() {
         <div className="flex justify-center">
           <div className="w-full overflow-y-auto">
             <div className="flex flex-col h-[70vh] xl:flex-row gap-5 px-4">
-              <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center h-full bg-sidpar rounded-md">
+              <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <MapLoade />
               </div>
-              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center h-full bg-sidpar rounded-md">
+              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <BuildingLoade />
               </div>
             </div>
