@@ -33,8 +33,6 @@ interface Property {
 }
 
 export default function Search() {
-  const initialPrice = 10000000;
-  const [price, setPrice] = useState<number>(initialPrice);
   const [loading, setLoading] = useState(true);
   const [bil, setBui] = useState<Property[]>([]);
   const [offer, setOffer] = useState<any>([]);
@@ -225,6 +223,20 @@ export default function Search() {
           </div>
         </div>
       </div>
+      {loading && (
+        <div className="flex justify-center">
+          <div className="w-full overflow-y-auto">
+            <div className="flex flex-col h-[70vh] xl:flex-row gap-5 px-4">
+              <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center h-full bg-sidpar rounded-md">
+                <MapLoade />
+              </div>
+              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center h-full bg-sidpar rounded-md">
+                <BuildingLoade />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
