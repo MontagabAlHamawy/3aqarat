@@ -156,12 +156,12 @@ export default function Search() {
 
   return (
     <div>
-      <div className="flex xl:fixed top-26 w-full px-40 right-10 flex-col xl:flex-row gap-5 xl:gap-40 justify-center items-center bg-section xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
+      <div className="flex xl:fixed top-26 w-full px-40 right-10 flex-col xl:flex-row gap-7 xl:gap-40 justify-center items-center bg-section xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
         <div className="flex flex-row items-center justify-center gap-2">
           <input
             type="text"
             placeholder="اكتب نص البحث"
-            className="w-80  border p-2 rounded-lg bg-body border-body text-white"
+            className="w-40 xl:w-80  border p-2 rounded-lg bg-body border-body text-white"
             value={searchText}
             onChange={handleSearchTextChange}
           />
@@ -173,10 +173,10 @@ export default function Search() {
             <PiMagnifyingGlassDuotone />
           </button>
         </div>
-        <div className="flex flex-row justify-between items-center gap-36">
+        <div className="flex flex-row justify-between items-center gap-10 xl:gap-36">
           <div>
             <select
-              className="w-80 h-11 border pr-2 rounded-lg bg-body border-body text-white"
+              className="w-32 xl:w-80  h-11 border pr-2 rounded-lg bg-body border-body text-white"
               value={selectedOffer}
               onChange={handleOfferChange}
             >
@@ -190,7 +190,7 @@ export default function Search() {
           </div>
           <div>
             <select
-              className="w-80 h-11 border pr-2 rounded-lg bg-body border-body text-white"
+              className="w-32 xl:w-80  h-11 border pr-2 rounded-lg bg-body border-body text-white"
               value={propertyType}
               onChange={handlePropertyTypeChange}
             >
