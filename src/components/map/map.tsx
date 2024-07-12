@@ -22,7 +22,13 @@ import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
 import { PiMapPinDuotone } from "react-icons/pi";
 import MapLoade from "../loade/MapLoade";
-import { ImagApartment, ImagBuilding, ImagCommercials, ImagHouse, ImagLand } from "../links";
+import {
+  ImagApartment,
+  ImagBuilding,
+  ImagCommercials,
+  ImagHouse,
+  ImagLand,
+} from "../links";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -66,23 +72,28 @@ function LocationMarker() {
 }
 
 export default function Map({ building }: { building: any[] }) {
-  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>({});
+  console.log("building=", building);
+  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
+    {}
+  );
 
   useEffect(() => {
     if (building) {
       const newLocations: { [key: string]: LatLngLiteral } = {};
 
       building.forEach((houss) => {
-        if (houss.address && houss.address.geo_address) {
-          const coords = houss.address.geo_address.split(", ");
-          
+        if (houss.property.address && houss.property.address.geo_address) {
+          const coords = houss.property.address.geo_address.split(", ");
+
           if (coords.length === 2) {
             const lat = parseFloat(coords[0]) || 34.69498; // Default latitude
             const lng = parseFloat(coords[1]) || 36.7237; // Default longitude
 
-            newLocations[houss.id] = { lat, lng };
+            newLocations[houss.property.id] = { lat, lng };
           } else {
-            console.warn(`Invalid geo_address format for house ID ${houss.id}: ${houss.address.geo_address}`);
+            console.warn(
+              `Invalid geo_address format for house ID ${houss.property.id}: ${houss.property.address.geo_address}`
+            );
           }
         }
       });
@@ -109,23 +120,23 @@ export default function Map({ building }: { building: any[] }) {
         />
         <LocationMarker />
         {building.map((houss) => {
-          const location = locations[houss.id];
+          const location = locations[houss.property.id];
 
           if (!location) return null;
 
           let iconee;
           let imagee = ImagBuilding;
 
-          if (houss.property_object?.property_type?.en === "apartment") {
+          if (houss.property_type?.en === "apartment") {
             iconee = Apartment;
             imagee = ImagApartment;
-          } else if (houss.property_object?.property_type?.en === "commercialproperty") {
+          } else if (houss.property_type?.en === "commercialproperty") {
             iconee = Commercialproperty;
             imagee = ImagCommercials;
-          } else if (houss.property_object?.property_type?.en === "house") {
+          } else if (houss.property_type?.en === "house") {
             iconee = House;
             imagee = ImagHouse;
-          } else if (houss.property_object?.property_type?.en === "building") {
+          } else if (houss.property_type?.en === "building") {
             iconee = BuildingIcon;
             imagee = ImagBuilding;
           } else {
@@ -135,7 +146,7 @@ export default function Map({ building }: { building: any[] }) {
 
           return (
             <Marker
-              key={houss.id}
+              key={houss.property.id}
               icon={
                 new L.Icon({
                   iconUrl: iconee.src,
@@ -154,8 +165,8 @@ export default function Map({ building }: { building: any[] }) {
                 >
                   <Image
                     src={
-                      houss.photos.length !== 0
-                        ? houss.photos[0].photo
+                      houss.property.photos.length !== 0
+                        ? houss.property.photos[0].photo
                         : imagee[0].photo
                     }
                     width={150}
@@ -165,15 +176,15 @@ export default function Map({ building }: { building: any[] }) {
                   />
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
                     <p className="text-lg xl:text-xl text-accent">
-                      {houss.title}
+                      {houss.property.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
                       <p className="text-sidpar text-base font-semibold">
-                        {houss.description}
+                        {houss.property.description}
                       </p>
                     </div>
                     <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
-                      {houss.price} ل.س
+                      {houss.property.price} ل.س
                     </div>
                   </div>
                 </Link>

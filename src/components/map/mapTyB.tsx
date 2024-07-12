@@ -73,13 +73,17 @@ function LocationMarker() {
 }
 
 export default function MapTyB({ building }: { building: any[] }) {
-  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>({});
+  console.log("building=", building);
+
+  const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
+    {}
+  );
 
   useEffect(() => {
     if (building && building.length) {
       const newLocations: { [key: string]: LatLngLiteral } = {};
 
-      building.forEach((houss) => {
+      building.map((houss) => {
         const geoAddress = houss.property.address?.geo_address;
         if (geoAddress) {
           const coords = geoAddress.split(", ");
@@ -88,7 +92,9 @@ export default function MapTyB({ building }: { building: any[] }) {
             const lng = parseFloat(coords[1]) || 36.7237;
             newLocations[houss.id] = { lat, lng };
           } else {
-            console.warn(`تنسيق geo_address غير صالح للمنزل ID ${houss.id}: ${geoAddress}`);
+            console.warn(
+              `تنسيق geo_address غير صالح للمنزل ID ${houss.id}: ${geoAddress}`
+            );
           }
         }
       });
@@ -96,7 +102,6 @@ export default function MapTyB({ building }: { building: any[] }) {
       setLocations(newLocations);
     }
   }, [building]);
-
 
   if (!locations || Object.keys(locations).length === 0) {
     return <MapLoade />;
@@ -118,7 +123,6 @@ export default function MapTyB({ building }: { building: any[] }) {
         {building.map((houss) => {
           const location = locations[houss.id];
           if (!location) return null;
-
           let iconUrl;
           let imageSrc = ImagBuilding;
 
@@ -165,9 +169,7 @@ export default function MapTyB({ building }: { building: any[] }) {
                   className="flex flex-col justify-center font-cairo gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image
-                    src={
-                      houss.property.photos?.[0]?.photo || imageSrc[0].photo
-                    }
+                    src={houss.property.photos?.[0]?.photo || imageSrc[0].photo}
                     width={150}
                     height={100}
                     alt="montagab"
