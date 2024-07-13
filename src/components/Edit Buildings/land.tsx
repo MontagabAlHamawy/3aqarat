@@ -14,11 +14,13 @@ import {
   PiTrashDuotone,
 } from "react-icons/pi";
 import { useRef, useState } from "react";
+import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
 
 export default function Land({ apartment }: any) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { showConfirmation } = useConfirmationAlert();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -57,34 +59,35 @@ export default function Land({ apartment }: any) {
   };
 
   const onSubmit = async (data: any) => {
-    let token = GetToken();
-    let headersList = {
-      Accept: "*/*",
-      Authorization: `JWT ${token}`,
-      "Content-Type": "application/json",
-    };
+    await showConfirmation(async () => {
+      let token = GetToken();
+      let headersList = {
+        Accept: "*/*",
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json",
+      };
 
-    let bodyContent = {
-      property: {
-        area: Number(data.area),
-        price: Number(data.price),
-        title: data.title,
-        description: data.description,
-        tabu: tabuMapping[data.tabu],
-      },
-    };
+      let bodyContent = {
+        property: {
+          area: Number(data.area),
+          price: Number(data.price),
+          title: data.title,
+          description: data.description,
+          tabu: tabuMapping[data.tabu],
+        },
+      };
 
-    try {
-      await axios.patch(`${apiUrl}/lands/${apartment.id}/`, bodyContent, {
-        headers: headersList,
-      });
-
-      toast.success("تم تعديل البيانات بنجاح");
-      router.replace(`/buildings/${apartment.id}`);
-    } catch (error) {
-      console.error("Error updating data:", error);
-      toast.error("فشل في ارسال البيانات");
-    }
+      try {
+        await axios.patch(`${apiUrl}/lands/${apartment.id}/`, bodyContent, {
+          headers: headersList,
+        });
+        toast.success("تم تعديل البيانات بنجاح");
+        router.replace(`/buildings/${apartment.id}`);
+      } catch (error) {
+        console.error("Error updating data:", error);
+        toast.error("فشل في ارسال البيانات");
+      }
+    });
   };
 
   let imagee: any;

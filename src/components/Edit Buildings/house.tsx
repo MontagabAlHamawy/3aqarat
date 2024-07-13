@@ -10,11 +10,13 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { PiPlusCircleDuotone, PiTrashDuotone } from "react-icons/pi";
 import { useRef, useState } from "react";
+import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
 
 export default function House({ apartment }: any) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { showConfirmation } = useConfirmationAlert();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -60,38 +62,39 @@ export default function House({ apartment }: any) {
   };
 
   const onSubmit = async (data: any) => {
-    let token = GetToken();
-    let headersList = {
-      Accept: "*/*",
-      Authorization: `JWT ${token}`,
-      "Content-Type": "application/json",
-    };
+    await showConfirmation(async () => {
+      let token = GetToken();
+      let headersList = {
+        Accept: "*/*",
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json",
+      };
 
-    let bodyContent = {
-      property: {
-        area: Number(data.area),
-        price: Number(data.price),
-        title: data.title,
-        description: data.description,
-        tabu: tabuMapping[data.tabu],
-      },
-      number_of_rooms: Number(data.number_of_rooms),
-      floor_number: Number(data.floor_number),
-      garden_area: Number(data.garden_area),
-      direction: data.direction,
-    };
-    try {
-      await axios.patch(`${apiUrl}/houses/${apartment.id}/`, bodyContent, {
-        headers: headersList,
-      });
-
-      toast.success("تم تعديل البيانات بنجاح");
-      router.replace(`/buildings/${apartment.id}`);
-    } catch (error) {
-      console.error("Error updating data:", error);
-      toast.error("فشل في ارسال البيانات");
-    }
-    console.log("bodyContent=", bodyContent);
+      let bodyContent = {
+        property: {
+          area: Number(data.area),
+          price: Number(data.price),
+          title: data.title,
+          description: data.description,
+          tabu: tabuMapping[data.tabu],
+        },
+        number_of_rooms: Number(data.number_of_rooms),
+        floor_number: Number(data.floor_number),
+        garden_area: Number(data.garden_area),
+        direction: data.direction,
+      };
+      try {
+        await axios.patch(`${apiUrl}/houses/${apartment.id}/`, bodyContent, {
+          headers: headersList,
+        });
+        toast.success("تم تعديل البيانات بنجاح");
+        router.replace(`/buildings/${apartment.id}`);
+      } catch (error) {
+        console.error("Error updating data:", error);
+        toast.error("فشل في ارسال البيانات");
+      }
+      console.log("bodyContent=", bodyContent);
+    });
   };
 
   let imagee: any;

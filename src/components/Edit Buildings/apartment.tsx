@@ -1,6 +1,5 @@
 "use client";
-import { ImagApartment, ImagBuilding } from "../links";
-import EditBSlide from "../Slide/EditBSlide";
+import { ImagApartment } from "../links";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import apiUrl from "@/utils/apiConfig";
@@ -10,11 +9,14 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { PiPlusCircleDuotone, PiTrashDuotone } from "react-icons/pi";
 import { useRef, useState } from "react";
+import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert"; // استيراد hook
 
 export default function Apartment({ apartment }: any) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const { showConfirmation } = useConfirmationAlert(); // استخدام hook
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -27,10 +29,11 @@ export default function Apartment({ apartment }: any) {
       reader.readAsDataURL(file);
     }
   };
+
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
-  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -57,37 +60,43 @@ export default function Apartment({ apartment }: any) {
   };
 
   const onSubmit = async (data: any) => {
-    let token = GetToken();
-    let headersList = {
-      Accept: "*/*",
-      Authorization: `JWT ${token}`,
-      "Content-Type": "application/json",
-    };
+    await showConfirmation(async () => {
+      let token = GetToken();
+      let headersList = {
+        Accept: "*/*",
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json",
+      };
 
-    let bodyContent = {
-      property: {
-        area: Number(data.area),
-        price: Number(data.price),
-        title: data.title,
-        description: data.description,
-        tabu: tabuMapping[data.tabu],
-      },
-      number_of_rooms: Number(data.number_of_rooms),
-      floor_number: Number(data.floor_number),
-      direction: data.direction,
-    };
+      let bodyContent = {
+        property: {
+          area: Number(data.area),
+          price: Number(data.price),
+          title: data.title,
+          description: data.description,
+          tabu: tabuMapping[data.tabu],
+        },
+        number_of_rooms: Number(data.number_of_rooms),
+        floor_number: Number(data.floor_number),
+        direction: data.direction,
+      };
 
-    try {
-      await axios.patch(`${apiUrl}/apartments/${apartment.id}/`, bodyContent, {
-        headers: headersList,
-      });
+      try {
+        await axios.patch(
+          `${apiUrl}/apartments/${apartment.id}/`,
+          bodyContent,
+          {
+            headers: headersList,
+          }
+        );
 
-      toast.success("تم تعديل البيانات بنجاح");
-      router.replace(`/buildings/${apartment.id}`);
-    } catch (error) {
-      console.error("Error updating data:", error);
-      toast.error("فشل في ارسال البيانات");
-    }
+        toast.success("تم تعديل البيانات بنجاح");
+        router.replace(`/buildings/${apartment.id}`);
+      } catch (error) {
+        console.error("Error updating data:", error);
+        toast.error("فشل في ارسال البيانات");
+      }
+    });
   };
 
   let imagee: any;
