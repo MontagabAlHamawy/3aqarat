@@ -36,33 +36,40 @@ import { useEffect, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
 import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Buildin(props: any) {
   const page = props.params.building[0];
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [building, setBuilding] = useState<any>(null);
   const [Iam, setIam] = useState<any>(false);
+  const router = useRouter();
+  useEffect(() => {
+    if (page === undefined) {
+      router.replace("/buildings");
+    }
+  }, []);
 
   useEffect(() => {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
-      if (buildingData.state) {
-      }
+      console.log("buildingData=", buildingData);
 
-      if (buildingData === null) {
+      if (!buildingData.id) {
         toast.error("خطاء في جلب البيانات ");
-        NotFound();
-      }
-      setBuilding(buildingData);
-      setPhoto(buildingData.client.profile_photo);
-      const token = Cookies.get("authToken") || false;
-      if (token) {
-        const ifme = await MyProfile();
-        if (ifme.username === buildingData.client.username) {
-          setIam(true);
-        }
+        router.replace("/not-found");
       } else {
-        setIam(false);
+        setBuilding(buildingData);
+        setPhoto(buildingData.client.profile_photo);
+        const token = Cookies.get("authToken") || false;
+        if (token) {
+          const ifme = await MyProfile();
+          if (ifme.username === buildingData.client.username) {
+            setIam(true);
+          }
+        } else {
+          setIam(false);
+        }
       }
     };
     myData();
@@ -71,6 +78,7 @@ export default function Buildin(props: any) {
   if (!building) {
     return <SingleBuildingLoade />;
   }
+  console.log("building=", building);
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";
   let build = [

@@ -72,7 +72,6 @@ function LocationMarker() {
 }
 
 export default function Map({ building }: { building: any[] }) {
-  console.log("building=", building);
   const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
     {}
   );
@@ -160,7 +159,7 @@ export default function Map({ building }: { building: any[] }) {
             >
               <Popup className="w-72 font-cairo">
                 <Link
-                  href={`/buildings/${houss.id}`}
+                  href={`/buildings/${houss.property.id}`}
                   className="flex flex-col justify-center font-cairo gap-0 items-center relative my[-25px] mt-[-20px]"
                 >
                   <Image

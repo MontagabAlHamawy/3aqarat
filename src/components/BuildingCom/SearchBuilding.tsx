@@ -11,48 +11,51 @@ import {
 } from "../links";
 
 export default function SearchBuilding({ bil }: any) {
-  console.log("bil=", bil);
   if (!bil) {
     return <BuildingError />;
   }
-
   return (
     <div>
-      {bil.map((house: any, index: any) => {
-        let imagee = ImagBuilding;
+      {bil.map((house: any) => {
+        let imageSrc = ImagBuilding;
 
-        if (house.property_object?.property_type?.en === "apartment") {
-          imagee = ImagApartment;
-        } else if (
-          house.property_object?.property_type?.en === "commercialproperty"
-        ) {
-          imagee = ImagCommercials;
-        } else if (house.property_object?.property_type?.en === "house") {
-          imagee = ImagHouse;
-        } else if (house.property_object?.property_type?.en === "building") {
-          imagee = ImagBuilding;
-        } else {
-          imagee = ImagLand;
+        switch (house.property_type?.en) {
+          case "apartment":
+            imageSrc = ImagApartment;
+            break;
+          case "commercialproperty":
+            imageSrc = ImagCommercials;
+            break;
+          case "house":
+            imageSrc = ImagHouse;
+            break;
+          case "building":
+            imageSrc = ImagBuilding;
+            break;
+          default:
+            imageSrc = ImagLand;
+            break;
         }
+
         return (
           <Link
-            href={`/buildings/${house.id}`}
-            key={index}
+            href={`/buildings/${house.property.id}`}
+            key={house.property.id}
             className="bg-sidpar rounded-xl flex flex-row justify-between items-center my-3 p-1"
           >
             <div className="flex gap-1 flex-col">
-              <p className="text-xl">{house.title}</p>
-              <p className="text-sm font-thin">{house.description}</p>
+              <p className="text-xl">{house.property.title}</p>
+              <p className="text-sm font-thin">{house.property.description}</p>
               <div>
-                <p className="text-accent">{house.price}ل.س</p>
+                <p className="text-accent">{house.property.price} ل.س</p>
               </div>
             </div>
             <div>
               <Image
                 src={
-                  house.photos && house.photos.length !== 0
-                    ? house.photos[0].photo
-                    : imagee[0].photo
+                  house.property.photos && house.property.photos.length !== 0
+                    ? house.property.photos[0].photo
+                    : imageSrc[0].photo
                 }
                 width={130}
                 height={0}

@@ -110,7 +110,7 @@ export async function LimitBuildingApi(limit: any) {
 export async function SingelBuildingApi(page: any) {
   const response = await fetch(`${apiUrl}/properties/${page}`);
   if (response.status === 404) {
-    return notFound()
+    return NotFound()
   }
   return response.json();
 }
@@ -165,7 +165,7 @@ export async function userBuilding(username: any) {
     const response = await axios.get(`${apiUrl}/profile/${username}/properties`);
     if (response.status === 404) {
 
-      return notFound();
+      return NotFound();
     }
     return response.data;
   } catch (error) {

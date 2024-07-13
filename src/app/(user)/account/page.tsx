@@ -8,6 +8,13 @@ import NotFound from "@/app/not-found";
 import UsersLoading from "@/components/loade/UsersLoading";
 
 export default function Acount() {
+  const router = useRouter();
+  const token = Cookies.get("authToken") || false;
+  useEffect(() => {
+    if (!token) {
+      router.replace("/login");
+    }
+  }, []);
   useEffect(() => {
     const myData = async () => {
       try {
@@ -19,13 +26,17 @@ export default function Acount() {
           return;
         }
       } catch (error) {
-        toast.error("حدث خطأ أثناء جلب البيانات");
-        console.error("error:", error);
+        if (!token) {
+          router.replace(`/login`);
+        } else {
+          router.replace("/not-found");
+          toast.error("حدث خطأ أثناء جلب البيانات");
+        }
       }
     };
     myData();
   }, []);
-  const router = useRouter();
+
   const [account, setAccount] = useState("/account");
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
