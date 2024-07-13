@@ -13,11 +13,8 @@ import {
 } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import NotFound from "@/app/not-found";
 import {
-  DeletMyAccount,
   MyProfile,
   userBuilding,
   userBuildingLimit,
@@ -27,17 +24,17 @@ import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import UsersLoading from "@/components/loade/UsersLoading";
 import AllMyBuildings from "@/components/BuildingCom/AllMyBuildings";
 import { handleDeleteAccount } from "@/components/sweetalert/handleDeleteAccount";
-import { handleLogout } from "@/components/sweetalert/handleLogout"; // استدعاء المكون الجديد
+import { handleLogout } from "@/components/sweetalert/handleLogout";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
-  const [Iam, setIam] = useState<any>(false);
-  const [Building, setBuilding] = useState<any>(null);
+  const [Iam, setIam] = useState(false);
+  const [Building, setBuilding] = useState(null);
   const [photo, setPhoto] = useState("/user-avatar.png");
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
-  const MySwal = withReactContent(Swal);
+
   function logout() {
     Cookies.set("authToken", "");
     Cookies.set("refreshToken", "");
@@ -144,7 +141,7 @@ export default function Username(props: any) {
                   <PiInstagramLogoDuotone />
                 </Link>
               )}
-              {user?.telegram_account && (
+              {user.telegram_account && (
                 <Link
                   href={`https://${user.telegram_account}`}
                   className="text-accent text-3xl"

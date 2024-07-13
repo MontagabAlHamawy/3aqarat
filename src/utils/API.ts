@@ -205,15 +205,15 @@ export async function MyProfile() {
     throw error;
   }
 }
-
-export async function DeletMyAccount() {
+export async function DeletMyAccount(current_password: any) {
   let token = GetToken();
   try {
     const response = await axios.delete(`${apiUrl}/auth/users/me`, {
       headers: {
         'Authorization': `JWT ${token}`,
         'Content-Type': 'application/json'
-      }
+      },
+      data: { current_password }
     });
     if (response.status === 404) {
       RefreshToken();
@@ -221,7 +221,7 @@ export async function DeletMyAccount() {
     }
     return response.data;
   } catch (error) {
-    console.error('Error fetching profile:', error);
+    console.error('Error deleting account:', error);
     throw error;
   }
 }

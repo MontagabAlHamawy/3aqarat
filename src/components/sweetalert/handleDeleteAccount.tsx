@@ -1,6 +1,6 @@
-import { DeletMyAccount } from "@/utils/API";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { DeletMyAccount } from "@/utils/API";
 
 const MySwal = withReactContent(Swal);
 
@@ -9,6 +9,13 @@ export function handleDeleteAccount(logout: () => void) {
     title: "هل أنت متأكد؟",
     text: "لن تتمكن من التراجع عن هذا!",
     icon: "warning",
+    input: "password",
+    inputLabel: "كلمة السر",
+    inputPlaceholder: "أدخل كلمة السر هنا",
+    inputAttributes: {
+      autocapitalize: "off",
+      autocorrect: "off",
+    },
     showCancelButton: true,
     confirmButtonText: "حذف الحساب",
     cancelButtonText: "تراجع",
@@ -20,9 +27,16 @@ export function handleDeleteAccount(logout: () => void) {
       popup: "text-white",
     },
     buttonsStyling: false,
+    preConfirm: (password) => {
+      if (!password) {
+        MySwal.showValidationMessage("كلمة السر مطلوبة");
+        return;
+      }
+      return password;
+    },
   }).then((result) => {
     if (result.isConfirmed) {
-      DeletMyAccount()
+      DeletMyAccount(result.value)
         .then(() => {
           MySwal.fire({
             title: "تم الحذف!",
