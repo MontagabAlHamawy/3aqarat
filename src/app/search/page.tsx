@@ -189,9 +189,10 @@ export default function Search() {
             </select>
           </div>
         </div>
-        <div className="w-max border p-2 rounded-lg bg-body border-body text-white">
-          <p>
-            عدد النتائج: <span className="text-accent">{bil.length}</span>
+        <div className="w-max border  p-2 rounded-lg bg-body border-body text-white">
+          <p className="flex justify-center items-center gap-1">
+            عدد النتائج:{" "}
+            <span className="text-accent text-xl">{bil.length}</span>
           </p>
         </div>
       </div>
@@ -200,11 +201,11 @@ export default function Search() {
           <div className="flex flex-col xl:flex-row-reverse gap-5">
             <div className="xl:fixed xl:top-[100px] mx-2 xl:mx-0 xl:right-[50px] xl:w-2/3">
               <div className="xl:mt-10 xl:mr-7 ">
-                <Map building={bil} />
+                {!loading && <Map building={bil} />}
               </div>
             </div>
             <div className="xl:w-1/3 p-4 mt-[-40px] xl:mt-6">
-              <SearchBuilding bil={bil} />
+              {!loading && <SearchBuilding bil={bil} />}
             </div>
           </div>
         </div>
