@@ -290,3 +290,22 @@ export async function ApilandSearch(search: any, offer: any, limit: any) {
   }
   return response.json();
 }
+export async function DeletBuilding(id: any) {
+  let token = GetToken();
+  try {
+    const response = await axios.delete(`${apiUrl}/properties/${id}/`, {
+      headers: {
+        'Authorization': `JWT ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.status === 404) {
+      RefreshToken();
+      return notFound();
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting Building:', error);
+    throw error;
+  }
+}

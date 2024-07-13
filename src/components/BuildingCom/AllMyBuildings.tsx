@@ -12,8 +12,11 @@ import {
 } from "../links";
 import BuildingError from "../error/BuildingError";
 import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
+import { handleDeleteBuilding } from "../sweetalert/handleDeleteBuilding";
+import { useRouter } from "next/navigation";
 
 export default function AllMyBuildings({ Building }: any) {
+  const router = useRouter();
   if (!Building || Building.length === 0) {
     return <BuildingError />;
   }
@@ -22,6 +25,11 @@ export default function AllMyBuildings({ Building }: any) {
     <div>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
         {Building.map((building: any) => {
+          function handleDelete() {
+            handleDeleteBuilding(building.id, () => {
+              router.replace("/account");
+            });
+          }
           const propertyType =
             building.property_object?.property_type?.ar || "N/A";
           const type = building.property_object?.property_type?.en || null;
@@ -86,6 +94,7 @@ export default function AllMyBuildings({ Building }: any) {
                 </Link>
                 <div
                   className={`flex mb-5 mx-2 cursor-pointer justify-start items-center gap-2 bg-red-600 w-max py-2 px-3 rounded-md`}
+                  onClick={handleDelete}
                 >
                   <PiTrashDuotone size={20} />
                 </div>

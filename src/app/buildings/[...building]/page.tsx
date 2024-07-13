@@ -37,6 +37,7 @@ import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
 import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
 
 export default function Buildin(props: any) {
   const page = props.params.building[0];
@@ -44,6 +45,7 @@ export default function Buildin(props: any) {
   const [building, setBuilding] = useState<any>(null);
   const [Iam, setIam] = useState<any>(false);
   const router = useRouter();
+
   useEffect(() => {
     if (page === undefined) {
       router.replace("/buildings");
@@ -136,6 +138,12 @@ export default function Buildin(props: any) {
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const formattedDate = `${hours}:${minutes} ${year}/${month}/${day} `;
 
+  function handleDelete() {
+    handleDeleteBuilding(building.id, () => {
+      router.replace("/buildings");
+    });
+  }
+
   return (
     <div className=" mt-[-10px] md:mt-auto">
       <div className="flex flex-col xl:flex-row justify-start items-start xl:items-center mr-5 xl:mr-0 gap-3">
@@ -152,6 +160,7 @@ export default function Buildin(props: any) {
           className={`${
             Iam ? "flex justify-start items-center gap-2" : "hidden"
           } mt-[-10px] xl:mt-0 mb-5 xl:mb-0  cursor-pointer bg-red-600 w-max py-2 px-3 rounded-md`}
+          onClick={handleDelete}
         >
           <PiTrashDuotone size={24} />
           <p>حذف العقار</p>
