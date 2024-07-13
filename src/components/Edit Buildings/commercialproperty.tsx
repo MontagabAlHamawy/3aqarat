@@ -43,6 +43,7 @@ export default function Commercialproperty({ apartment }: any) {
       tabu: apartment.tabu,
       area: apartment.area,
       direction: apartment.property_object.direction,
+      floor_number: apartment.property_object.floor_number,
       price: apartment.price,
     },
   });
@@ -71,6 +72,7 @@ export default function Commercialproperty({ apartment }: any) {
         tabu: tabuMapping[data.tabu],
       },
       direction: data.direction,
+      floor_number: data.floor_number,
     };
 
     try {
@@ -130,14 +132,12 @@ export default function Commercialproperty({ apartment }: any) {
                   className=" rounded-md"
                 />
                 <button
-                
                   className={`${
                     imagee === ImagCommercials ? "hidden" : ""
                   }p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
                 >
                   <PiTrashDuotone size={30} />
                 </button>
-                
               </div>
             );
           })}
@@ -249,6 +249,25 @@ export default function Commercialproperty({ apartment }: any) {
                 ))}
               </select>
               {errors.direction && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                رقم الطابق :
+                <p className="text-gray-500 text-xs">
+                  (القيمة 0 تشير الى الطابق الأرضي)
+                </p>
+              </label>
+              <input
+                type="text"
+                placeholder="رقم الطابق"
+                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                {...register("floor_number", { required: true })}
+              />
+              {errors.floor_number && (
                 <p className="text-red-500">هذا الحقل مطلوب</p>
               )}
             </div>

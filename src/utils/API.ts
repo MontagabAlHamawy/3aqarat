@@ -242,8 +242,8 @@ export async function ApiOfferTypes() {
 }
 
 
-export async function ApiSearch(search: any, offer: any, limit: any) {
-  const response = await fetch(`${apiUrl}/properties/?search=${search}&offer=${offer}&limit=${limit}`);
+export async function ApiSearch(search: any) {
+  const response = await fetch(`${apiUrl}/properties/?search=${search}`);
 
   if (response.status === 404) {
     return NotFound();

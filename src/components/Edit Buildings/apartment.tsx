@@ -166,7 +166,7 @@ export default function Apartment({ apartment }: any) {
             ref={fileInputRef}
             onChange={handleFileChange}
             style={{ display: "none" }}
-          />  
+          />
         </div>
       </div>
       <form
@@ -220,7 +220,7 @@ export default function Apartment({ apartment }: any) {
         </div>
 
         <div className="flex flex-col justify-center items-center gap-4">
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center  gap-1 xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 المساحة :
@@ -228,7 +228,7 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="المساحة"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-48 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("area", { required: true })}
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -240,7 +240,7 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="عدد الغرف"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-48 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("number_of_rooms", { required: true })}
               />
               {errors.number_of_rooms && (
@@ -248,10 +248,14 @@ export default function Apartment({ apartment }: any) {
               )}
             </div>
           </div>
-          <div className="flex w-full flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex w-full flex-row justify-center items-center xl:items-center gap-1  xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 رقم الطابق :
+                <p className="text-gray-500 text-xs ">
+                  {" "}
+                  (القيمة 0 تشير الى الطابق الأرضي)
+                </p>
               </label>
               <input
                 type="text"
@@ -264,7 +268,7 @@ export default function Apartment({ apartment }: any) {
               )}
             </div>
             <div className="mb-4 ">
-              <label className="block text-white font-semibold text-sm mb-2">
+              <label className="block text-white font-semibold text-sm mb-6  ">
                 الإتجاه :
               </label>
               <select
