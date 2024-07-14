@@ -39,7 +39,11 @@ export default function Houses(props: any) {
       }
       setBuilding(response.results);
       setPageInfo(response);
-      setPagination(response.next !== null);
+      if (response.next === null && response.previous === null) {
+        setPagination(false);
+      } else {
+        setPagination(true);
+      }
     } catch (error) {
       toast.error("حدث خطأ أثناء جلب البيانات");
       console.error("error:", error);
@@ -146,7 +150,11 @@ export default function Houses(props: any) {
       </form>
       <BuildingFilter linked={linked} />
       <AllBuildingsType Building={building} />
-      <div className={`w-full ${pagination ? "flex justify-center items-center" : "hidden"}`}>
+      <div
+        className={`w-full ${
+          pagination ? "flex justify-center items-center" : "hidden"
+        }`}
+      >
         <PaginationHouses page={pageInfo} />
       </div>
     </div>

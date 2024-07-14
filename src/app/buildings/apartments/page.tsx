@@ -39,7 +39,11 @@ export default function Apartments(props: any) {
       }
       setBuilding(response.results);
       setPageInfo(response);
-      setPagination(response.next !== null);
+      if (response.next === null && response.previous === null) {
+        setPagination(false);
+      } else {
+        setPagination(true);
+      }
     } catch (error) {
       toast.error("حدث خطأ أثناء جلب البيانات");
       console.error("error:", error);
