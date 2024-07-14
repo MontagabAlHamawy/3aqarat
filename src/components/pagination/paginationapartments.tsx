@@ -40,7 +40,7 @@ export default function PaginationApartments({ page }: PaginationProps) {
   const path2 = getPathFromUrl(page.previous);
 
   return (
-    <div className="flex flex-row justify-center items-center w-max px-8 py-2 rounded-lg gap-10 bg-white/10">
+    <div className="flex flex-row justify-center items-center w-max px-8 py-2 rounded-lg gap-10 bg-sidpar">
       <div className="p-2 rounded-lg text-xl xl:text-2xl bg-accent cursor-pointer">
         <PiCaretRightDuotone
           onClick={() => setPagination(`/buildings/apartments/${path1}`)}

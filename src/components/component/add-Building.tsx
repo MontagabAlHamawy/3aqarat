@@ -67,7 +67,9 @@ export default function AddBuilding() {
     <div>
       {Iam && !isAddBuildingPage && (
         <div
-          className={`fixed ${buttonPosition} left-0 xl:left-3 p-3 z-50 add-building-container`}
+          className={`fixed ${
+            buttonPosition ? buttonPosition : "bottom-[60px] xl:bottom-16"
+          } left-0 xl:left-3 p-3 z-50 add-building-container`}
         >
           <div className="relative">
             <div

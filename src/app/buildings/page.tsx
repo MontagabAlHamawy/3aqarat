@@ -39,9 +39,9 @@ export default function Building(props: any) {
       }
       setBuilding(response.results);
       setPageInfo(response);
-      if (response.next === null && response.previous === null){ 
+      if (response.next === null && response.previous === null) {
         setPagination(false);
-      }else{
+      } else {
         setPagination(true);
       }
     } catch (error) {

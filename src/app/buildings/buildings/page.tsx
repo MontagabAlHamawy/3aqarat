@@ -78,7 +78,7 @@ export default function Buildings(props: any) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">العقارات</h1>
+          <h1 className="text-2xl">المحاضر</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -105,7 +105,7 @@ export default function Buildings(props: any) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">العقارات</h1>
+          <h1 className="text-2xl">المحاضر</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -131,7 +131,7 @@ export default function Buildings(props: any) {
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl">العقارات</h1>
+        <h1 className="text-2xl">المحاضر</h1>
       </div>
       <form
         className="flex flex-row items-center justify-center gap-2 mt-5"

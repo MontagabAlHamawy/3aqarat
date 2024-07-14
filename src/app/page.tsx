@@ -48,7 +48,7 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="mt-14 xl:mt-32 m-0 px-4 xl:px-10 h-full z-40">
+      <div className="mt-14 xl:mt-32 m-0 px-2 xl:px-10 h-full z-40">
         <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
           <h1 className="text-white text-lg text-center xl:text-right font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
             سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
@@ -70,9 +70,9 @@ export default function Home() {
           </div>
         </div>
         <MapLoade />
-        <div className="flex justify-center w-full items-center flex-col">
+        <div className="flex justify-center mx-0 w-full items-center flex-col">
           <h1 className="text-white text-2xl my-5">أحدث العقارات</h1>
-          <div className="w-full mx-[-10px]">
+          <div className="w-full mx-[-30px] px-0">
             <BuildingFilter linked={linked} />
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function Home() {
         <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
           <div>
             <h1 className="text-2xl text-white mb-5 items-center">المميزات</h1>
-            <div className="grid grid-cols-2 xl:grid-cols-1 gap-x-5 gap-y-5 xl:gap-x-16">
+            <div className="grid grid-cols-2 px-4 last:xl:grid-cols-1 gap-x-5 gap-y-5 xl:gap-x-16">
               {whyus.map((link, index) => {
                 return (
                   <div className="flex flex-row gap-2 mb-4" key={index}>
@@ -119,7 +119,7 @@ export default function Home() {
   }
 
   return (
-    <div className="mt-14 xl:mt-32 m-0 px-4 xl:px-10 h-full z-40">
+    <div className="mt-14 xl:mt-32 m-0 px-2 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
         <h1 className="text-white text-lg text-center xl:text-right font-semibold xl:font-medium xl:text-2xl w-full xl:w-[50%]">
           سواء كانت المرة الاولى لك في شراء عقار او اذا كنت احد المستثمرين
@@ -143,9 +143,9 @@ export default function Home() {
       <div className="mt-10 w-full rounded-xl flex justify-center items-center">
         <HomeMap building={bil} />
       </div>
-      <div className="flex justify-center w-full items-center flex-col">
+      <div className="flex justify-center mx-0 w-full items-center flex-col">
         <h1 className="text-white text-2xl my-5">الأحدث</h1>
-        <div className="w-full mx-[-10px]">
+        <div className="w-full mx-[-30px] px-0">
           <BuildingFilter linked={linked} />
         </div>
       </div>
@@ -160,7 +160,7 @@ export default function Home() {
       <div className="flex flex-col xl:flex-row justify-between items-center gap-3 mt-10">
         <div>
           <h1 className="text-2xl text-white mb-5 items-center">المميزات</h1>
-          <div className="grid grid-cols-2 xl:grid-cols-1 gap-x-5 gap-y-5 xl:gap-x-16">
+          <div className="grid grid-cols-2 px-4 xl:grid-cols-1 gap-x-5 gap-y-5 xl:gap-x-16">
             {whyus.map((link, index) => {
               return (
                 <div className="flex flex-row gap-2 mb-4" key={index}>
