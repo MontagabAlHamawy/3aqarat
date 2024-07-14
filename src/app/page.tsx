@@ -143,7 +143,7 @@ export default function Home() {
       <div className="mt-10 w-full rounded-xl flex justify-center items-center">
         <HomeMap building={bil} />
       </div>
-      <div className="flex justify-center mx-0 w-full items-center flex-col">
+      <div className="flex justify-center mx-0  w-full items-center flex-col">
         <h1 className="text-white text-2xl my-5">الأحدث</h1>
         <div className="w-full mx-[-30px] px-0">
           <BuildingFilter linked={linked} />

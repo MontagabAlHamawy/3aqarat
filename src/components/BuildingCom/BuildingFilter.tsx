@@ -3,7 +3,7 @@
 import { hom } from "../links";
 import Link from "next/link";
 
-export default function BuildingFilter({ linked }: any) {
+export default function  BuildingFilter({ linked }: any) {
   return (
     <div className="grid grid-cols-3 mt-7 md:grid-cols-6 xl:grid-cols-6 gap-x-1 gap-y-5 md:gap-x-3 xl:gap-x-10 xl:mb-6">
       {hom.map((link, index) => (

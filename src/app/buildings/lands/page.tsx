@@ -19,7 +19,7 @@ export default function Lands(props: any) {
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/houses";
+  const linked = "/buildings/lands";
 
   const fetchData = useCallback(async () => {
     setLoading(true);
