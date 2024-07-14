@@ -17,18 +17,18 @@ export default function Land(Building: any) {
           </p>
         </div>
       </div>
-        <div className="flex gap-2 w-full">
-          <div className="flex gap-1 ">
-            <p className="text-accent text-lg">
-              <PiMapPinDuotone />
-            </p>
-            الموقع:
-          </div>
-          <p className="text-gray-300 max-w-64 xl:max-w-96 ">
-            {building.address.city.name} / {building.address.region} /{" "}
-            {building.address.street} / {building.address.description}{" "}
+      <div className="flex gap-2 w-full">
+        <div className="flex gap-1 ">
+          <p className="text-accent text-lg">
+            <PiMapPinDuotone />
           </p>
+          الموقع:
         </div>
+        <p className="text-gray-300 max-w-64 xl:max-w-96 ">
+          {building.address.city.name_ar} / {building.address.region} /{" "}
+          {building.address.street} / {building.address.description}{" "}
+        </p>
+      </div>
     </div>
   );
 }

@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description: "موقع عقاري",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{

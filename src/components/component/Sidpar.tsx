@@ -17,6 +17,7 @@ import Cookies from "js-cookie";
 
 function Sidpar() {
   const route = usePathname();
+  const [Iam, setIam] = useState<any>(false);
   const [sidebarWidth, setSidebarWidth] = useState(16);
 
   const toggleSidebar = () => {
@@ -33,6 +34,7 @@ function Sidpar() {
     } else {
       setAccount("/account");
       setAccountNam("حسابي");
+      setIam(true)
     }
   }, [route]);
   const navData = [
