@@ -9,14 +9,15 @@ import Link from "next/link";
 export default function AddBuilding() {
   const route = usePathname();
   const [Iam, setIam] = useState<any>(false);
+  const [showButtons, setShowButtons] = useState(false);
+  const [buttonPosition, setButtonPosition] = useState("bottom-5");
+
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (token) {
       setIam(true);
     }
   }, [route]);
-  const [showButtons, setShowButtons] = useState(false);
-  const [buttonPosition, setButtonPosition] = useState("bottom-5");
 
   const toggleButtons = () => {
     setShowButtons(!showButtons);
@@ -25,10 +26,8 @@ export default function AddBuilding() {
   const handleScroll = () => {
     const scrollPosition = window.scrollY + window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-
-    // Check if we are at the bottom of the page
-    if (documentHeight - scrollPosition === 1) {
-      setButtonPosition("bottom-[60px] xl:bottom-5");
+    if (documentHeight - scrollPosition >= 10) {
+      setButtonPosition("bottom-[60px] xl:bottom-8");
     } else {
       setButtonPosition("bottom-[60px] xl:bottom-16");
     }
@@ -39,13 +38,36 @@ export default function AddBuilding() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [handleScroll]);
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (!(event.target as HTMLElement).closest(".add-building-container")) {
+      setShowButtons(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setShowButtons(false);
+  }, [route]);
+
+  // Check if the current route is "/buildings/add-building"
+  const isAddBuildingPage =
+    route === "/buildings/add-building" ||
+    route === "/buildings/edit-building" ||
+    route === "/account/edit-account";
 
   return (
     <div>
-      {Iam && (
+      {Iam && !isAddBuildingPage && (
         <div
-          className={`fixed bottom-[60px] bottom-16 left-0 xl:left-3 p-3 z-50`}
+          className={`fixed ${buttonPosition} left-0 xl:left-3 p-3 z-50 add-building-container`}
         >
           <div className="relative">
             <div
