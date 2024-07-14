@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { PiPlusCircleDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function AddBuilding() {
   const route = usePathname();
@@ -43,7 +44,9 @@ export default function AddBuilding() {
   return (
     <div>
       {Iam && (
-        <div className={`fixed bottom-[60px] bottom-16 left-0 xl:left-3 p-3 z-50`}>
+        <div
+          className={`fixed bottom-[60px] bottom-16 left-0 xl:left-3 p-3 z-50`}
+        >
           <div className="relative">
             <div
               className={` ${
@@ -58,19 +61,27 @@ export default function AddBuilding() {
             {showButtons && (
               <div className="absolute bottom-full left-0 flex flex-col justify-end items-end space-y-2 mb-2">
                 <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
-                  <a href="/buildings/add-building?url=apartment">إضافة شقة</a>
+                  <Link href="/buildings/add-building?url=apartment">
+                    إضافة شقة
+                  </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
-                  <a href="/buildings/add-building?url=building">إضافة محضر</a>
+                  <Link href="/buildings/add-building?url=building">
+                    إضافة محضر
+                  </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
-                  <a href="/buildings/add-building?url=house">إضافة منزل</a>
+                  <Link href="/buildings/add-building?url=house">
+                    إضافة منزل
+                  </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
-                  <a href="/buildings/add-building?url=commercial">إضافة محل</a>
+                  <Link href="/buildings/add-building?url=commercial">
+                    إضافة محل
+                  </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
-                  <a href="/buildings/add-building?url=land">إضافة أرض</a>
+                  <Link href="/buildings/add-building?url=land">إضافة أرض</Link>
                 </button>
               </div>
             )}
