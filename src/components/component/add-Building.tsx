@@ -27,9 +27,9 @@ export default function AddBuilding() {
 
     // Check if we are at the bottom of the page
     if (documentHeight - scrollPosition === 1) {
-      setButtonPosition("bottom-[60px] bottom-5");
+      setButtonPosition("bottom-[60px] xl:bottom-5");
     } else {
-      setButtonPosition("bottom-[60px] bottom-16");
+      setButtonPosition("bottom-[60px] xl:bottom-16");
     }
   };
 
@@ -43,7 +43,7 @@ export default function AddBuilding() {
   return (
     <div>
       {Iam && (
-        <div className={`fixed ${buttonPosition} left-0 xl:left-3 p-3 z-50`}>
+        <div className={`fixed bottom-[60px] bottom-16 left-0 xl:left-3 p-3 z-50`}>
           <div className="relative">
             <div
               className={` ${
