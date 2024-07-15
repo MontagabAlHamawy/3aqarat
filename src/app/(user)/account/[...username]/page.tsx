@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import {
+  PiArticleDuotone,
   PiFacebookLogoDuotone,
+  PiGearSixDuotone,
   PiInstagramLogoDuotone,
   PiPenDuotone,
   PiTelegramLogoDuotone,
@@ -32,13 +34,15 @@ export default function Username(props: any) {
   const [Building, setBuilding] = useState(null);
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [loading, setLoading] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false); // New state for toggling menu
+  const menuRef = useRef(null);
 
   const router = useRouter();
 
   function logout() {
     Cookies.set("authToken", "");
     Cookies.set("refreshToken", "");
-    router.replace(`/login`);
+    router.replace("/login");
   }
 
   useEffect(() => {
@@ -93,6 +97,22 @@ export default function Username(props: any) {
     handleLogout(logout);
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !(menuRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+
   if (photo === null) {
     setPhoto("/user-avatar.png");
   }
@@ -106,8 +126,8 @@ export default function Username(props: any) {
       <div>
         <div
           className={`flex flex-col ${
-            Iam ? "mt-20 xl:mt-0" : "mt-0"
-          }  xl:flex-row justify-start items-center xl:mr-40 gap-x-14 gap-y-4`}
+            Iam ? "mt-5 xl:mt-0" : "mt-0"
+          } xl:flex-row justify-start items-center xl:mr-40 gap-x-14 gap-y-4`}
         >
           <div>
             <Image
@@ -151,32 +171,40 @@ export default function Username(props: any) {
               )}
             </div>
           </div>
-          <div
-            className={`${
-              Iam ? "flex" : "hidden"
-            }  flex flex-col justify-between items-start xl:items-start mb-40 w-full xl:w-max  gap-5 px-1 xl:px-5  absolute top-[-110px]  xl:top-1 xl:left-5 `}
-          >
-            <div className="flex flex-row xl:flex-col gap-5 justify-between items-center xl:items-start w-full">
-              <div onClick={handleLogoutClick}>
-                <div className="bg-indigo-600 cursor-pointer flex justify-start items-center gap-1 xl:gap-2 text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-indigo-500 ease-in duration-300">
-                  <PiUploadSimpleDuotone size={24} />
-                  <p>تسجيل الخروج</p>
+          {Iam && (
+            <div className="absolute top-[-50px] xl:top-0 left-2" ref={menuRef}>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="bg-accent relative p-2 text-xl rounded-md hover:sidpar focus:outline-none"
+              >
+                <PiGearSixDuotone />  {/* Three-dot icon */}
+              </button>
+              {menuOpen && (
+                <div className="absolute top-0 left-10 bg-sidpar w-max  rounded-md shadow-lg">
+                  <div
+                    onClick={handleLogoutClick}
+                    className="flex items-center p-2 cursor-pointer rounded-md hover:bg-accent-hover"
+                  >
+                    <PiUploadSimpleDuotone size={24} />
+                    <p className="ml-2">تسجيل الخروج</p>
+                  </div>
+                  <Link href="/account/edit-account">
+                    <div className="flex items-center p-2 cursor-pointer rounded-md hover:bg-accent-hover">
+                      <PiPenDuotone size={24} />
+                      <p className="ml-2">تعديل الحساب</p>
+                    </div>
+                  </Link>
+                  <div
+                    onClick={DeletA}
+                    className="flex items-center p-2 cursor-pointer rounded-md hover:bg-accent-hover"
+                  >
+                    <PiTrashDuotone size={24} />
+                    <p className="ml-2">حذف الحساب</p>
+                  </div>
                 </div>
-              </div>
-              <Link href="/account/edit-account">
-                <div className="bg-accent flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300">
-                  <PiPenDuotone size={24} />
-                  <p>تعديل الحساب</p>
-                </div>
-              </Link>
+              )}
             </div>
-            <div onClick={DeletA}>
-              <div className="bg-red-600 flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300">
-                <PiTrashDuotone size={24} />
-                <p>حذف الحساب</p>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -184,7 +212,7 @@ export default function Username(props: any) {
         <h1 className="text-2xl mt-10 bg-section xl:mr-[-8px] rounded-t-md py-2 px-3 w-min">
           {Iam ? "عقاراتي" : "العقارات"}
         </h1>
-        <div className=" bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
+        <div className="bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
           {Iam ? (
             <AllMyBuildings Building={Building} />
           ) : (

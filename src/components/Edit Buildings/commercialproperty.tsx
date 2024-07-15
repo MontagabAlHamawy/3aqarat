@@ -96,11 +96,11 @@ export default function Commercialproperty({ apartment }: any) {
   };
 
   let imagee: any;
-  if (apartment.photos.length !== 0) {
+  // if (apartment.photos.length !== 0) {
     imagee = apartment.photos;
-  } else {
-    imagee = ImagCommercials;
-  }
+  // } else {
+  //   imagee = ImagCommercials;
+  // }
 
   const directionOptions = [
     { value: "N", label: "شمالي" },

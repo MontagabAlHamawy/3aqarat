@@ -32,9 +32,14 @@ import BBuilding from "@/components/Buildings/bbuilding";
 import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
 import NotFound from "@/app/not-found";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
+import {
+  PiDotsThreeVerticalDuotone,
+  PiGearSixDuotone,
+  PiPenDuotone,
+  PiTrashDuotone,
+} from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
@@ -44,6 +49,8 @@ export default function Buildin(props: any) {
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [building, setBuilding] = useState<any>(null);
   const [Iam, setIam] = useState<any>(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -76,6 +83,19 @@ export default function Buildin(props: any) {
     };
     myData();
   }, [page]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
 
   if (!building) {
     return <SingleBuildingLoade />;
@@ -145,41 +165,51 @@ export default function Buildin(props: any) {
   }
 
   return (
-    <div className=" mt-[-10px] md:mt-auto">
-      <div className="flex flex-col xl:flex-row justify-start items-start xl:items-center mr-5 xl:mr-0 gap-3">
-        <Link
-          href={`/buildings/edit-building?url=${building.id}`}
-          className={`${
-            Iam ? "flex justify-start items-center gap-2" : "hidden"
-          } mt-[-10px] xl:mt-0 mb-5 xl:mb-0  bg-accent w-max py-2 px-3 rounded-md`}
-        >
-          <PiPenDuotone size={24} />
-          <p>تعديل معلومات العقار</p>
-        </Link>
-        <div
-          className={`${
-            Iam ? "flex justify-start items-center gap-2" : "hidden"
-          } mt-[-10px] xl:mt-0 mb-5 xl:mb-0  cursor-pointer bg-red-600 w-max py-2 px-3 rounded-md`}
-          onClick={handleDelete}
-        >
-          <PiTrashDuotone size={24} />
-          <p>حذف العقار</p>
-        </div>
+    <div className="mt-[20px] xl:mt-auto relative">
+      <div className="absolute z-50 top-[-50px] xl:top-0 left-2">
+        {Iam && (
+          <div className="relative" ref={menuRef}>
+            <div
+              className="bg-accent relative p-2 text-xl rounded-md hover:sidpar focus:outline-none"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <PiGearSixDuotone />
+            </div>
+            {menuOpen && (
+              <div className="absolute top-0 left-10  bg-sidpar w-max rounded-md shadow-lg">
+                <Link
+                  href={`/buildings/edit-building?url=${building.id}`}
+                  className="flex items-center gap-2 px-4 py-2   rounded-md hover:bg-accent-hover"
+                >
+                  <PiPenDuotone size={24} />
+                  <p>تعديل العقار</p>
+                </Link>
+                <div
+                  className="flex items-center gap-2 px-4 py-2  cursor-pointer  rounded-md hover:bg-accent-hover"
+                  onClick={handleDelete}
+                >
+                  <PiTrashDuotone size={24} />
+                  <p>حذف العقار</p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      <div className="flex justify-center xl:justify-between  items-center w-full">
+      <div className="flex justify-center xl:justify-between items-center w-full">
         <div className="flex flex-col justify-center xl:flex-row gap-10 items-center w-full">
           <div className="mx-2 xl:mx-0 flex justify-center items-center">
             <Slide
               image={building.photos.length !== 0 ? building.photos : imagee}
             />
           </div>
-          <div className="flex flex-col  gap-3 mx-2 xl:mx-0">
-            <div className="flex justify-between items-center  gap-10">
+          <div className="flex flex-col gap-3 mx-2 xl:mx-0">
+            <div className="flex justify-between items-center gap-10">
               <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
                 {building.offer}
               </p>
               <Link href={`/buildings/${linked}`}>
-                <p className="text-lg  py-2 px-3 bg-accent w-max ml-3 rounded-md">
+                <p className="text-lg py-2 px-3 bg-accent w-max ml-3 rounded-md">
                   {propertyType}
                 </p>
               </Link>

@@ -91,11 +91,11 @@ export default function Land({ apartment }: any) {
   };
 
   let imagee: any;
-  if (apartment.photos.length !== 0) {
+  // if (apartment.photos.length !== 0) {
     imagee = apartment.photos;
-  } else {
-    imagee = ImagLand;
-  }
+  // } else {
+  //   imagee = ImagLand;
+  // }
 
   let im = false;
   if (apartment.photos.length === 0 || apartment.photos.length === 1) {

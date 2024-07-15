@@ -98,11 +98,11 @@ export default function House({ apartment }: any) {
   };
 
   let imagee: any;
-  if (apartment.photos.length !== 0) {
+  // if (apartment.photos.length !== 0) {
     imagee = apartment.photos;
-  } else {
-    imagee = ImagHouse;
-  }
+  // } else {
+  //   imagee = ImagHouse;
+  // }
 
   const directionOptions = [
     { value: "N", label: "شمالي" },

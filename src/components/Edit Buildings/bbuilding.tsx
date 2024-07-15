@@ -94,11 +94,11 @@ export default function BBuilding({ building }: any) {
   };
 
   let imagee: any;
-  if (building.photos.length !== 0) {
+  // if (building.photos.length !== 0) {
     imagee = building.photos;
-  } else {
-    imagee = ImagBuilding;
-  }
+  // } else {
+  //   imagee = ImagBuilding;
+  // }
 
   const directionOptions = [
     { value: "N", label: "شمالي" },
