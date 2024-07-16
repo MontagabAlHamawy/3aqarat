@@ -31,15 +31,9 @@ import Commercialproperty from "@/components/Buildings/commercialproperty";
 import BBuilding from "@/components/Buildings/bbuilding";
 import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
-import NotFound from "@/app/not-found";
 import { useEffect, useRef, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import {
-  PiDotsThreeVerticalDuotone,
-  PiGearSixDuotone,
-  PiPenDuotone,
-  PiTrashDuotone,
-} from "react-icons/pi";
+import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
@@ -166,7 +160,7 @@ export default function Buildin(props: any) {
 
   return (
     <div className="mt-[20px] xl:mt-auto relative">
-      <div className="absolute z-50 top-[-50px] xl:top-0 left-2">
+      <div className="absolute z-20 top-[-50px] xl:top-0 left-2">
         {Iam && (
           <div className="relative" ref={menuRef}>
             <div
@@ -176,16 +170,16 @@ export default function Buildin(props: any) {
               <PiGearSixDuotone />
             </div>
             {menuOpen && (
-              <div className="absolute top-0 left-10  bg-sidpar w-max rounded-md shadow-lg">
+              <div className="absolute flex flex-col gap-2 top-0 left-10 p-2 bg-sidpar w-max rounded-md shadow-lg">
                 <Link
                   href={`/buildings/edit-building?url=${building.id}`}
-                  className="flex items-center gap-2 px-4 py-2   rounded-md hover:bg-accent-hover"
+                  className="flex items-center gap-2 px-4 py-2   rounded-md bg-body hover:bg-accent"
                 >
                   <PiPenDuotone size={24} />
                   <p>تعديل العقار</p>
                 </Link>
                 <div
-                  className="flex items-center gap-2 px-4 py-2  cursor-pointer  rounded-md hover:bg-accent-hover"
+                  className="flex items-center gap-2 px-4 py-2  cursor-pointer  rounded-md bg-body hover:bg-accent"
                   onClick={handleDelete}
                 >
                   <PiTrashDuotone size={24} />

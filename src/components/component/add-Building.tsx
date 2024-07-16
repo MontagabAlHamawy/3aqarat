@@ -82,27 +82,27 @@ export default function AddBuilding() {
             </div>
             {showButtons && (
               <div className="absolute bottom-full left-0 flex flex-col justify-end items-end space-y-2 mb-2">
-                <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
+                <button className="p-2 text-sm  bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
                   <Link href="/buildings/add-building?url=apartment">
                     إضافة شقة
                   </Link>
                 </button>
-                <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
+                <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
                   <Link href="/buildings/add-building?url=building">
                     إضافة محضر
                   </Link>
                 </button>
-                <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
+                <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
                   <Link href="/buildings/add-building?url=house">
                     إضافة منزل
                   </Link>
                 </button>
-                <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
+                <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
                   <Link href="/buildings/add-building?url=commercial">
                     إضافة محل
                   </Link>
                 </button>
-                <button className="p-2 text-sm bg-accent text-white w-max rounded shadow">
+                <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
                   <Link href="/buildings/add-building?url=land">إضافة أرض</Link>
                 </button>
               </div>

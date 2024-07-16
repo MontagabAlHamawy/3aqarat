@@ -4,7 +4,6 @@ import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import {
-  PiArticleDuotone,
   PiFacebookLogoDuotone,
   PiGearSixDuotone,
   PiInstagramLogoDuotone,
@@ -177,26 +176,26 @@ export default function Username(props: any) {
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="bg-accent relative p-2 text-xl rounded-md hover:sidpar focus:outline-none"
               >
-                <PiGearSixDuotone />  {/* Three-dot icon */}
+                <PiGearSixDuotone />
               </button>
               {menuOpen && (
-                <div className="absolute top-0 left-10 bg-sidpar w-max  rounded-md shadow-lg">
+                <div className="absolute flex flex-col p-2 gap-2 top-0 left-10 bg-sidpar w-max  rounded-md shadow-lg">
                   <div
                     onClick={handleLogoutClick}
-                    className="flex items-center p-2 cursor-pointer rounded-md hover:bg-accent-hover"
+                    className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-accent"
                   >
                     <PiUploadSimpleDuotone size={24} />
                     <p className="ml-2">تسجيل الخروج</p>
                   </div>
                   <Link href="/account/edit-account">
-                    <div className="flex items-center p-2 cursor-pointer rounded-md hover:bg-accent-hover">
+                    <div className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-accent">
                       <PiPenDuotone size={24} />
                       <p className="ml-2">تعديل الحساب</p>
                     </div>
                   </Link>
                   <div
                     onClick={DeletA}
-                    className="flex items-center p-2 cursor-pointer rounded-md hover:bg-accent-hover"
+                    className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-accent"
                   >
                     <PiTrashDuotone size={24} />
                     <p className="ml-2">حذف الحساب</p>
