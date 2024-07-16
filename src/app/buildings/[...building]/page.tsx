@@ -160,7 +160,7 @@ export default function Buildin(props: any) {
 
   return (
     <div className="mt-[20px] xl:mt-auto relative">
-      <div className="absolute z-20 top-[-50px] xl:top-0 left-2">
+      <div className="absolute z-20 top-[-50px] xl:top-[-20px] left-2">
         {Iam && (
           <div className="relative" ref={menuRef}>
             <div
@@ -190,7 +190,7 @@ export default function Buildin(props: any) {
           </div>
         )}
       </div>
-      <div className="flex justify-center xl:justify-between items-center w-full">
+      <div className="flex justify-center xl:justify-between items-center w-full mt-5">
         <div className="flex flex-col justify-center xl:flex-row gap-10 items-center w-full">
           <div className="mx-2 xl:mx-0 flex justify-center items-center">
             <Slide

@@ -34,7 +34,7 @@ export default function MobileSidpar() {
   ];
   return (
     <div className="fixed bottom-0 left-[-1px] w-full bg-sidpar py-3  flex justify-center items-center z-50">
-      <div className="flex flex-row justify-center w-full items-center gap-5 ">
+      <div className="flex flex-row justify-center w-full items-center gap-5 md:gap-20 ">
         {MobData.map((link, index) => {
           let isActive = route === link.path;
 
