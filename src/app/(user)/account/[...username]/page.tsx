@@ -180,13 +180,6 @@ export default function Username(props: any) {
               </button>
               {menuOpen && (
                 <div className="absolute flex flex-col p-2 gap-2 top-0 left-10 bg-sidpar w-max  rounded-md shadow-lg">
-                  <div
-                    onClick={handleLogoutClick}
-                    className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-accent"
-                  >
-                    <PiUploadSimpleDuotone size={24} />
-                    <p className="ml-2">تسجيل الخروج</p>
-                  </div>
                   <Link href="/account/edit-account">
                     <div className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-accent">
                       <PiPenDuotone size={24} />
@@ -194,8 +187,16 @@ export default function Username(props: any) {
                     </div>
                   </Link>
                   <div
+                    onClick={handleLogoutClick}
+                    className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-red-600"
+                  >
+                    <PiUploadSimpleDuotone size={24} />
+                    <p className="ml-2">تسجيل الخروج</p>
+                  </div>
+
+                  <div
                     onClick={DeletA}
-                    className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-accent"
+                    className="flex items-center p-2 cursor-pointer rounded-md bg-body hover:bg-red-600"
                   >
                     <PiTrashDuotone size={24} />
                     <p className="ml-2">حذف الحساب</p>

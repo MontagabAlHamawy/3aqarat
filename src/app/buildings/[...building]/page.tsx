@@ -56,7 +56,6 @@ export default function Buildin(props: any) {
   useEffect(() => {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
-      console.log("buildingData=", buildingData);
 
       if (!buildingData.id) {
         toast.error("خطاء في جلب البيانات ");
@@ -94,7 +93,6 @@ export default function Buildin(props: any) {
   if (!building) {
     return <SingleBuildingLoade />;
   }
-  console.log("building=", building);
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";
   let build = [
@@ -179,7 +177,7 @@ export default function Buildin(props: any) {
                   <p>تعديل العقار</p>
                 </Link>
                 <div
-                  className="flex items-center gap-2 px-4 py-2  cursor-pointer  rounded-md bg-body hover:bg-accent"
+                  className="flex items-center gap-2 px-4 py-2  cursor-pointer  rounded-md bg-body hover:bg-red-600"
                   onClick={handleDelete}
                 >
                   <PiTrashDuotone size={24} />

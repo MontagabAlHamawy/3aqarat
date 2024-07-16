@@ -1,36 +1,23 @@
 "use client";
-import { ImagLand } from "../links";
+import { ImagBuilding, ImagCommercials } from "../links";
 import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import apiUrl from "@/utils/apiConfig";
-import { ApiOfferTypes, GetToken } from "@/utils/API";
+import { GetToken } from "@/utils/API";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Slide from "../Slide/Slide";
 import Image from "next/image";
 import { PiPlusCircleDuotone, PiTrashDuotone } from "react-icons/pi";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
 
-export default function Land({ apartment }: any) {
+export default function Commercialproperty({ apartment }: any) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showConfirmation } = useConfirmationAlert();
-  const [offer, setOffer] = useState<any>([]);
-  const [selectedOffer, setSelectedOffer] = useState<string>("1");
-
-  useEffect(() => {
-    async function fetchData() {
-      const offer = await ApiOfferTypes();
-      setOffer(offer);
-    }
-    fetchData();
-  }, []);
-
-  const handleOfferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOffer(e.target.value);
-  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -43,11 +30,9 @@ export default function Land({ apartment }: any) {
       reader.readAsDataURL(file);
     }
   };
-
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
-
   const router = useRouter();
   const {
     register,
@@ -59,21 +44,11 @@ export default function Land({ apartment }: any) {
       description: apartment.description,
       tabu: apartment.tabu,
       area: apartment.area,
+      direction: apartment.property_object.direction,
+      floor_number: apartment.property_object.floor_number,
       price: apartment.price,
-      ooffer: apartment.offer,
-      months: apartment.duration_in_months,
     },
   });
-
-  useEffect(() => {
-    if (apartment.offer === "بيع") {
-      setSelectedOffer("1");
-    } else if (apartment.offer === "إجار") {
-      setSelectedOffer("2");
-    } else if (apartment.offer === "رهن") {
-      setSelectedOffer("3");
-    }
-  }, [apartment.offer]);
 
   const tabuMapping: any = {
     "طابو أخضر ( السجل العقاري )": 1,
@@ -82,7 +57,6 @@ export default function Land({ apartment }: any) {
     "حكم قطعي": 4,
     "سجل مؤقت": 5,
   };
-
   const onSubmit = async (data: any) => {
     await showConfirmation(async () => {
       let token = GetToken();
@@ -99,16 +73,19 @@ export default function Land({ apartment }: any) {
           title: data.title,
           description: data.description,
           tabu: tabuMapping[data.tabu],
-          offer: Number(selectedOffer),
-          duration_in_months: data.months,
         },
+        direction: data.direction,
+        floor_number: data.floor_number,
       };
-      console.log("bodyContent=", bodyContent);
 
       try {
-        await axios.patch(`${apiUrl}/lands/${apartment.id}/`, bodyContent, {
-          headers: headersList,
-        });
+        await axios.patch(
+          `${apiUrl}/commercial-properties/${apartment.id}/`,
+          bodyContent,
+          {
+            headers: headersList,
+          }
+        );
         toast.success("تم تعديل البيانات بنجاح");
         router.replace(`/buildings/${apartment.id}`);
       } catch (error) {
@@ -119,7 +96,22 @@ export default function Land({ apartment }: any) {
   };
 
   let imagee: any;
-  imagee = apartment.photos;
+  // if (apartment.photos.length !== 0) {
+    imagee = apartment.photos;
+  // } else {
+  //   imagee = ImagCommercials;
+  // }
+
+  const directionOptions = [
+    { value: "N", label: "شمالي" },
+    { value: "E", label: "شرقي" },
+    { value: "S", label: "جنوبي" },
+    { value: "W", label: "غربي" },
+    { value: "NE", label: "شمالي شرقي" },
+    { value: "NW", label: "شمالي غربي" },
+    { value: "SE", label: "جنوبي شرقي" },
+    { value: "SW", label: "جنوبي غربي" },
+  ];
   let im = false;
   if (apartment.photos.length === 0 || apartment.photos.length === 1) {
     im = false;
@@ -132,8 +124,7 @@ export default function Land({ apartment }: any) {
       <div>
         <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
           {imagee.map((index: any, id: any) => {
-            console.log(imagee);
-
+            console.log(index);
             return (
               <div key={id} className="relative">
                 <Image
@@ -141,12 +132,12 @@ export default function Land({ apartment }: any) {
                   width={300}
                   height={0}
                   alt={`Gallery Image`}
-                  className={`object-center rounded-md cursor-pointer`}
+                  className=" rounded-md"
                 />
                 <button
                   className={`${
-                    imagee === ImagLand ? "hidden" : ""
-                  } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
+                    imagee === ImagCommercials ? "hidden" : ""
+                  }p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
                 >
                   <PiTrashDuotone size={30} />
                 </button>
@@ -236,24 +227,6 @@ export default function Land({ apartment }: any) {
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
-                نوع العرض :
-              </label>
-              <div>
-                <select
-                  className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
-                  value={selectedOffer}
-                  onChange={handleOfferChange}
-                >
-                  {offer.map((offer: any) => (
-                    <option key={offer.id} value={offer.id}>
-                      {offer.offer}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
                 المساحة :
               </label>
               <input
@@ -264,21 +237,45 @@ export default function Land({ apartment }: any) {
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
+            <div className="mb-4 ">
+              <label className="block text-white font-semibold text-sm mb-2">
+                الإتجاه :
+              </label>
+              <select
+                className="w-40 xl:w-52 h-10 border pr-2 rounded-lg bg-section border-section text-white"
+                {...register("direction", { required: true })}
+              >
+                {directionOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              {errors.direction && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
+            </div>
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
-            <div className={`${selectedOffer === "1" ? "hidden" : ""} mb-4`}>
+            <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
-                مدة {selectedOffer === "2" ? "الإجار" : "الرهن"} :{" "}
-                {selectedOffer === "2" ? "(بالأشهر)" : "(بالسنوات)"}
+                رقم الطابق :
+                <p className="text-gray-500 text-xs">
+                  (القيمة 0 تشير الى الطابق الأرضي)
+                </p>
               </label>
               <input
                 type="text"
-                placeholder="مدة العرض"
-                className="w-40  xl:w-full border p-2 rounded-lg bg-section border-section text-white"
-                {...register("months", { required: true })}
+                placeholder="رقم الطابق"
+                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                {...register("floor_number", { required: true })}
               />
-              {errors.months && <p className="text-red-500">هذا الحقل مطلوب</p>}
+              {errors.floor_number && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
             </div>
+          </div>
+          <div className="flex flex-row justify-center items-center gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 السعر :
