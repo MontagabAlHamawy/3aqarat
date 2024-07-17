@@ -69,28 +69,20 @@ export default function Commercialproperty(Building: any) {
           </div>
           <p className="text-gray-300">{direction}</p>
         </div>
-        <div
-          className={`${building.offer === "إيجار" ? "flex" : "hidden"} gap-2`}
-        >
-          <div className="flex justify-center items-center gap-1">
-            <p className="text-accent text-lg">
-              <PiTimerDuotone />
-            </p>
-            مدة عقد الإجار<span className="text-gray-400">(بالأشهر)</span>:
-          </div>
-          <p className="text-gray-300">{building.duration_in_months}</p>
+      </div>
+      <div className={`flex w-max gap-2`}>
+        <div className="flex justify-center items-center gap-1">
+          <p className="text-accent text-lg">
+            <PiTimerDuotone />
+          </p>
+          مدة عقد {building.offer === "إيجار" ? "الإجار" : "الرهن"}
+          <span className="text-gray-400 text-sm">
+            {" "}
+            {building.offer === "إيجار" ? "(بالأشهر)" : "(بالسنوات)"}
+          </span>
+          :
         </div>
-        <div
-          className={`${building.offer === "رهن" ? "flex" : "hidden"} gap-2`}
-        >
-          <div className="flex justify-center items-center gap-1">
-            <p className="text-accent text-lg">
-              <PiTimerDuotone />
-            </p>
-            مدة عقد الرهن<span className="text-gray-400">(بالسنوات)</span>:
-          </div>
-          <p className="text-gray-300">{building.duration_in_months}</p>
-        </div>
+        <p className="text-gray-300">{building.duration_in_months}</p>
       </div>
       <div className="flex gap-2 w-full">
         <div className="flex justify-center items-center gap-1 ">

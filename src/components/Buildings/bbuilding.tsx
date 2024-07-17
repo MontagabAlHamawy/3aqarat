@@ -38,9 +38,9 @@ export default function BBuilding(Building: any) {
   return (
     // {buildin.map((building: any) => (
     <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-2 xl:grid-cols-2 gap-x-1 gap-y-5 xl:gap-x-10">
-        <div className="flex gap-2">
-          <div className="flex justify-center items-center gap-1 ">
+      <div className="grid grid-cols-2 xl:grid-cols-2 gap-x-7 gap-y-5 xl:gap-x-10">
+        <div className="flex gap-2 w-max">
+          <div className="flex w-full justify-center items-center gap-1 ">
             <p className="text-accent text-lg">
               <PiRulerDuotone />
             </p>

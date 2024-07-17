@@ -49,18 +49,6 @@ export default function House(Building: any) {
             {building.area}M<sup>2</sup>
           </p>
         </div>
-
-        <div
-          className={`${building.offer === "رهن" ? "flex" : "hidden"} w-full gap-2`}
-        >
-          <div className="flex justify-center items-center gap-1">
-            <p className="text-accent text-lg">
-              <PiTimerDuotone />
-            </p>
-            مدة عقد الرهن<span className="text-gray-400">(بالسنوات)</span>:
-          </div>
-          <p className="text-gray-300">{building.duration_in_months}</p>
-        </div>
         <div className="flex gap-2 ">
           <div className="flex justify-center items-center  gap-1 ">
             <p className="text-accent text-lg">
@@ -115,8 +103,19 @@ export default function House(Building: any) {
           </p>
         </div>
       </div>
-      <div className="flex gap-2 mt-2 sm:w-full">
-        <div className="flex justify-center items-center   gap-1 ">
+      <div
+          className={`${building.offer === "رهن" ? "flex" : "hidden"} w-full gap-2`}
+        >
+          <div className="flex justify-center items-center gap-1">
+            <p className="text-accent text-lg">
+              <PiTimerDuotone />
+            </p>
+            مدة عقد الرهن<span className="text-gray-400">(بالسنوات)</span>:
+          </div>
+          <p className="text-gray-300">{building.duration_in_months}</p>
+        </div>
+      <div className="flex gap-2 sm:w-full">
+        <div className="flex justify-center items-center  gap-1 ">
           <p className="text-accent text-lg">
             <PiMapPinDuotone />
           </p>
