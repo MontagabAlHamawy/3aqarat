@@ -4,17 +4,19 @@ import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import apiUrl from "@/utils/apiConfig";
-import { GetToken } from "@/utils/API";
+import { ApiOfferTypes, GetToken } from "@/utils/API";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { PiTrashDuotone, PiPlusCircleDuotone } from "react-icons/pi";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
 
 export default function BBuilding({ building }: any) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
+  const [offer, setOffer] = useState<any[]>([]); // To hold offer types
+  const [selectedOffer, setSelectedOffer] = useState<any>(building.offer || ""); // For selected offer type
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showConfirmation } = useConfirmationAlert();
 
@@ -29,14 +31,17 @@ export default function BBuilding({ building }: any) {
       reader.readAsDataURL(file);
     }
   };
+
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
+
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       title: building.title,
@@ -47,15 +52,31 @@ export default function BBuilding({ building }: any) {
       num_of_floors: building.property_object.num_of_floors,
       direction: building.property_object.direction,
       price: building.price,
+      offer: building.offer || "",
+      months: building.months || "",
     },
   });
 
-  const tabuMapping: any = {
-    "طابو أخضر ( السجل العقاري )": 1,
-    "إقرار محكمة": 2,
-    "كاتب عدل": 3,
-    "حكم قطعي": 4,
-    "سجل مؤقت": 5,
+  useEffect(() => {
+    async function fetchData() {
+      const offerTypes = await ApiOfferTypes();
+      setOffer(offerTypes);
+      setSelectedOffer(building.offer || ""); // Initialize with the building's offer type
+    }
+    fetchData();
+  }, [building.offer]);
+  useEffect(() => {
+    // Map the offer from apartment to selectedOffer
+    if (building.offer) {
+      // Map the offer value to the corresponding option value if needed
+      const offerValue =
+        offer.find((item: any) => item.offer === building.offer)?.id || "";
+      setSelectedOffer(offerValue);
+    }
+  }, [building.offer, offer]);
+
+  const handleOfferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOffer(Number(e.target.value));
   };
 
   const onSubmit = async (data: any) => {
@@ -74,6 +95,8 @@ export default function BBuilding({ building }: any) {
           title: data.title,
           description: data.description,
           tabu: tabuMapping[data.tabu],
+          offer: Number(selectedOffer),
+          duration_in_months: data.months,
         },
         num_of_apartments: Number(data.num_of_apartments),
         num_of_floors: Number(data.num_of_floors),
@@ -93,12 +116,13 @@ export default function BBuilding({ building }: any) {
     });
   };
 
-  let imagee: any;
-  // if (building.photos.length !== 0) {
-    imagee = building.photos;
-  // } else {
-  //   imagee = ImagBuilding;
-  // }
+  const tabuMapping: any = {
+    "طابو أخضر ( السجل العقاري )": 1,
+    "إقرار محكمة": 2,
+    "كاتب عدل": 3,
+    "حكم قطعي": 4,
+    "سجل مؤقت": 5,
+  };
 
   const directionOptions = [
     { value: "N", label: "شمالي" },
@@ -110,45 +134,44 @@ export default function BBuilding({ building }: any) {
     { value: "SE", label: "جنوبي شرقي" },
     { value: "SW", label: "جنوبي غربي" },
   ];
+
+  let imagee: any;
+  imagee = building.photos;
   let im = false;
   if (building.photos.length === 0 || building.photos.length === 1) {
     im = false;
   } else {
     im = true;
   }
-
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
+    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
-          {imagee.map((index: any, id: any) => {
-            console.log(index);
-            return (
-              <div key={id} className="relative">
-                <Image
-                  src={index.photo}
-                  width={300}
-                  height={0}
-                  alt={`Gallery Image`}
-                  className="  object-center rounded-md cursor-pointer"
-                />
-                <button
-                  className={`${
-                    imagee === ImagBuilding ? "hidden" : ""
-                  } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-                >
-                  <PiTrashDuotone size={30} />
-                </button>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-2 mt-7 mx-2 gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6">
+          {imagee.map((index: any, id: any) => (
+            <div key={id} className="relative">
+              <Image
+                src={index.photo}
+                width={300}
+                height={0}
+                alt={`Gallery Image`}
+                className="object-center rounded-md cursor-pointer"
+              />
+              <button
+                className={`${
+                  imagee === ImagBuilding ? "hidden" : ""
+                } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
+              >
+                <PiTrashDuotone size={30} />
+              </button>
+            </div>
+          ))}
           <div className={`relative ${photo === "" ? "hidden" : "block"}`}>
             <Image
               src={photo}
               width={300}
               height={0}
               alt="user"
-              className={` rounded-md`}
+              className={`rounded-md`}
             />
             <button
               onClick={() => setPhoto("")}
@@ -175,9 +198,9 @@ export default function BBuilding({ building }: any) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-start items-start"
       >
-        <div className="w-full ">
-          <div className="mb-4 w-full ">
-            <label className="block text-white font-semibold text-sm mb-2 ">
+        <div className="w-full">
+          <div className="mb-4 w-full">
+            <label className="block text-white font-semibold text-sm mb-2">
               العنوان :
             </label>
             <input
@@ -222,7 +245,7 @@ export default function BBuilding({ building }: any) {
         </div>
 
         <div className="flex flex-col justify-center items-center gap-4">
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-3">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 المساحة :
@@ -230,7 +253,7 @@ export default function BBuilding({ building }: any) {
               <input
                 type="text"
                 placeholder="المساحة"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("area", { required: true })}
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -242,7 +265,7 @@ export default function BBuilding({ building }: any) {
               <input
                 type="text"
                 placeholder="عدد الشقق"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("num_of_apartments", { required: true })}
               />
               {errors.num_of_apartments && (
@@ -250,7 +273,7 @@ export default function BBuilding({ building }: any) {
               )}
             </div>
           </div>
-          <div className="flex w-full flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex w-full flex-row justify-center items-center gap-1 xl:gap-3">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 عدد الطوابق :
@@ -258,14 +281,14 @@ export default function BBuilding({ building }: any) {
               <input
                 type="text"
                 placeholder="عدد الطوابق"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("num_of_floors", { required: true })}
               />
               {errors.num_of_floors && (
                 <p className="text-red-500">هذا الحقل مطلوب</p>
               )}
             </div>
-            <div className="mb-4 ">
+            <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 الإتجاه :
               </label>
@@ -284,6 +307,41 @@ export default function BBuilding({ building }: any) {
               )}
             </div>
           </div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                نوع العرض :
+              </label>
+              <div>
+                <select
+                  className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                  value={selectedOffer}
+                  onChange={handleOfferChange}
+                >
+                  {offer.map((offerItem: any) => (
+                    <option key={offerItem.id} value={offerItem.id}>
+                      {offerItem.offer}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className={`${selectedOffer === 1 ? "hidden" : ""} mb-4`}>
+              <label className="block text-white font-semibold text-sm mb-2">
+                مدة {selectedOffer === 2 ? "الإجار" : "الرهن"} :{" "}
+                <span className="text-gray-400 text-sm">
+                  {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
+                </span>
+              </label>
+              <input
+                type="text"
+                placeholder="مدة العرض"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("months", { required: selectedOffer !== "1" })}
+              />
+              {errors.months && <p className="text-red-500">هذا الحقل مطلوب</p>}
+            </div>
+          </div>
           <div className="flex flex-row justify-center items-center gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
@@ -299,12 +357,12 @@ export default function BBuilding({ building }: any) {
             </div>
           </div>
         </div>
-        <div className="mb-4 flex justify-start items-center">
+        <div className="xl:w-full xl:flex xl:justify-center">
           <button
             type="submit"
-            className="w-full h-11 border p-2 rounded-md  bg-accent border-accent hover:bg-accent-hover text-white"
+            className=" xl:w-40 bg-accent hover:bg-accent-hover text-white  py-2 px-4 rounded"
           >
-            تحديث البيانات
+            تعديل المعلومات
           </button>
         </div>
       </form>

@@ -73,7 +73,7 @@ function LocationMarker() {
 }
 
 export default function MapTyB({ building }: { building: any[] }) {
-  console.log("building=", building);
+
 
   const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
     {}

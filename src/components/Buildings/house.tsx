@@ -36,8 +36,8 @@ export default function House(Building: any) {
     direction = "جنوبي غربي";
   }
   return (
-    <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5 xl:gap-x-16">
+    <div className="flex flex-col gap-5">
+      <div className="grid grid-cols-2 xl:grid-cols-2 gap-x-5 gap-y-5 xl:gap-x-16">
         <div className="flex gap-2 ">
           <div className="flex justify-center items-center  gap-1 ">
             <p className="text-accent text-lg">
@@ -49,16 +49,17 @@ export default function House(Building: any) {
             {building.area}M<sup>2</sup>
           </p>
         </div>
-        <div className="flex gap-2 ">
-          <div className="flex justify-center items-center  gap-1 ">
+
+        <div
+          className={`${building.offer === "رهن" ? "flex" : "hidden"} w-full gap-2`}
+        >
+          <div className="flex justify-center items-center gap-1">
             <p className="text-accent text-lg">
-              <PiArmchairDuotone />
+              <PiTimerDuotone />
             </p>
-            عدد الغرف:
+            مدة عقد الرهن<span className="text-gray-400">(بالسنوات)</span>:
           </div>
-          <p className="text-gray-300">
-            {building.property_object.num_of_rooms}
-          </p>
+          <p className="text-gray-300">{building.duration_in_months}</p>
         </div>
         <div className="flex gap-2 ">
           <div className="flex justify-center items-center  gap-1 ">
@@ -102,16 +103,16 @@ export default function House(Building: any) {
           </div>
           <p className="text-gray-300">{building.duration_in_months}</p>
         </div>
-        <div
-          className={`${building.offer === "رهن" ? "flex" : "hidden"} gap-2`}
-        >
-          <div className="flex justify-center items-center gap-1">
+        <div className="flex gap-2 ">
+          <div className="flex justify-center items-center  gap-1 ">
             <p className="text-accent text-lg">
-              <PiTimerDuotone />
+              <PiArmchairDuotone />
             </p>
-            مدة عقد الرهن<span className="text-gray-400">(بالسنوات)</span>:
+            عدد الغرف:
           </div>
-          <p className="text-gray-300">{building.duration_in_months}</p>
+          <p className="text-gray-300">
+            {building.property_object.num_of_rooms}
+          </p>
         </div>
       </div>
       <div className="flex gap-2 mt-2 sm:w-full">

@@ -34,7 +34,7 @@ export default function Commercialproperty(Building: any) {
     direction = "جنوبي غربي";
   }
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-5">
       <div className="grid grid-cols-2 xl:grid-cols-2 gap-x-1 gap-y-5 xl:gap-x-10">
         <div className="flex gap-2">
           <div className="flex justify-center items-center  gap-1 ">

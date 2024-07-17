@@ -18,7 +18,7 @@ export default function Land({ apartment }: any) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showConfirmation } = useConfirmationAlert();
   const [offer, setOffer] = useState<any>([]);
-  const [selectedOffer, setSelectedOffer] = useState<string>("1");
+  const [selectedOffer, setSelectedOffer] = useState<any>("");
 
   useEffect(() => {
     async function fetchData() {
@@ -27,9 +27,17 @@ export default function Land({ apartment }: any) {
     }
     fetchData();
   }, []);
-
+  useEffect(() => {
+    // Map the offer from apartment to selectedOffer
+    if (apartment.offer) {
+      // Map the offer value to the corresponding option value if needed
+      const offerValue =
+        offer.find((item: any) => item.offer === apartment.offer)?.id || "";
+      setSelectedOffer(offerValue);
+    }
+  }, [apartment.offer, offer]);
   const handleOfferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOffer(e.target.value);
+    setSelectedOffer(Number(e.target.value));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +111,7 @@ export default function Land({ apartment }: any) {
           duration_in_months: data.months,
         },
       };
-      console.log("bodyContent=", bodyContent);
+    
 
       try {
         await axios.patch(`${apiUrl}/lands/${apartment.id}/`, bodyContent, {
@@ -132,7 +140,7 @@ export default function Land({ apartment }: any) {
       <div>
         <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
           {imagee.map((index: any, id: any) => {
-            console.log(imagee);
+            
 
             return (
               <div key={id} className="relative">
@@ -233,7 +241,19 @@ export default function Land({ apartment }: any) {
         </div>
 
         <div className="flex flex-col justify-center items-center gap-4">
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-3">
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                المساحة :
+              </label>
+              <input
+                type="text"
+                placeholder="المساحة"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("area", { required: true })}
+              />
+              {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
+            </div>
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 نوع العرض :
@@ -252,29 +272,20 @@ export default function Land({ apartment }: any) {
                 </select>
               </div>
             </div>
-            <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                المساحة :
-              </label>
-              <input
-                type="text"
-                placeholder="المساحة"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
-                {...register("area", { required: true })}
-              />
-              {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
-            </div>
           </div>
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
-            <div className={`${selectedOffer === "1" ? "hidden" : ""} mb-4`}>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-3">
+            <div className={`${selectedOffer === 1 ? "hidden" : ""} mb-4`}>
               <label className="block text-white font-semibold text-sm mb-2">
-                مدة {selectedOffer === "2" ? "الإجار" : "الرهن"} :{" "}
-                {selectedOffer === "2" ? "(بالأشهر)" : "(بالسنوات)"}
+                مدة {selectedOffer === 2 ? "الإجار" : "الرهن"} :{" "}
+                <span className="text-gray-400 text-sm">
+                  {" "}
+                  {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
+                </span>
               </label>
               <input
                 type="text"
                 placeholder="مدة العرض"
-                className="w-40  xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40  xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("months", { required: true })}
               />
               {errors.months && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -286,19 +297,19 @@ export default function Land({ apartment }: any) {
               <input
                 type="text"
                 placeholder="السعر"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("price", { required: true })}
               />
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
           </div>
         </div>
-        <div className="mb-4 flex justify-start items-center">
+        <div className="xl:w-full xl:flex xl:justify-center">
           <button
             type="submit"
-            className="w-full h-11 border p-2 rounded-md  bg-accent border-accent hover:bg-accent-hover text-white"
+            className=" xl:w-40 bg-accent hover:bg-accent-hover text-white  py-2 px-4 rounded"
           >
-            تحديث البيانات
+            تعديل المعلومات
           </button>
         </div>
       </form>

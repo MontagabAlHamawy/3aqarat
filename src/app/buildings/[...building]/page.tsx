@@ -157,8 +157,8 @@ export default function Buildin(props: any) {
   }
 
   return (
-    <div className="mt-[20px] xl:mt-auto relative">
-      <div className="absolute z-20 top-[-50px] xl:top-[-20px] left-2">
+    <div className="mt-[20px] xl:mt-10 relative">
+      <div className="absolute z-20 top-[-50px] xl:top-[-40px] left-2">
         {Iam && (
           <div className="relative" ref={menuRef}>
             <div

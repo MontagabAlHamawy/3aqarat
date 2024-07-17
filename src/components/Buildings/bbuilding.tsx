@@ -37,8 +37,8 @@ export default function BBuilding(Building: any) {
   }
   return (
     // {buildin.map((building: any) => (
-    <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-1 gap-y-5 xl:gap-x-10">
+    <div className="flex flex-col gap-5">
+      <div className="grid grid-cols-2 xl:grid-cols-2 gap-x-1 gap-y-5 xl:gap-x-10">
         <div className="flex gap-2">
           <div className="flex justify-center items-center gap-1 ">
             <p className="text-accent text-lg">
@@ -81,25 +81,17 @@ export default function BBuilding(Building: any) {
             {building.property_object.num_of_floors}
           </p>
         </div>
-        <div
-          className={`${building.offer === "إيجار" ? "flex" : "hidden"} gap-2`}
-        >
+        <div className={`flex w-max gap-2`}>
           <div className="flex justify-center items-center gap-1">
             <p className="text-accent text-lg">
               <PiTimerDuotone />
             </p>
-            مدة عقد الإجار<span className="text-gray-400">(بالأشهر)</span>:
-          </div>
-          <p className="text-gray-300">{building.duration_in_months}</p>
-        </div>
-        <div
-          className={`${building.offer === "رهن" ? "flex" : "hidden"} gap-2`}
-        >
-          <div className="flex justify-center items-center gap-1">
-            <p className="text-accent text-lg">
-              <PiTimerDuotone />
-            </p>
-            مدة عقد الرهن<span className="text-gray-400">(بالسنوات)</span>:
+            مدة عقد {building.offer === "إيجار" ? "الإجار" : "الرهن"}
+            <span className="text-gray-400 text-sm">
+              {" "}
+              {building.offer === "إيجار" ? "(بالأشهر)" : "(بالسنوات)"}
+            </span>
+            :
           </div>
           <p className="text-gray-300">{building.duration_in_months}</p>
         </div>

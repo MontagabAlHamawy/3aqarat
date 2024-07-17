@@ -32,7 +32,7 @@ export default function House({ apartment }: any) {
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
-  console.log("apartment=", apartment);
+
 
   const router = useRouter();
   const {
@@ -93,7 +93,7 @@ export default function House({ apartment }: any) {
         console.error("Error updating data:", error);
         toast.error("فشل في ارسال البيانات");
       }
-      console.log("bodyContent=", bodyContent);
+     
     });
   };
 
@@ -127,7 +127,7 @@ export default function House({ apartment }: any) {
       <div>
         <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
           {imagee.map((index: any, id: any) => {
-            console.log(index);
+          
             return (
               <div key={id} className="relative">
                 <Image

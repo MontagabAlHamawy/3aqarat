@@ -1,4 +1,3 @@
-"use client";
 import { ImagApartment } from "../links";
 import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
@@ -18,18 +17,28 @@ export default function Apartment({ apartment }: any) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showConfirmation } = useConfirmationAlert();
   const [offer, setOffer] = useState<any>([]);
-  const [selectedOffer, setSelectedOffer] = useState<string>("1");
+  const [selectedOffer, setSelectedOffer] = useState<any>("");
 
   useEffect(() => {
     async function fetchData() {
-      const offer = await ApiOfferTypes();
-      setOffer(offer);
+      const offerData = await ApiOfferTypes();
+      setOffer(offerData);
     }
     fetchData();
   }, []);
 
+  useEffect(() => {
+    // Map the offer from apartment to selectedOffer
+    if (apartment.offer) {
+      // Map the offer value to the corresponding option value if needed
+      const offerValue =
+        offer.find((item: any) => item.offer === apartment.offer)?.id || "";
+      setSelectedOffer(offerValue);
+    }
+  }, [apartment.offer, offer]);
+
   const handleOfferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOffer(e.target.value);
+    setSelectedOffer(Number(e.target.value));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +62,7 @@ export default function Apartment({ apartment }: any) {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       title: apartment.title,
@@ -63,20 +73,10 @@ export default function Apartment({ apartment }: any) {
       floor_number: apartment.property_object.floor_number,
       direction: apartment.property_object.direction,
       price: apartment.price,
-      offer: apartment.offer,
+      offer: apartment.offer, // This will not set the value directly to the select, managed separately
       months: apartment.duration_in_months,
     },
   });
-
-  useEffect(() => {
-    if (apartment.offer === "بيع") {
-      setSelectedOffer("1");
-    } else if (apartment.offer === "إجار") {
-      setSelectedOffer("2");
-    } else if (apartment.offer === "رهن") {
-      setSelectedOffer("3");
-    }
-  }, [apartment.offer]);
 
   const tabuMapping: any = {
     "طابو أخضر ( السجل العقاري )": 1,
@@ -109,7 +109,6 @@ export default function Apartment({ apartment }: any) {
         floor_number: Number(data.floor_number),
         direction: data.direction,
       };
-      console.log("bodyContent=", bodyContent);
 
       try {
         await axios.patch(
@@ -146,11 +145,10 @@ export default function Apartment({ apartment }: any) {
     { value: "SE", label: "جنوبي شرقي" },
     { value: "SW", label: "جنوبي غربي" },
   ];
-
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
+    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
+        <div className="grid grid-cols-2 mt-7 mx-2 gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6">
           {imagee.map((index: any, id: any) => (
             <div key={id} className="relative">
               <Image
@@ -158,7 +156,7 @@ export default function Apartment({ apartment }: any) {
                 width={300}
                 height={0}
                 alt={`Gallery Image`}
-                className="  object-center rounded-md cursor-pointer"
+                className="object-center rounded-md cursor-pointer"
               />
               <button
                 className={`${
@@ -175,11 +173,11 @@ export default function Apartment({ apartment }: any) {
               width={300}
               height={0}
               alt="user"
-              className={` rounded-md`}
+              className="rounded-md"
             />
             <button
               onClick={() => setPhoto("")}
-              className={`p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
+              className="p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1"
             >
               <PiTrashDuotone size={30} />
             </button>
@@ -247,9 +245,9 @@ export default function Apartment({ apartment }: any) {
             {errors.tabu && <p className="text-red-500">هذا الحقل مطلوب</p>}
           </div>
         </div>
-
         <div className="flex flex-col justify-center items-center gap-4">
-          <div className="flex flex-row justify-center items-center  gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4"></div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 المساحة :
@@ -257,7 +255,7 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="المساحة"
-                className="w-full xl:w-40 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("area", { required: true })}
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -269,7 +267,7 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="عدد الغرف"
-                className="w-full xl:w-40 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("number_of_rooms", { required: true })}
               />
               {errors.number_of_rooms && (
@@ -285,7 +283,7 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="الطابق"
-                className="w-full xl:w-40 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("floor_number", { required: true })}
               />
               {errors.floor_number && (
@@ -297,7 +295,7 @@ export default function Apartment({ apartment }: any) {
                 الإتجاه :
               </label>
               <select
-                className="w-full xl:w-40 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
                 {...register("direction", { required: true })}
               >
                 {directionOptions.map((option) => (
@@ -316,31 +314,31 @@ export default function Apartment({ apartment }: any) {
               <label className="block text-white font-semibold text-sm mb-2">
                 نوع العرض :
               </label>
-              <div>
-                <select
-                  className="w-40 xl:w-40 h-11 border pr-2 rounded-lg bg-section border-section text-white"
-                  value={selectedOffer}
-                  onChange={handleOfferChange}
-                >
-                  {offer.map((offer: any) => (
-                    <option key={offer.id} value={offer.id}>
-                      {offer.offer}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <select
+                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                value={selectedOffer}
+                onChange={handleOfferChange}
+              >
+                {offer.map((offerItem: any) => (
+                  <option key={offerItem.id} value={offerItem.id}>
+                    {offerItem.offer}
+                  </option>
+                ))}
+              </select>
             </div>
-
-            <div className={`${selectedOffer === "1" ? "hidden" : ""} mb-4`}>
+            <div className={`${selectedOffer === 1 ? "hidden" : ""} mb-4`}>
               <label className="block text-white font-semibold text-sm mb-2">
-                مدة {selectedOffer === "2" ? "الإجار" : "الرهن"} :{" "}
-                {selectedOffer === "2" ? "(بالأشهر)" : "(بالسنوات)"}
+                مدة {selectedOffer === 2 ? "الإجار" : "الرهن"} :{" "}
+                <span className="text-gray-400 text-sm">
+                  {" "}
+                  {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
+                </span>
               </label>
               <input
                 type="text"
                 placeholder="مدة العرض"
-                className="w-40 xl:w-40 border p-2 rounded-lg bg-section border-section text-white"
-                {...register("months", { required: true })}
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("months", { required: selectedOffer !== "1" })}
               />
               {errors.months && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
@@ -353,19 +351,21 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="السعر"
-                className="w-full xl:w-40 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("price", { required: true })}
               />
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full xl:w-40 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          تعديل
-        </button>
+        <div className="xl:w-full xl:flex xl:justify-center">
+          <button
+            type="submit"
+            className="xl:w-40 bg-accent hover:bg-accent-hover text-white py-2 px-4 rounded"
+          >
+            تعديل المعلومات
+          </button>
+        </div>
       </form>
     </div>
   );
