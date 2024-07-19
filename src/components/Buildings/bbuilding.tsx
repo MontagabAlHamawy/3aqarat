@@ -81,7 +81,7 @@ export default function BBuilding(Building: any) {
             {building.property_object.num_of_floors}
           </p>
         </div>
-        <div className={`flex w-max gap-2`}>
+        <div className={`${building.offer === "إيجار" || building.offer === "رهن" ? "flex" : "hidden"} w-max gap-2`}>
           <div className="flex justify-center items-center gap-1">
             <p className="text-accent text-lg">
               <PiTimerDuotone />

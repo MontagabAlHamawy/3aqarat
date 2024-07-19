@@ -21,24 +21,22 @@ export default function Land(Building: any) {
           </p>
         </div>
         <div
-          className={`${building.offer === "إيجار" ? "flex" : "hidden"} gap-2`}
+          className={`${
+            building.offer === "إيجار" || building.offer === "رهن"
+              ? "flex"
+              : "hidden"
+          } w-max gap-2`}
         >
           <div className="flex justify-center items-center gap-1">
             <p className="text-accent text-lg">
               <PiTimerDuotone />
             </p>
-            مدة عقد الإجار<span className="text-gray-400">(بالأشهر)</span>:
-          </div>
-          <p className="text-gray-300">{building.duration_in_months}</p>
-        </div>
-        <div
-          className={`${building.offer === "رهن" ? "flex" : "hidden"} gap-2`}
-        >
-          <div className="flex justify-center items-center gap-1">
-            <p className="text-accent text-lg">
-              <PiTimerDuotone />
-            </p>
-            مدة عقد الرهن<span className="text-gray-400">(بالسنوات)</span>:
+            مدة عقد {building.offer === "إيجار" ? "الإجار" : "الرهن"}
+            <span className="text-gray-400 text-sm">
+              {" "}
+              {building.offer === "إيجار" ? "(بالأشهر)" : "(بالسنوات)"}
+            </span>
+            :
           </div>
           <p className="text-gray-300">{building.duration_in_months}</p>
         </div>
