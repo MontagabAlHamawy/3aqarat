@@ -210,24 +210,10 @@ export default function Search() {
           </p>
         </div>
       </div>
-      <div className="flex justify-center">
-        <div className="w-full overflow-y-auto">
-          <div className="flex flex-col xl:flex-row-reverse gap-5">
-            <div className="xl:fixed xl:top-[100px] mx-2 xl:mx-0 xl:right-[50px] xl:w-2/3">
-              <div className="xl:mt-10 xl:mr-7 ">
-                {!loading && !error && <Map building={bil} />}
-              </div>
-            </div>
-            <div className="xl:w-1/3 p-4 mt-[-40px] xl:mt-6">
-              {!loading && !error && <SearchBuilding bil={bil} />}
-            </div>
-          </div>
-        </div>
-      </div>
-      {loading && (
-        <div className="flex justify-center xl:mb-[-200px]">
+      {loading ? (
+        <div className="flex justify-center xl:mb-[-200px] ">
           <div className="w-full overflow-y-auto">
-            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4">
+            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 xl:mt-14">
               <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <MapLoade />
               </div>
@@ -237,16 +223,30 @@ export default function Search() {
             </div>
           </div>
         </div>
-      )}
-      {error && (
-        <div className="flex justify-center xl:mb-[-200px]">
+      ) : error ? (
+        <div className="flex justify-center xl:mb-[-200px] ">
           <div className="w-full overflow-y-auto">
-            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4">
+            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 xl:mt-14">
               <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <MapError />
               </div>
               <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <BuildingError />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex justify-center">
+          <div className="w-full overflow-y-auto">
+            <div className="flex flex-col xl:flex-row-reverse gap-5">
+              <div className="xl:fixed xl:top-[100px] mx-2 xl:mx-0 xl:right-[50px] xl:w-2/3">
+                <div className="xl:mt-10 xl:mr-7 ">
+                  <Map building={bil} />
+                </div>
+              </div>
+              <div className="xl:w-1/3 p-4 mt-[-40px] xl:mt-6">
+                <SearchBuilding bil={bil} />
               </div>
             </div>
           </div>

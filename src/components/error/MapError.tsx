@@ -8,7 +8,7 @@ export default function MapError() {
         <div className="text-[90px]">
           <PiMapPinDuotone />
         </div>
-        <h1 className="text-2xl">لا توجد بيانات لعرضها...</h1>
+        <h1 className="text-2xl">لا توجد بيانات لعرضها</h1>
       </div>
     </div>
   );
