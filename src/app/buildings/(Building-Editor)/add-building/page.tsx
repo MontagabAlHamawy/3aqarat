@@ -43,19 +43,19 @@ export default function AddBuilding(props: any) {
       </div>
       <div>
         <div className={`${isLand ? "block" : "hidden"}`}>
-          <Land apartment />
+          <Land />
         </div>
         <div className={`${isApartment ? "block" : "hidden"}`}>
-          <Apartment apartment />
+          <Apartment />
         </div>
         <div className={`${isCommercialproperty ? "block" : "hidden"}`}>
-          <Commercialproperty apartment />
+          <Commercialproperty />
         </div>
         <div className={`${isBuilding ? "block" : "hidden"}`}>
-          <BBuilding building />
+          <BBuilding />
         </div>
         <div className={`${isHouse ? "block" : "hidden"}`}>
-          <House apartment />
+          <House />
         </div>
       </div>
     </div>

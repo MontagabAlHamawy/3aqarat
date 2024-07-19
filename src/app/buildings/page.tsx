@@ -13,8 +13,8 @@ import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 export default function Building(props: any) {
   const [building, setBuilding] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
@@ -23,7 +23,6 @@ export default function Building(props: any) {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    setError(false);
     try {
       let response;
       if (searchText.length >= 3) {
@@ -34,7 +33,6 @@ export default function Building(props: any) {
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
         NotFound();
-        setError(true);
         return;
       }
       setBuilding(response.results);
@@ -74,7 +72,7 @@ export default function Building(props: any) {
     }
   };
 
-  if (loading && searching) {
+  if (loading) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">

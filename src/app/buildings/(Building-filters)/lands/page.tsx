@@ -1,16 +1,16 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import { CommercialApi, ApiCommercialSearch } from "@/utils/API";
+import { LandApi, ApilandSearch } from "@/utils/API";
 import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
-import NotFound from "../../not-found";
+import NotFound from "@/app/not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-import PaginationCommercial from "@/components/pagination/paginationcommercial";
-import BuildingError from "@/components/error/BuildingError";
+import PaginationHouses from "@/components/pagination/paginationhouses";
 import BuildingLoade from "@/components/loade/BuildingLoade";
+import BuildingError from "@/components/error/BuildingError";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 
-export default function Commercials(props: any) {
+export default function Lands(props: any) {
   const [building, setBuilding] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function Commercials(props: any) {
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/commercials";
+  const linked = "/buildings/lands";
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -27,9 +27,9 @@ export default function Commercials(props: any) {
     try {
       let response;
       if (searchText.length >= 3) {
-        response = await ApiCommercialSearch(searchText, "", "");
+        response = await ApilandSearch(searchText, "", "");
       } else {
-        response = await CommercialApi(page);
+        response = await LandApi(page);
       }
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
@@ -39,11 +39,7 @@ export default function Commercials(props: any) {
       }
       setBuilding(response.results);
       setPageInfo(response);
-      if (response.next === null && response.previous === null) {
-        setPagination(false);
-      } else {
-        setPagination(true);
-      }
+      setPagination(response.next !== null);
     } catch (error) {
       toast.error("حدث خطأ أثناء جلب البيانات");
       console.error("error:", error);
@@ -74,11 +70,11 @@ export default function Commercials(props: any) {
     }
   };
 
-  if (loading && searching) {
+  if (loading) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">المحال التجارية</h1>
+          <h1 className="text-2xl">الأراضي</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -103,9 +99,9 @@ export default function Commercials(props: any) {
 
   if (error) {
     return (
-      <div className="mx-2 xl:mx-0 xl:ml-3">
+      <div className="mx-2  xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">المحال التجارية</h1>
+          <h1 className="text-2xl">الأراضي</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -131,7 +127,7 @@ export default function Commercials(props: any) {
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl">المحال التجارية</h1>
+        <h1 className="text-2xl">الأراضي</h1>
       </div>
       <form
         className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -155,7 +151,7 @@ export default function Commercials(props: any) {
           pagination ? "flex justify-center items-center" : "hidden"
         }`}
       >
-        <PaginationCommercial page={pageInfo} />
+        <PaginationHouses page={pageInfo} />
       </div>
     </div>
   );

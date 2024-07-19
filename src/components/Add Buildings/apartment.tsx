@@ -1,5 +1,3 @@
-"use client";
-import { ImagApartment } from "../links";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import apiUrl from "@/utils/apiConfig";
@@ -8,15 +6,33 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { PiPlusCircleDuotone, PiTrashDuotone } from "react-icons/pi";
-import { useRef, useState } from "react";
-import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert"; // استيراد hook
+import { useRef, useState, useEffect } from "react";
+import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
 
-export default function Apartment({ apartment }: any) {
+export default function Apartment() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-  const { showConfirmation } = useConfirmationAlert(); // استخدام hook
+  const { showConfirmation } = useConfirmationAlert();
+  const [selectedOffer, setSelectedOffer] = useState<number | string>("");
+  const [cities, setCities] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchCities() {
+      try {
+        const response = await axios.get(`${apiUrl}/cities/`);
+        setCities(response.data);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      }
+    }
+
+    fetchCities();
+  }, []);
+
+  const handleOfferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOffer(e.target.value);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -34,24 +50,31 @@ export default function Apartment({ apartment }: any) {
     fileInputRef.current?.click();
   };
 
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: apartment.title,
-      description: apartment.description,
-      tabu: apartment.tabu,
-      area: apartment.area,
-      number_of_rooms: apartment.property_object.number_of_rooms,
-      floor_number: apartment.property_object.floor_number,
-      direction: apartment.property_object.direction,
-      price: apartment.price,
+      title: "",
+      description: "",
+      tabu: "",
+      area: "",
+      number_of_rooms: "",
+      floor_number: "",
+      direction: "",
+      price: "",
+      months: "",
+      region: "",
+      street: "",
+      address_description: "",
+      geo_address: "",
+      city: "",
     },
   });
 
-  const tabuMapping: any = {
+  const tabuMapping: Record<string, number> = {
     "طابو أخضر ( السجل العقاري )": 1,
     "إقرار محكمة": 2,
     "كاتب عدل": 3,
@@ -75,6 +98,16 @@ export default function Apartment({ apartment }: any) {
           title: data.title,
           description: data.description,
           tabu: tabuMapping[data.tabu],
+          offer: Number(selectedOffer),
+          duration_in_months: Number(data.months),
+          address: {
+            region: data.region,
+            street: data.street,
+            description: data.address_description,
+            geo_address: data.geo_address,
+            city: Number(data.city),
+          },
+          photos: selectedFile ? [{ photo: photo }] : [],
         },
         number_of_rooms: Number(data.number_of_rooms),
         floor_number: Number(data.floor_number),
@@ -82,29 +115,17 @@ export default function Apartment({ apartment }: any) {
       };
 
       try {
-        await axios.patch(
-          `${apiUrl}/apartments/${apartment.id}/`,
-          bodyContent,
-          {
-            headers: headersList,
-          }
-        );
-
-        toast.success("تم تعديل البيانات بنجاح");
-        router.replace(`/buildings/${apartment.id}`);
+        await axios.post(`${apiUrl}/apartments/`, bodyContent, {
+          headers: headersList,
+        });
+        toast.success("تمت إضافة العقار بنجاح");
+        router.replace(`/buildings`);
       } catch (error) {
-        console.error("Error updating data:", error);
-        toast.error("فشل في ارسال البيانات");
+        console.error("Error adding property:", error);
+        toast.error("فشل في إرسال البيانات");
       }
     });
   };
-
-  let imagee: any;
-  // if (apartment.photos.length !== 0) {
-    imagee = apartment.photos;
-  // } else {
-  //   imagee = ImagApartment;
-  // }
 
   const directionOptions = [
     { value: "N", label: "شمالي" },
@@ -117,53 +138,27 @@ export default function Apartment({ apartment }: any) {
     { value: "SW", label: "جنوبي غربي" },
   ];
 
-  let im = false;
-  if (apartment.photos.length === 0 || apartment.photos.length === 1) {
-    im = false;
-  } else {
-    im = true;
-  }
-
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
+    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
-          {imagee.map((index: any, id: any) => {
-            
-            return (
-              <div key={id} className="relative">
-                <Image
-                  src={index.photo}
-                  width={300}
-                  height={0}
-                  alt={`Gallery Image`}
-                  className="  object-center rounded-md cursor-pointer"
-                />
-                <button
-                  className={`${
-                    imagee === ImagApartment ? "hidden" : ""
-                  }p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-                >
-                  <PiTrashDuotone size={30} />
-                </button>
-              </div>
-            );
-          })}
-          <div className={`relative ${photo === "" ? "hidden" : "block"}`}>
-            <Image
-              src={photo}
-              width={300}
-              height={0}
-              alt="user"
-              className={` rounded-md`}
-            />
-            <button
-              onClick={() => setPhoto("")}
-              className={`p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-            >
-              <PiTrashDuotone size={30} />
-            </button>
-          </div>
+        <div className="grid grid-cols-2 mt-7 mx-2 gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6">
+          {photo && (
+            <div className="relative">
+              <Image
+                src={photo}
+                width={300}
+                height={0}
+                alt="user"
+                className="rounded-md"
+              />
+              <button
+                onClick={() => setPhoto("")}
+                className="p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1"
+              >
+                <PiTrashDuotone size={30} />
+              </button>
+            </div>
+          )}
           <button
             onClick={handleIconClick}
             className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
@@ -227,9 +222,9 @@ export default function Apartment({ apartment }: any) {
             {errors.tabu && <p className="text-red-500">هذا الحقل مطلوب</p>}
           </div>
         </div>
-
         <div className="flex flex-col justify-center items-center gap-4">
-          <div className="flex flex-row justify-center items-center  gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4"></div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 المساحة :
@@ -237,7 +232,7 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="المساحة"
-                className="w-40 xl:w-48 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("area", { required: true })}
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -249,7 +244,7 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="عدد الغرف"
-                className="w-40 xl:w-48 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("number_of_rooms", { required: true })}
               />
               {errors.number_of_rooms && (
@@ -257,31 +252,27 @@ export default function Apartment({ apartment }: any) {
               )}
             </div>
           </div>
-          <div className="flex w-full flex-row justify-center items-center xl:items-center gap-1  xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
-                رقم الطابق :
-                <p className="text-gray-500 text-xs ">
-                  {" "}
-                  (القيمة 0 تشير الى الطابق الأرضي)
-                </p>
+                الطابق :
               </label>
               <input
                 type="text"
-                placeholder="رقم الطابق"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                placeholder="الطابق"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("floor_number", { required: true })}
               />
               {errors.floor_number && (
                 <p className="text-red-500">هذا الحقل مطلوب</p>
               )}
             </div>
-            <div className="mb-4 ">
-              <label className="block text-white font-semibold text-sm mb-6  ">
-                الإتجاه :
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                الاتجاه :
               </label>
               <select
-                className="w-40 xl:w-52 h-10 border pr-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
                 {...register("direction", { required: true })}
               >
                 {directionOptions.map((option) => (
@@ -295,7 +286,7 @@ export default function Apartment({ apartment }: any) {
               )}
             </div>
           </div>
-          <div className="flex flex-row justify-center items-center gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 السعر :
@@ -303,21 +294,126 @@ export default function Apartment({ apartment }: any) {
               <input
                 type="text"
                 placeholder="السعر"
-                className="w-40 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
                 {...register("price", { required: true })}
               />
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                عدد الشهور :
+              </label>
+              <input
+                type="text"
+                placeholder="عدد الشهور"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("months", { required: true })}
+              />
+              {errors.months && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                المنطقة :
+              </label>
+              <input
+                type="text"
+                placeholder="المنطقة"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("region", { required: true })}
+              />
+              {errors.region && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                الشارع :
+              </label>
+              <input
+                type="text"
+                placeholder="الشارع"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("street", { required: true })}
+              />
+              {errors.street && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                وصف العنوان :
+              </label>
+              <input
+                type="text"
+                placeholder="وصف العنوان"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("address_description", { required: true })}
+              />
+              {errors.address_description && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                العنوان على الخريطة :
+              </label>
+              <input
+                type="text"
+                placeholder="العنوان على الخريطة"
+                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                {...register("geo_address", { required: true })}
+              />
+              {errors.geo_address && (
+                <p className="text-red-500">هذا الحقل مطلوب</p>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                المدينة :
+              </label>
+              <select
+                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                {...register("city", { required: true })}
+              >
+                {cities.map((city: any) => (
+                  <option key={city.id} value={city.id}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
+              {errors.city && <p className="text-red-500">هذا الحقل مطلوب</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-white font-semibold text-sm mb-2">
+                نوع العرض :
+              </label>
+              <select
+                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                value={selectedOffer}
+                onChange={handleOfferChange}
+              >
+                <option value="">اختر نوع العرض</option>
+                <option value="1">عرض 1</option>
+                <option value="2">عرض 2</option>
+                <option value="3">عرض 3</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div className="mb-4 flex justify-start items-center">
-          <button
-            type="submit"
-            className="w-full h-11 border p-2 rounded-md  bg-accent border-accent hover:bg-accent-hover text-white"
-          >
-            تحديث البيانات
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-blue-600 text-white rounded-md"
+        >
+          إرسال
+        </button>
       </form>
     </div>
   );

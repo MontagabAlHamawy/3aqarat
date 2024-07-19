@@ -1,16 +1,16 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import { HousesApi, ApiHouseSearch } from "@/utils/API";
+import { CommercialApi, ApiCommercialSearch } from "@/utils/API";
 import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
-import NotFound from "../../not-found";
+import NotFound from "@/app/not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-import PaginationHouses from "@/components/pagination/paginationhouses";
-import BuildingLoade from "@/components/loade/BuildingLoade";
+import PaginationCommercial from "@/components/pagination/paginationcommercial";
 import BuildingError from "@/components/error/BuildingError";
+import BuildingLoade from "@/components/loade/BuildingLoade";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 
-export default function Houses(props: any) {
+export default function Commercials(props: any) {
   const [building, setBuilding] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function Houses(props: any) {
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/houses";
+  const linked = "/buildings/commercials";
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -27,9 +27,9 @@ export default function Houses(props: any) {
     try {
       let response;
       if (searchText.length >= 3) {
-        response = await ApiHouseSearch(searchText, "", "");
+        response = await ApiCommercialSearch(searchText, "", "");
       } else {
-        response = await HousesApi(page);
+        response = await CommercialApi(page);
       }
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
@@ -74,11 +74,11 @@ export default function Houses(props: any) {
     }
   };
 
-  if (loading && searching) {
+  if (loading) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">المنازل</h1>
+          <h1 className="text-2xl">المحال التجارية</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -103,9 +103,9 @@ export default function Houses(props: any) {
 
   if (error) {
     return (
-      <div className="mx-2  xl:mx-0 xl:ml-3">
+      <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">المنازل</h1>
+          <h1 className="text-2xl">المحال التجارية</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -131,7 +131,7 @@ export default function Houses(props: any) {
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl">المنازل</h1>
+        <h1 className="text-2xl">المحال التجارية</h1>
       </div>
       <form
         className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -155,7 +155,7 @@ export default function Houses(props: any) {
           pagination ? "flex justify-center items-center" : "hidden"
         }`}
       >
-        <PaginationHouses page={pageInfo} />
+        <PaginationCommercial page={pageInfo} />
       </div>
     </div>
   );

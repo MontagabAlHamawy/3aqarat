@@ -18,7 +18,8 @@ import {
 } from "@/utils/API";
 import MapLoade from "@/components/loade/MapLoade";
 import BuildingLoade from "@/components/loade/BuildingLoade";
-import build from "next/dist/build";
+import BuildingError from "@/components/error/BuildingError";
+import MapError from "@/components/error/MapError";
 
 const Map = dynamic(() => import("@/components/map/map"), { ssr: false });
 
@@ -30,6 +31,7 @@ interface Property {
 
 export default function Search() {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [bil, setBui] = useState<Property[]>([]);
   const [offer, setOffer] = useState<any>([]);
   const [searchText, setSearchText] = useState<string>("");
@@ -48,8 +50,14 @@ export default function Search() {
       }
       setBui(build.results);
       setOffer(offer);
+      if (build.results.length === 0) {
+        setError(true);
+      } else {
+        setError(false);
+      }
     } catch (error) {
       toast.error("خطاء في جلب البيانات");
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -114,8 +122,14 @@ export default function Search() {
           );
       }
       setBui(build.results);
+      if (build.results.length === 0) {
+        setError(true);
+      } else {
+        setError(false);
+      }
     } catch (error) {
       toast.error("خطاء في جلب البيانات");
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -201,11 +215,11 @@ export default function Search() {
           <div className="flex flex-col xl:flex-row-reverse gap-5">
             <div className="xl:fixed xl:top-[100px] mx-2 xl:mx-0 xl:right-[50px] xl:w-2/3">
               <div className="xl:mt-10 xl:mr-7 ">
-                {!loading && <Map building={bil} />}
+                {!loading && !error && <Map building={bil} />}
               </div>
             </div>
             <div className="xl:w-1/3 p-4 mt-[-40px] xl:mt-6">
-              {!loading && <SearchBuilding bil={bil} />}
+              {!loading && !error && <SearchBuilding bil={bil} />}
             </div>
           </div>
         </div>
@@ -219,6 +233,20 @@ export default function Search() {
               </div>
               <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <BuildingLoade />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {error && (
+        <div className="flex justify-center xl:mb-[-200px]">
+          <div className="w-full overflow-y-auto">
+            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4">
+              <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
+                <MapError />
+              </div>
+              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
+                <BuildingError />
               </div>
             </div>
           </div>
