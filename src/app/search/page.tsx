@@ -213,7 +213,7 @@ export default function Search() {
       {loading ? (
         <div className="flex justify-center xl:mb-[-200px] ">
           <div className="w-full overflow-y-auto">
-            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 xl:mt-14">
+            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 mt-5 xl:mt-14">
               <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <MapLoade />
               </div>
@@ -226,7 +226,7 @@ export default function Search() {
       ) : error ? (
         <div className="flex justify-center xl:mb-[-200px] ">
           <div className="w-full overflow-y-auto">
-            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 xl:mt-14">
+            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 mt-5 xl:mt-14">
               <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <MapError />
               </div>
