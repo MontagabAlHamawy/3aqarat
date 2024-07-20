@@ -11,11 +11,6 @@ export default function Acount() {
   const router = useRouter();
   const token = Cookies.get("authToken") || false;
   useEffect(() => {
-    if (!token) {
-      router.replace("/login");
-    }
-  }, []);
-  useEffect(() => {
     const myData = async () => {
       try {
         const response = await MyProfile();

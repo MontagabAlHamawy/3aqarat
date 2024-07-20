@@ -44,13 +44,6 @@ export default function Username(props: any) {
     router.replace("/login");
   }
 
-  const token = Cookies.get("authToken") || false;
-  useEffect(() => {
-    if (!token) {
-      router.replace("/login");
-    }
-  }, []);
-
   useEffect(() => {
     const myData = async () => {
       const Bdata = {
@@ -87,6 +80,18 @@ export default function Username(props: any) {
     };
     myData();
   }, [props.params.username]);
+  const [account, setAccount] = useState(
+    `/account/${props.params.username[0]}`
+  );
+  useEffect(() => {
+    const token = Cookies.get("authToken") || false;
+    if (!token) {
+      setAccount("/login?url=account");
+    }
+  }, []);
+  useEffect(() => {
+    router.replace(account);
+  }, [account, router]);
 
   function DeletA() {
     handleDeleteAccount(logout);
