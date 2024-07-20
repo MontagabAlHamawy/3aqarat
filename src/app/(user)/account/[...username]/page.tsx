@@ -44,8 +44,8 @@ export default function Username(props: any) {
     router.replace("/login");
   }
 
+  const token = Cookies.get("authToken") || false;
   useEffect(() => {
-    const token = Cookies.get("authToken") || false;
     if (!token) {
       router.replace("/login");
     }
