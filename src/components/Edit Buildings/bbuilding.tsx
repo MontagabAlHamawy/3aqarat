@@ -53,7 +53,7 @@ export default function BBuilding({ building }: any) {
       direction: building.property_object.direction,
       price: building.price,
       offer: building.offer || "",
-      months: building.months || "",
+      months: building.duration_in_months || "",
     },
   });
 
@@ -330,6 +330,7 @@ export default function BBuilding({ building }: any) {
               <label className="block text-white font-semibold text-sm mb-2">
                 مدة {selectedOffer === 2 ? "الإجار" : "الرهن"} :{" "}
                 <span className="text-gray-400 text-sm">
+                  {" "}
                   {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
                 </span>
               </label>
