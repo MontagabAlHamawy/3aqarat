@@ -33,7 +33,7 @@ export default function Username(props: any) {
   const [Building, setBuilding] = useState(null);
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [loading, setLoading] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false); // New state for toggling menu
+  const [menuOpen, setMenuOpen] = useState(false); 
   const menuRef = useRef(null);
 
   const router = useRouter();
@@ -79,7 +79,7 @@ export default function Username(props: any) {
       }
     };
     myData();
-  }, [props.params.username]);
+  }, [props.params.username, router]);
   const [account, setAccount] = useState(
     `/account/${props.params.username[0]}`
   );

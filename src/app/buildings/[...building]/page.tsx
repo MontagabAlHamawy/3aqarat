@@ -51,7 +51,7 @@ export default function Buildin(props: any) {
     if (page === undefined) {
       router.replace("/buildings");
     }
-  }, []);
+  }, [page, router]);
 
   useEffect(() => {
     const myData = async () => {
@@ -75,7 +75,7 @@ export default function Buildin(props: any) {
       }
     };
     myData();
-  }, [page]);
+  }, [page, router]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

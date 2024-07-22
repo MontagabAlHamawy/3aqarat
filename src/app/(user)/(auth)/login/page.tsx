@@ -27,7 +27,8 @@ export default function Login(props: any) {
     if (!token) {
       if (props.searchParams.url === undefined) {
         setAccount(`/login`);
-        url = `/signup`;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        url = "/signup";
       } else {
         setAccount(`/login?url=${props.searchParams.url}`);
         url = `/signup?url=${props.searchParams.url}`;

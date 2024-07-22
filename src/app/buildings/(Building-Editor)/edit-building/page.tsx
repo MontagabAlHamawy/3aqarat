@@ -23,7 +23,7 @@ export default function EditBuilding(props: any) {
     if (page === undefined) {
       router.replace(`/buildings/`);
     }
-  }, [page]);
+  }, [page, router]);
   useEffect(() => {
     const myData = async () => {
       const buildingData: any = await SingelBuildingApi(page);
@@ -44,7 +44,7 @@ export default function EditBuilding(props: any) {
       }
     };
     myData();
-  }, [page]);
+  }, [page, props.searchParams.url, router]);
   if (!building) {
     return <SingleBuildingLoade />;
   }

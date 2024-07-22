@@ -12,6 +12,7 @@ import {
 } from "react-icons/pi";
 
 export default function MobileSidpar() {
+
   const [accountName, setAccountNam] = useState("حسابي");
   const route = usePathname();
   const [account, setAccount] = useState("");
@@ -50,23 +51,20 @@ export default function MobileSidpar() {
             <Link
               href={link.path}
               key={index}
-              className={`flex flex-col items-center ${
-                isActive
+              className={`flex flex-col items-center ${isActive
                   ? "bg-accent p-3  rounded-full w-16 h-16 mt-[-40px]"
                   : "text-gray-400"
-              }`}
+                }`}
             >
               <p
-                className={`text-lg ${
-                  isActive ? "text-white" : "text-gray-400"
-                }`}
+                className={`text-lg ${isActive ? "text-white" : "text-gray-400"
+                  }`}
               >
                 {link.icone}
               </p>
               <p
-                className={`text-sm ${
-                  isActive ? "text-white" : "text-gray-400"
-                }`}
+                className={`text-sm ${isActive ? "text-white" : "text-gray-400"
+                  }`}
               >
                 {link.name}
               </p>

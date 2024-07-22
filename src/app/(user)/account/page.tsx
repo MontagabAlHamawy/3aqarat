@@ -30,7 +30,7 @@ export default function Acount() {
       }
     };
     myData();
-  }, []);
+  }, [router, token]);
 
   const [account, setAccount] = useState("/account");
   useEffect(() => {
