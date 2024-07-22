@@ -26,7 +26,7 @@ export function handleEditAccount(handleSubmit: () => void) {
         MySwal.fire({
           title: "تم ارسال معلومات المستخدم",
           text: "لقد تم ارسال معلومات المستخدم بنجاح.",
-          confirmButtonText: "تم",
+          confirmButtonText: "متم",
           icon: "success",
           customClass: {
             confirmButton:
