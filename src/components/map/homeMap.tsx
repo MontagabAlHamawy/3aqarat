@@ -166,15 +166,15 @@ export default function HomeMap({ building }: { building: any[] }) {
                     className="mt-5 rounded-md"
                   />
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
-                    <p className="text-lg xl:text-xl text-accent">
+                    <p className="text-lg xl:text-xl text-accent font-family">
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar text-base font-semibold">
+                      <p className="text-sidpar text-base font-semibold font-family">
                         {houss.description}
                       </p>
                     </div>
-                    <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
+                    <div className="bg-accent text-white font-family text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
                       {houss.price} ل.س
                     </div>
                   </div>
