@@ -86,7 +86,7 @@ export default function MapsComponent({ loc }: any) {
   ];
 
   return (
-    <div className="z-30">
+    <div className="z-30 font-cairo">
       <MapContainer
         className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: xloc, lng: yloc }}

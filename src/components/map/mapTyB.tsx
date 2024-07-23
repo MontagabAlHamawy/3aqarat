@@ -108,7 +108,7 @@ export default function MapTyB({ building }: { building: any[] }) {
   }
 
   return (
-    <div className="z-30 mt-10 xl:mt-[-5px]">
+    <div className="z-30 mt-10 xl:mt-[-5px] font-cairo">
       <MapContainer
         className="w-full h-[300px] md:h-[60vh] xl:w-[62vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: 34.6985, lng: 36.7237 }}
