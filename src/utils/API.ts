@@ -12,10 +12,27 @@ export function SaveRefreshToken(token: string) {
 };
 
 export function GetToken(): string | undefined {
-  return Cookies.get("authToken");
+  if (Cookies.get("authToken") === undefined && Cookies.get("refreshToken") !== undefined) {
+    RefreshToken();
+    GetToken();
+  } else {
+    return Cookies.get("authToken");
+  }
 }
 export function GetRefreshToken(): string | undefined {
   return Cookies.get("refreshToken");
+}
+
+export async function RefreshToken() {
+  let token = GetRefreshToken()
+  const response = await axios.post(`${apiUrl}/auth/jwt/refresh/`, {
+    refresh: `${token}`
+  });
+  console.log("response=", response);
+  if (response.status === 404) {
+    return notFound()
+  }
+  SaveToken(response.data.access);
 }
 
 export async function LoginApi(username: string | null, email: string | null, password: any) {
@@ -30,16 +47,7 @@ export async function LoginApi(username: string | null, email: string | null, pa
   SaveToken(response.data?.access);
   SaveRefreshToken(response.data?.refresh);
 }
-export async function RefreshToken() {
-  let token = GetRefreshToken()
-  const response = await axios.post(`${apiUrl}/auth/jwt/refresh/`, {
-    "refresh": `JWT ${token}`
-  });
-  if (response.status === 404) {
-    return notFound()
-  }
-  SaveToken(response.data?.access);
-}
+
 
 export async function SignUpApi(email: string, first_name: string, last_name: string, username: string, password: string) {
   const response = await axios.post(`${apiUrl}/auth/users/`, {

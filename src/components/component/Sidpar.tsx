@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import { RefreshToken } from "@/utils/API";
 
 function Sidpar() {
   const route = usePathname();
@@ -44,15 +45,17 @@ function Sidpar() {
     { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
     { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
   ];
+  if (Cookies.get("authToken") === undefined && Cookies.get("refreshToken") !== undefined) {
+    RefreshToken();
+  }
 
   return (
     <div
       className={`flex flex-col  justify-center xl:justify-start gap-y-4 top-0 fixed h-max bg-transparent xl:bg-sidpar z-50 w-full xl:h-[100vh]
-      ${
-        sidebarWidth === 16
+      ${sidebarWidth === 16
           ? "items-center xl:w-16"
           : "items-start xl:w-[250px]"
-      } transition-all`}
+        } transition-all`}
     >
       <div
         className={`absolute transition-all top-[50%] bg-sidpar py-6 px-3 rounded-tl-2xl rounded-bl-2xl text-white text-xl cursor-pointer
@@ -93,15 +96,13 @@ function Sidpar() {
         </Link>
       </div>
       <div
-        className={`h-[2px] w-14 bg-white/20 rounded-full mb-[-35px] ${
-          sidebarWidth === 16 ? "w-14" : "w-56 mr-3"
-        }`}
+        className={`h-[2px] w-14 bg-white/20 rounded-full mb-[-35px] ${sidebarWidth === 16 ? "w-14" : "w-56 mr-3"
+          }`}
       ></div>
 
       <motion.div
-        className={`flex w-full xl:flex-col   justify-between bg-sidpar xl:bg-transparent  gap-y-1 px-4 md:px-40 xl:px-0 h-[70px] xl:h-max py-8 text-3xl xl:text-md rounded-tl-xl rounded-tr-xl xl:rounded-full ${
-          sidebarWidth === 16 ? "items-center " : "items-start"
-        }`}
+        className={`flex w-full xl:flex-col   justify-between bg-sidpar xl:bg-transparent  gap-y-1 px-4 md:px-40 xl:px-0 h-[70px] xl:h-max py-8 text-3xl xl:text-md rounded-tl-xl rounded-tr-xl xl:rounded-full ${sidebarWidth === 16 ? "items-center " : "items-start"
+          }`}
       >
         {navData.map((link, index) => {
           let isActive = route === link.path; // Default isActive value
@@ -131,30 +132,27 @@ function Sidpar() {
                     </div>
                   </div>
                   <nav
-                    className={`${
-                      isActive
+                    className={`${isActive
                         ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
                         : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
-                    } rounded-xl p-5 xl:p-4 cursor-pointer transition-all w-full`}
+                      } rounded-xl p-5 xl:p-4 cursor-pointer transition-all w-full`}
                   >
                     {link.icone}
                   </nav>
                 </div>
               ) : (
                 <div
-                  className={`${
-                    isActive
+                  className={`${isActive
                       ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
                       : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
-                  } rounded-xl p-5 xl:p-4 cursor-pointer transition-all mx-2 flex justify-start w-full items-start gap-x-5 `}
+                    } rounded-xl p-5 xl:p-4 cursor-pointer transition-all mx-2 flex justify-start w-full items-start gap-x-5 `}
                 >
                   <nav className="mt-1">{link.icone}</nav>
                   <p
-                    className={`${
-                      isActive
+                    className={`${isActive
                         ? "text-white text-2xl xl:text-lg "
                         : "text-text text-2xl xl:text-lg  group-hover:text-white"
-                    }`}
+                      }`}
                   >
                     {link.name}
                   </p>

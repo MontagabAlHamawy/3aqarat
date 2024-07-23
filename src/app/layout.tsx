@@ -10,6 +10,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { Cairo } from "@next/font/google";
 import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
+import { RefreshToken } from "@/utils/API";
+import Cookies from "js-cookie";
 
 const cairo = Cairo({
   subsets: ["latin"],
@@ -21,11 +23,15 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout(
+  {
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>) {
+  if (Cookies.get("authToken") === undefined && Cookies.get("refreshToken") !== undefined) {
+    RefreshToken();
+  }
   return (
     <html lang="en" className={cairo.className}>
       <body className={cairo.className}>

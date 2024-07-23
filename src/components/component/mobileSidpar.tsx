@@ -10,6 +10,7 @@ import {
   PiMegaphoneDuotone,
   PiUserDuotone,
 } from "react-icons/pi";
+import { RefreshToken } from "@/utils/API";
 
 export default function MobileSidpar() {
 
@@ -33,6 +34,9 @@ export default function MobileSidpar() {
     { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
     { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },
   ];
+  if (Cookies.get("authToken") === undefined && Cookies.get("refreshToken") !== undefined) {
+    RefreshToken();
+  }
   return (
     <div className="fixed bottom-0 left-[-1px] w-full bg-sidpar py-3  flex justify-center items-center z-50">
       <div className="flex flex-row justify-center w-full items-center gap-5 md:gap-20 ">
