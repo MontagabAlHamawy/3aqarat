@@ -3,13 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
-/* .cairo{
-  font-family: "Cairo", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0;
-} */
+
 
 body {
   direction: rtl;
@@ -17,19 +11,25 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings:
-    "slnt" 0;
+    "slnt"0;
 }
-
+@layer base {
+  html {
+    font-family: "Cairo", system-ui, sans-serif;
+  }
+}
 .swal2-popup {
   background-color: #18171d;
 }
+
 .leaflet-bottom.leaflet-right {
   display: none;
 }
-.rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,
-.rdrDayToday:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span::after {
+
+.rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrStartEdge~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge~.rdrDayNumber span::after,
+.rdrDayToday:not(.rdrDayPassive) .rdrSelected~.rdrDayNumber span::after {
   background-color: #fff !important;
 }
 
@@ -52,59 +52,85 @@ body {
     width: 10px;
     left: 0;
   }
+
   ::-webkit-scrollbar-thumb {
-    @apply bg-accent  hover:bg-accent-hover;
+    @apply bg-accent hover: bg-accent-hover;
     border-radius: 20px;
   }
+
   ::-webkit-scrollbar-track {
     @apply bg-white;
   }
+
   body {
     @apply text-primary bg-body font-sans;
   }
+
   p {
     @apply text-white;
   }
+
   div {
     @apply text-white;
   }
+
   .h1 {
-    @apply text-4xl xl:text-[64px] text-primary xl:leading-[72px] font-extrabold mb-[18px];
+    @apply text-4xl xl: text-[64px] text-primary xl:leading-[72px] font-extrabold mb-[18px];
   }
+
   .h2 {
     @apply text-4xl font-bold mb-6;
   }
+
   .h3 {
     @apply text-xl font-semibold mb-4;
   }
+
   .description {
-    @apply text-base xl:text-xl xl:leading-8;
+    @apply text-base xl: text-xl xl:leading-8;
   }
+
   .section {
-    @apply w-full h-screen pt-[60px] xl:pt-[120px];
+    @apply w-full h-screen pt-[60px] xl: pt-[120px];
   }
+
   .btn {
     @apply rounded-[10px] w-full uppercase font-medium text-white tracking-[2px] text-[13px] flex justify-center items-center duration-300;
   }
+
   .btn-sm {
     @apply h-14;
   }
+
   .btn-lg {
     @apply h-16;
   }
+
   .btn-cta {
     @apply bg-primary h-[54px] rounded-[5px] px-4 transition-all duration-300;
   }
+
   .btn-primary {
     @apply bg-primary;
   }
+
   .btn-secondary {
     @apply bg-secondary;
   }
+
   .btn-accent {
-    @apply bg-accent hover:bg-accent-hover;
+    @apply bg-accent hover: bg-accent-hover;
   }
+
   .active {
     @apply text-accent-hover;
+  }
+
+  .font-family {
+    font-family: "Cairo", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+      "slnt"0;
   }
 }
