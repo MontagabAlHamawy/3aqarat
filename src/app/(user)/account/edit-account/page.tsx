@@ -59,7 +59,7 @@ export default function EditAccount() {
   useEffect(() => {
     const token = GetToken();
     if (!token) {
-      router.replace("/login");
+      router.replace(`/login?url=account/edit-account`);
     }
   }, [router]);
 
@@ -150,7 +150,7 @@ export default function EditAccount() {
           تعديل معلومات الحساب
         </h1>
       </div>
-      <div className="flex flex-col xl:flex-row-reverse xl:pr-20 items-center mt-20 xl:mt-0 xl:gap-10 justify-start xl:justify-center">
+      <div className="flex flex-col xl:flex-row xl:pr-20 items-center mt-20 xl:mt-0 xl:gap-5 justify-start xl:justify-center">
         <div className="relative xl:w-1/2 xl:pr-8 mt-[-40px] mb-4 xl:mb-0">
           <Image
             src={photo}

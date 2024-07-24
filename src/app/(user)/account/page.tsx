@@ -22,7 +22,7 @@ export default function Acount() {
         }
       } catch (error) {
         if (!token) {
-          router.replace(`/login`);
+          router.replace(`/login?url=account`);
         } else {
           router.replace("/not-found");
           toast.error("حدث خطأ أثناء جلب البيانات");

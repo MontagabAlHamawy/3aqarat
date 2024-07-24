@@ -86,9 +86,9 @@ export default function Username(props: any) {
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
-      setAccount("/login?url=account");
+      setAccount(`/login?url=account/${props.params.username[0]}`);
     }
-  }, []);
+  }, [props.params.username]);
   useEffect(() => {
     router.replace(account);
   }, [account, router]);
