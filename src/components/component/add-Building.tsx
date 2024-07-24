@@ -10,7 +10,7 @@ export default function AddBuilding() {
   const route = usePathname();
   const [Iam, setIam] = useState<any>(false);
   const [showButtons, setShowButtons] = useState(false);
-  const [buttonPosition, setButtonPosition] = useState("bottom-5");
+  const [buttonPosition, setButtonPosition] = useState("bottom-[60px] xl:bottom-8");
 
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
