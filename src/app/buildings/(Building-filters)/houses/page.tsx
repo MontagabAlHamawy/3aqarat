@@ -22,14 +22,13 @@ export default function Houses(props: any) {
   const linked = "/buildings/houses";
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
     setError(false);
     try {
       let response;
-      if (searchText.length >= 3) {
+      response = await HousesApi(page);
+      if (searching) {
+        setLoading(true);
         response = await ApiHouseSearch(searchText, "", "");
-      } else {
-        response = await HousesApi(page);
       }
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
@@ -51,7 +50,7 @@ export default function Houses(props: any) {
     } finally {
       setLoading(false);
     }
-  }, [page, searchText]);
+  }, [page, searchText, searching]);
 
   useEffect(() => {
     fetchData();
@@ -74,7 +73,7 @@ export default function Houses(props: any) {
     }
   };
 
-  if (loading ) {
+  if (loading) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
@@ -151,9 +150,8 @@ export default function Houses(props: any) {
       <BuildingFilter linked={linked} />
       <AllBuildingsType Building={building} />
       <div
-        className={`w-full ${
-          pagination ? "flex justify-center items-center" : "hidden"
-        }`}
+        className={`w-full ${pagination ? "flex justify-center items-center" : "hidden"
+          }`}
       >
         <PaginationHouses page={pageInfo} />
       </div>

@@ -22,14 +22,13 @@ export default function Commercials(props: any) {
   const linked = "/buildings/commercials";
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
     setError(false);
     try {
       let response;
-      if (searchText.length >= 3) {
+      response = await CommercialApi(page);
+      if (searching) {
+        setLoading(true);
         response = await ApiCommercialSearch(searchText, "", "");
-      } else {
-        response = await CommercialApi(page);
       }
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
@@ -51,7 +50,7 @@ export default function Commercials(props: any) {
     } finally {
       setLoading(false);
     }
-  }, [page, searchText]);
+  }, [page, searchText, searching]);
 
   useEffect(() => {
     fetchData();
@@ -151,9 +150,8 @@ export default function Commercials(props: any) {
       <BuildingFilter linked={linked} />
       <AllBuildingsType Building={building} />
       <div
-        className={`w-full ${
-          pagination ? "flex justify-center items-center" : "hidden"
-        }`}
+        className={`w-full ${pagination ? "flex justify-center items-center" : "hidden"
+          }`}
       >
         <PaginationCommercial page={pageInfo} />
       </div>

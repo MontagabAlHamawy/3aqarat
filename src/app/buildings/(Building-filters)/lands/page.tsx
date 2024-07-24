@@ -22,14 +22,13 @@ export default function Lands(props: any) {
   const linked = "/buildings/lands";
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
     setError(false);
     try {
       let response;
-      if (searchText.length >= 3) {
+      response = await LandApi(page);
+      if (searching) {
+        setLoading(true);
         response = await ApilandSearch(searchText, "", "");
-      } else {
-        response = await LandApi(page);
       }
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
@@ -47,7 +46,7 @@ export default function Lands(props: any) {
     } finally {
       setLoading(false);
     }
-  }, [page, searchText]);
+  }, [page, searchText, searching]);
 
   useEffect(() => {
     fetchData();
@@ -147,9 +146,8 @@ export default function Lands(props: any) {
       <BuildingFilter linked={linked} />
       <AllBuildingsType Building={building} />
       <div
-        className={`w-full ${
-          pagination ? "flex justify-center items-center" : "hidden"
-        }`}
+        className={`w-full ${pagination ? "flex justify-center items-center" : "hidden"
+          }`}
       >
         <PaginationHouses page={pageInfo} />
       </div>
