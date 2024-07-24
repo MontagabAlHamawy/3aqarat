@@ -73,9 +73,9 @@ export default function AddBuilding() {
             <div
               className={` ${
                 showButtons
-                  ? "bg-sidpar border-white border-solid border-2"
+                  ? "bg-sidpar border-body border-solid border-2"
                   : "bg-accent border-accent border-solid border-2"
-              }  cursor-pointer text-3xl  rounded-md p-3`}
+              }  cursor-pointer text-2xl xl:text-3xl  rounded-md p-2 xl:p-2`}
               onClick={toggleButtons}
             >
               <PiPlusCircleDuotone />

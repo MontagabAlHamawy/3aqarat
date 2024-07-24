@@ -3,7 +3,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/:path*", // توجيه الطلبات إلى API فقط إذا كانت تبدأ بـ /api
+        source: "/api/:path*",
         destination: "https://gruafahim.pythonanywhere.com/:path*",
       },
     ];
@@ -11,7 +11,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        // matching all API routes
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
@@ -23,12 +22,13 @@ const nextConfig = {
     ]
   },
   images: {
-    domains: ['gruafahim.pythonanywhere.com'],
-  },
-  siteUrl: 'https://3aqarat.vercel.app',
-  generateRobotsTxt: true,
-  
-  
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'gruafahim.pythonanywhere.com',
+        pathname: '**',
+      },
+    ],
+  },     
 };
-
 export default nextConfig;
