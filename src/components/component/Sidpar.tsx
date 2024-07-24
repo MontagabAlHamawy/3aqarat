@@ -26,7 +26,7 @@ function Sidpar() {
   };
 
   const [accountName, setAccountNam] = useState("حسابي");
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState("/login");
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
@@ -111,6 +111,8 @@ function Sidpar() {
             if (link.path !== "/") {
               isActive = true;
             }
+          } else if (route === "/signup" && link.name === "تسجيل") {
+            isActive = true;
           }
           return (
             <Link

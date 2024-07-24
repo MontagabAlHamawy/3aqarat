@@ -74,7 +74,7 @@ export default function AddBuilding() {
               className={` ${showButtons
                 ? "bg-section   "
                 : "bg-accent "
-                }  cursor-pointer text-2xl xl:text-3xl  rounded-md p-3 `}
+                }  cursor-pointer text-2xl xl:text-3xl rounded-md p-3`}
               onClick={toggleButtons}
             >
               <PiPlusCircleDuotone />

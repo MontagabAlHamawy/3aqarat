@@ -252,10 +252,10 @@ export default function Buildin(props: any) {
               </Link>
               <Link
                 href={`tel://${building.client.phone_number}`}
-                className={`py-2 px-3 text-xl bg-accent rounded-md ${building.client.phone_number ? "block" : "hidden"
+                className={`cursor-pointer text-2xl bg-accent rounded-md p-2 ${building.client.phone_number ? "block" : "hidden"
                   }`}
               >
-                <PiPhoneDuotone />
+                <PiPhoneDuotone /> 
               </Link>
             </div>
           </div>

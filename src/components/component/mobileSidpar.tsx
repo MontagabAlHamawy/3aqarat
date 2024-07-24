@@ -16,7 +16,7 @@ export default function MobileSidpar() {
 
   const [accountName, setAccountNam] = useState("حسابي");
   const route = usePathname();
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState("/login");
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
@@ -47,10 +47,9 @@ export default function MobileSidpar() {
             if (link.path !== "/") {
               isActive = true;
             }
-          } 
-          // else if (route === "/signup" && link.name === "تسجيل") {
-          //   isActive = true;
-          // }
+          } else if (route === "/signup" && link.name === "تسجيل") {
+            isActive = true;
+          }
 
           return (
             <Link
