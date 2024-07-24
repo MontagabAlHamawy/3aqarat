@@ -9,27 +9,38 @@ import {
   PiBellSimpleDuotone,
 } from "react-icons/pi";
 import Cookies from "js-cookie";
-import { RefreshToken } from "@/utils/API";
+import { MyProfile, RefreshToken } from "@/utils/API";
 
 function Header() {
   const route = usePathname();
   const [account, setAccount] = useState("");
+  const [IsLog, setIsLog] = useState(false);
+  const [photo, setPhoto] = useState("/user-avatar.png");
 
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
       setAccount("login");
+      setIsLog(false)
     } else {
       setAccount("account");
+      const myData = async () => {
+        const ifme = await MyProfile();
+        setPhoto(ifme.profile_photo);
+        setIsLog(true)
+      }
+      myData();
     }
   }, [route]);
 
-  // Regular expression to check if the route is /account/... or /login or /signup
   const accountActive = /^\/account\/.*|\/login|\/signup$/.test(route);
   const searchActive = route === "/search";
   const notActive = route === "/notification";
   if (Cookies.get("authToken") === undefined && Cookies.get("refreshToken") !== undefined) {
     RefreshToken();
+  }
+  if (photo === null) {
+    setPhoto("/user-avatar.png");
   }
   return (
     <div className="sticky top-0 w-full h-16 bg-sidpar shadow-lg  z-40 xl:pr-20 flex flex-row justify-between items-center">
@@ -50,7 +61,7 @@ function Header() {
           />
         </Link>
       </div>
-      <div className="mx-2 flex flex-row gap-2">
+      <div className="mx-2 flex flex-row justify-center items-center gap-2 ">
         <Link href={"/search"}>
           <PiMagnifyingGlassDuotone
             className={`text-4xl text-white p-2 ${searchActive ? "bg-accent" : "bg-body "
@@ -64,10 +75,21 @@ function Header() {
           />
         </Link>
         <Link href={`/${account}`}>
-          <PiUserDuotone
-            className={`text-4xl text-white p-2 ${accountActive ? "bg-accent" : "bg-body "
-              } rounded-md cursor-pointer`}
-          />
+          <span className={`${IsLog ? 'hidden' : 'block'}`}>
+            <PiUserDuotone
+              className={`text-4xl text-white p-2 ${accountActive ? "bg-accent" : "bg-body "
+                } rounded-md cursor-pointer`}
+            />
+          </span>
+          <span className={`${IsLog ? 'block' : 'hidden'} `}>
+            <Image  
+              src={photo}
+              width={35}
+              height={40}
+              alt="user"
+              className="rounded-md cursor-pointer border border-body"
+            />
+          </span>
         </Link>
       </div>
     </div>

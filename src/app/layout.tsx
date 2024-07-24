@@ -7,7 +7,7 @@ import MobileSidpar from "../components/component/mobileSidpar";
 import Footer from "../components/component/Footer";
 import Header from "../components/component/Header";
 import { Analytics } from "@vercel/analytics/react";
-import { Cairo } from "@next/font/google";
+import { Cairo } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
 import { RefreshToken } from "@/utils/API";
