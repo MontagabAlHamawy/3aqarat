@@ -56,7 +56,7 @@ body {
     border-radius: 20px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-white;
+    @apply bg-body;
   }
   body {
     @apply text-primary bg-body font-sans;
