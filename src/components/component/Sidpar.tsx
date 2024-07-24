@@ -105,16 +105,13 @@ function Sidpar() {
           }`}
       >
         {navData.map((link, index) => {
-          let isActive = route === link.path; // Default isActive value
+          let isActive = route === link.path;
 
           if (route !== "/" && route.startsWith(link.path)) {
             if (link.path !== "/") {
               isActive = true;
             }
-          } else if (route === "/signup" && link.name === "تسجيل الدخول") {
-            isActive = true;
           }
-
           return (
             <Link
               key={index}
@@ -133,8 +130,8 @@ function Sidpar() {
                   </div>
                   <nav
                     className={`${isActive
-                        ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
-                        : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
+                      ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
+                      : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
                       } rounded-xl p-5 xl:p-4 cursor-pointer transition-all w-full`}
                   >
                     {link.icone}
@@ -143,15 +140,15 @@ function Sidpar() {
               ) : (
                 <div
                   className={`${isActive
-                      ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
-                      : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
+                    ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
+                    : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
                     } rounded-xl p-5 xl:p-4 cursor-pointer transition-all mx-2 flex justify-start w-full items-start gap-x-5 `}
                 >
                   <nav className="mt-1">{link.icone}</nav>
                   <p
                     className={`${isActive
-                        ? "text-white text-2xl xl:text-lg "
-                        : "text-text text-2xl xl:text-lg  group-hover:text-white"
+                      ? "text-white text-2xl xl:text-lg "
+                      : "text-text text-2xl xl:text-lg  group-hover:text-white"
                       }`}
                   >
                     {link.name}

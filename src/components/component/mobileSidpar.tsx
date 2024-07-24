@@ -47,16 +47,17 @@ export default function MobileSidpar() {
             if (link.path !== "/") {
               isActive = true;
             }
-          } else if (route === "/signup" && link.name === "تسجيل") {
-            isActive = true;
-          }
+          } 
+          // else if (route === "/signup" && link.name === "تسجيل") {
+          //   isActive = true;
+          // }
 
           return (
             <Link
               href={link.path}
               key={index}
               className={`flex flex-col items-center ${isActive
-                  ? "bg-accent p-3  rounded-full w-16 h-16 mt-[-40px]"
+                  ? "bg-accent  p-1 rounded-full w-20 h-20 mt-[-40px] border-[13px] transform-cpu border-sidpar"
                   : "text-gray-400"
                 }`}
             >

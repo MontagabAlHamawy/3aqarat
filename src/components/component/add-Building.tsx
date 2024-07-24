@@ -71,11 +71,10 @@ export default function AddBuilding() {
         >
           <div className="relative">
             <div
-              className={` ${
-                showButtons
-                  ? "bg-sidpar border-body border-solid border-2"
-                  : "bg-accent border-accent border-solid border-2"
-              }  cursor-pointer text-2xl xl:text-3xl  rounded-md p-2 xl:p-2`}
+              className={` ${showButtons
+                ? "bg-section   "
+                : "bg-accent "
+                }  cursor-pointer text-2xl xl:text-3xl  rounded-md p-3 `}
               onClick={toggleButtons}
             >
               <PiPlusCircleDuotone />

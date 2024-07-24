@@ -33,7 +33,7 @@ import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
 import { useEffect, useRef, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
+import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone, PiPhoneDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
@@ -232,26 +232,30 @@ export default function Buildin(props: any) {
             </div>
             <div className="flex justify-between items-center mx-[-5px] xl:mx-3 cursor-pointer">
               <Link href={`/account/${building.client.username}`}>
-                <div className="flex gap-1 xl:gap-2 justify-center items-center">
+                <div className="flex gap-2 xl:gap-2 justify-center items-center">
                   <Image
                     src={photo}
                     width={40}
                     height={40}
                     alt="seller"
-                    className="w-10 h-10 p-1 bg-accent rounded-full"
+                    className="w-10 h-10 p-[1px] bg-sidpar rounded-md"
                   />
-                  <p>
-                    {building.client.first_name} {building.client.last_name}
-                  </p>
+                  <div className="flex flex-col justify-start items-start">
+                    <p>
+                      {building.client.first_name} {building.client.last_name}
+                    </p>
+                    <p className="text-sm text-neutral-400 font-light">
+                      {building.client.username}@
+                    </p>
+                  </div>
                 </div>
               </Link>
               <Link
                 href={`tel://${building.client.phone_number}`}
-                className={`py-2 px-3 bg-accent rounded-md ${
-                  building.client.phone_number ? "block" : "hidden"
-                }`}
+                className={`py-2 px-3 text-xl bg-accent rounded-md ${building.client.phone_number ? "block" : "hidden"
+                  }`}
               >
-                {building.client.phone_number}
+                <PiPhoneDuotone />
               </Link>
             </div>
           </div>
