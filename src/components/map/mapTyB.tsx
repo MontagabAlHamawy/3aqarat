@@ -29,6 +29,7 @@ import {
   ImagLand,
 } from "../links";
 import BuildingError from "../error/BuildingError";
+import mapErrorSweet from "../sweetalert/mapErrorSweet";
 
 // مكون لتحديد موقع المستخدم الحالي
 function LocationMarker() {
@@ -43,10 +44,7 @@ function LocationMarker() {
       map.flyTo(e.latlng, map.getZoom());
     },
     locationerror(e) {
-      alert(
-        "لم يتمكن من الوصول إلى موقعك. يرجى تمكين خدمات الموقع وحاول مرة أخرى."
-      );
-      console.error(e);
+      mapErrorSweet();
     },
   });
 

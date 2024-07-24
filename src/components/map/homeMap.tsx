@@ -21,6 +21,7 @@ import Land from "../../../public/map/land.svg";
 import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
 import MapLoade from "../loade/MapLoade";
+import mapErrorSweet from "../sweetalert/mapErrorSweet";
 import {
   ImagApartment,
   ImagBuilding,
@@ -31,7 +32,6 @@ import {
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
-
   const map = useMapEvents({
     click() {
       map.locate();
@@ -41,10 +41,7 @@ function LocationMarker() {
       map.flyTo(e.latlng, map.getZoom());
     },
     locationerror(e) {
-      alert(
-        "Couldn't access your location. Please enable location services and try again."
-      );
-      console.error(e);
+      mapErrorSweet();
     },
   });
 

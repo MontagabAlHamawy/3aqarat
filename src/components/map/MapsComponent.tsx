@@ -26,6 +26,7 @@ import {
   ImagHouse,
   ImagLand,
 } from "../links";
+import mapErrorSweet from "../sweetalert/mapErrorSweet";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -39,10 +40,7 @@ function LocationMarker() {
       map.flyTo(e.latlng, map.getZoom());
     },
     locationerror(e) {
-      alert(
-        "Couldn't access your location. Please enable location services and try again."
-      );
-      console.error(e);
+      mapErrorSweet();
     },
   });
 
