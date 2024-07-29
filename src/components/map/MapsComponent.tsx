@@ -134,11 +134,10 @@ export default function MapsComponent({ loc }: any) {
               }
               position={[xloc, yloc]}
             >
-              <Popup className="w-72 font-cairo">
+              <Popup className=" w-72 font-cairo ">
                 <Link
                   href={`/buildings/${houss.link}`}
-                  key={index}
-                  className="flex flex-col justify-center font-cairo  gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-10px]"
                 >
                   <Image
                     src={
@@ -152,15 +151,15 @@ export default function MapsComponent({ loc }: any) {
                     className="mt-5 rounded-md"
                   />
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
-                    <p className="text-lg xl:text-xl text-accent">
+                    <p className="text-lg xl:text-xl text-accent font-family">
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar  text-base font-semibold">
+                      <p className="text-white text-base w-40 text-center font-thin font-family font-cairo">
                         {houss.description}
                       </p>
                     </div>
-                    <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
+                    <div className="bg-accent text-white font-family text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
                       {houss.price} ل.س
                     </div>
                   </div>

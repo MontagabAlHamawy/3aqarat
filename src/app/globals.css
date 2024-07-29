@@ -31,6 +31,12 @@ body {
 .leaflet-bottom.leaflet-right {
   display: none;
 }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip{
+  background: #222029 !important;
+}
+.leaflet-popup-close-button{
+  color: #fff !important;
+}
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,

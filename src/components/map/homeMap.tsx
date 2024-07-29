@@ -146,10 +146,10 @@ export default function HomeMap({ building }: { building: any[] }) {
               }
               position={location}
             >
-              <Popup className="w-72 font-cairo">
+              <Popup className="w-72 font-cairo ">
                 <Link
                   href={`/buildings/${houss.id}`}
-                  className="flex flex-col font-cairo justify-center  gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
                   <Image
                     src={
@@ -167,7 +167,7 @@ export default function HomeMap({ building }: { building: any[] }) {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar text-base font-semibold font-family font-cairo">
+                      <p className="text-white w-40 text-base text-center font-thin font-family font-cairo">
                         {houss.description}
                       </p>
                     </div>

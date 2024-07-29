@@ -158,7 +158,7 @@ export default function Map({ building }: { building: any[] }) {
               <Popup className="w-72 font-cairo">
                 <Link
                   href={`/buildings/${houss.property.id}`}
-                  className="flex flex-col justify-center font-cairo gap-0 items-center relative my[-25px] mt-[-20px]"
+                  className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
                   <Image
                     src={
@@ -176,7 +176,7 @@ export default function Map({ building }: { building: any[] }) {
                       {houss.property.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-sidpar text-base font-semibold">
+                      <p className="text-white w-40 text-center text-base font-thin">
                         {houss.property.description}
                       </p>
                     </div>
