@@ -21,7 +21,7 @@ export default function GallerySlider(){
     >
       {Imag.map((image, index) => (
         <SwiperSlide key={index} >
-          <div className="flex justify-center items-center ">
+          <div className="flex justify-center items-center bg-sidpar">
             <Image
               src={image.name}
               width={500}

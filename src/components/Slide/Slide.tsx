@@ -60,7 +60,7 @@ export default function Slide({ image }: any) {
       >
         {image.map((image: any, imageIndex: any) => (
           <SwiperSlide key={imageIndex}>
-            <div className="flex justify-center items-center w-full h-[280px] md:h-[300px] xl:h-[400px] ">
+            <div className="flex bg-sidpar justify-center items-center w-full h-[280px] md:h-[300px] xl:h-[400px] ">
               <Image
                 src={image.photo}
                 width={400}
