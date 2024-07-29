@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { PiCaretLeftDuotone, PiCaretRightDuotone } from "react-icons/pi";
@@ -14,14 +15,6 @@ interface PaginationProps {
 }
 
 export default function PaginationLands({ page }: PaginationProps) {
-  const router = useRouter();
-  const [pagination, setPagination] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (pagination !== null) {
-      router.replace(pagination);
-    }
-  }, [pagination, router]);
 
   if (!page) {
     return <div>لا توجد عقارات لعرضها.</div>;
@@ -41,16 +34,12 @@ export default function PaginationLands({ page }: PaginationProps) {
 
   return (
     <div className="flex flex-row justify-center items-center w-max px-8 py-2 rounded-lg gap-10 bg-sidpar">
-      <div className="p-2 rounded-lg text-xl xl:text-2xl bg-accent cursor-pointer">
-        <PiCaretRightDuotone
-          onClick={() => setPagination(`/buildings/lands/${path1}`)}
-        />
-      </div>
-      <div className="p-2 text-xl xl:text-2xl rounded-lg bg-accent cursor-pointer">
-        <PiCaretLeftDuotone
-          onClick={() => setPagination(`/buildings/lands/${path2}`)}
-        />
-      </div>
+      <Link href={`/buildings/lands/${path1}`} className="p-2 rounded-lg text-xl xl:text-2xl bg-accent cursor-pointer">
+        <PiCaretRightDuotone />
+      </Link >
+      <Link href={`/buildings/lands/${path2}`} className="p-2 text-xl xl:text-2xl rounded-lg bg-accent cursor-pointer">
+        <PiCaretLeftDuotone />
+      </Link>
     </div>
   );
 }
