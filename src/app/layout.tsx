@@ -47,7 +47,8 @@ export default function RootLayout(
             stacked
             theme="dark"
             position="top-left"
-            className=" mt-14"
+            style={{ fontFamily: "Cairo" }}
+            className={`mt-14 font-cairo ${cairo.className}`}
           />
           <div className="wrapper min-h-[71vh] md:min-h-[68vh] xl:min-h-[84.3vh] py-10 xl:pr-20 xl:pt-10">
             {children}
