@@ -90,7 +90,7 @@ export default function Apartments(props: any) {
             value={searchText}
             onChange={handleSearchTextChange}
           />
-          <button type="submit" className="p-3 bg-accent rounded-md">
+          <button type="submit" className="text-xl text-white p-2 bg-accent rounded-md cursor-pointer " >
             <PiMagnifyingGlassDuotone />
           </button>
         </form>
@@ -117,7 +117,7 @@ export default function Apartments(props: any) {
             value={searchText}
             onChange={handleSearchTextChange}
           />
-          <button type="submit" className="p-3 bg-accent rounded-md">
+          <button type="submit" className="text-xl text-white p-2 bg-accent rounded-md cursor-pointer " >
             <PiMagnifyingGlassDuotone />
           </button>
         </form>
@@ -143,7 +143,7 @@ export default function Apartments(props: any) {
           value={searchText}
           onChange={handleSearchTextChange}
         />
-        <button type="submit" className="p-3 bg-accent rounded-md">
+        <button type="submit" className="text-xl text-white p-2 bg-accent rounded-md cursor-pointer " >
           <PiMagnifyingGlassDuotone />
         </button>
       </form>

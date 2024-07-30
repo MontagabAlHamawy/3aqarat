@@ -155,7 +155,7 @@ export default function MapsComponent({ loc }: any) {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-white text-base w-40 text-center font-thin font-family font-cairo">
+                      <p className="text-white text-base w-full text-center font-thin font-family font-cairo">
                         {houss.description}
                       </p>
                     </div>

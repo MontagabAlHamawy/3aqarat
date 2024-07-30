@@ -23,13 +23,22 @@ export default function AddBuilding() {
     setShowButtons(!showButtons);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleScroll = () => {
     const scrollPosition = window.scrollY + window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     if (documentHeight - scrollPosition >= 10) {
-      setButtonPosition("bottom-[60px] xl:bottom-8");
+      if (route === "/requests") {
+        setButtonPosition("bottom-[80px] xl:bottom-8");
+      } else {
+        setButtonPosition("bottom-[60px] xl:bottom-8");
+      }
     } else {
-      setButtonPosition("bottom-[60px] xl:bottom-16");
+      if (route === "/requests") {
+        setButtonPosition("bottom-[80px] xl:bottom-16");
+      } else {
+        setButtonPosition("bottom-[60px] xl:bottom-16");
+      }
     }
   };
 
@@ -38,7 +47,7 @@ export default function AddBuilding() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (!(event.target as HTMLElement).closest(".add-building-container")) {
@@ -72,9 +81,9 @@ export default function AddBuilding() {
           <div className="relative">
             <div
               className={` ${showButtons
-                ? "bg-section   "
-                : "bg-accent "
-                }  cursor-pointer text-2xl xl:text-3xl rounded-md p-3`}
+                ? "bg-section   border-body "
+                : "bg-accent border-accent"
+                }  cursor-pointer border text-2xl xl:text-3xl rounded-md p-3`}
               onClick={toggleButtons}
             >
               <PiPlusCircleDuotone />

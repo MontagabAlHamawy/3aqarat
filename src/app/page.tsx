@@ -45,7 +45,7 @@ export default function Home() {
 
     fetchData();
   }, []);
-  const linked = "/buildings/";
+  const linked = "/";
 
   if (loading) {
     return <HomeLoading />;

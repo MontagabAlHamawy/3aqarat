@@ -38,8 +38,8 @@ export default function MobileSidpar() {
     RefreshToken();
   }
   return (
-    <div className="fixed bottom-0 left-[-1px] w-full bg-sidpar py-3  flex justify-center items-center z-50">
-      <div className="flex flex-row justify-center w-full items-center gap-5 md:gap-20 ">
+    <div className="fixed transition delay-0 bottom-0 left-[-1px] w-full bg-sidpar py-3  flex justify-center items-center z-50">
+      <div className="flex transition delay-0 flex-row justify-center w-full items-center gap-5 md:gap-20 ">
         {MobData.map((link, index) => {
           let isActive = route === link.path;
 
@@ -56,7 +56,7 @@ export default function MobileSidpar() {
               href={link.path}
               key={index}
               className={`flex flex-col items-center ${isActive
-                  ? "bg-accent  p-1 rounded-full w-20 h-20 mt-[-40px] border-[13px] transform-cpu border-sidpar"
+                  ? "bg-accent  p-1 rounded-full w-20 h-20 mt-[-40px] border-[13px] transition delay-0 border-sidpar"
                   : "text-gray-400"
                 }`}
             >

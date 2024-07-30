@@ -168,7 +168,7 @@ export default function Search() {
           />
           <button
             type="submit"
-            className="p-3 bg-accent rounded-md "
+            className="text-xl text-white p-2 bg-accent rounded-md cursor-pointer"
             onClick={handleSearch}
           >
             <PiMagnifyingGlassDuotone />

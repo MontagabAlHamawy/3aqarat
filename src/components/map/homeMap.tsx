@@ -167,7 +167,7 @@ export default function HomeMap({ building }: { building: any[] }) {
                       {houss.title}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
-                      <p className="text-white w-40 text-base text-center font-thin font-family font-cairo">
+                      <p className="text-white w-full text-base text-center font-thin font-family font-cairo">
                         {houss.description}
                       </p>
                     </div>

@@ -37,6 +37,19 @@ body {
 .leaflet-popup-close-button{
   color: #fff !important;
 }
+.leaflet-control-zoom-in ,.leaflet-control-zoom-out{
+  background: #106cd8 !important;
+  color: #fff !important;
+  margin-bottom: 10px !important;
+  border-radius: 6px !important;
+  border: none !important;
+}
+.leaflet-control-zoom-in:hover ,.leaflet-control-zoom-out:hover{
+  background: #3c8ce9 !important;
+}
+.leaflet-control-zoom.leaflet-bar.leaflet-control{
+  border: none !important;
+}
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,

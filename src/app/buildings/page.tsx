@@ -85,11 +85,11 @@ export default function Building(props: any) {
           <input
             type="text"
             placeholder="اكتب نص البحث"
-            className="w-60 xl:w-80 border p-2 rounded-lg bg-sidpar border-sidpar text-white"
+            className="w-60 xl:w-96 border p-2 rounded-lg bg-sidpar border-sidpar text-white"
             value={searchText}
             onChange={handleSearchTextChange}
           />
-          <button type="submit" className="p-3 bg-accent rounded-md">
+          <button type="submit" className="text-xl text-white p-2 bg-accent rounded-md cursor-pointer " >
             <PiMagnifyingGlassDuotone />
           </button>
         </form>
@@ -112,11 +112,11 @@ export default function Building(props: any) {
           <input
             type="text"
             placeholder="اكتب نص البحث"
-            className="w-60 xl:w-80 border p-2 rounded-lg bg-sidpar border-sidpar text-white"
+            className="w-60 xl:w-96 border p-2 rounded-lg bg-sidpar border-sidpar text-white"
             value={searchText}
             onChange={handleSearchTextChange}
           />
-          <button type="submit" className="p-3 bg-accent rounded-md">
+          <button type="submit" className="text-xl text-white p-2 bg-accent rounded-md cursor-pointer " >
             <PiMagnifyingGlassDuotone />
           </button>
         </form>
@@ -142,7 +142,7 @@ export default function Building(props: any) {
           value={searchText}
           onChange={handleSearchTextChange}
         />
-        <button type="submit" className="p-3 bg-accent rounded-md">
+        <button type="submit" className="text-xl text-white p-2 bg-accent rounded-md cursor-pointer " >
           <PiMagnifyingGlassDuotone />
         </button>
       </form>
