@@ -55,9 +55,9 @@ export default function MobileSidpar() {
             <Link
               href={link.path}
               key={index}
-              className={`flex flex-col items-center ${isActive
-                  ? "bg-accent  p-1 rounded-full w-20 h-20 mt-[-40px] border-[13px] transition delay-0 border-sidpar"
-                  : "text-gray-400"
+              className={`flex flex-col  items-center ${isActive
+                ? "bg-accent  p-1 rounded-full w-20 h-20 mt-[-40px] border-[13px] transition delay-0 border-sidpar"
+                : "text-gray-400 border-0 border-sidpar"
                 }`}
             >
               <p
