@@ -41,7 +41,7 @@ export default function AddBuilding(props: any) {
           إضافة عقار جديد
         </h1>
       </div>
-      <div>
+      {/* <div>
         <div className={`${isLand ? "block" : "hidden"}`}>
           <Land />
         </div>
@@ -57,7 +57,7 @@ export default function AddBuilding(props: any) {
         <div className={`${isHouse ? "block" : "hidden"}`}>
           <House />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

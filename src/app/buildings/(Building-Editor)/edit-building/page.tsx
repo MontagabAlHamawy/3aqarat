@@ -7,7 +7,7 @@ import Commercialproperty from "@/components/Edit Buildings/commercialproperty";
 import House from "@/components/Edit Buildings/house";
 import Land from "@/components/Edit Buildings/land";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import { MyProfile, SingelBuildingApi } from "@/utils/API";
+import { GetToken, MyProfile, SingelBuildingApi } from "@/utils/API";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 export default function EditBuilding(props: any) {
 
   const page = props.searchParams.url;
-
+  const token = GetToken();
   const [building, setBuilding] = useState<any>(null);
   const router = useRouter();
   useEffect(() => {
@@ -72,29 +72,32 @@ export default function EditBuilding(props: any) {
     isBuilding = true;
   }
   return (
-    <div>
-      <div>
-        <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
-          تعديل معلومات العقار
-        </h1>
+    <>
+      <div className={`relative ${token ? "hidden" : ""}`}><SingleBuildingLoade /></div>
+      <div className={`relative ${token ? "" : "hidden"}`}>
+        <div>
+          <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
+            تعديل معلومات العقار
+          </h1>
+        </div>
+        <div>
+          <div className={`${isLand ? "block" : "hidden"}`}>
+            <Land apartment={building} />
+          </div>
+          <div className={`${isApartment ? "block" : "hidden"}`}>
+            <Apartment apartment={building} />
+          </div>
+          <div className={`${isCommercialproperty ? "block" : "hidden"}`}>
+            <Commercialproperty apartment={building} />
+          </div>
+          <div className={`${isBuilding ? "block" : "hidden"}`}>
+            <BBuilding building={building} />
+          </div>
+          <div className={`${isHouse ? "block" : "hidden"}`}>
+            <House apartment={building} />
+          </div>
+        </div>
       </div>
-      <div>
-        <div className={`${isLand ? "block" : "hidden"}`}>
-          <Land apartment={building} />
-        </div>
-        <div className={`${isApartment ? "block" : "hidden"}`}>
-          <Apartment apartment={building} />
-        </div>
-        <div className={`${isCommercialproperty ? "block" : "hidden"}`}>
-          <Commercialproperty apartment={building} />
-        </div>
-        <div className={`${isBuilding ? "block" : "hidden"}`}>
-          <BBuilding building={building} />
-        </div>
-        <div className={`${isHouse ? "block" : "hidden"}`}>
-          <House apartment={building} />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
