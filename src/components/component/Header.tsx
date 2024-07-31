@@ -19,7 +19,7 @@ import { handleDeleteAccount } from "../sweetalert/handleDeleteAccount";
 
 function Header() {
   const route = usePathname();
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState("login");
   const [IsLog, setIsLog] = useState(false);
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -66,7 +66,7 @@ function Header() {
   }
 
   function handleLogoutClick() {
-    handleLogout(logout);
+    handleLogout(logout)
   }
 
   const accountActive = /^\/account\/.*|\/login|\/signup$/.test(route);
