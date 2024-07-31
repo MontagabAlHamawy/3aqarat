@@ -1,13 +1,20 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { GetToken } from '@/utils/API';
 
 export default function Email() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
+    useEffect(() => {
+        const token = GetToken();
+        if (!token) {
+          router.replace(`/login?url=account/edit-account/email`);
+        }
+      }, [router]);
 
     const handleEmailUpdate = async (event: React.FormEvent) => {
         event.preventDefault();

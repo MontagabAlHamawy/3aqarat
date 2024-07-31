@@ -1,8 +1,8 @@
 "use client";
 
-import { ResetPassword } from '@/utils/API';
+import { GetToken, ResetPassword } from '@/utils/API';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PiEyeDuotone, PiEyeSlashDuotone } from 'react-icons/pi';
 import { toast } from 'react-toastify';
 
@@ -16,6 +16,12 @@ export default function PasswordReset() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
+  useEffect(() => {
+    const token = GetToken();
+    if (!token) {
+      router.replace(`/login?url=account/edit-account/password`);
+    }
+  }, [router]);
 
   const handlePasswordReset = async (event: React.FormEvent) => {
     event.preventDefault();
