@@ -17,7 +17,6 @@ export default function EditAccount() {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
-    email: "",
     first_name: "",
     last_name: "",
     phone_number: "",
@@ -32,10 +31,8 @@ export default function EditAccount() {
     async function fetchData() {
       try {
         const data = await MyProfile();
-        const response = await userInfo();
-        setUser(response.email);
+
         setFormData({
-          email: response.email || "",
           first_name: data.first_name || "",
           last_name: data.last_name || "",
           phone_number: data.phone_number || "",
@@ -55,7 +52,7 @@ export default function EditAccount() {
     }
     fetchData();
   }, []);
-  
+
   useEffect(() => {
     const token = GetToken();
     if (!token) {
@@ -69,7 +66,6 @@ export default function EditAccount() {
       let token = GetToken();
       const formDataToSend = new FormData();
 
-      formDataToSend.append("email", formData.email);
       formDataToSend.append("first_name", formData.first_name);
       formDataToSend.append("last_name", formData.last_name);
       formDataToSend.append("phone_number", formData.phone_number);
@@ -175,20 +171,6 @@ export default function EditAccount() {
               handleEditAccountClick();
             }}
           >
-            <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                البريد الإلكتروني:
-              </label>
-              <input
-                type="text"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email || ""}
-                onChange={handleChange}
-                required={true}
-                className="w-full border p-2 rounded-lg bg-body text-base border-body text-white"
-              />
-            </div>
             <div className="flex justify-center items-center flex-row gap-3 mb-4">
               <div>
                 <label className="block text-white text-sm font-semibold mb-2">

@@ -157,8 +157,8 @@ export default function Search() {
 
   return (
     <div>
-      <div className="flex xl:fixed top-26 w-full px-40 right-10 flex-col xl:flex-row gap-5 xl:gap-10 justify-center items-center bg-section xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
-        <div className="flex flex-row items-center justify-center gap-2">
+      <div className="flex xl:fixed top-26 w-full  px-40 right-10 flex-col xl:flex-row gap-5 xl:gap-10 justify-center items-center bg-sidpar shadow-lg xl:mr-[-16px] mt-[-40px] xl:px-6 h-full py-10 xl:py-0 xl:h-16">
+        <div className="flex flex-row items-center justify-center gap-2 mt-4 xl:mt-0">
           <input
             type="text"
             placeholder="اكتب نص البحث"
@@ -174,7 +174,7 @@ export default function Search() {
             <PiMagnifyingGlassDuotone />
           </button>
         </div>
-        <div className="flex flex-row justify-between items-center gap-7 xl:gap-10">
+        <div className="flex mb-[-20px] xl:mb-0 flex-row justify-between items-center gap-7 xl:gap-10">
           <div>
             <select
               className="w-32 xl:w-80  h-11 border pr-2 rounded-lg bg-body border-body text-white"
@@ -203,7 +203,13 @@ export default function Search() {
             </select>
           </div>
         </div>
-        <div className="w-max border  p-2 rounded-lg bg-body border-body text-white">
+        <div className="w-max border absolute xl:hidden top-16 right-0  p-2 bg-body border-body text-white">
+          <p className="flex justify-center items-center gap-1">
+            عدد النتائج:{" "}
+            <span className="text-accent text-xl">{bil.length}</span>
+          </p>
+        </div>
+        <div className="w-max border hidden xl:block top-16 left-0  p-2 rounded-lg bg-body border-body text-white">
           <p className="flex justify-center items-center gap-1">
             عدد النتائج:{" "}
             <span className="text-accent text-xl">{bil.length}</span>
