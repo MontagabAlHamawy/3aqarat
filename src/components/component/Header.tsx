@@ -10,6 +10,7 @@ import {
   PiPenDuotone,
   PiUploadSimpleDuotone,
   PiTrashDuotone,
+  PiDoorOpenDuotone
 } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { MyProfile, RefreshToken } from "@/utils/API";
@@ -144,7 +145,7 @@ function Header() {
                 onClick={handleLogoutClick}
                 className="flex items-center  gap-1 p-2 cursor-pointer rounded-md bg-body hover:bg-red-600"
               >
-                <PiUploadSimpleDuotone size={24} />
+                <PiDoorOpenDuotone size={24} />
                 <p className="ml-2">تسجيل الخروج</p>
               </div>
 
