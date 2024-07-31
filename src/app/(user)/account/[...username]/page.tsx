@@ -33,16 +33,16 @@ export default function Username(props: any) {
   const [Building, setBuilding] = useState(null);
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [loading, setLoading] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false); 
+  // const [menuOpen, setMenuOpen] = useState(false); 
   const menuRef = useRef(null);
 
   const router = useRouter();
 
-  function logout() {
-    Cookies.set("authToken", "");
-    Cookies.set("refreshToken", "");
-    router.replace("/login");
-  }
+  // function logout() {
+  //   Cookies.set("authToken", "");
+  //   Cookies.set("refreshToken", "");
+  //   router.replace("/login");
+  // }
 
   useEffect(() => {
     const myData = async () => {
@@ -83,39 +83,31 @@ export default function Username(props: any) {
   const [account, setAccount] = useState(
     `/account/${props.params.username[0]}`
   );
-  useEffect(() => {
-    const token = Cookies.get("authToken") || false;
-    if (!token) {
-      setAccount(`/login?url=account/${props.params.username[0]}`);
-    }
-  }, [props.params.username]);
-  useEffect(() => {
-    router.replace(account);
-  }, [account, router]);
+  // useEffect(() => {
+  //   const token = Cookies.get("authToken") || false;
+  //   if (!token) {
+  //     setAccount(`/login?url=account/${props.params.username[0]}`);
+  //   }
+  // }, [props.params.username]);
+  // useEffect(() => {
+  //   router.replace(account);
+  // }, [account, router]);
 
-  function DeletA() {
-    handleDeleteAccount(logout);
-  }
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (
+  //       menuRef.current &&
+  //       !(menuRef.current as HTMLElement).contains(event.target as Node)
+  //     ) {
+  //       setMenuOpen(false);
+  //     }
+  //   };
 
-  function handleLogoutClick() {
-    handleLogout(logout);
-  }
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !(menuRef.current as HTMLElement).contains(event.target as Node)
-      ) {
-        setMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menuRef]);
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [menuRef]);
 
   if (photo === null) {
     setPhoto("/user-avatar.png");
@@ -129,8 +121,7 @@ export default function Username(props: any) {
     <div className="relative">
       <div>
         <div
-          className={`flex flex-col ${
-            Iam ? "mt-5 xl:mt-0" : "mt-0"
+          className={`flex flex-col mt-0
           } xl:flex-row justify-start items-center xl:mr-40 gap-x-14 gap-y-4`}
         >
           <div>
@@ -175,7 +166,7 @@ export default function Username(props: any) {
               )}
             </div>
           </div>
-          {Iam && (
+          {/* {Iam && (
             <div className="absolute top-[-50px] xl:top-0 left-2" ref={menuRef}>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -209,7 +200,7 @@ export default function Username(props: any) {
                 </div>
               )}
             </div>
-          )}
+          )} */}
         </div>
       </div>
 

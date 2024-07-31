@@ -8,7 +8,7 @@ export default function BuildingLoade() {
         <div className="text-[90px]">
           <PiBuildingsDuotone />
         </div>
-        <h1 className="text-2xl">جاري جلب العقارات...</h1>
+        <h1 className="text-lg xl:text-2xl">جاري جلب العقارات...</h1>
       </div>
     </div>
   );

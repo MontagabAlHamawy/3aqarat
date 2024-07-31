@@ -63,6 +63,21 @@ export async function SignUpApi(email: string, first_name: string, last_name: st
   SaveToken(response.data?.access);
   SaveRefreshToken(response.data?.refresh);
 }
+export async function ResetPassword(new_password: string | null, current_password: string | null) {
+  let token = GetToken();
+  const response = await axios.post(`${apiUrl}/auth/users/set_password/`, {
+    new_password,
+    current_password
+  }, {
+    headers: {
+      'Authorization': `JWT ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if (response.status === 404) {
+    return notFound()
+  }
+}
 
 export async function BuildingApi(page: any) {
   const response = await fetch(`${apiUrl}/properties/?page=${page}`);

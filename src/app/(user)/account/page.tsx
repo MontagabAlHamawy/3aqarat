@@ -32,16 +32,16 @@ export default function Acount() {
     myData();
   }, [router, token]);
 
-  const [account, setAccount] = useState("/account");
-  useEffect(() => {
-    const token = Cookies.get("authToken") || false;
-    if (!token) {
-      setAccount("/login?url=account");
-    }
-  }, []);
+  // const [account, setAccount] = useState("/account");
+  // useEffect(() => {
+  //   const token = Cookies.get("authToken") || false;
+  //   if (!token) {
+  //     setAccount("/login?url=account");
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    router.replace(account);
-  }, [account, router]);
+  // useEffect(() => {
+  //   router.replace(account);
+  // }, [account, router]);
   return <UsersLoading />;
 }

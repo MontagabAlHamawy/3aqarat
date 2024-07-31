@@ -8,7 +8,7 @@ export default function MapLoade() {
         <div className="text-[90px]">
           <PiMapPinDuotone />
         </div>
-        <h1 className="text-2xl">جاري تحميل الخريطة...</h1>
+        <h1 className="text-lg xl:text-2xl">جاري تحميل الخريطة...</h1>
       </div>
     </div>
   );

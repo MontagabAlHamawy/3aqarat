@@ -1,22 +1,34 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import {
   PiUserDuotone,
   PiMagnifyingGlassDuotone,
   PiBellSimpleDuotone,
+  PiPenDuotone,
+  PiUploadSimpleDuotone,
+  PiTrashDuotone,
 } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { MyProfile, RefreshToken } from "@/utils/API";
+import { handleLogout } from "../sweetalert/handleLogout";
+import { handleDeleteAccount } from "../sweetalert/handleDeleteAccount";
 
 function Header() {
   const route = usePathname();
   const [account, setAccount] = useState("");
   const [IsLog, setIsLog] = useState(false);
   const [photo, setPhoto] = useState("/user-avatar.png");
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const router = useRouter();
+  function logout() {
+    Cookies.set("authToken", "");
+    Cookies.set("refreshToken", "");
+    router.replace("/login");
+  }
   useEffect(() => {
     const token = Cookies.get("authToken") || false;
     if (!token) {
@@ -32,6 +44,29 @@ function Header() {
       myData();
     }
   }, [route]);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !(menuRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+
+  function DeletA() {
+    handleDeleteAccount(logout);
+  }
+
+  function handleLogoutClick() {
+    handleLogout(logout);
+  }
 
   const accountActive = /^\/account\/.*|\/login|\/signup$/.test(route);
   const searchActive = route === "/search";
@@ -81,16 +116,43 @@ function Header() {
                 } rounded-md cursor-pointer`}
             />
           </span>
-          <span className={`${IsLog ? 'block' : 'hidden'} `}>
-            <Image  
-              src={photo}
-              width={35}
-              height={40}
-              alt="user"
-              className="rounded-md cursor-pointer border border-body"
-            />
-          </span>
         </Link>
+        <button ref={menuRef} onClick={() => setMenuOpen(!menuOpen)} className={`${IsLog ? 'block' : 'hidden'} `}>
+          <Image
+            src={photo}
+            width={35}
+            height={40}
+            alt="user"
+            className="rounded-md cursor-pointer border border-body"
+          />
+
+          {menuOpen && (
+            <div className="absolute flex flex-col p-2 gap-2 top-[62px] left-0 bg-sidpar w-max  rounded-br-md shadow-lg">
+              <Link href="/account/edit-account">
+                <div className="flex items-center gap-1 p-2 cursor-pointer rounded-md bg-body hover:bg-accent">
+                  <PiPenDuotone size={24} />
+                  <p className="ml-2">تعديل الحساب</p>
+                </div>
+              </Link>
+              <div
+                onClick={handleLogoutClick}
+                className="flex items-center  gap-1 p-2 cursor-pointer rounded-md bg-body hover:bg-red-600"
+              >
+                <PiUploadSimpleDuotone size={24} />
+                <p className="ml-2">تسجيل الخروج</p>
+              </div>
+
+              <div
+                onClick={DeletA}
+                className="flex items-center  gap-1 p-2 cursor-pointer rounded-md bg-body hover:bg-red-600"
+              >
+                <PiTrashDuotone size={24} />
+                <p className="ml-2">حذف الحساب</p>
+              </div>
+            </div>
+          )}
+        </button>
+
       </div>
     </div>
   );

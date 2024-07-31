@@ -145,19 +145,14 @@ export default function EditAccount() {
 
   return (
     <div>
-      <div>
-        <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
-          تعديل معلومات الحساب
-        </h1>
-      </div>
-      <div className="flex flex-col xl:flex-row xl:pr-20 items-center mt-20 xl:mt-0 xl:gap-5 justify-start xl:justify-center">
+      <div className="flex flex-col mt-5 xl:flex-row xl:pr-20 items-center xl:mt-0 xl:gap-5 justify-start xl:justify-center">
         <div className="relative xl:w-1/2 xl:pr-8 mt-[-40px] mb-4 xl:mb-0">
           <Image
             src={photo}
             width={300}
             height={0}
             alt="user"
-            className="rounded-2xl"
+            className="rounded-2xl border border-body"
           />
           <button
             onClick={handleIconClick}
@@ -191,7 +186,7 @@ export default function EditAccount() {
                 value={formData.email || ""}
                 onChange={handleChange}
                 required={true}
-                className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
+                className="w-full border p-2 rounded-lg bg-body text-base border-body text-white"
               />
             </div>
             <div className="flex justify-center items-center flex-row gap-3 mb-4">
@@ -206,7 +201,7 @@ export default function EditAccount() {
                   value={formData.first_name || ""}
                   onChange={handleChange}
                   required={true}
-                  className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
+                  className="w-full border p-2 rounded-lg bg-body text-base border-body text-white"
                 />
               </div>
               <div>
@@ -220,7 +215,7 @@ export default function EditAccount() {
                   value={formData.last_name || ""}
                   onChange={handleChange}
                   required={true}
-                  className="w-full border p-2 rounded-lg bg-section border-section text-white"
+                  className="w-full border p-2 rounded-lg bg-body border-body text-white"
                 />
               </div>
             </div>
@@ -236,7 +231,7 @@ export default function EditAccount() {
                   placeholder="Phone Number"
                   value={formData.phone_number || ""}
                   onChange={handleChange}
-                  className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
+                  className="w-full border p-2 rounded-lg bg-body text-base border-body text-white"
                 />
               </div>
               <div>
@@ -249,7 +244,7 @@ export default function EditAccount() {
                   name="telegram_account"
                   value={formData.telegram_account || ""}
                   onChange={handleChange}
-                  className="w-full border p-2 rounded-lg bg-section border-section text-white"
+                  className="w-full border p-2 rounded-lg bg-body border-body text-white"
                 />
               </div>
             </div>
@@ -264,7 +259,7 @@ export default function EditAccount() {
                   placeholder="Facebook Account"
                   value={formData.facebook_account || ""}
                   onChange={handleChange}
-                  className="w-full border p-2 rounded-lg bg-section text-base border-section text-white"
+                  className="w-full border p-2 rounded-lg bg-body text-base border-body text-white"
                 />
               </div>
               <div>
@@ -277,13 +272,13 @@ export default function EditAccount() {
                   name="instagram_account"
                   value={formData.instagram_account || ""}
                   onChange={handleChange}
-                  className="w-full border p-2 rounded-lg bg-section border-section text-white"
+                  className="w-full border p-2 rounded-lg bg-body border-body text-white"
                 />
               </div>
             </div>
             <button
               type="submit"
-              className=" bg-accent hover:bg-hover  rounded-lg p-2 text-white font-bold mt-4"
+              className=" bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300"
             >
               تعديل المعلومات
             </button>

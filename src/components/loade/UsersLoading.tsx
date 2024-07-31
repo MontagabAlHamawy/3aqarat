@@ -8,7 +8,7 @@ export default function UsersLoading() {
         <div className="text-[90px]">
           <PiUserDuotone />
         </div>
-        <h1 className="text-2xl">جاري جلب معلومات المستخدم...</h1>
+        <h1 className=" text-lg xl:text-2xl">جاري جلب معلومات المستخدم...</h1>
       </div>
     </div>
   )

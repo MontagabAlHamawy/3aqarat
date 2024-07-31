@@ -8,7 +8,7 @@ export default function RequestLoade() {
         <div className="text-[90px]">
           <PiMegaphoneDuotone />
         </div>
-        <h1 className="text-2xl">لا توجد طلبات لعرضها</h1>
+        <h1 className="text-lg xl:text-2xl">لا توجد طلبات لعرضها</h1>
       </div>
     </div>
   );
