@@ -128,6 +128,12 @@ function Header() {
 
           {menuOpen && (
             <div className="absolute flex flex-col p-2 gap-2 top-[62px] left-0 bg-sidpar w-max  rounded-br-md shadow-lg">
+              <Link href="/account/">
+                <div className="flex items-center gap-1 p-2 cursor-pointer rounded-md bg-body hover:bg-accent">
+                  <PiUserDuotone size={24} />
+                  <p className="ml-2">معلومات الحساب</p>
+                </div>
+              </Link>
               <Link href="/account/edit-account">
                 <div className="flex items-center gap-1 p-2 cursor-pointer rounded-md bg-body hover:bg-accent">
                   <PiPenDuotone size={24} />
