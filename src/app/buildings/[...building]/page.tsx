@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import Slide from "@/components/Slide/Slide";
 import MapLoade from "@/components/map/MapLoade";
-import { MyProfile, SingelBuildingApi } from "@/utils/API";
+import { GetToken, MyProfile, SingelBuildingApi } from "@/utils/API";
 import Apartment from "@/components/Buildings/apartment";
 import Commercialproperty from "@/components/Buildings/commercialproperty";
 import BBuilding from "@/components/Buildings/bbuilding";
@@ -46,7 +46,7 @@ export default function Buildin(props: any) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
+  const token = GetToken();
   useEffect(() => {
     if (page === undefined) {
       router.replace("/buildings");
@@ -252,10 +252,10 @@ export default function Buildin(props: any) {
               </Link>
               <Link
                 href={`tel://${building.client.phone_number}`}
-                className={`cursor-pointer text-2xl bg-accent rounded-md p-2 ${building.client.phone_number ? "block" : "hidden"
+                className={`cursor-pointer text-2xl bg-accent rounded-md p-2 ${building.client.phone_number && token ? "block" : "hidden"
                   }`}
               >
-                <PiPhoneDuotone /> 
+                <PiPhoneDuotone />
               </Link>
             </div>
           </div>

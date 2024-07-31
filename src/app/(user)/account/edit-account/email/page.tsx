@@ -4,17 +4,18 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { GetToken } from '@/utils/API';
+import UsersLoading from '@/components/loade/UsersLoading';
 
 export default function Email() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
+    const token = GetToken();
     useEffect(() => {
-        const token = GetToken();
         if (!token) {
-          router.replace(`/login?url=account/edit-account/email`);
+            router.replace(`/login?url=account/edit-account/email`);
         }
-      }, [router]);
+    }, [router, token]);
 
     const handleEmailUpdate = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -36,30 +37,33 @@ export default function Email() {
     };
 
     return (
-        <div className="xl:pl-20 w-full max-w-md px-10 xl:px-0 xl:mr-32">
-            <form className="w-full xl:max-w-md" onSubmit={handleEmailUpdate}>
-                <div className="mb-4">
-                    <label className="block text-white text-sm font-semibold mb-2">
-                        الإيميل الجديد:
-                    </label>
-                    <input
-                        type="email"
-                        placeholder="New Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border p-2 rounded-lg bg-body border-body text-white"
-                    />
-                </div>
+        <>
+            <div className={`relative ${token ? "hidden" : ""}`}><UsersLoading /></div>
+            <div className={`xl:pl-20 w-full max-w-md px-10 xl:px-0 xl:mr-32 ${token ? "" : "hidden"}`}>
+                <form className="w-full xl:max-w-md" onSubmit={handleEmailUpdate}>
+                    <div className="mb-4">
+                        <label className="block text-white text-sm font-semibold mb-2">
+                            الإيميل الجديد:
+                        </label>
+                        <input
+                            type="email"
+                            placeholder="New Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full border p-2 rounded-lg bg-body border-body text-white"
+                        />
+                    </div>
 
 
 
-                <button
-                    type="submit"
-                    className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300"
-                >
-                    تعديل الإيميل
-                </button>
-            </form>
-        </div>
+                    <button
+                        type="submit"
+                        className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300"
+                    >
+                        تعديل الإيميل
+                    </button>
+                </form>
+            </div>
+        </>
     );
 }

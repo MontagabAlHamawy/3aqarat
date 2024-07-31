@@ -16,6 +16,7 @@ export default function EditAccount() {
     useState<string>("/user-avatar.png");
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const token = GetToken();
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -140,7 +141,9 @@ export default function EditAccount() {
   }
 
   return (
-    <div>
+    <>
+    <div className={`relative ${token ? "hidden" : ""}`}><UsersLoading /></div>
+    <div className={`relative ${token ? "" : "hidden"}`}>
       <div className="flex flex-col mt-5 xl:flex-row xl:pr-20 items-center xl:mt-0 xl:gap-5 justify-start xl:justify-center">
         <div className="relative xl:w-1/2 xl:pr-8 mt-[-40px] mb-4 xl:mb-0">
           <Image
@@ -268,5 +271,6 @@ export default function EditAccount() {
         </div>
       </div>
     </div>
+    </>
   );
 }

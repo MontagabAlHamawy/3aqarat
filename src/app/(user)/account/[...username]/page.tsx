@@ -25,8 +25,6 @@ import {
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import UsersLoading from "@/components/loade/UsersLoading";
 import AllMyBuildings from "@/components/BuildingCom/AllMyBuildings";
-import { handleDeleteAccount } from "@/components/sweetalert/handleDeleteAccount";
-import { handleLogout } from "@/components/sweetalert/handleLogout";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
@@ -64,11 +62,11 @@ export default function Username(props: any) {
           setUser(response);
           setBuilding(responseB1.results);
           setPhoto(response.profile_photo);
+          console.log("response=", response);
 
-          if (response === undefined) {
+          if (response.status === 404) {
             toast.error("حدث خطأ أثناء جلب البيانات");
             NotFound();
-            return;
           }
         }
       } catch (error) {
