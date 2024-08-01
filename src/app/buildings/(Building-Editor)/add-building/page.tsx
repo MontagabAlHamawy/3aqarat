@@ -13,11 +13,11 @@ import React from "react";
 export default function AddBuilding(props: any) {
   const router = useRouter();
   const token = GetToken();
-  if (props.searchParams.url === null || props.searchParams.url === '' || props.searchParams.url === undefined || props.searchParams.url === 'undefined') {
-    router.replace("/buildings");
-  }
   if (!token) {
     router.replace(`/login?url=buildings/add-building?url=${props.searchParams.url}`);
+  }
+  if (props.searchParams.url === null || props.searchParams.url === '' || props.searchParams.url === undefined || props.searchParams.url === 'undefined') {
+    router.replace("/buildings");
   }
   let isApartment = false;
   let isCommercialproperty = false;
