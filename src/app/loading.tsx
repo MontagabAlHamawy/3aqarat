@@ -1,22 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
+import { PiHandDuotone } from 'react-icons/pi'
 
 export default function Loading() {
 
     return (
-        <div className="flex flex-col gap-4 justify-center items-center w-full mt-20 xl:mt-40">
+        <div className="flex flex-col gap-4 justify-center items-center w-full mt-20 xl:mt-32">
             <div className="flex flex-col items-center justify-center ">
-                <div className="animate-waving-hand opacity-100 transform translate-y-0 duration-300">
-                    <Image
-                        src={'/hand.svg'}
-                        width={20}
-                        height={20}
-                        alt="Welcome"
-                        className="w-24 h-24 xl:w-32 xl:h-32" />
+                <div className="animate-waving-hand opacity-100 text-accent transform translate-y-0 duration-100">
+                    <PiHandDuotone size={160} />
                 </div>
-                <div className="mt-4 text-center">
-                    <p className="text-lg font-semibold text-white">
-                    تحميل...
+                <div className="mt-1 text-center">
+                    <p className="text-lg xl:text-2xl font-semibold text-white">
+                        تحميل...
                     </p>
                     <p className="text-sm text-gray-500">
                         نحن نقوم بإعداد المحتوى الخاص بك.

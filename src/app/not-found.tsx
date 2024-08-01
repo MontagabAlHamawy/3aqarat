@@ -1,38 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
+import { PiLinkBreakDuotone } from "react-icons/pi";
 
 export default function NotFound() {
   return (
-    <div >
-      <div className="xl:w-full xl:pt-20 flex flex-col justify-center items-center mt-20">
-        <div className="animate-waving-hand opacity-100 transform translate-x-0 duration-300">
-          <Image
-            height={170}
-            alt="error"
-            src={"/404.svg"}
-            width={170}
-            className="w-24 h-24 xl:w-32 xl:h-32"
-          />
+    <div className="flex flex-col gap-4 justify-center items-center w-full mt-20 xl:mt-32">
+      <div className="flex flex-col items-center justify-center ">
+        <div className="animate-waving-hand opacity-100 text-accent transform translate-y-0 duration-100">
+          <PiLinkBreakDuotone size={160} />
         </div>
-        <div className="mt-4 text-center">
-          <p className="font-semibold text-white">
-            الصفحة غير موجودة
+        <div className="text-center">
+          <p className="text-lg xl:text-2xl font-semibold text-white">
+            404
           </p>
-          <Link
-            href={"/"}
-            aria-label="home"
-
-          >
-            <button
-              type="submit"
-              className="bg-accent mt-5 text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300"
-            >
-              الرئيسية
-            </button>
-
-          </Link>
+          <p className="text-sm text-gray-500">
+            الصفحة التي طلبتها غير موجودة
+          </p>
         </div>
-
       </div>
     </div>
   );
