@@ -123,7 +123,7 @@ function Sidpar() {
               {sidebarWidth === 16 ? (
                 <div>
                   <div className="absolute transition-all pr-[75px] right-0 hidden xl:group-hover:flex w-max">
-                    <div className="bg-icone backdrop-blur-3xl hidden relative mt-[14px] xl:flex text-white items-center p-[6px] rounded-[6px]">
+                    <div className="bg-icone backdrop-blur-3xl hidden relative mt-[14px] xl:flex items-center p-[6px] rounded-[6px]">
                       <div className="text-[15px] leading-none hidden xl:block font-semibold capitalize ">
                         {link.name}
                       </div>
@@ -132,7 +132,7 @@ function Sidpar() {
                   </div>
                   <nav
                     className={`${isActive
-                      ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
+                      ? "text-accent mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
                       : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
                       } rounded-xl p-5 xl:p-4 cursor-pointer transition-all w-full`}
                   >
@@ -142,14 +142,14 @@ function Sidpar() {
               ) : (
                 <div
                   className={`${isActive
-                    ? "text-white mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
+                    ? "text-accent mb-[100%] xl:mb-0 bg-body text-2xl xl:text-2xl "
                     : "text-icone mb-0 xl:mb-0 bg-transparent text-2xl xl:text-2xl group-hover:bg-body group-hover:text-white"
                     } rounded-xl p-5 xl:p-4 cursor-pointer transition-all mx-2 flex justify-start w-full items-start gap-x-5 `}
                 >
                   <nav className="mt-1">{link.icone}</nav>
                   <p
                     className={`${isActive
-                      ? "text-white text-2xl xl:text-lg "
+                      ? "text-accent text-2xl xl:text-lg "
                       : "text-text text-2xl xl:text-lg  group-hover:text-white"
                       }`}
                   >
