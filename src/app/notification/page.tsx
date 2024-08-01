@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { BuildingApi, LimitBuildingApi } from "@/utils/API";
+import { BuildingApi, GetToken, LimitBuildingApi } from "@/utils/API";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import NotificationLoade from "@/components/loade/NotificationLoade";
 import NotificationError from "@/components/error/NotificationError";
 
 export default function Notification() {
+  const token = GetToken();
   const [building, setBuilding] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -54,34 +55,37 @@ export default function Notification() {
   }
 
   return (
-    <div>
-      <div className="flex flex-col-reverse xl:flex-row gap-5 px-2 xl:pl-5">
-        <div className="w-full grid grid-cols-1 xl:grid-cols-2 gap-x-5 gap-y-5 xl:gap-x-16">
-          {building.map((building: any) => {
-            const isoDate = building.created_at;
-            const date = new Date(isoDate);
-            const year = date.getFullYear();
-            const month = date.getMonth() + 1;
-            const day = date.getDate();
-            const hours = date.getHours();
-            const minutes = date.getMinutes().toString().padStart(2, "0");
-            const formattedDate = `${hours}:${minutes} ${year}/${month}/${day}`;
-            return (
-              <Link
-                href={`/buildings/${building.id}`}
-                key={building.id}
-                className="bg-sidpar rounded-md py-2 px-3 flex flex-col gap-2 relative"
-              >
-                <h1 className="text-accent text-xl">{building.title}</h1>
-                <p>{building.description}</p>
-                <p className="text-gray-400 font-thin text-sm">
-                  {formattedDate}
-                </p>
-              </Link>
-            );
-          })}
+    <>
+      <div className={`relative ${token ? "hidden" : ""}`}><NotificationLoade /></div>
+      <div className={`relative ${token ? "" : "hidden"}`}>
+        <div className="flex flex-col-reverse xl:flex-row gap-5 px-2 xl:pl-5">
+          <div className="w-full grid grid-cols-1 xl:grid-cols-2 gap-x-5 gap-y-5 xl:gap-x-16">
+            {building.map((building: any) => {
+              const isoDate = building.created_at;
+              const date = new Date(isoDate);
+              const year = date.getFullYear();
+              const month = date.getMonth() + 1;
+              const day = date.getDate();
+              const hours = date.getHours();
+              const minutes = date.getMinutes().toString().padStart(2, "0");
+              const formattedDate = `${hours}:${minutes} ${year}/${month}/${day}`;
+              return (
+                <Link
+                  href={`/buildings/${building.id}`}
+                  key={building.id}
+                  className="bg-sidpar rounded-md py-2 px-3 flex flex-col gap-2 relative"
+                >
+                  <h1 className="text-accent text-xl">{building.title}</h1>
+                  <p>{building.description}</p>
+                  <p className="text-gray-400 font-thin text-sm">
+                    {formattedDate}
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

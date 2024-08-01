@@ -6,9 +6,11 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import LoveLoade from "@/components/loade/LoveLoade";
 import LoveError from "@/components/error/LoveError";
+import { GetToken } from "@/utils/API";
 
 export default function Love() {
   const router = useRouter();
+  const token = GetToken();
   const [account, setAccount] = useState("/love");
   const [loading, setLoading] = useState(true);
   let data = false;
@@ -32,12 +34,14 @@ export default function Love() {
     return <LoveError />;
   }
   return (
-    <div className="mx-2 xl:mx-0 xl:ml-3">
-      <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl">المفضلة</h1>
-      </div>
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
-        {/* {house.map((houss, index) => {
+    <>
+      <div className={`relative ${token ? "hidden" : ""}`}><LoveLoade /></div>
+      <div className={`mx-2 xl:mx-0 xl:ml-3 ${token ? "" : "hidden"}`}>
+        <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
+          <h1 className="text-2xl">المفضلة</h1>
+        </div>
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
+          {/* {house.map((houss, index) => {
           return (
             <Link
               href={houss.link}
@@ -67,7 +71,8 @@ export default function Love() {
             </Link>
           );
         })} */}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
