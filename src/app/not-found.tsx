@@ -4,27 +4,35 @@ import Image from "next/image";
 export default function NotFound() {
   return (
     <div >
-      <div className="xl:w-full xl:pt-20 flex flex-col justify-center items-center">
-        <Image
-          height={0}
-          alt="error"
-          src={"/error.png"}
-          width={600}
-          className=" md:mt-[-100px] xl:mt-[-150px] xl:ml-[-10px]"
-        />
+      <div className="xl:w-full xl:pt-20 flex flex-col justify-center items-center mt-20">
+        <div className="animate-waving-hand opacity-100 transform translate-x-0 duration-300">
+          <Image
+            height={170}
+            alt="error"
+            src={"/404.svg"}
+            width={170}
+            className="w-24 h-24 xl:w-32 xl:h-32"
+          />
+        </div>
+        <div className="mt-4 text-center">
+          <p className="font-semibold text-white">
+            الصفحة غير موجودة
+          </p>
+          <Link
+            href={"/"}
+            aria-label="home"
 
-        <span className="text-accent text-center text-xl md:text-2xl xl:text-2xl font-normal mt-[-50px] md:mt-[-100px] xl:mt-[-100px]">
-          الصفحة غير موجودة
-        </span>
-        <Link
-          href={"/"}
-          aria-label="home"
-          className="flex justify-center items-center"
-        >
-          <div className="btn btn-sm btn-accent w-[164px] mt-5 xl:mb-0">
-            <p className="text-base font-400 text-white">الرئيسية</p>
-          </div>
-        </Link>
+          >
+            <button
+              type="submit"
+              className="bg-accent mt-5 text-white px-4 py-2 rounded hover:bg-accent-hover  ease-in duration-300"
+            >
+              الرئيسية
+            </button>
+
+          </Link>
+        </div>
+
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ export default function EditBuilding(props: any) {
         } else {
           if (token) {
             const ifme = await MyProfile();
-            if (ifme.username !== buildingData.client.username) {
+            if (ifme.username !== buildingData?.client?.username) {
               router.replace(`/buildings/${page}`);
             }
           } else {
@@ -59,7 +59,7 @@ export default function EditBuilding(props: any) {
     return <SingleBuildingLoade />;
   }
 
-  const type = building.property_object?.property_type?.en || null;
+  const type = building?.property_object?.property_type?.en || null;
   let isApartment = false;
   let isCommercialproperty = false;
   let isHouse = false;
