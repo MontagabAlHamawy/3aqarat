@@ -16,8 +16,8 @@ export default function AddBuilding(props: any) {
   if (props.searchParams.url === null || props.searchParams.url === '' || props.searchParams.url === undefined || props.searchParams.url === 'undefined') {
     router.replace("/buildings");
   }
-  if(!token){
-      router.replace(`/login?url=buildings/add-building?url=${props.searchParams.url}`);
+  if (!token) {
+    router.replace(`/login?url=buildings/add-building?url=${props.searchParams.url}`);
   }
   let isApartment = false;
   let isCommercialproperty = false;
@@ -39,21 +39,23 @@ export default function AddBuilding(props: any) {
   }
   if (props.searchParams.url === "building") {
     isBuilding = true;
+  } else {
+    router.replace("/buildings");
   }
   return (
     <>
-    <div className={`relative ${token ? "hidden" : ""}`}><Loading/></div>
-    <div className={`relative ${token ? "" : "hidden"}`}>
-      <div>
-        <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
-          {isApartment ? "إضافة شقة جديدة" :
-            isBuilding ? "إضافة محضر جديد" :
-              isHouse ? "إضافة منزل جديد" :
-                isLand ? "إضافة أرض جديدة" :
-                  isCommercialproperty ? "إضافة محل تجاري جديد" : ""}
-        </h1>
-      </div>
-      {/* <div>
+      <div className={`relative ${token ? "hidden" : ""}`}><Loading /></div>
+      <div className={`relative ${token ? "" : "hidden"}`}>
+        <div>
+          <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
+            {isApartment ? "إضافة شقة جديدة" :
+              isBuilding ? "إضافة محضر جديد" :
+                isHouse ? "إضافة منزل جديد" :
+                  isLand ? "إضافة أرض جديدة" :
+                    isCommercialproperty ? "إضافة محل تجاري جديد" : ""}
+          </h1>
+        </div>
+        {/* <div>
         <div className={`${isLand ? "block" : "hidden"}`}>
           <Land />
         </div>
@@ -70,7 +72,7 @@ export default function AddBuilding(props: any) {
           <House />
         </div>
       </div> */}
-    </div>
+      </div>
     </>
   );
 }
