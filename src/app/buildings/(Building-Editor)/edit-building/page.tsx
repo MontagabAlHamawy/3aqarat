@@ -21,8 +21,8 @@ export default function EditBuilding(props: any) {
   const router = useRouter();
   const [warning, SetWarning] = useState(false)
   useEffect(() => {
-    if (page === null || page === '' || page === undefined) {
-      toast.error("حدث خطأ أثناء جلب البيانات");
+    if (page === null || page === '' || page === undefined || page === 'undefined') {
+      toast.error("هذا العقار غير موجود أو تم حذفه");
       router.replace("/buildings");
     }
   }, [page, router]);

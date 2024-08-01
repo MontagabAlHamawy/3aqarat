@@ -85,7 +85,7 @@ export default function Buildin(props: any) {
     };
     myData();
     if (warning) {
-      toast.error("هذا العقار غير موجود");
+      toast.error("هذا العقار غير موجود أو تم حذفه");
     }
   }, [page, router, warning]);
 
