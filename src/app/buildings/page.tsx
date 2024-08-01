@@ -22,7 +22,6 @@ export default function Building(props: any) {
   const linked = "/buildings/";
 
   const fetchData = useCallback(async () => {
-
     try {
       let response;
       response = await BuildingApi(page);
@@ -43,7 +42,6 @@ export default function Building(props: any) {
         setPagination(true);
       }
     } catch (error) {
-      toast.error("حدث خطأ أثناء جلب البيانات");
       console.error("error:", error);
       setError(true);
     } finally {

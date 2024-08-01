@@ -37,6 +37,7 @@ import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone, PiPhoneDuotone } from "
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
+import NotFound from "@/app/not-found";
 
 export default function Buildin(props: any) {
   const page = props.params.building[0];
@@ -44,6 +45,8 @@ export default function Buildin(props: any) {
   const [building, setBuilding] = useState<any>(null);
   const [Iam, setIam] = useState<any>(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [warning, SetWarning] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const token = GetToken();
@@ -55,27 +58,36 @@ export default function Buildin(props: any) {
 
   useEffect(() => {
     const myData = async () => {
-      const buildingData: any = await SingelBuildingApi(page);
-
-      if (!buildingData.id) {
-        toast.error("خطاء في جلب البيانات ");
-        router.replace("/not-found");
-      } else {
-        setBuilding(buildingData);
-        setPhoto(buildingData.client.profile_photo);
-        const token = Cookies.get("authToken") || false;
-        if (token) {
-          const ifme = await MyProfile();
-          if (ifme.username === buildingData.client.username) {
-            setIam(true);
-          }
+      try {
+        const buildingData: any = await SingelBuildingApi(page);
+        if (!buildingData.id) {
+          SetWarning(true)
+          NotFound();
         } else {
-          setIam(false);
+          setBuilding(buildingData);
+          setPhoto(buildingData.client.profile_photo);
+          const token = Cookies.get("authToken") || false;
+          if (token) {
+            const ifme = await MyProfile();
+            if (ifme.username === buildingData.client.username) {
+              setIam(true);
+            }
+          } else {
+            setIam(false);
+          }
         }
+      } catch (error) {
+        SetWarning(true)
+        NotFound();
+      } finally {
+        setLoading(false);
       }
     };
     myData();
-  }, [page, router]);
+    if (warning) {
+      toast.error("هذا العقار غير موجود");
+    }
+  }, [page, router, warning]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -90,8 +102,13 @@ export default function Buildin(props: any) {
     };
   }, [menuRef]);
 
-  if (!building) {
+  if (loading) {
     return <SingleBuildingLoade />;
+  }
+  if (warning) {
+    return (
+      <NotFound />
+    )
   }
 
   const propertyType = building.property_object?.property_type?.ar || "N/A";

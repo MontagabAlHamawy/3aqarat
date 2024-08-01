@@ -3,6 +3,7 @@ import apiUrl from "./apiConfig";
 import Cookies from "js-cookie";
 import { notFound } from "next/navigation";
 import NotFound from "@/app/not-found";
+import { cache } from "react";
 
 export function SaveToken(token: string) {
   Cookies.set("authToken", token, { expires: 5 });
@@ -266,7 +267,7 @@ export async function ApiOfferTypes() {
 
 
 export async function ApiSearch(search: any) {
-  const response = await fetch(`${apiUrl}/properties/?search=${search}`);
+  const response = await fetch(`${apiUrl}/properties/?search=${search}`, { cache: 'no-store' });
 
   if (response.status === 404) {
     return NotFound();

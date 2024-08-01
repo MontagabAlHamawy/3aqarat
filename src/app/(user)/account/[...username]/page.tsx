@@ -2,19 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
-import Cookies from "js-cookie";
 import {
   PiFacebookLogoDuotone,
-  PiGearSixDuotone,
   PiInstagramLogoDuotone,
-  PiPenDuotone,
   PiTelegramLogoDuotone,
-  PiTrashDuotone,
-  PiUploadSimpleDuotone,
 } from "react-icons/pi";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import NotFound from "@/app/not-found";
 import {
   GetToken,
   MyProfile,
@@ -25,6 +19,7 @@ import {
 import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import UsersLoading from "@/components/loade/UsersLoading";
 import AllMyBuildings from "@/components/BuildingCom/AllMyBuildings";
+import NotFound from "@/app/not-found";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
@@ -33,6 +28,7 @@ export default function Username(props: any) {
   const [photo, setPhoto] = useState("/user-avatar.png");
   const [loading, setLoading] = useState(true);
   const menuRef = useRef(null);
+  const [warning, SetWarning] = useState(false)
 
   const router = useRouter();
   const token = GetToken();
@@ -65,22 +61,27 @@ export default function Username(props: any) {
           console.log("response=", response);
 
           if (response.status === 404) {
-            toast.error("حدث خطأ أثناء جلب البيانات");
-            NotFound();
+            SetWarning(true)
+            return NotFound()
           }
         }
       } catch (error) {
         if (!token) {
           router.replace(`/login?url=account/${props.params.username[0]}`);
         } else {
-          router.replace("/not-found");
+          SetWarning(true)
+          return NotFound()
+          // router.replace("/not-found");
         }
       } finally {
         setLoading(false);
       }
     };
     myData();
-  }, [props.params.username, router, token]);
+    if (warning) {
+      toast.warning("هذا المستخدم غير موجود");
+    }
+  }, [props.params.username, router, token, warning]);
   const [account, setAccount] = useState(
     `/account/${props.params.username[0]}`
   );
@@ -92,12 +93,17 @@ export default function Username(props: any) {
   if (loading) {
     return <UsersLoading />;
   }
+  if(warning){
+    return(
+      <NotFound/>
+    )
+  }
 
 
   return (
     <>
-      <div className={`relative ${token ? "hidden" : ""}`}><UsersLoading /></div>
-      <div className={`relative ${token ? "" : "hidden"}`}>
+      <div className={`relative ${token && !warning ? "hidden" : ""}`}><UsersLoading /></div>
+      <div className={`relative ${token && !warning ? "" : "hidden"}`}>
         <div>
           <div
             className={`flex flex-col mt-0

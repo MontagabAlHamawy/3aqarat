@@ -15,6 +15,7 @@ export default function Login(props: any) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [account, setAccount] = useState("/account");
+
   let url = `/signup`;
   if (props.searchParams.url === undefined) {
     url = `/signup`;
@@ -69,6 +70,7 @@ export default function Login(props: any) {
         toast.success("تم تسجيل الدخول بنجاح");
       } catch (error: any) {
         toast.error("فشل تسجيل الدخول");
+        toast.error("تحقق من اسم المستخدم او كلمة المرور");
       }
     }
   };

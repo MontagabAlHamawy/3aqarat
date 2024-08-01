@@ -67,6 +67,7 @@ export default function SignUp(props: any) {
         toast.success("تم تسجيل المستخدم بنجاح");
       } catch (error) {
         toast.error("فشل تسجيل المستخدم");
+        toast.error("الرجاء محاولة اختيار كلمة مرور أقوى");
       }
     }
   };
@@ -89,7 +90,6 @@ export default function SignUp(props: any) {
         </h1>
       </div>
       <div className="flex flex-col xl:flex-row-reverse xl:px-20 items-center justify-center">
-        {/* القسم الأول: الصورة */}
         <div className="xl:w-1/2 xl:pr-8 mb-4 xl:mb-0">
           <Image
             width={600}
@@ -99,8 +99,6 @@ export default function SignUp(props: any) {
             className="w-[600px] h-auto"
           />
         </div>
-
-        {/* القسم الثاني: الفورم */}
         <div className=" xl:pl-20 w-full max-w-md px-10 xl:px-0">
           <form className="w-full max-w-md" onSubmit={handleRegister}>
             <div className="mb-4">

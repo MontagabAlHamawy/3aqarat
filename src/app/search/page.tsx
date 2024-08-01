@@ -45,7 +45,7 @@ export default function Search() {
       const offer = await ApiOfferTypes();
       const build = await ApiHouseSearch("", "", res.count);
       if (!res) {
-        toast.error("خطاء في جلب البيانات");
+        setError(true);
         NotFound();
       }
       setBui(build.results);
@@ -56,7 +56,6 @@ export default function Search() {
         setError(false);
       }
     } catch (error) {
-      toast.error("خطاء في جلب البيانات");
       setError(true);
     } finally {
       setLoading(false);
@@ -128,7 +127,6 @@ export default function Search() {
         setError(false);
       }
     } catch (error) {
-      toast.error("خطاء في جلب البيانات");
       setError(true);
     } finally {
       setLoading(false);

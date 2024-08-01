@@ -44,7 +44,6 @@ export default function Buildings(props: any) {
         setPagination(true);
       }
     } catch (error) {
-      toast.error("حدث خطأ أثناء جلب البيانات");
       console.error("error:", error);
       setError(true);
     } finally {

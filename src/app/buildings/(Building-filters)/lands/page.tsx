@@ -40,7 +40,6 @@ export default function Lands(props: any) {
       setPageInfo(response);
       setPagination(response.next !== null);
     } catch (error) {
-      toast.error("حدث خطأ أثناء جلب البيانات");
       console.error("error:", error);
       setError(true);
     } finally {

@@ -106,7 +106,7 @@ export default function AddBuilding() {
                   </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
-                  <Link href="/buildings/add-building?url=commercial">
+                  <Link href="/buildings/add-building?url=commercialproperty">
                     إضافة محل
                   </Link>
                 </button>

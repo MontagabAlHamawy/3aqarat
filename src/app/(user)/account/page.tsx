@@ -8,6 +8,7 @@ import NotFound from "@/app/not-found";
 import UsersLoading from "@/components/loade/UsersLoading";
 
 export default function Acount() {
+  const [warning, SetWarning] = useState(false)
   const router = useRouter();
   const token = Cookies.get("authToken") || false;
   useEffect(() => {
@@ -24,13 +25,17 @@ export default function Acount() {
         if (!token) {
           router.replace(`/login?url=account`);
         } else {
-          router.replace("/not-found");
-          toast.error("حدث خطأ أثناء جلب البيانات");
+          SetWarning(true)
+
+          router.replace("/");
         }
       }
     };
     myData();
-  }, [router, token]);
+    if (warning) {
+      toast.warning("حدث خطأ أثناء جلب بيانات حسابك");
+    }
+  }, [router, token, warning]);
 
   // const [account, setAccount] = useState("/account");
   // useEffect(() => {

@@ -10,7 +10,7 @@ import React from "react";
 
 export default function AddBuilding(props: any) {
   const router = useRouter();
-  if (props.searchParams.url === undefined) {
+  if (props.searchParams.url === null || props.searchParams.url === '') {
     router.replace("/buildings");
   }
   let isApartment = false;
@@ -38,7 +38,11 @@ export default function AddBuilding(props: any) {
     <div>
       <div>
         <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
-          إضافة عقار جديد
+          {isApartment ? "إضافة شقة جديدة" :
+            isBuilding ? "إضافة محضر جديد" :
+              isHouse ? "إضافة منزل جديد" :
+                isLand ? "إضافة أرض جديدة" :
+                  isCommercialproperty ? "إضافة محل تجاري جديد" : ""}
         </h1>
       </div>
       {/* <div>

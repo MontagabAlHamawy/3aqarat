@@ -19,32 +19,42 @@ export default function EditBuilding(props: any) {
   const token = GetToken();
   const [building, setBuilding] = useState<any>(null);
   const router = useRouter();
+  const [warning, SetWarning] = useState(false)
   useEffect(() => {
-    if (page === undefined) {
-      router.replace(`/buildings/`);
+    if (page === null || page === '') {
+      toast.error("حدث خطأ أثناء جلب البيانات");
+      router.replace("/buildings");
     }
   }, [page, router]);
   useEffect(() => {
     const myData = async () => {
-      const buildingData: any = await SingelBuildingApi(page);
-      const token = Cookies.get("authToken") || false;
-      if (buildingData === null) {
-        toast.error("خطاء في جلب البيانات ");
-        NotFound();
-      } else {
-        if (token) {
-          const ifme = await MyProfile();
-          if (ifme.username !== buildingData.client.username) {
-            router.replace(`/buildings/${props.searchParams.url}`);
-          }
+      try {
+        const buildingData: any = await SingelBuildingApi(page);
+        const token = Cookies.get("authToken") || false;
+        if (buildingData === null || buildingData === undefined || buildingData === '') {
+          SetWarning(true);
+          NotFound();
         } else {
-          router.replace(`/login?url=buildings/${props.searchParams.url}`);
+          if (token) {
+            const ifme = await MyProfile();
+            if (ifme.username !== buildingData.client.username) {
+              router.replace(`/buildings/${page}`);
+            }
+          } else {
+            router.replace(`/login?url=buildings/${page}`);
+          }
+          setBuilding(buildingData);
         }
-        setBuilding(buildingData);
+      } catch (error) {
+        SetWarning(true)
+        router.replace("/buildings");
       }
     };
     myData();
-  }, [page, props.searchParams.url, router]);
+    if (warning) {
+      toast.error("لا يمكن تعديل معلومات هذا العقار");
+    }
+  }, [page, router, warning]);
   if (!building) {
     return <SingleBuildingLoade />;
   }
