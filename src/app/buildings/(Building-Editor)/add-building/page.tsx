@@ -1,17 +1,23 @@
 "use client";
 
+import Loading from "@/app/loading";
 import Apartment from "@/components/Add Buildings/apartment";
 import BBuilding from "@/components/Add Buildings/bbuilding";
 import Commercialproperty from "@/components/Add Buildings/commercialproperty";
 import House from "@/components/Add Buildings/house";
 import Land from "@/components/Add Buildings/land";
+import { GetToken } from "@/utils/API";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function AddBuilding(props: any) {
   const router = useRouter();
+  const token = GetToken();
   if (props.searchParams.url === null || props.searchParams.url === '') {
     router.replace("/buildings");
+  }
+  if(!token){
+      router.replace(`/login?url=buildings/add-building?url=${props.searchParams.url}`);
   }
   let isApartment = false;
   let isCommercialproperty = false;
@@ -35,7 +41,9 @@ export default function AddBuilding(props: any) {
     isBuilding = true;
   }
   return (
-    <div>
+    <>
+    <div className={`relative ${token ? "hidden" : ""}`}><Loading/></div>
+    <div className={`relative ${token ? "" : "hidden"}`}>
       <div>
         <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
           {isApartment ? "إضافة شقة جديدة" :
@@ -63,5 +71,6 @@ export default function AddBuilding(props: any) {
         </div>
       </div> */}
     </div>
+    </>
   );
 }
