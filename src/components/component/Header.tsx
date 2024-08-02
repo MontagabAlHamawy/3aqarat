@@ -120,7 +120,7 @@ function Header() {
             />
           </span>
         </Link>
-        <button ref={menuRef} onClick={() => setMenuOpen(!menuOpen)} className={`${IsLog ? 'block' : 'hidden'} mr-[-5px] `}>
+        <button ref={menuRef} onClick={() => setMenuOpen(!menuOpen)} className={`${IsLog ? 'block' : 'hidden'} mr-[-7px] `}>
           <Image
             src={photo ? user?.profile_photo : "/"}
             width={35}
