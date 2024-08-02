@@ -6,6 +6,7 @@ import {
   PiFacebookLogoDuotone,
   PiInstagramLogoDuotone,
   PiTelegramLogoDuotone,
+  PiUserDuotone,
 } from "react-icons/pi";
 import { notFound, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -25,7 +26,7 @@ export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
   const [Iam, setIam] = useState(false);
   const [Building, setBuilding] = useState(null);
-  const [photo, setPhoto] = useState("/user-avatar.png");
+  const [photo, setPhoto] = useState(true);
   const [loading, setLoading] = useState(true);
   const menuRef = useRef(null);
   const [warning, SetWarning] = useState(false)
@@ -56,10 +57,10 @@ export default function Username(props: any) {
           Bdata.username = props.params.username[0];
           const responseB1 = await userBuildingLimit(Bdata);
           setUser(response);
+          if (response.profile_photo === null) {
+            setPhoto(false);
+          }
           setBuilding(responseB1.results);
-          setPhoto(response.profile_photo);
-          console.log("response=", response);
-
           if (response.status === 404) {
             SetWarning(true)
             return NotFound()
@@ -86,16 +87,13 @@ export default function Username(props: any) {
     `/account/${props.params.username[0]}`
   );
 
-  if (photo === null) {
-    setPhoto("/user-avatar.png");
-  }
 
   if (loading) {
     return <UsersLoading />;
   }
-  if(warning){
-    return(
-      <NotFound/>
+  if (warning) {
+    return (
+      <NotFound />
     )
   }
 
@@ -109,17 +107,20 @@ export default function Username(props: any) {
             className={`flex flex-col mt-0
           } xl:flex-row justify-start items-center xl:mr-40 gap-x-14 gap-y-4`}
           >
-            <div>
+            <div className={`${photo ? "" : "hidden"}`}>
               <Image
-                src={photo}
+                src={photo ? user?.profile_photo : "/"}
                 width={300}
                 height={0}
                 alt="user"
-                className="rounded-2xl"
+                className={`rounded-2xl`}
               />
             </div>
+            <div className={`rounded-2xl text-accent flex justify-center items-center w-[250px] h-[250px] xl:w-[300px] xl:h-[300px] bg-sidpar ${photo ? "hidden" : ""}`}>
+              <PiUserDuotone size={160} />
+            </div>
             <div className="flex flex-col justify-center items-center xl:items-start gap-3">
-              <h1 className="text-accent text-2xl font-bold">
+              <h1 className="text-accent text-2xl font-semibold font-mono">
                 {user?.first_name} {user?.last_name}
               </h1>
               <p className="text-neutral-400 font-light">{user?.username}@</p>

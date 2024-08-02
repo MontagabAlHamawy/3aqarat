@@ -12,7 +12,7 @@ export default function Loading() {
                 </div>
                 <div className="mt-1 text-center">
                     <p className="text-lg xl:text-2xl font-semibold text-white">
-                        تحميل...
+                        جاري التحميل...
                     </p>
                     <p className="text-sm text-gray-500">
                         نحن نقوم بإعداد المحتوى الخاص بك.

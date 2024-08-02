@@ -8,7 +8,7 @@ export default function MapError() {
         <div className="text-[90px] text-accent  animate-waving-hand opacity-100 transform translate-y-0 duration-100">
           <PiMapPinDuotone />
         </div>
-        <h1 className="text-2xl">لا توجد بيانات لعرضها</h1>
+        <h1 className="text-lg xl:text-2xl">لا توجد بيانات لعرضها</h1>
       </div>
     </div>
   );

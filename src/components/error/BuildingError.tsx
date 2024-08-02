@@ -8,7 +8,7 @@ export default function BuildingError() {
         <div className="text-[90px] text-accent  animate-waving-hand opacity-100 transform translate-y-0 duration-100">
           <PiBuildingsDuotone />
         </div>
-        <h1 className="text-2xl">لا توجد عقارات لعرضها</h1>
+        <h1 className="text-lg xl:text-2xl">لا توجد عقارات لعرضها</h1>
       </div>
     </div>
   );

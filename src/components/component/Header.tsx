@@ -18,10 +18,11 @@ import { handleLogout } from "../sweetalert/handleLogout";
 import { handleDeleteAccount } from "../sweetalert/handleDeleteAccount";
 
 function Header() {
+  const [user, setUser] = useState<any>(null);
   const route = usePathname();
   const [account, setAccount] = useState("login");
   const [IsLog, setIsLog] = useState(false);
-  const [photo, setPhoto] = useState("/user-avatar.png");
+  const [photo, setPhoto] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const router = useRouter();
@@ -39,7 +40,10 @@ function Header() {
       setAccount("account");
       const myData = async () => {
         const ifme = await MyProfile();
-        setPhoto(ifme.profile_photo);
+        setUser(ifme);
+        if (ifme.profile_photo === null) {
+          setPhoto(false);
+        }
         setIsLog(true)
       }
       myData();
@@ -75,9 +79,7 @@ function Header() {
   if (Cookies.get("authToken") === undefined && Cookies.get("refreshToken") !== undefined) {
     RefreshToken();
   }
-  if (photo === null) {
-    setPhoto("/user-avatar.png");
-  }
+
   return (
     <div className="sticky top-0 w-full h-16 bg-sidpar shadow-lg  z-40 xl:pr-20 flex flex-row justify-between items-center">
       <div>
@@ -118,13 +120,17 @@ function Header() {
             />
           </span>
         </Link>
-        <button ref={menuRef} onClick={() => setMenuOpen(!menuOpen)} className={`${IsLog ? 'block' : 'hidden'} `}>
+        <button ref={menuRef} onClick={() => setMenuOpen(!menuOpen)} className={`${IsLog ? 'block' : 'hidden'} mr-[-5px] `}>
           <Image
-            src={photo}
+            src={photo ? user?.profile_photo : "/"}
             width={35}
             height={40}
             alt="user"
-            className="rounded-md cursor-pointer border border-body"
+            className={` rounded-md cursor-pointer border border-body ${photo ? "" : "hidden"}`}
+          />
+          <PiUserDuotone
+            className={`text-4xl text-white p-2 ${accountActive ? "bg-accent" : "bg-body "
+              } ${photo ? "hidden" : ""} rounded-md cursor-pointer`}
           />
 
           {menuOpen && (
