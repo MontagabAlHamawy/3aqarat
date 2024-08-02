@@ -120,7 +120,7 @@ export default function Username(props: any) {
               <PiUserDuotone size={160} />
             </div>
             <div className="flex flex-col justify-center items-center xl:items-start gap-3">
-              <h1 className="text-accent text-2xl font-semibold font-mono">
+              <h1 className="text-accent text-2xl font-semibold">
                 {user?.first_name} {user?.last_name}
               </h1>
               <p className="text-neutral-400 font-light">{user?.username}@</p>

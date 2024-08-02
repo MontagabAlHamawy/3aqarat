@@ -33,7 +33,7 @@ import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
 import { useEffect, useRef, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone, PiPhoneDuotone } from "react-icons/pi";
+import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone, PiPhoneDuotone, PiUserDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
@@ -41,7 +41,7 @@ import NotFound from "@/app/not-found";
 
 export default function Buildin(props: any) {
   const page = props.params.building[0];
-  const [photo, setPhoto] = useState("/user-avatar.png");
+  const [photo, setPhoto] = useState(true);
   const [building, setBuilding] = useState<any>(null);
   const [Iam, setIam] = useState<any>(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -65,7 +65,10 @@ export default function Buildin(props: any) {
           NotFound();
         } else {
           setBuilding(buildingData);
-          setPhoto(buildingData.client.profile_photo);
+          setPhoto(true);
+          if (buildingData.client.profile_photo === null) {
+            setPhoto(false)
+          }
           const token = Cookies.get("authToken") || false;
           if (token) {
             const ifme = await MyProfile();
@@ -101,6 +104,7 @@ export default function Buildin(props: any) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [menuRef]);
+
 
   if (loading) {
     return <SingleBuildingLoade />;
@@ -155,9 +159,7 @@ export default function Buildin(props: any) {
     linked = "buildings";
     imagee = ImagBuilding;
   }
-  if (photo === null) {
-    setPhoto("/user-avatar.png");
-  }
+
   const isoDate = building.created_at;
   const date = new Date(isoDate);
   const year = date.getFullYear();
@@ -251,13 +253,16 @@ export default function Buildin(props: any) {
               <Link href={`/account/${building.client.username}`}>
                 <div className="flex gap-2 xl:gap-2 justify-center items-center">
                   <Image
-                    src={photo}
+                    src={photo ? building.client.profile_photo : "/"}
                     width={40}
                     height={40}
                     alt="seller"
-                    className="w-10 h-10 p-[1px] bg-sidpar rounded-md"
+                    className={`w-10 h-10 p-[1px] bg-sidpar rounded-md ${photo ? "" : "hidden"}`}
                   />
-                  <div className="flex flex-col justify-start items-start">
+                  <div className={`rounded-md text-accent flex justify-center items-center w-[40px] h-[40px]  bg-sidpar ${photo ? "hidden" : ""}`}>
+                    <PiUserDuotone size={24} />
+                  </div>
+                  <div className="flex flex-col justify-start items-start font-semibold">
                     <p>
                       {building.client.first_name} {building.client.last_name}
                     </p>
