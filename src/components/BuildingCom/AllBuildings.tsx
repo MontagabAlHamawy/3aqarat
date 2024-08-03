@@ -48,7 +48,7 @@ export default function AllBuildings({ Building }: any) {
               className="bg-sidpar hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
               <div className="h-36 relative xl:h-48 flex flex-col justify-center items-center w-full">
-                {/* <Image
+                <Image
                   src={
                     building.photos.length !== 0
                       ? building.photos[0].photo
@@ -58,7 +58,7 @@ export default function AllBuildings({ Building }: any) {
                   height={0}
                   alt="montagab"
                   className="w-[1080px] h-40 xl:h-52 rounded-tl-xl z-20 rounded-tr-xl"
-                /> */}
+                />
                 <PiSpinnerGapDuotone size={40} className="text-accent z-10  absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
               </div>
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
