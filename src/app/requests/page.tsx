@@ -1,3 +1,4 @@
+import RequestError from "@/components/error/RequestError";
 import RequestLoade from "@/components/loade/RequestLoade";
 import React from "react";
 
@@ -26,7 +27,7 @@ export default function Requests() {
             );
           })}
         </div> */}
-        <RequestLoade />
+        <RequestError />
         <div className="xl:w-1/2 flex flex-col gap-3">
           <input
             type="text"

@@ -11,7 +11,7 @@ import {
 } from "../links";
 import BuildingError from "../error/BuildingError";
 
-export default function AllBuildings({ Building }: any) {
+export default function AllBuildingsUser({ Building }: any) {
   if (!Building || Building.length === 0) {
     return <BuildingError />;
   }
@@ -44,7 +44,7 @@ export default function AllBuildings({ Building }: any) {
             <Link
               key={building.id}
               href={`/buildings/${building.id}`}
-              className="bg-sidpar hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
+              className="bg-body hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
               <Image
                 src={

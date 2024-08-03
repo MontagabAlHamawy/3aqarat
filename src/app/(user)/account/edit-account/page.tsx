@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import UsersLoading from "@/components/loade/UsersLoading";
 import { PiPenDuotone, PiUserDuotone } from "react-icons/pi";
 import { handleEditAccount } from "@/components/sweetalert/handleEditAccount";
+import EditUsersLoading from "@/components/loade/EditUsersLoading";
 
 export default function EditAccount() {
   const [user, setUser] = useState<string | null>(null);
@@ -139,15 +140,12 @@ export default function EditAccount() {
       toast.error("Error updating profile");
     }
   };
-
   if (loading) {
-    return <UsersLoading />;
+    return <EditUsersLoading />;
   }
-
-
   return (
-    <>
-      <div className={`relative ${token ? "hidden" : ""}`}><UsersLoading /></div>
+    <div>
+      <div className={`relative ${token ? "hidden" : ""}`}><EditUsersLoading/></div>
       <div className={`relative ${token ? "" : "hidden"}`}>
         <div className="flex flex-col mt-5 xl:flex-row xl:pr-20 items-center xl:mt-0 xl:gap-5 justify-start xl:justify-center">
           <div className="relative xl:w-1/2 xl:pr-8 mt-[-40px] mb-4 xl:mb-0">
@@ -279,6 +277,7 @@ export default function EditAccount() {
           </div>
         </div>
       </div>
-    </>
+    </div>
+    // </div>
   );
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { GetToken } from '@/utils/API';
 import UsersLoading from '@/components/loade/UsersLoading';
+import EditUsersLoading from '@/components/loade/EditUsersLoading';
 
 export default function Email() {
     const [email, setEmail] = useState("");
@@ -38,7 +39,7 @@ export default function Email() {
 
     return (
         <>
-            <div className={`relative ${token ? "hidden" : ""}`}><UsersLoading /></div>
+            <div className={`relative ${token ? "hidden" : ""}`}><EditUsersLoading /></div>
             <div className={`xl:pl-20 w-full max-w-md px-10 xl:px-0 xl:mr-32 ${token ? "" : "hidden"}`}>
                 <form className="w-full xl:max-w-md" onSubmit={handleEmailUpdate}>
                     <div className="mb-4">

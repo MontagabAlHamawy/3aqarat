@@ -21,6 +21,7 @@ import AllBuildings from "@/components/BuildingCom/AllBuildings";
 import UsersLoading from "@/components/loade/UsersLoading";
 import AllMyBuildings from "@/components/BuildingCom/AllMyBuildings";
 import NotFound from "@/app/not-found";
+import AllBuildingsUser from "@/components/BuildingCom/AllBuildingsUser";
 
 export default function Username(props: any) {
   const [user, setUser] = useState<any>(null);
@@ -191,14 +192,14 @@ export default function Username(props: any) {
         </div>
 
         <div>
-          <h1 className="text-2xl mt-10 bg-section xl:mr-[-8px] rounded-t-md py-2 px-3 w-min">
+          <h1 className="text-2xl mt-10 bg-sidpar xl:mr-[-8px] rounded-t-md py-2 px-3 w-min">
             {Iam ? "عقاراتي" : "العقارات"}
           </h1>
-          <div className="bg-section rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
+          <div className="bg-sidpar rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
             {Iam ? (
               <AllMyBuildings Building={Building} />
             ) : (
-              <AllBuildings Building={Building} />
+              <AllBuildingsUser Building={Building} />
             )}
           </div>
         </div>

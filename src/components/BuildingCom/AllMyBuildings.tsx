@@ -53,7 +53,7 @@ export default function AllMyBuildings({ Building }: any) {
           return (
             <div
               key={building.id}
-              className="bg-body hover:bg-sidpar  rounded-xl relative flex justify-between items-start flex-col h-auto"
+              className="bg-body hover:bg-section  rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
               <Link href={`/buildings/${building.id}`}>
                 <Image

@@ -8,7 +8,6 @@ import {
   PiMagnifyingGlassDuotone,
   PiBellSimpleDuotone,
   PiPenDuotone,
-  PiUploadSimpleDuotone,
   PiTrashDuotone,
   PiDoorOpenDuotone
 } from "react-icons/pi";
@@ -165,7 +164,6 @@ function Header() {
             </div>
           )}
         </button>
-
       </div>
     </div>
   );
