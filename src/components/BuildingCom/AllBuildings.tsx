@@ -10,6 +10,7 @@ import {
   ImagLand,
 } from "../links";
 import BuildingError from "../error/BuildingError";
+import { PiInfinityDuotone } from "react-icons/pi";
 
 export default function AllBuildings({ Building }: any) {
   if (!Building || Building.length === 0) {
@@ -46,18 +47,20 @@ export default function AllBuildings({ Building }: any) {
               href={`/buildings/${building.id}`}
               className="bg-sidpar hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
-              <Image
-                src={
-                  building.photos.length !== 0
-                    ? building.photos[0].photo
-                    : imagee[0].photo
-                }
-                width={1000}
-                height={0}
-                alt="montagab"
-                className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
-              />
-
+              <div className="h-36 relative xl:h-48 flex flex-col justify-center items-center w-full">
+                <Image
+                  src={
+                    building.photos.length !== 0
+                      ? building.photos[0].photo
+                      : imagee[0].photo
+                  }
+                  width={1000}
+                  height={0}
+                  alt="montagab"
+                  className="w-[1080px] h-40 xl:h-52 rounded-tl-xl z-20 rounded-tr-xl"
+                />
+                <PiInfinityDuotone size={40} className="text-accent z-10  absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
+              </div>
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                 {propertyType}
               </div>
@@ -70,7 +73,7 @@ export default function AllBuildings({ Building }: any) {
               <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
                 <p className="text-accent">{building.price}ل.س</p>
               </div>
-              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+              <div className="bg-accent text-white z-30 text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                 {building.offer}
               </div>
             </Link>

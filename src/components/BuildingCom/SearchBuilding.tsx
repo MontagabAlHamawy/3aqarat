@@ -9,6 +9,7 @@ import {
   ImagHouse,
   ImagLand,
 } from "../links";
+import { PiInfinityDuotone } from "react-icons/pi";
 
 export default function SearchBuilding({ bil }: any) {
   if (!bil) {
@@ -50,7 +51,7 @@ export default function SearchBuilding({ bil }: any) {
                 <p className="text-accent">{house.property.price} ل.س</p>
               </div>
             </div>
-            <div>
+            <div className=" relative h-24 min-w-40 flex flex-col justify-center items-center ">
               <Image
                 src={
                   house.property.photos && house.property.photos.length !== 0
@@ -60,8 +61,9 @@ export default function SearchBuilding({ bil }: any) {
                 width={130}
                 height={0}
                 alt="house"
-                className="rounded-md h-24 w-40"
+                className="rounded-md h-24 w-40 z-10"
               />
+              <PiInfinityDuotone size={20} className="text-accent z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
             </div>
           </Link>
         );

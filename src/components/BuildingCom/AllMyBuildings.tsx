@@ -11,7 +11,7 @@ import {
   ImagLand,
 } from "../links";
 import BuildingError from "../error/BuildingError";
-import { PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
+import { PiInfinityDuotone, PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
 import { handleDeleteBuilding } from "../sweetalert/handleDeleteBuilding";
 import { useRouter } from "next/navigation";
 
@@ -55,7 +55,7 @@ export default function AllMyBuildings({ Building }: any) {
               key={building.id}
               className="bg-body hover:bg-section  rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
-              <Link href={`/buildings/${building.id}`}>
+              <Link href={`/buildings/${building.id} `} className="h-36 xl:h-48 relative flex justify-center items-center w-full">
                 <Image
                   src={
                     building.photos.length !== 0
@@ -65,8 +65,9 @@ export default function AllMyBuildings({ Building }: any) {
                   width={1000}
                   height={0}
                   alt="montagab"
-                  className="w-[1080px] h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
+                  className="w-[1080px] z-20 h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
                 />
+                <PiInfinityDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
               </Link>
               <Link href={`/buildings/${building.id}`}>
                 <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
@@ -81,7 +82,7 @@ export default function AllMyBuildings({ Building }: any) {
                 <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
                   <p className="text-accent">{building.price}ل.س</p>
                 </div>
-                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+                <div className="bg-accent z-30 text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                   {building.offer}
                 </div>
               </Link>

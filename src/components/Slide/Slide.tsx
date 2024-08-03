@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
+import { PiInfinityDuotone } from "react-icons/pi";
 import SwiperCore from "swiper";
 import {
   A11y,
@@ -66,9 +67,10 @@ export default function Slide({ image }: any) {
                 width={400}
                 height={0}
                 alt={`Gallery Image`}
-                className="w-full h-min object-center rounded-md cursor-pointer"
+                className="w-full h-min object-center rounded-md z-20 cursor-pointer"
                 onClick={() => openPopup(image.images)}
               />
+              <PiInfinityDuotone size={70} className="text-accent z-10 fixed animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
             </div>
           </SwiperSlide>
         ))}
