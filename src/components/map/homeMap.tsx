@@ -152,7 +152,6 @@ export default function HomeMap({ building }: { building: any[] }) {
                   href={`/buildings/${houss.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
-
                   <div className=" relative h-20 min-w-40 flex flex-col mb-5 justify-center items-center ">
                     <Image
                       src={

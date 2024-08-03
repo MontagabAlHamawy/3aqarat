@@ -28,16 +28,16 @@ export default function AddBuilding(props: any) {
   if (props.searchParams.url === "apartment") {
     isApartment = true;
   }
-  if (props.searchParams.url === "commercialproperty") {
+  else if (props.searchParams.url === "commercialproperty") {
     isCommercialproperty = true;
   }
-  if (props.searchParams.url === "house") {
+  else if (props.searchParams.url === "house") {
     isHouse = true;
   }
-  if (props.searchParams.url === "land") {
+  else if (props.searchParams.url === "land") {
     isLand = true;
   }
-  if (props.searchParams.url === "building") {
+  else if (props.searchParams.url === "building") {
     isBuilding = true;
   } else {
     router.replace("/buildings");
