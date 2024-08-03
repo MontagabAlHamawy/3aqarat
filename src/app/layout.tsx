@@ -35,7 +35,7 @@ export default function RootLayout(
   return (
     <html lang="en" className={cairo.className}>
       <body className={cairo.className}>
-        <div>
+        <div className="font-cairo">
           <Header />
           <div className="hidden xl:block">
             <Sidpar />

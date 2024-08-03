@@ -38,8 +38,10 @@ export default function PaginationBuildings({ page }: PaginationProps) {
 
       <Link href={`/buildings/buildings/${path1}`} className="p-2 rounded-lg text-xl xl:text-2xl bg-accent cursor-pointer">
         <PiCaretRightDuotone />
+        <p className="text-base">التالي</p>
       </Link >
       <Link href={`/buildings/buildings/${path2}`} className="p-2 text-xl xl:text-2xl rounded-lg bg-accent cursor-pointer">
+        <p className="text-base ">السابق</p>
         <PiCaretLeftDuotone />
       </Link>
     </div>
