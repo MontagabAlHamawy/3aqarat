@@ -20,7 +20,7 @@ import Apartment from "../../../public/map/flar.svg";
 import Land from "../../../public/map/land.svg";
 import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
-import { PiInfinityDuotone, PiMapPinDuotone } from "react-icons/pi";
+import { PiInfinityDuotone, PiMapPinDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
 import MapLoade from "../loade/MapLoade";
 import {
   ImagApartment,
@@ -160,7 +160,7 @@ export default function Map({ building }: { building: any[] }) {
                   href={`/buildings/${houss.property.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
-                  <div className=" relative h-20 min-w-40 flex flex-col mb-5 justify-center items-center ">
+                  <div className=" relative h-20 min-w-40 flex flex-col my-5 justify-center items-center ">
                     <Image
                       src={
                         houss.property.photos.length !== 0
@@ -172,7 +172,7 @@ export default function Map({ building }: { building: any[] }) {
                       alt="montagab"
                       className="mt-5 rounded-md z-20"
                     />
-                    <PiInfinityDuotone size={20} className="text-accent !z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
+                    <PiSpinnerGapDuotone size={20} className="text-accent !z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
                   </div>
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
                     <p className="text-lg xl:text-xl text-accent">

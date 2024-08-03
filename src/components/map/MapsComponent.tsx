@@ -27,7 +27,7 @@ import {
   ImagLand,
 } from "../links";
 import mapErrorSweet from "../sweetalert/mapErrorSweet";
-import { PiInfinityDuotone } from "react-icons/pi";
+import { PiInfinityDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
 
 function LocationMarker() {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
@@ -140,7 +140,7 @@ export default function MapsComponent({ loc }: any) {
                   href={`/buildings/${houss.link}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-10px]"
                 >
-                  <div className=" relative h-20 min-w-40 flex flex-col mb-5 justify-center items-center ">
+                  <div className=" relative h-20 min-w-40 flex flex-col my-5 justify-center items-center ">
                     <Image
                       src={
                         houss.photos.length !== 0
@@ -152,7 +152,7 @@ export default function MapsComponent({ loc }: any) {
                       alt="montagab"
                       className="mt-5 rounded-md z-20"
                     />
-                    <PiInfinityDuotone size={20} className="text-accent !z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
+                    <PiSpinnerGapDuotone size={20} className="text-accent !z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
                   </div>
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
                     <p className="text-lg xl:text-xl text-accent font-family">
