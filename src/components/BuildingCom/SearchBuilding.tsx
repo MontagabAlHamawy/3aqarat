@@ -9,7 +9,7 @@ import {
   ImagHouse,
   ImagLand,
 } from "../links";
-import { PiInfinityDuotone } from "react-icons/pi";
+import { PiInfinityDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
 
 export default function SearchBuilding({ bil }: any) {
   if (!bil) {
@@ -63,7 +63,7 @@ export default function SearchBuilding({ bil }: any) {
                 alt="house"
                 className="rounded-md h-24 w-40 z-10"
               />
-              <PiInfinityDuotone size={20} className="text-accent z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
+              <PiSpinnerGapDuotone size={20} className="text-accent z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
             </div>
           </Link>
         );

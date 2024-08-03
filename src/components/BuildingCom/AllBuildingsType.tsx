@@ -11,7 +11,7 @@ import {
   ImagLand,
 } from "../links";
 import BuildingLoade from "../loade/BuildingLoade";
-import { PiInfinityDuotone } from "react-icons/pi";
+import { PiInfinityDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
 
 export default function AllBuildingsType({ Building }: any) {
   if (!Building || Building.length === 0) {
@@ -65,7 +65,7 @@ export default function AllBuildingsType({ Building }: any) {
                 alt="montagab"
                 className="w-[1080px] h-36 xl:h-48 rounded-tl-xl z-20 rounded-tr-xl"
               />
-              <PiInfinityDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
+              <PiSpinnerGapDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
               </div>
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                 {propertyType}

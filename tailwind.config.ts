@@ -51,14 +51,14 @@ module.exports = {
         },
         wavee: {
           "0%": { transform: "rotate(0.0deg)" },
-          "25%": { transform: "rotate(-90deg)" },
-          "50%": { transform: "rotate(-180deg)" },
-          "75%": { transform: "rotate(-270deg)" }
+          "25%": { transform: "rotate(90deg)" },
+          "50%": { transform: "rotate(180deg)" },
+          "75%": { transform: "rotate(270deg)" }
         },
       },
       animation: {
         "waving-hand": "wave 2s linear infinite",
-        "waving-hand2": "wavee 1.5s linear infinite",
+        "waving-hand2": "wavee 1.3s linear infinite",
       },
       
     },

@@ -11,7 +11,7 @@ import {
   ImagLand,
 } from "../links";
 import BuildingError from "../error/BuildingError";
-import { PiInfinityDuotone, PiPenDuotone, PiTrashDuotone } from "react-icons/pi";
+import { PiInfinityDuotone, PiPenDuotone, PiSpinnerGapDuotone, PiTrashDuotone } from "react-icons/pi";
 import { handleDeleteBuilding } from "../sweetalert/handleDeleteBuilding";
 import { useRouter } from "next/navigation";
 
@@ -67,7 +67,7 @@ export default function AllMyBuildings({ Building }: any) {
                   alt="montagab"
                   className="w-[1080px] z-20 h-36 xl:h-48 rounded-tl-xl rounded-tr-xl"
                 />
-                <PiInfinityDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
+                <PiSpinnerGapDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
               </Link>
               <Link href={`/buildings/${building.id}`}>
                 <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
