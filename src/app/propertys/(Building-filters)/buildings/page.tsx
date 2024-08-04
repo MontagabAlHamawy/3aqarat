@@ -19,7 +19,7 @@ export default function Buildings(props: any) {
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/buildings";
+  const linked = "/propertys/buildings";
 
   const fetchData = useCallback(async () => {
     setError(false);

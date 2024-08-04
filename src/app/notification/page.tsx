@@ -71,7 +71,7 @@ export default function Notification() {
               const formattedDate = `${hours}:${minutes} ${year}/${month}/${day}`;
               return (
                 <Link
-                  href={`/buildings/${building.id}`}
+                  href={`/propertys/${building.id}`}
                   key={building.id}
                   className="bg-sidpar rounded-md py-2 px-3 flex flex-col gap-2 relative"
                 >

@@ -118,7 +118,7 @@ export default function Land({ apartment }: any) {
           headers: headersList,
         });
         toast.success("تم تعديل البيانات بنجاح");
-        router.replace(`/buildings/${apartment.id}`);
+        router.replace(`/propertys/${apartment.id}`);
       } catch (error) {
         console.error("Error updating data:", error);
         toast.error("فشل في ارسال البيانات");

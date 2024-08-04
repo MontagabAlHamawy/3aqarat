@@ -29,7 +29,7 @@ export default function MobileSidpar() {
   }, [route]);
   const MobData = [
     { name: accountName, path: account, icone: <PiUserDuotone /> },
-    { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
+    { name: "العقارات", path: "/propertys", icone: <PiBuildingsDuotone /> },
     { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
     { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
     { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },

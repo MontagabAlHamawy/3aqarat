@@ -40,7 +40,7 @@ function Sidpar() {
   }, [route]);
   const navData = [
     { name: "الرئيسية", path: "/", icone: <PiHouseDuotone /> },
-    { name: "العقارات", path: "/buildings", icone: <PiBuildingsDuotone /> },
+    { name: "العقارات", path: "/propertys", icone: <PiBuildingsDuotone /> },
     { name: accountName, path: account, icone: <PiUserDuotone /> },
     { name: "المفضلة", path: "/love", icone: <PiHeartDuotone /> },
     { name: "مطلوب", path: "/requests", icone: <PiMegaphoneDuotone /> },

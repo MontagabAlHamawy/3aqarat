@@ -54,7 +54,7 @@ export default function AllBuildingsType({ Building }: any) {
           return (
             <Link
               key={building.property.id}
-              href={`/buildings/${building.property.id}`}
+              href={`/propertys/${building.property.id}`}
               className="bg-sidpar hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
               <div className="h-36 relative xl:h-48 flex flex-col justify-center items-center w-full">

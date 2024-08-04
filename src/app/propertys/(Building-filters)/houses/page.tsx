@@ -1,37 +1,39 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import { BuildingApi, ApiSearch } from "@/utils/API";
-import AllBuildings from "@/components/BuildingCom/AllBuildings";
-import NotFound from "../not-found";
+import { HousesApi, ApiHouseSearch } from "@/utils/API";
+import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
+import NotFound from "@/app/not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-import Pagination from "@/components/pagination/pagination";
+import PaginationHouses from "@/components/pagination/paginationhouses";
 import BuildingLoade from "@/components/loade/BuildingLoade";
 import BuildingError from "@/components/error/BuildingError";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 
-export default function Building(props: any) {
+export default function Houses(props: any) {
   const [building, setBuilding] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [pagination, setPagination] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/";
+  const linked = "/propertys/houses";
 
   const fetchData = useCallback(async () => {
+    setError(false);
     try {
       let response;
-      response = await BuildingApi(page);
+      response = await HousesApi(page);
       if (searching) {
         setLoading(true);
-        response = await ApiSearch(searchText);
+        response = await ApiHouseSearch(searchText, "", "");
       }
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
         NotFound();
+        setError(true);
         return;
       }
       setBuilding(response.results);
@@ -74,7 +76,7 @@ export default function Building(props: any) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">العقارات</h1>
+          <h1 className="text-2xl">المنازل</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -99,9 +101,9 @@ export default function Building(props: any) {
 
   if (error) {
     return (
-      <div className="mx-2 xl:mx-0 xl:ml-3">
+      <div className="mx-2  xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">العقارات</h1>
+          <h1 className="text-2xl">المنازل</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -127,7 +129,7 @@ export default function Building(props: any) {
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl">العقارات</h1>
+        <h1 className="text-2xl">المنازل</h1>
       </div>
       <form
         className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -145,12 +147,12 @@ export default function Building(props: any) {
         </button>
       </form>
       <BuildingFilter linked={linked} />
-      <AllBuildings Building={building} />
+      <AllBuildingsType Building={building} />
       <div
         className={`w-full ${pagination ? "flex justify-center items-center" : "hidden"
           }`}
       >
-        <Pagination page={pageInfo} />
+        <PaginationHouses page={pageInfo} />
       </div>
     </div>
   );

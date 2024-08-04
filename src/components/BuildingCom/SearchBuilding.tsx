@@ -40,7 +40,7 @@ export default function SearchBuilding({ bil }: any) {
 
         return (
           <Link
-            href={`/buildings/${house.property.id}`}
+            href={`/propertys/${house.property.id}`}
             key={house.property.id}
             className="bg-sidpar rounded-xl flex gap-1 flex-row justify-between items-center my-3 p-1"
           >

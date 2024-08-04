@@ -71,7 +71,7 @@ export default function Home() {
             <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في
             مهمتك وتجعل الأمر أكثر مرونة
           </p>
-          <Link href={"/buildings"}>
+          <Link href={"/propertys"}>
             <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
               عرض العقارات
             </div>
@@ -89,7 +89,7 @@ export default function Home() {
       </div>
       <AllBuildings Building={building} />
       <div className="flex justify-center items-center">
-        <Link href={"/buildings"}>
+        <Link href={"/propertys"}>
           <div className="bg-accent w-max text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
             عرض المزيد
           </div>

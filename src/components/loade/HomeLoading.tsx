@@ -8,7 +8,7 @@ import Link from "next/link";
 import { PiCheck } from "react-icons/pi";
 
 export default function HomeLoading() {
-  const linked = "/buildings/";
+  const linked = "/propertys/";
   return (
     <div className="mt-14 xl:mt-32 m-0 px-2 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">
@@ -24,7 +24,7 @@ export default function HomeLoading() {
             <span className="text-accent">3aqarat</span> من شأنها ان تساعدك في
             مهمتك وتجعل الأمر أكثر مرونة
           </p>
-          <Link href={"/buildings"}>
+          <Link href={"/propertys"}>
             <div className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
               عرض العقارات
             </div>
@@ -40,7 +40,7 @@ export default function HomeLoading() {
       </div>
       <BuildingLoade />
       <div className="flex justify-center items-center">
-        <Link href={"/buildings"}>
+        <Link href={"/propertys"}>
           <div className="bg-accent w-max text-white px-4 py-2 rounded hover:bg-accent-hover ease-in duration-300">
             عرض المزيد
           </div>

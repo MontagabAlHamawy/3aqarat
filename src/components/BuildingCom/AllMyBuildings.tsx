@@ -55,7 +55,7 @@ export default function AllMyBuildings({ Building }: any) {
               key={building.id}
               className="bg-body hover:bg-section  rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
-              <Link href={`/buildings/${building.id} `} className="h-36 xl:h-48 relative flex justify-center items-center w-full">
+              <Link href={`/propertys/${building.id} `} className="h-36 xl:h-48 relative flex justify-center items-center w-full">
                 <Image
                   src={
                     building.photos.length !== 0
@@ -69,7 +69,7 @@ export default function AllMyBuildings({ Building }: any) {
                 />
                 <PiSpinnerGapDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
               </Link>
-              <Link href={`/buildings/${building.id}`}>
+              <Link href={`/propertys/${building.id}`}>
                 <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                   {propertyType}
                 </div>
@@ -88,7 +88,7 @@ export default function AllMyBuildings({ Building }: any) {
               </Link>
               <div className="flex justify-between xl:justify-start w-full items-center gap-4">
                 <Link
-                  href={`/buildings/edit-building?url=${building.id}`}
+                  href={`/propertys/edit-property?url=${building.id}`}
                   className={`flex mb-5 mx-2 justify-start items-center gap-2 bg-accent w-max py-2 px-3 rounded-md`}
                 >
                   <PiPenDuotone size={20} />

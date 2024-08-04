@@ -52,7 +52,7 @@ export default function Buildin(props: any) {
   const token = GetToken();
   useEffect(() => {
     if (page === undefined) {
-      router.replace("/buildings");
+      router.replace("/propertys");
     }
   }, [page, router]);
 
@@ -171,7 +171,7 @@ export default function Buildin(props: any) {
 
   function handleDelete() {
     handleDeleteBuilding(building.id, () => {
-      router.replace("/buildings");
+      router.replace("/propertys");
     });
   }
 
@@ -189,7 +189,7 @@ export default function Buildin(props: any) {
             {menuOpen && (
               <div className="absolute flex flex-col gap-2 top-0 left-10 p-2 bg-sidpar w-max rounded-md shadow-lg">
                 <Link
-                  href={`/buildings/edit-building?url=${building.id}`}
+                  href={`/propertys/edit-property?url=${building.id}`}
                   className="flex items-center gap-2 px-4 py-2   rounded-md bg-body hover:bg-accent"
                 >
                   <PiPenDuotone size={24} />
@@ -219,7 +219,7 @@ export default function Buildin(props: any) {
               <p className="text-xl py-2 px-3 bg-accent w-min rounded-md">
                 {building.offer}
               </p>
-              <Link href={`/buildings/${linked}`}>
+              <Link href={`/propertys/${linked}`}>
                 <p className="text-lg py-2 px-3 bg-accent w-max ml-3 rounded-md">
                   {propertyType}
                 </p>
@@ -265,7 +265,7 @@ export default function Buildin(props: any) {
                   <div className={`rounded-md text-accent flex justify-center items-center w-[40px] h-[40px]  bg-sidpar ${photo ? "hidden" : ""}`}>
                     <PiUserDuotone size={24} />
                   </div>
-                  <div className="flex flex-col justify-start items-start font-semibold">
+                  <div className="flex flex-col justify-start items-start font-medium">
                     <p>
                       {building.client.first_name} {building.client.last_name}
                     </p>

@@ -23,7 +23,7 @@ export default function EditBuilding(props: any) {
   useEffect(() => {
     if (page === null || page === '' || page === undefined || page === 'undefined') {
       toast.error("هذا العقار غير موجود أو تم حذفه");
-      router.replace("/buildings");
+      router.replace("/propertys");
     }
   }, [page, router]);
   useEffect(() => {
@@ -38,16 +38,16 @@ export default function EditBuilding(props: any) {
           if (token) {
             const ifme = await MyProfile();
             if (ifme.username !== buildingData?.client?.username) {
-              router.replace(`/buildings/${page}`);
+              router.replace(`/propertys/${page}`);
             }
           } else {
-            router.replace(`/login?url=buildings/${page}`);
+            router.replace(`/login?url=propertys/${page}`);
           }
           setBuilding(buildingData);
         }
       } catch (error) {
         SetWarning(true)
-        router.replace("/buildings");
+        router.replace("/propertys");
       }
     };
     myData();

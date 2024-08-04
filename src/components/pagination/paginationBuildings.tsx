@@ -36,11 +36,11 @@ export default function PaginationBuildings({ page }: PaginationProps) {
   return (
     <div className="flex flex-row justify-center items-center w-max px-8 py-2 rounded-lg gap-10 bg-sidpar">
 
-      <Link href={`/buildings/buildings/${path1}`} className="p-2 rounded-lg text-xl xl:text-2xl bg-accent cursor-pointer">
+      <Link href={`/propertys/buildings/${path1}`} className="p-2 rounded-lg text-xl xl:text-2xl bg-accent cursor-pointer">
         <PiCaretRightDuotone />
         <p className="text-base">التالي</p>
       </Link >
-      <Link href={`/buildings/buildings/${path2}`} className="p-2 text-xl xl:text-2xl rounded-lg bg-accent cursor-pointer">
+      <Link href={`/propertys/buildings/${path2}`} className="p-2 text-xl xl:text-2xl rounded-lg bg-accent cursor-pointer">
         <p className="text-base ">السابق</p>
         <PiCaretLeftDuotone />
       </Link>

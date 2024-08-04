@@ -68,8 +68,8 @@ export default function AddBuilding() {
 
   // Check if the current route is "/buildings/add-building"
   const isAddBuildingPage =
-    route === "/buildings/add-building" ||
-    route === "/buildings/edit-building" ||
+    route === "/propertys/add-property" ||
+    route === "/propertys/edit-property" ||
     route === "/account/edit-account";
 
   return (
@@ -91,27 +91,27 @@ export default function AddBuilding() {
             {showButtons && (
               <div className="absolute bottom-full left-0 flex flex-col justify-end items-end space-y-2 mb-2">
                 <button className="p-2 text-sm  bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
-                  <Link href="/buildings/add-building?url=apartment">
+                  <Link href="/propertys/add-property?url=apartment">
                     إضافة شقة
                   </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
-                  <Link href="/buildings/add-building?url=building">
+                  <Link href="/propertys/add-property?url=building">
                     إضافة محضر
                   </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
-                  <Link href="/buildings/add-building?url=house">
+                  <Link href="/propertys/add-property?url=house">
                     إضافة منزل
                   </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
-                  <Link href="/buildings/add-building?url=commercialproperty">
+                  <Link href="/propertys/add-property?url=commercialproperty">
                     إضافة محل
                   </Link>
                 </button>
                 <button className="p-2 text-sm bg-accent hover:bg-accent-hover text-white w-max rounded shadow">
-                  <Link href="/buildings/add-building?url=land">إضافة أرض</Link>
+                  <Link href="/propertys/add-property?url=land">إضافة أرض</Link>
                 </button>
               </div>
             )}

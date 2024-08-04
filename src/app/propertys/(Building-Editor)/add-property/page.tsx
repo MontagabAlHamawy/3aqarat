@@ -14,10 +14,10 @@ export default function AddBuilding(props: any) {
   const router = useRouter();
   const token = GetToken();
   if (!token) {
-    router.replace(`/login?url=buildings/add-building?url=${props.searchParams.url}`);
+    router.replace(`/login?url=propertys/add-property?url=${props.searchParams.url}`);
   }
   if (props.searchParams.url === null || props.searchParams.url === '' || props.searchParams.url === undefined || props.searchParams.url === 'undefined') {
-    router.replace("/buildings");
+    router.replace("/propertys");
   }
   let isApartment = false;
   let isCommercialproperty = false;
@@ -40,7 +40,7 @@ export default function AddBuilding(props: any) {
   else if (props.searchParams.url === "building") {
     isBuilding = true;
   } else {
-    router.replace("/buildings");
+    router.replace("/propertys");
   }
   return (
     <>

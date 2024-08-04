@@ -108,7 +108,7 @@ export default function BBuilding({ building }: any) {
           headers: headersList,
         });
         toast.success("تم تعديل البيانات بنجاح");
-        router.replace(`/buildings/${building.id}`);
+        router.replace(`/propertys/${building.id}`);
       } catch (error) {
         console.error("Error updating data:", error);
         toast.error("فشل في ارسال البيانات");

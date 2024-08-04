@@ -1,16 +1,16 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import { ApartmentsApi, ApiApartmentSearch } from "@/utils/API";
+import { CommercialApi, ApiCommercialSearch } from "@/utils/API";
 import AllBuildingsType from "@/components/BuildingCom/AllBuildingsType";
 import NotFound from "@/app/not-found";
 import BuildingFilter from "@/components/BuildingCom/BuildingFilter";
-import PaginationApartments from "@/components/pagination/paginationapartments";
-import BuildingLoade from "@/components/loade/BuildingLoade";
+import PaginationCommercial from "@/components/pagination/paginationcommercial";
 import BuildingError from "@/components/error/BuildingError";
+import BuildingLoade from "@/components/loade/BuildingLoade";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 
-export default function Apartments(props: any) {
+export default function Commercials(props: any) {
   const [building, setBuilding] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,16 +19,16 @@ export default function Apartments(props: any) {
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
   const page = props.searchParams.page || 1;
-  const linked = "/buildings/apartments";
+  const linked = "/propertys/commercials";
 
   const fetchData = useCallback(async () => {
     setError(false);
     try {
       let response;
-      response = await ApartmentsApi(page);
+      response = await CommercialApi(page);
       if (searching) {
         setLoading(true);
-        response = await ApiApartmentSearch(searchText, "", "");
+        response = await ApiCommercialSearch(searchText, "", "");
       }
       if (!response || !response.results) {
         toast.error("خطاء في جلب البيانات ");
@@ -76,7 +76,7 @@ export default function Apartments(props: any) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">الشقق</h1>
+          <h1 className="text-2xl">المحال التجارية</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -103,7 +103,7 @@ export default function Apartments(props: any) {
     return (
       <div className="mx-2 xl:mx-0 xl:ml-3">
         <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-          <h1 className="text-2xl">الشقق</h1>
+          <h1 className="text-2xl">المحال التجارية</h1>
         </div>
         <form
           className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -129,7 +129,7 @@ export default function Apartments(props: any) {
   return (
     <div className="mx-2 xl:mx-0 xl:ml-3">
       <div className="bg-sidpar flex justify-center items-center h-20 xl:h-40 rounded-md">
-        <h1 className="text-2xl">الشقق</h1>
+        <h1 className="text-2xl">المحال التجارية</h1>
       </div>
       <form
         className="flex flex-row items-center justify-center gap-2 mt-5"
@@ -152,7 +152,7 @@ export default function Apartments(props: any) {
         className={`w-full ${pagination ? "flex justify-center items-center" : "hidden"
           }`}
       >
-        <PaginationApartments page={pageInfo} />
+        <PaginationCommercial page={pageInfo} />
       </div>
     </div>
   );

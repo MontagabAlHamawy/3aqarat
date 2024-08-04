@@ -157,7 +157,7 @@ export default function Map({ building }: { building: any[] }) {
             >
               <Popup className="w-72 font-cairo">
                 <Link
-                  href={`/buildings/${houss.property.id}`}
+                  href={`/propertys/${houss.property.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
                   <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col my-5 justify-center items-center ">

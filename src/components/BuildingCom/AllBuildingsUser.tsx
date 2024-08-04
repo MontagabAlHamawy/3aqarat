@@ -44,7 +44,7 @@ export default function AllBuildingsUser({ Building }: any) {
           return (
             <Link
               key={building.id}
-              href={`/buildings/${building.id}`}
+              href={`/propertys/${building.id}`}
               className="bg-body hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
               <div className="h-36 xl:h-48 relative flex justify-center items-center w-full">

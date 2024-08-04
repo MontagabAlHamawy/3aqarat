@@ -137,7 +137,7 @@ export default function MapsComponent({ loc }: any) {
             >
               <Popup className=" w-72 font-cairo ">
                 <Link
-                  href={`/buildings/${houss.link}`}
+                  href={`/propertys/${houss.link}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-10px]"
                 >
                   <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col my-5 justify-center items-center ">
