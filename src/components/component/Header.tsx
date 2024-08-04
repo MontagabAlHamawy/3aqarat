@@ -121,11 +121,11 @@ function Header() {
           </span>
         </Link>
         <button ref={menuRef} onClick={() => setMenuOpen(!menuOpen)} className={`${IsLog ? 'block' : 'hidden'} mr-[-7px] `}>
-          <div className={`${photo ? "" : "hidden"} rounded-md bg-body relative flex flex-col justify-center items-center w-10 h-10`}>
+          <div className={`${photo ? "" : "hidden"} rounded-md bg-body relative flex flex-col justify-center items-center w-[36px] h-[36px]`}>
             <Image
               src={photo ? user?.profile_photo : "/"}
-              width={40}
-              height={40}
+              width={36}
+              height={36}
               alt="user"
               className={`rounded-md z-20 w-full h-full`}
             />

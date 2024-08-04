@@ -50,6 +50,13 @@ body {
 .leaflet-control-zoom.leaflet-bar.leaflet-control{
   border: none !important;
 }
+.leaflet-popup-close-button{
+  margin-top: 7px;
+}
+.leaflet-popup-close-button span{
+  font-size: 30px;
+  margin-right: 7px;
+}
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span::after,
 .rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span::after,

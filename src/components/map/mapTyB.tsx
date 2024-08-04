@@ -167,13 +167,13 @@ export default function MapTyB({ building }: { building: any[] }) {
                   href={`/buildings/${houss.property.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-10px]"
                 >
-                  <div className=" relative h-20 min-w-40 flex flex-col my-5 justify-center items-center ">
+                  <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col my-5 justify-center items-center ">
                     <Image
                       src={houss.property.photos?.[0]?.photo || imageSrc[0].photo}
                       width={150}
                       height={100}
                       alt="montagab"
-                      className="mt-5 rounded-md z-20"
+                      className="h-full rounded-md z-20"
                     />
                     <PiSpinnerGapDuotone size={20} className="text-accent !z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
                   </div>
