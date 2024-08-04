@@ -5,6 +5,7 @@ import React, { useEffect, useState, useRef } from "react";
 import {
   PiFacebookLogoDuotone,
   PiInstagramLogoDuotone,
+  PiSpinnerGapDuotone,
   PiTelegramLogoDuotone,
   PiUserDuotone,
 } from "react-icons/pi";
@@ -108,14 +109,15 @@ export default function Username(props: any) {
             className={`flex flex-col mt-0
           } xl:flex-row justify-start items-center xl:mr-40 gap-x-14 gap-y-4`}
           >
-            <div className={`${photo ? "" : "hidden"}`}>
+            <div className={`${photo ? "" : "hidden"} rounded-2xl bg-sidpar relative flex flex-col justify-center items-center w-[300px] h-[300px]`}>
               <Image
                 src={photo ? user?.profile_photo : "/"}
                 width={300}
                 height={0}
                 alt="user"
-                className={`rounded-2xl`}
+                className={`rounded-2xl z-20 w-full h-full`}
               />
+              <PiSpinnerGapDuotone size={70} className="text-accent z-10  absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
             </div>
             <div className={`rounded-2xl text-accent flex justify-center items-center w-[250px] h-[250px] xl:w-[300px] xl:h-[300px] bg-sidpar ${photo ? "hidden" : ""}`}>
               <PiUserDuotone size={160} />

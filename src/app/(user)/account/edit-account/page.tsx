@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import UsersLoading from "@/components/loade/UsersLoading";
-import { PiPenDuotone, PiUserDuotone } from "react-icons/pi";
+import { PiPenDuotone, PiSpinnerGapDuotone, PiUserDuotone } from "react-icons/pi";
 import { handleEditAccount } from "@/components/sweetalert/handleEditAccount";
 import EditUsersLoading from "@/components/loade/EditUsersLoading";
 
@@ -145,23 +145,26 @@ export default function EditAccount() {
   }
   return (
     <div>
-      <div className={`relative ${token ? "hidden" : ""}`}><EditUsersLoading/></div>
+      <div className={`relative ${token ? "hidden" : ""}`}><EditUsersLoading /></div>
       <div className={`relative ${token ? "" : "hidden"}`}>
         <div className="flex flex-col mt-5 xl:flex-row xl:pr-20 items-center xl:mt-0 xl:gap-5 justify-start xl:justify-center">
           <div className="relative xl:w-1/2 xl:pr-8 mt-[-40px] mb-4 xl:mb-0">
-            <Image
-              src={photo}
-              width={300}
-              height={0}
-              alt="user"
-              className={`rounded-2xl border border-body ${IsPhoto ? "" : "hidden"}`}
-            />
+            <div className={`${IsPhoto ? "" : "hidden"} rounded-2xl bg-body relative flex flex-col justify-center items-center w-[300px] h-[300px]`}>
+              <Image
+                src={photo}
+                width={300}
+                height={0}
+                alt="user"
+                className={`rounded-2xl z-20 w-full h-full`}
+              />
+              <PiSpinnerGapDuotone size={70} className="text-accent z-10  absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
+            </div>
             <div className={`rounded-2xl bg-body text-accent flex justify-center items-center w-[250px] h-[250px] xl:w-[300px] xl:h-[300px]  ${IsPhoto ? "hidden" : ""}`}>
               <PiUserDuotone size={160} />
             </div>
             <button
               onClick={handleIconClick}
-              className="absolute top-1 right-1 xl:right-9 bg-accent text-white rounded-full p-2"
+              className="absolute z-30 top-1 right-1 xl:right-9 bg-accent text-white rounded-full p-2"
             >
               <PiPenDuotone size={24} />
             </button>

@@ -9,7 +9,8 @@ import {
   PiBellSimpleDuotone,
   PiPenDuotone,
   PiTrashDuotone,
-  PiDoorOpenDuotone
+  PiDoorOpenDuotone,
+  PiSpinnerGapDuotone
 } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { MyProfile, RefreshToken } from "@/utils/API";
@@ -120,13 +121,16 @@ function Header() {
           </span>
         </Link>
         <button ref={menuRef} onClick={() => setMenuOpen(!menuOpen)} className={`${IsLog ? 'block' : 'hidden'} mr-[-7px] `}>
-          <Image
-            src={photo ? user?.profile_photo : "/"}
-            width={35}
-            height={40}
-            alt="user"
-            className={` rounded-md cursor-pointer border border-body ${photo ? "" : "hidden"}`}
-          />
+          <div className={`${photo ? "" : "hidden"} rounded-md bg-body relative flex flex-col justify-center items-center w-10 h-10`}>
+            <Image
+              src={photo ? user?.profile_photo : "/"}
+              width={40}
+              height={40}
+              alt="user"
+              className={`rounded-md z-20 w-full h-full`}
+            />
+            <PiSpinnerGapDuotone size={20} className="text-accent z-10  absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
+          </div>
           <PiUserDuotone
             className={`text-4xl text-white p-2 ${accountActive ? "bg-accent" : "bg-body "
               } ${photo ? "hidden" : ""} rounded-md cursor-pointer`}

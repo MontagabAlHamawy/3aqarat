@@ -33,7 +33,7 @@ import House from "@/components/Buildings/house";
 import Land from "@/components/Buildings/land";
 import { useEffect, useRef, useState } from "react";
 import SingleBuildingLoade from "@/components/loade/SingleBuildingLoade";
-import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone, PiPhoneDuotone, PiUserDuotone } from "react-icons/pi";
+import { PiGearSixDuotone, PiPenDuotone, PiTrashDuotone, PiPhoneDuotone, PiUserDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
@@ -252,13 +252,16 @@ export default function Buildin(props: any) {
             <div className="flex justify-between items-center mx-[-5px] xl:mx-3 cursor-pointer">
               <Link href={`/account/${building.client.username}`}>
                 <div className="flex gap-2 xl:gap-2 justify-center items-center">
-                  <Image
-                    src={photo ? building.client.profile_photo : "/"}
-                    width={40}
-                    height={40}
-                    alt="seller"
-                    className={`w-10 h-10 p-[1px] bg-sidpar rounded-md ${photo ? "" : "hidden"}`}
-                  />
+                  <div className={`${photo ? "" : "hidden"} rounded-md bg-sidpar relative flex flex-col justify-center items-center w-10 h-10`}>
+                    <Image
+                      src={photo ? building.client.profile_photo : "/"}
+                      width={40}
+                      height={40}
+                      alt="seller"
+                      className={`rounded-md z-20 w-full h-full`}
+                    />
+                    <PiSpinnerGapDuotone size={20} className="text-accent z-10  absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
+                  </div>
                   <div className={`rounded-md text-accent flex justify-center items-center w-[40px] h-[40px]  bg-sidpar ${photo ? "hidden" : ""}`}>
                     <PiUserDuotone size={24} />
                   </div>
