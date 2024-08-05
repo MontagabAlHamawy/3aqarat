@@ -27,7 +27,7 @@ export default function Commercials(props: any) {
       let response;
       response = await CommercialApi(page);
       if (searching) {
-        setLoading(true);
+        setLoading(false);
         response = await ApiCommercialSearch(searchText, "", "");
       }
       if (!response || !response.results) {

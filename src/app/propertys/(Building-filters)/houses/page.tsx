@@ -27,7 +27,7 @@ export default function Houses(props: any) {
       let response;
       response = await HousesApi(page);
       if (searching) {
-        setLoading(true);
+        setLoading(false);
         response = await ApiHouseSearch(searchText, "", "");
       }
       if (!response || !response.results) {

@@ -1,21 +1,23 @@
+"use client";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import apiUrl from "@/utils/apiConfig";
 import { GetToken } from "@/utils/API";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { PiPlusCircleDuotone, PiTrashDuotone } from "react-icons/pi";
 import { useRef, useState, useEffect } from "react";
 import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
+import { useRouter } from "next/navigation";
 
 export default function Apartment() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [photo, setPhoto] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [photos, setPhotos] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showConfirmation } = useConfirmationAlert();
   const [selectedOffer, setSelectedOffer] = useState<number | string>("");
   const [cities, setCities] = useState<any[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchCities() {
@@ -35,22 +37,22 @@ export default function Apartment() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setSelectedFile(file);
-    if (file) {
+    const files = e.target.files ? Array.from(e.target.files) : [];
+    setSelectedFiles(files);
+    const fileReaders = files.map((file) => {
       const reader = new FileReader();
-      reader.onload = () => {
-        setPhoto(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
+      return new Promise<string>((resolve) => {
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(file);
+      });
+    });
+    Promise.all(fileReaders).then((loadedPhotos) => setPhotos(loadedPhotos));
   };
 
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
 
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -88,38 +90,40 @@ export default function Apartment() {
       let headersList = {
         Accept: "*/*",
         Authorization: `JWT ${token}`,
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       };
 
-      let bodyContent = {
-        property: {
-          area: Number(data.area),
-          price: Number(data.price),
-          title: data.title,
-          description: data.description,
-          tabu: tabuMapping[data.tabu],
-          offer: Number(selectedOffer),
-          duration_in_months: Number(data.months),
-          address: {
-            region: data.region,
-            street: data.street,
-            description: data.address_description,
-            geo_address: data.geo_address,
-            city: Number(data.city),
-          },
-          photos: selectedFile ? [{ photo: photo }] : [],
-        },
-        number_of_rooms: Number(data.number_of_rooms),
-        floor_number: Number(data.floor_number),
-        direction: data.direction,
-      };
+      // Create FormData instance
+      let formData = new FormData();
+
+      // Append property data
+      formData.append("property[area]", data.area);
+      formData.append("property[price]", data.price);
+      formData.append("property[title]", data.title);
+      formData.append("property[description]", data.description);
+      formData.append("property[tabu]", tabuMapping[data.tabu].toString());
+      formData.append("property[offer]", selectedOffer.toString());
+      formData.append("property[duration_in_months]", data.months);
+      formData.append("property[address][region]", data.region);
+      formData.append("property[address][street]", data.street);
+      formData.append("property[address][description]", data.address_description);
+      formData.append("property[address][geo_address]", data.geo_address);
+      formData.append("property[address][city]", data.city.toString());
+      formData.append("number_of_rooms", data.number_of_rooms);
+      formData.append("floor_number", data.floor_number);
+      formData.append("direction", data.direction);
+
+      // Append photos
+      selectedFiles.forEach((file) => {
+        formData.append("property[photos]", file);
+      });
 
       try {
-        await axios.post(`${apiUrl}/apartments/`, bodyContent, {
+        await axios.post(`${apiUrl}/apartments/`, formData, {
           headers: headersList,
         });
         toast.success("تمت إضافة العقار بنجاح");
-        router.replace(`/buildings`);
+        router.replace("/buildings");
       } catch (error) {
         console.error("Error adding property:", error);
         toast.error("فشل في إرسال البيانات");
@@ -139,26 +143,26 @@ export default function Apartment() {
   ];
 
   return (
-    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
+    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-x-2 xl:gap-4">
       <div>
-        <div className="grid grid-cols-2 mt-7 mx-2 gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6">
-          {photo && (
-            <div className="relative">
+        <div className="flex flex-wrap items-start gap-2">
+          {photos.map((photo, index) => (
+            <div key={index} className="relative">
               <Image
                 src={photo}
                 width={300}
-                height={0}
+                height={200}
                 alt="user"
                 className="rounded-md"
               />
               <button
-                onClick={() => setPhoto("")}
+                onClick={() => setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index))}
                 className="p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1"
               >
                 <PiTrashDuotone size={30} />
               </button>
             </div>
-          )}
+          ))}
           <button
             onClick={handleIconClick}
             className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
@@ -168,18 +172,16 @@ export default function Apartment() {
           <input
             type="file"
             ref={fileInputRef}
-            onChange={handleFileChange}
             style={{ display: "none" }}
+            multiple
+            onChange={handleFileChange}
           />
         </div>
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col justify-start items-start"
-      >
-        <div className="w-full ">
-          <div className="mb-4 w-full ">
-            <label className="block text-white font-semibold text-sm mb-2 ">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-start items-start">
+        <div className="w-full">
+          <div className="mb-4 w-full">
+            <label className="block text-white font-semibold text-sm mb-2">
               العنوان :
             </label>
             <input
@@ -221,9 +223,6 @@ export default function Apartment() {
             </select>
             {errors.tabu && <p className="text-red-500">هذا الحقل مطلوب</p>}
           </div>
-        </div>
-        <div className="flex flex-col justify-center items-center gap-4">
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4"></div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
@@ -401,9 +400,9 @@ export default function Apartment() {
                 onChange={handleOfferChange}
               >
                 <option value="">اختر نوع العرض</option>
-                <option value="1">عرض 1</option>
-                <option value="2">عرض 2</option>
-                <option value="3">عرض 3</option>
+                <option value="1">بيع</option>
+                <option value="2">رهن</option>
+                <option value="3">إيجار</option>
               </select>
             </div>
           </div>
@@ -412,7 +411,7 @@ export default function Apartment() {
           type="submit"
           className="px-4 py-2 bg-blue-600 text-white rounded-md"
         >
-          إرسال
+          إضافة عقار
         </button>
       </form>
     </div>

@@ -27,7 +27,7 @@ export default function Apartments(props: any) {
       let response;
       response = await ApartmentsApi(page);
       if (searching) {
-        setLoading(true);
+        setLoading(false);
         response = await ApiApartmentSearch(searchText, "", "");
       }
       if (!response || !response.results) {

@@ -26,7 +26,7 @@ export default function Building(props: any) {
       let response;
       response = await BuildingApi(page);
       if (searching) {
-        setLoading(true);
+        setLoading(false);
         response = await ApiSearch(searchText);
       }
       if (!response || !response.results) {

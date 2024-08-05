@@ -8,7 +8,7 @@ import Link from "next/link";
 import { PiCheck } from "react-icons/pi";
 
 export default function HomeLoading() {
-  const linked = "/propertys/";
+  const linked = "/";
   return (
     <div className="mt-14 xl:mt-32 m-0 px-2 xl:px-10 h-full z-40">
       <div className="flex justify-between items-center flex-col xl:flex-row gap-4 xl:gap-8 ">

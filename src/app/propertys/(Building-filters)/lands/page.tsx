@@ -27,7 +27,7 @@ export default function Lands(props: any) {
       let response;
       response = await LandApi(page);
       if (searching) {
-        setLoading(true);
+        setLoading(false);
         response = await ApilandSearch(searchText, "", "");
       }
       if (!response || !response.results) {

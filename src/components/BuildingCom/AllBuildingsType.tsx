@@ -57,13 +57,13 @@ export default function AllBuildingsType({ Building }: any) {
               href={`/propertys/${building.property.id}`}
               className="bg-sidpar hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
             >
-              <div className="h-36 relative xl:h-48 flex flex-col justify-center items-center w-full">
+              <div className=" relative h-40 xl:h-52 flex flex-col justify-center items-center w-full">
               <Image
                 src={imageUrl}
                 width={1000}
                 height={0}
                 alt="montagab"
-                className="w-[1080px] h-36 xl:h-48 rounded-tl-xl z-20 rounded-tr-xl"
+                className="w-[1080px] h-40 xl:h-52 rounded-tl-xl z-20 rounded-tr-xl"
               />
               <PiSpinnerGapDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100"/>
               </div>
