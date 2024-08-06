@@ -54,7 +54,7 @@ export default function AllBuildings({ Building }: any) {
             <Link
               key={building.id}
               href={`/propertys/${building.id}`}
-              className="bg-sidpar hover:bg-section rounded-xl relative flex justify-between items-start flex-col h-auto"
+              className="bg-sidpar hover:bg-section rounded-xl relative flex justify-start items-start flex-col h-auto"
             >
               <div className=" relative h-40 xl:h-52 flex flex-col justify-center items-center w-full">
                 <Image
@@ -70,20 +70,22 @@ export default function AllBuildings({ Building }: any) {
                 />
                 <PiSpinnerGapDuotone size={40} className="text-accent z-10  absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
               </div>
-              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
-                {propertyType}
-              </div>
-              <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
-                {truncatedTitle}
-              </p>
-              <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
-                {truncatedText}
-              </p>
-              <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
-                <p className="text-accent">{formattedNumber} ل.س</p>
-              </div>
-              <div className="bg-accent text-white z-30 text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
-                {building.offer}
+              <div className="flex flex-col justify-between items-start h-full">
+                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
+                  {propertyType}
+                </div>
+                <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
+                  {truncatedTitle}
+                </p>
+                <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
+                  {truncatedText}
+                </p>
+                <div className="flex flex-row justify-between items-center px-2 xl:px-5 my-3 xl:my-1 xl:mb-7">
+                  <p className="text-accent text-sm xl:text-base">{formattedNumber} ل.س</p>
+                </div>
+                <div className="bg-accent text-white z-30 text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+                  {building.offer}
+                </div>
               </div>
             </Link>
           );

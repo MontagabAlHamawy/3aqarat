@@ -43,7 +43,7 @@ export default function AllBuildingsUser({ Building }: any) {
           if (type === "building") {
             imagee = ImagBuilding;
           }
-          const formattedNumber = formatNumber(building.property.price);
+          const formattedNumber = formatNumber(building.price);
           const truncatedText = truncateText(building.description, 30);
           const truncatedTitle = truncateText(building.title, 20);
           return (
@@ -66,6 +66,7 @@ export default function AllBuildingsUser({ Building }: any) {
                 />
                 <PiSpinnerGapDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
               </div>
+              <div className="flex flex-col justify-between items-start h-full">
               <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
                 {propertyType}
               </div>
@@ -75,11 +76,12 @@ export default function AllBuildingsUser({ Building }: any) {
               <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
                 {truncatedText}
               </p>
-              <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
-                <p className="text-accent">{formattedNumber} ل.س</p>
+              <div className="flex flex-row justify-between items-center my-3 px-2 xl:px-5 xl:my-1 xl:mb-7">
+                <p className="text-accent text-sm xl:text-base">{formattedNumber} ل.س</p>
               </div>
               <div className="bg-accent z-30 text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                 {building.offer}
+              </div>
               </div>
             </Link>
           );

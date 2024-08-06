@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import NotificationLoade from "@/components/loade/NotificationLoade";
 import NotificationError from "@/components/error/NotificationError";
+import { truncateText } from "@/components/links";
 
 export default function Notification() {
   const token = GetToken();
@@ -61,6 +62,7 @@ export default function Notification() {
         <div className="flex flex-col-reverse xl:flex-row gap-5 px-2 xl:pl-5">
           <div className="w-full grid grid-cols-1 xl:grid-cols-2 gap-x-5 gap-y-5 xl:gap-x-16">
             {building.map((building: any) => {
+              const truncatedText = truncateText(building.description, 50);
               const isoDate = building.created_at;
               const date = new Date(isoDate);
               const year = date.getFullYear();
@@ -76,7 +78,7 @@ export default function Notification() {
                   className="bg-sidpar rounded-md py-2 px-3 flex flex-col gap-2 relative"
                 >
                   <h1 className="text-accent text-xl">{building.title}</h1>
-                  <p>{building.description}</p>
+                  <p>{truncatedText}</p>
                   <p className="text-gray-400 font-thin text-sm">
                     {formattedDate}
                   </p>

@@ -92,7 +92,7 @@ export default function MapsComponent({ loc }: any) {
         className="w-[90vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: xloc, lng: yloc }}
         zoom={13}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -145,7 +145,7 @@ export default function MapsComponent({ loc }: any) {
                   href={`/propertys/${houss.link}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-10px]"
                 >
-                  <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col my-5 justify-center items-center ">
+                  <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col mt-5 justify-center items-center ">
                     <Image
                       src={
                         houss.photos.length !== 0

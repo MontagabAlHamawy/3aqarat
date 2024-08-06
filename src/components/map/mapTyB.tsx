@@ -114,7 +114,7 @@ export default function MapTyB({ building }: { building: any[] }) {
         className="w-full h-[300px] md:h-[60vh] xl:w-[62vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: 34.6985, lng: 36.7237 }}
         zoom={7}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -172,7 +172,7 @@ export default function MapTyB({ building }: { building: any[] }) {
                   href={`/propertys/${houss.property.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-10px]"
                 >
-                  <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col my-5 justify-center items-center ">
+                  <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col mt-5 justify-center items-center ">
                     <Image
                       src={houss.property.photos?.[0]?.photo || imageSrc[0].photo}
                       width={150}

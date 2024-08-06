@@ -74,20 +74,22 @@ export default function AllBuildingsType({ Building }: any) {
                 />
                 <PiSpinnerGapDuotone size={40} className="text-accent z-10 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
               </div>
-              <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
-                {propertyType}
-              </div>
-              <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
-                {truncatedTitle}
-              </p>
-              <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
-                {truncatedText}
-              </p>
-              <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
-                <p className="text-accent">{formattedNumber} ل.س</p>
-              </div>
-              <div className="bg-accent z-30 text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
-                {building.property.offer}
+              <div className="flex flex-col justify-between items-start h-full">
+                <div className="bg-accent text-white text-sm xl:text-lg px-2 py-1 rounded w-max mt-2 mx-2">
+                  {propertyType}
+                </div>
+                <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
+                  {truncatedTitle}
+                </p>
+                <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
+                  {truncatedText}
+                </p>
+                <div className="flex flex-row justify-between items-center my-3 px-2 xl:px-5 xl:my-1 xl:mb-7">
+                  <p className="text-accent text-sm xl:text-base">{formattedNumber} ل.س</p>
+                </div>
+                <div className="bg-accent z-30 text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
+                  {building.property.offer}
+                </div>
               </div>
             </Link>
           );
