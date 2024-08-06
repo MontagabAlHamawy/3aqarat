@@ -174,6 +174,13 @@ export default function Buildin(props: any) {
       router.replace("/propertys");
     });
   }
+  function formatNumber(num: number): string {
+    const numStr = num.toString();
+    const formattedNumStr = numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return formattedNumStr;
+  }
+  const number = building.price;
+  const formattedNumber = formatNumber(number);
 
   return (
     <div className="mt-[20px] xl:mt-10 relative">
@@ -246,7 +253,7 @@ export default function Buildin(props: any) {
               <House building={building} />
             </div>
             <div className="flex justify-between items-center">
-              <p className="text-xl text-accent">{building.price} ل.س</p>
+              <p className="text-xl text-accent">{formattedNumber} ل.س</p>
               <p className="text-lg font-thin text-gray-400">{formattedDate}</p>
             </div>
             <div className="flex justify-between items-center mx-[-5px] xl:mx-3 cursor-pointer">

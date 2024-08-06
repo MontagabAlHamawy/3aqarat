@@ -23,11 +23,13 @@ import Tower from "../../../public/map/tower.svg";
 import { PiInfinityDuotone, PiMapPinDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
 import MapLoade from "../loade/MapLoade";
 import {
+  formatNumber,
   ImagApartment,
   ImagBuilding,
   ImagCommercials,
   ImagHouse,
   ImagLand,
+  truncateText,
 } from "../links";
 import mapErrorSweet from "../sweetalert/mapErrorSweet";
 
@@ -140,6 +142,9 @@ export default function Map({ building }: { building: any[] }) {
             iconee = Land;
             imagee = ImagLand;
           }
+          const formattedNumber = formatNumber(houss.property.price);
+          const truncatedText = truncateText(houss.property.description, 30);
+          const truncatedTitle = truncateText(houss.property.title, 20);
 
           return (
             <Marker
@@ -176,15 +181,15 @@ export default function Map({ building }: { building: any[] }) {
                   </div>
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
                     <p className="text-lg xl:text-xl text-accent">
-                      {houss.property.title}
+                      {truncatedTitle}
                     </p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
                       <p className="text-white w-full text-center text-base font-thin">
-                        {houss.property.description}
+                        {truncatedText}
                       </p>
                     </div>
                     <div className="bg-accent text-white text-sm xl:text-base px-2 py-1 mt-[-15px] rounded">
-                      {houss.property.price} ل.س
+                      {formattedNumber} ل.س
                     </div>
                   </div>
                 </Link>

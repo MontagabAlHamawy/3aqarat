@@ -3,11 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  formatNumber,
   ImagApartment,
   ImagBuilding,
   ImagCommercials,
   ImagHouse,
   ImagLand,
+  truncateText,
 } from "../links";
 import BuildingError from "../error/BuildingError";
 import { PiInfinityDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
@@ -17,6 +19,8 @@ export default function AllBuildings({ Building }: any) {
     return <BuildingError />;
   }
 
+
+
   return (
     <div>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 xl:gap-x-16 xl:gap-y-10 ml-5 my-5 w-full">
@@ -25,6 +29,11 @@ export default function AllBuildings({ Building }: any) {
             building.property_object?.property_type?.ar || "N/A";
           const type = building.property_object?.property_type?.en || null;
           let imagee = ImagBuilding;
+
+          const formattedNumber = formatNumber(building.price);
+          const truncatedText = truncateText(building.description, 30);
+          const truncatedTitle = truncateText(building.title, 20);
+
 
           if (type === "apartment") {
             imagee = ImagApartment;
@@ -65,13 +74,13 @@ export default function AllBuildings({ Building }: any) {
                 {propertyType}
               </div>
               <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
-                {building.title}
+                {truncatedTitle}
               </p>
               <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
-                {building.description}
+                {truncatedText}
               </p>
               <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
-                <p className="text-accent">{building.price}ل.س</p>
+                <p className="text-accent">{formattedNumber} ل.س</p>
               </div>
               <div className="bg-accent text-white z-30 text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                 {building.offer}

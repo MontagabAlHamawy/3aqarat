@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import {
+  formatNumber,
   ImagApartment,
   ImagBuilding,
   ImagCommercials,
   ImagHouse,
   ImagLand,
+  truncateText,
 } from "../links";
 import BuildingError from "../error/BuildingError";
 import { PiInfinityDuotone, PiPenDuotone, PiSpinnerGapDuotone, PiTrashDuotone } from "react-icons/pi";
@@ -50,6 +52,10 @@ export default function AllMyBuildings({ Building }: any) {
           if (type === "building") {
             imagee = ImagBuilding;
           }
+         
+          const formattedNumber = formatNumber(building.price);
+          const truncatedText = truncateText(building.description, 30);
+          const truncatedTitle = truncateText(building.title, 20);
           return (
             <div
               key={building.id}
@@ -74,13 +80,13 @@ export default function AllMyBuildings({ Building }: any) {
                   {propertyType}
                 </div>
                 <p className="text-lg xl:text-xl text-accent mt-2 px-2 xl:px-5">
-                  {building.title}
+                  {truncatedTitle}
                 </p>
                 <p className="text-white text-sm font-light sm:my-2 px-2 xl:px-5">
-                  {building.description}
+                  {truncatedText}
                 </p>
                 <div className="flex flex-row justify-between items-center my-3 px-5 xl:my-1 xl:mb-7">
-                  <p className="text-accent">{building.price}ل.س</p>
+                  <p className="text-accent">{formattedNumber} ل.س</p>
                 </div>
                 <div className="bg-accent z-30 text-white text-sm xl:text-lg px-2 py-1 rounded absolute top-2 right-2">
                   {building.offer}

@@ -12,6 +12,9 @@ export default function SingleBuildingLoade() {
           <p className="text-lg xl:text-2xl font-semibold text-white">
             جاري جلب معلومات العقار...
           </p>
+          <p className="text-sm text-gray-500">
+            الرجاء الإنتظار جاري التحميل
+          </p>
         </div>
       </div>
     </div>

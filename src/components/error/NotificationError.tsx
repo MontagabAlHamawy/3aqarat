@@ -5,7 +5,7 @@ export default function NotificationError() {
   return (
     <div className="flex flex-col gap-4 justify-center items-center w-full mt-20 xl:mt-32">
       <div className="flex flex-col items-center justify-center ">
-        <div className="animate-waving-hand opacity-100 text-accent transform translate-y-0 duration-100">
+        <div className=" text-accent">
           <PiBellSimpleDuotone size={160} />
         </div>
         <div className="text-center">

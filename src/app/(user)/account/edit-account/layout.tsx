@@ -10,7 +10,7 @@ export default function EditAccountLayout({ children }: { children: React.ReactN
             {/* <div className={`${token ? "hidden" : ""}`}><UsersLoading /> {children}</div> */}
             <div >
                 <EditAccount />
-                <div className={`bg-sidpar w-full rounded-b-md mb-0 rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 px-4 xl:mx-[-8px]`}>
+                <div className={`bg-sidpar w-full rounded-b-md p-0 m-0 mb-0 rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10  xl:mx-[-8px]`}>
                     {children}
                 </div>
             </div>

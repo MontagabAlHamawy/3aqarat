@@ -54,3 +54,18 @@ export const whyus = [
     discrep: "يمكنك البحث عن العقار في المناطق التي تفضل السكن فيها",
   },
 ];
+
+
+export function formatNumber(num: number): string {
+  const numStr = num.toString();
+  const formattedNumStr = numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return formattedNumStr;
+}
+
+export function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+      return text;
+  }
+  return text.substring(0, maxLength) + '...';
+}
+
