@@ -274,6 +274,14 @@ export async function ApiSearch(search: any) {
   }
   return response.json();
 }
+export async function ApiSearch2(search: any, offer: any, limit: any) {
+  const response = await fetch(`${apiUrl}/properties/?search=${search}&offer=${offer}&limit=${limit}`);
+
+  if (response.status === 404) {
+    return NotFound();
+  }
+  return response.json();
+}
 export async function ApiApartmentSearch(search: any, offer: any, limit: any) {
   const response = await fetch(`${apiUrl}/apartments/?search=${search}&property__offer=${offer}&limit=${limit}`);
 

@@ -114,7 +114,7 @@ export default function MapTyB({ building }: { building: any[] }) {
         className="w-full h-[300px] md:h-[60vh] xl:w-[62vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: 34.6985, lng: 36.7237 }}
         zoom={7}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

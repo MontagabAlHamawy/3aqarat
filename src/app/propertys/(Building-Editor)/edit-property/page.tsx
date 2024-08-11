@@ -20,6 +20,8 @@ export default function EditBuilding(props: any) {
   const [building, setBuilding] = useState<any>(null);
   const router = useRouter();
   const [warning, SetWarning] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [MyBuilding, setMyBuilding] = useState(false);
   useEffect(() => {
     if (page === null || page === '' || page === undefined || page === 'undefined') {
       toast.error("هذا العقار غير موجود أو تم حذفه");
@@ -37,6 +39,7 @@ export default function EditBuilding(props: any) {
         } else {
           if (token) {
             const ifme = await MyProfile();
+            setMyBuilding(false)
             if (ifme.username !== buildingData?.client?.username) {
               router.replace(`/propertys/${page}`);
             }
@@ -48,6 +51,9 @@ export default function EditBuilding(props: any) {
       } catch (error) {
         SetWarning(true)
         router.replace("/propertys");
+      } finally {
+        setLoading(false);
+        setMyBuilding(true)
       }
     };
     myData();
@@ -55,7 +61,7 @@ export default function EditBuilding(props: any) {
       toast.error("لا يمكن تعديل معلومات هذا العقار");
     }
   }, [page, router, warning]);
-  if (!building) {
+  if (loading) {
     return <SingleBuildingLoade />;
   }
 
@@ -83,8 +89,8 @@ export default function EditBuilding(props: any) {
   }
   return (
     <>
-      <div className={`relative ${token ? "hidden" : ""}`}><SingleBuildingLoade /></div>
-      <div className={`relative ${token ? "" : "hidden"}`}>
+      <div className={`relative ${token || MyBuilding ? "hidden" : ""}`}><SingleBuildingLoade /></div>
+      <div className={`relative ${token || MyBuilding ? "" : "hidden"}`}>
         <div>
           <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
             تعديل معلومات العقار

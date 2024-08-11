@@ -1,15 +1,13 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
-import { toast } from "react-toastify";
 import NotFound from "../not-found";
 import SearchBuilding from "@/components/BuildingCom/SearchBuilding";
 import {
   ApiOfferTypes,
-  BuildingApi,
-  ApiSearch,
+  ApiSearch2,
   ApiApartmentSearch,
   ApiBuildingSearch,
   ApiCommercialSearch,
@@ -20,122 +18,87 @@ import MapLoade from "@/components/loade/MapLoade";
 import BuildingLoade from "@/components/loade/BuildingLoade";
 import BuildingError from "@/components/error/BuildingError";
 import MapError from "@/components/error/MapError";
+import SearchBuilding2 from "@/components/BuildingCom/SearchBuilding2";
 
 const Map = dynamic(() => import("@/components/map/map"), { ssr: false });
-
-interface Property {
-  id: number;
-  name: string;
-  type: string;
-}
+const Map2 = dynamic(() => import("@/components/map/map2"), { ssr: false });
 
 export default function Search() {
   const [loading, setLoading] = useState(true);
+  const [type, setType] = useState(true);
   const [error, setError] = useState(false);
-  const [bil, setBui] = useState<Property[]>([]);
-  const [offer, setOffer] = useState<any>([]);
+  const [bil, setBui] = useState([]);
+  const [offer, setOffer] = useState<any[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedOffer, setSelectedOffer] = useState<string>("");
-  const [propertyType, setPropertyType] = useState<string>("house");
-
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-      const res = await BuildingApi(1);
-      const offer = await ApiOfferTypes();
-      const build = await ApiHouseSearch("", "", res.count);
-      if (!res) {
-        setError(true);
-        NotFound();
-      }
-      setBui(build.results);
-      setOffer(offer);
-      if (build.results.length === 0) {
-        setError(true);
-      } else {
-        setError(false);
-      }
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const [propertyType, setPropertyType] = useState<string>("");
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const offerData = await ApiOfferTypes();
+        setOffer(offerData);
 
-  const handleSearch = useCallback(async () => {
-    if (searchText.length > 0 && searchText.length < 3) {
-      return;
-    }
-    try {
-      setLoading(true);
-      const res = await BuildingApi(1);
-      const encodedSearchText = encodeURIComponent(searchText);
-      let build;
+        let build;
+        switch (propertyType) {
+          case "house":
+            setType(false);
+            build = await ApiHouseSearch(searchText, selectedOffer, 10000000);
+            break;
+          case "flat":
+            setType(false);
+            build = await ApiApartmentSearch(searchText, selectedOffer, 10000000);
+            break;
+          case "building":
+            setType(false);
+            build = await ApiBuildingSearch(searchText, selectedOffer, 10000000);
+            break;
+          case "commercial":
+            setType(false);
+            build = await ApiCommercialSearch(searchText, selectedOffer, 10000000);
+            break;
+          case "land":
+            setType(false);
+            build = await ApilandSearch(searchText, selectedOffer, 10000000);
+            break;
+          default:
+            setType(true);
+            build = await ApiSearch2(searchText, selectedOffer, 10000000);
+        }
 
-      switch (propertyType) {
-        case "house":
-          build = await ApiHouseSearch(
-            encodedSearchText,
-            selectedOffer,
-            res.count
-          );
-          break;
-        case "flat":
-          build = await ApiApartmentSearch(
-            encodedSearchText,
-            selectedOffer,
-            res.count
-          );
-          break;
-        case "building":
-          build = await ApiBuildingSearch(
-            encodedSearchText,
-            selectedOffer,
-            res.count
-          );
-          break;
-        case "commercial":
-          build = await ApiCommercialSearch(
-            encodedSearchText,
-            selectedOffer,
-            res.count
-          );
-          break;
-        case "land":
-          build = await ApilandSearch(
-            encodedSearchText,
-            selectedOffer,
-            res.count
-          );
-          break;
+        let formattedResults;
 
-        default:
-          build = await ApiHouseSearch(
-            encodedSearchText,
-            selectedOffer,
-            res.count
-          );
-      }
-      setBui(build.results);
-      if (build.results.length === 0) {
+        // إذا كانت البيانات من ApiSearch2
+        if (build && build.results) {
+          formattedResults = build.results;
+        } else if (build && build.results && build.results[0]?.property) {
+          // إذا كانت البيانات من ApiHouseSearch, ApiApartmentSearch, etc.
+          formattedResults = build.results.map((item: any) => item.property);
+        }
+
+        if (!formattedResults || formattedResults.length === 0) {
+          setError(true);
+          NotFound();
+        } else {
+          setBui(formattedResults);
+          setError(false);
+        }
+      } catch (error) {
         setError(true);
-      } else {
-        setError(false);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
+    };
+
+    if (searchText.length === 0 || searchText.length >= 3) {
+      fetchData();
     }
   }, [searchText, selectedOffer, propertyType]);
 
-  useEffect(() => {
-    handleSearch();
-  }, [handleSearch]);
+  const handleSearch = () => {
+    // سيتم تنفيذ جلب البيانات تلقائياً من خلال useEffect
+  };
 
   const handleSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -143,15 +106,15 @@ export default function Search() {
 
   const handleOfferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOffer(e.target.value);
+    setBui([]);
   };
 
-  const handlePropertyTypeChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handlePropertyTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPropertyType(e.target.value);
     setBui([]);
-    handleSearch();
   };
+  console.log("bil: ", bil);
+
 
   return (
     <div>
@@ -160,7 +123,7 @@ export default function Search() {
           <input
             type="text"
             placeholder="اكتب نص البحث"
-            className="w-40 xl:w-80  border p-2 rounded-lg bg-body border-body text-white"
+            className="w-40 xl:w-80 border p-2 rounded-lg bg-body border-body text-white"
             value={searchText}
             onChange={handleSearchTextChange}
           />
@@ -172,15 +135,15 @@ export default function Search() {
             <PiMagnifyingGlassDuotone />
           </button>
         </div>
-        <div className="flex  mb-[-20px] xl:mb-0 flex-row justify-between items-center gap-7 xl:gap-10">
+        <div className="flex mb-[-20px] xl:mb-0 flex-row justify-between items-center gap-7 xl:gap-10">
           <div>
             <select
-              className="w-32 xl:w-80  h-11 border pr-2 rounded-lg bg-body border-body text-white"
+              className="w-32 xl:w-80 h-11 border pr-2 rounded-lg bg-body border-body text-white"
               value={selectedOffer}
               onChange={handleOfferChange}
             >
               <option value="">الكل</option>
-              {offer.map((offer: any) => (
+              {offer.map((offer) => (
                 <option key={offer.id} value={offer.id}>
                   {offer.offer}
                 </option>
@@ -189,10 +152,11 @@ export default function Search() {
           </div>
           <div>
             <select
-              className="w-32 xl:w-80  h-11 border pr-2 rounded-lg bg-body border-body text-white"
+              className="w-32 xl:w-80 h-11 border pr-2 rounded-lg bg-body border-body text-white"
               value={propertyType}
               onChange={handlePropertyTypeChange}
             >
+              <option value="all">جميع أنواع العقارات</option>
               <option value="house">منزل</option>
               <option value="flat">شقة</option>
               <option value="building">محضر</option>
@@ -201,40 +165,38 @@ export default function Search() {
             </select>
           </div>
         </div>
-        <div className="w-max border absolute xl:hidden top-16 right-0  p-2 bg-body border-body text-white">
+        <div className="w-max border absolute xl:hidden top-16 right-0 p-2 bg-body border-body text-white">
           <p className="flex justify-center items-center gap-1">
-            عدد النتائج:{" "}
-            <span className="text-accent text-xl">{bil.length}</span>
+            عدد النتائج: <span className="text-accent text-xl">{bil.length}</span>
           </p>
         </div>
-        <div className="w-max border hidden xl:block top-16 left-0  p-2 rounded-lg bg-body border-body text-white">
+        <div className="w-max border hidden xl:block top-16 left-0 p-2 rounded-lg bg-body border-body text-white">
           <p className="flex justify-center items-center gap-1">
-            عدد النتائج:{" "}
-            <span className="text-accent text-xl">{bil.length}</span>
+            عدد النتائج: <span className="text-accent text-xl">{bil.length}</span>
           </p>
         </div>
       </div>
       {loading ? (
-        <div className="flex justify-center xl:mb-[-200px] ">
+        <div className="flex justify-center xl:mb-[-200px]">
           <div className="w-full overflow-y-auto">
-            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 mt-5 xl:mt-14">
+            <div className="flex flex-col xl:h-[60vh] xl:flex-row gap-5 px-4 mt-5 xl:mt-14">
               <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <MapLoade />
               </div>
-              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
+              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <BuildingLoade />
               </div>
             </div>
           </div>
         </div>
       ) : error ? (
-        <div className="flex justify-center xl:mb-[-200px] ">
+        <div className="flex justify-center xl:mb-[-200px]">
           <div className="w-full overflow-y-auto">
-            <div className="flex flex-col  xl:h-[60vh] xl:flex-row gap-5 px-4 mt-5 xl:mt-14">
+            <div className="flex flex-col xl:h-[60vh] xl:flex-row gap-5 px-4 mt-5 xl:mt-14">
               <div className="xl:w-2/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <MapError />
               </div>
-              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4  flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
+              <div className="xl:w-1/3 px-4 xl:px-0 xl:mx-4 flex w-full justify-center items-center xl:h-full bg-sidpar rounded-md">
                 <BuildingError />
               </div>
             </div>
@@ -245,12 +207,12 @@ export default function Search() {
           <div className="w-full overflow-y-auto">
             <div className="flex flex-col xl:flex-row-reverse gap-5">
               <div className="xl:fixed xl:top-[100px] mx-2 xl:mx-0 xl:right-[50px] xl:w-2/3">
-                <div className="xl:mt-10 xl:mr-7 ">
-                  <Map building={bil} />
+                <div className="xl:mt-10 xl:mr-7">
+                  {type ? <Map building={bil} /> : <Map2 building={bil} />}
                 </div>
               </div>
               <div className="xl:w-1/3 p-4 mt-[-40px] xl:mt-6">
-                <SearchBuilding bil={bil} />
+                {type ? <SearchBuilding2 bil={bil} /> : <SearchBuilding bil={bil} />}
               </div>
             </div>
           </div>
@@ -259,3 +221,7 @@ export default function Search() {
     </div>
   );
 }
+function fetchData() {
+  throw new Error("Function not implemented.");
+}
+

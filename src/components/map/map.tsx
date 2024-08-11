@@ -81,17 +81,17 @@ export default function Map({ building }: { building: any[] }) {
       const newLocations: { [key: string]: LatLngLiteral } = {};
 
       building.forEach((houss) => {
-        if (houss.property.address && houss.property.address.geo_address) {
-          const coords = houss.property.address.geo_address.split(", ");
+        if (houss.address && houss.address.geo_address) {
+          const coords = houss.address.geo_address.split(", ");
 
           if (coords.length === 2) {
             const lat = parseFloat(coords[0]) || 34.69498; // Default latitude
             const lng = parseFloat(coords[1]) || 36.7237; // Default longitude
 
-            newLocations[houss.property.id] = { lat, lng };
+            newLocations[houss.id] = { lat, lng };
           } else {
             console.warn(
-              `Invalid geo_address format for house ID ${houss.property.id}: ${houss.property.address.geo_address}`
+              `Invalid geo_address format for house ID ${houss.id}: ${houss.address.geo_address}`
             );
           }
         }
@@ -111,7 +111,7 @@ export default function Map({ building }: { building: any[] }) {
         className="w-full h-[300px] md:h-[60vh] xl:w-[62vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: 34.6985, lng: 36.7237 }}
         zoom={7}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -119,36 +119,37 @@ export default function Map({ building }: { building: any[] }) {
         />
         <LocationMarker />
         {building.map((houss) => {
-          const location = locations[houss.property.id];
+           console.log("houss: ",houss);
+          const location = locations[houss.id];
 
           if (!location) return null;
 
           let iconee;
           let imagee = ImagBuilding;
 
-          if (houss.property_type?.en === "apartment") {
+          if (houss.property_object.property_type?.en === "apartment") {
             iconee = Apartment;
             imagee = ImagApartment;
-          } else if (houss.property_type?.en === "commercialproperty") {
+          } else if (houss.property_object.property_type?.en === "commercialproperty") {
             iconee = Commercialproperty;
             imagee = ImagCommercials;
-          } else if (houss.property_type?.en === "house") {
+          } else if (houss.property_object.property_type?.en === "house") {
             iconee = House;
             imagee = ImagHouse;
-          } else if (houss.property_type?.en === "building") {
+          } else if (houss.property_object.property_type?.en === "building") {
             iconee = BuildingIcon;
             imagee = ImagBuilding;
           } else {
             iconee = Land;
             imagee = ImagLand;
           }
-          const formattedNumber = formatNumber(houss.property.price);
-          const truncatedText = truncateText(houss.property.description, 30);
-          const truncatedTitle = truncateText(houss.property.title, 20);
+          const formattedNumber = formatNumber(houss.price);
+          const truncatedText = truncateText(houss.description, 30);
+          const truncatedTitle = truncateText(houss.title, 20);
 
           return (
             <Marker
-              key={houss.property.id}
+              key={houss.id}
               icon={
                 new L.Icon({
                   iconUrl: iconee.src,
@@ -162,14 +163,14 @@ export default function Map({ building }: { building: any[] }) {
             >
               <Popup className="w-72 font-cairo">
                 <Link
-                  href={`/propertys/${houss.property.id}`}
+                  href={`/propertys/${houss.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
                   <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col mt-5 justify-center items-center ">
                     <Image
                       src={
-                        houss.property.photos.length !== 0
-                          ? houss.property.photos[0].photo
+                        houss.photos.length !== 0
+                          ? houss.photos[0].photo
                           : imagee[0].photo
                       }
                       width={150}

@@ -38,6 +38,8 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { handleDeleteBuilding } from "@/components/sweetalert/handleDeleteBuilding";
 import NotFound from "@/app/not-found";
+import BuildingContent from "@/components/Buildings/BuildingContent";
+import BuildingSContent from "@/components/Buildings/BuildingSContent";
 
 export default function Buildin(props: any) {
   const page = props.params.building[0];
@@ -296,6 +298,22 @@ export default function Buildin(props: any) {
       <div className="flex justify-center items-center mt-10 mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
         <MapLoade building={build} />
       </div>
+      <div className={`${isBuilding ? "block" : "hidden"}`}>
+        <h1 className="text-2xl mt-10 bg-sidpar xl:mr-[-8px] rounded-t-md py-2 px-3 w-max">
+          الموجودة ضمن العقار
+        </h1>
+        <div className="bg-sidpar rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
+          <BuildingContent property={building} />
+        </div>
+      </div>
+      <div className={`${isBuilding ? "hidden" : "block"}`}>
+        <h1 className="text-2xl mt-10 bg-sidpar xl:mr-[-8px] rounded-t-md py-2 px-3 w-max">
+          عقارات مشابها
+        </h1>
+        <div className="bg-sidpar rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
+          <BuildingSContent property={building} />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
