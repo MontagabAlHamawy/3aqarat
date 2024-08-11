@@ -298,16 +298,16 @@ export default function Buildin(props: any) {
       <div className="flex justify-center items-center mt-10 mx-2 xl:mx-0 xl:ml-4 rounded-md relative cursor-pointer">
         <MapLoade building={build} />
       </div>
-      <div className={`${isBuilding ? "block" : "hidden"} text-sm xl:text-lg`}>
-        <h1 className="text-2xl mt-10 bg-sidpar xl:mr-[-8px] rounded-t-md py-2 px-3 w-max">
+      <div className={`${isBuilding ? "block" : "hidden"}`}>
+        <h1 className="text-base xl:text-xl mt-10 bg-sidpar xl:mr-[-8px] rounded-t-md py-2 px-3 w-max">
           الموجودة ضمن العقار
         </h1>
         <div className="bg-sidpar rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">
           <BuildingContent property={building} />
         </div>
       </div>
-      <div className={`${isBuilding ? "hidden" : "block"} text-sm xl:text-lg`}>
-        <h1 className="text-2xl mt-10 bg-sidpar xl:mr-[-8px] rounded-t-md py-2 px-3 w-max">
+      <div className={`${isBuilding ? "hidden" : "block"} `}>
+        <h1 className="text-base xl:text-xl mt-10 bg-sidpar xl:mr-[-8px] rounded-t-md py-2 px-3 w-max">
           عقارات مشابها
         </h1>
         <div className="bg-sidpar rounded-b-md rounded-tl-md py-10 gap-x-5 gap-y-5 xl:gap-x-10 xl:gap-y-10 w-full px-4 xl:mx-[-8px]">

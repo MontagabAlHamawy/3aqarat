@@ -1,23 +1,13 @@
 "use client";
-import { ImagBuilding, ImagCommercials } from "../links";
-import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import apiUrl from "@/utils/apiConfig";
-import { GetToken } from "@/utils/API";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import Slide from "../Slide/Slide";
-import Image from "next/image";
 import { PiPlusCircleDuotone, PiTrashDuotone } from "react-icons/pi";
 import { useRef, useState } from "react";
-import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
+import Image from "next/image";
 
-export default function Commercialproperty({ apartment }: any) {
+export default function Commercialproperty() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { showConfirmation } = useConfirmationAlert();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -30,77 +20,16 @@ export default function Commercialproperty({ apartment }: any) {
       reader.readAsDataURL(file);
     }
   };
+
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
-  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      title: apartment.title,
-      description: apartment.description,
-      tabu: apartment.tabu,
-      area: apartment.area,
-      direction: apartment.property_object.direction,
-      floor_number: apartment.property_object.floor_number,
-      price: apartment.price,
-    },
-  });
-
-  const tabuMapping: any = {
-    "طابو أخضر ( السجل العقاري )": 1,
-    "إقرار محكمة": 2,
-    "كاتب عدل": 3,
-    "حكم قطعي": 4,
-    "سجل مؤقت": 5,
-  };
-  const onSubmit = async (data: any) => {
-    await showConfirmation(async () => {
-      let token = GetToken();
-      let headersList = {
-        Accept: "*/*",
-        Authorization: `JWT ${token}`,
-        "Content-Type": "application/json",
-      };
-
-      let bodyContent = {
-        property: {
-          area: Number(data.area),
-          price: Number(data.price),
-          title: data.title,
-          description: data.description,
-          tabu: tabuMapping[data.tabu],
-        },
-        direction: data.direction,
-        floor_number: data.floor_number,
-      };
-
-      try {
-        await axios.patch(
-          `${apiUrl}/commercial-properties/${apartment.id}/`,
-          bodyContent,
-          {
-            headers: headersList,
-          }
-        );
-        toast.success("تم تعديل البيانات بنجاح");
-        router.replace(`/buildings/${apartment.id}`);
-      } catch (error) {
-        console.error("Error updating data:", error);
-        toast.error("فشل في ارسال البيانات");
-      }
-    });
-  };
-
-  let imagee: any;
-  // if (apartment.photos.length !== 0) {
-    imagee = apartment.photos;
-  // } else {
-  //   imagee = ImagCommercials;
-  // }
+  } = useForm();
 
   const directionOptions = [
     { value: "N", label: "شمالي" },
@@ -112,45 +41,23 @@ export default function Commercialproperty({ apartment }: any) {
     { value: "SE", label: "جنوبي شرقي" },
     { value: "SW", label: "جنوبي غربي" },
   ];
-  let im = false;
-  if (apartment.photos.length === 0 || apartment.photos.length === 1) {
-    im = false;
-  } else {
-    im = true;
-  }
+
+  const onSubmit = (data: any) => {
+    console.log("Form Data:", data);
+    alert("Form Submitted! Check the console for data.");
+  };
 
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
+    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
-          {imagee.map((index: any, id: any) => {
-         
-            return (
-              <div key={id} className="relative">
-                <Image
-                  src={index.photo}
-                  width={300}
-                  height={0}
-                  alt={`Gallery Image`}
-                  className=" rounded-md"
-                />
-                <button
-                  className={`${
-                    imagee === ImagCommercials ? "hidden" : ""
-                  }p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-                >
-                  <PiTrashDuotone size={30} />
-                </button>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-2 mt-7 mx-2 gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6">
           <div className={`relative ${photo === "" ? "hidden" : "block"}`}>
             <Image
               src={photo}
               width={300}
               height={0}
               alt="user"
-              className={` rounded-md`}
+              className={`rounded-md`}
             />
             <button
               onClick={() => setPhoto("")}
@@ -177,9 +84,9 @@ export default function Commercialproperty({ apartment }: any) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-start items-start"
       >
-        <div className="w-full ">
-          <div className="mb-4 w-full ">
-            <label className="block text-white font-semibold text-sm mb-2 ">
+        <div className="w-full">
+          <div className="mb-4 w-full">
+            <label className="block text-white font-semibold text-sm mb-2">
               العنوان :
             </label>
             <input
@@ -211,6 +118,7 @@ export default function Commercialproperty({ apartment }: any) {
               className="w-80 xl:w-full h-11 border pr-2 rounded-lg bg-section border-section text-white"
               {...register("tabu", { required: true })}
             >
+              <option value="">اختر نوع الملكية</option>
               <option value="طابو أخضر ( السجل العقاري )">
                 طابو أخضر ( السجل العقاري )
               </option>
@@ -237,7 +145,7 @@ export default function Commercialproperty({ apartment }: any) {
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
-            <div className="mb-4 ">
+            <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 الإتجاه :
               </label>
@@ -245,6 +153,7 @@ export default function Commercialproperty({ apartment }: any) {
                 className="w-40 xl:w-52 h-10 border pr-2 rounded-lg bg-section border-section text-white"
                 {...register("direction", { required: true })}
               >
+                <option value="">اختر الاتجاه</option>
                 {directionOptions.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -295,7 +204,7 @@ export default function Commercialproperty({ apartment }: any) {
             type="submit"
             className="w-full h-11 border p-2 rounded-md  bg-accent border-accent hover:bg-accent-hover text-white"
           >
-            تحديث البيانات
+            إرسال البيانات
           </button>
         </div>
       </form>

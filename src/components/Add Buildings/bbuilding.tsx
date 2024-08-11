@@ -1,22 +1,13 @@
 "use client";
-import { ImagBuilding } from "../links";
-import EditBSlide from "../Slide/EditBSlide";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import apiUrl from "@/utils/apiConfig";
-import { GetToken } from "@/utils/API";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { PiTrashDuotone, PiPlusCircleDuotone } from "react-icons/pi";
 import { useRef, useState } from "react";
-import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
+import { PiTrashDuotone, PiPlusCircleDuotone } from "react-icons/pi";
+import Image from "next/image";
 
-export default function BBuilding({ building }: any) {
+export default function BBuilding() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { showConfirmation } = useConfirmationAlert();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -29,76 +20,16 @@ export default function BBuilding({ building }: any) {
       reader.readAsDataURL(file);
     }
   };
+
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
-  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      title: building.title,
-      description: building.description,
-      tabu: building.tabu,
-      area: building.area,
-      num_of_apartments: building.property_object.num_of_apartments,
-      num_of_floors: building.property_object.num_of_floors,
-      direction: building.property_object.direction,
-      price: building.price,
-    },
-  });
-
-  const tabuMapping: any = {
-    "طابو أخضر ( السجل العقاري )": 1,
-    "إقرار محكمة": 2,
-    "كاتب عدل": 3,
-    "حكم قطعي": 4,
-    "سجل مؤقت": 5,
-  };
-
-  const onSubmit = async (data: any) => {
-    await showConfirmation(async () => {
-      let token = GetToken();
-      let headersList = {
-        Accept: "*/*",
-        Authorization: `JWT ${token}`,
-        "Content-Type": "application/json",
-      };
-
-      let bodyContent = {
-        property: {
-          area: Number(data.area),
-          price: Number(data.price),
-          title: data.title,
-          description: data.description,
-          tabu: tabuMapping[data.tabu],
-        },
-        num_of_apartments: Number(data.num_of_apartments),
-        num_of_floors: Number(data.num_of_floors),
-        direction: data.direction,
-      };
-
-      try {
-        await axios.patch(`${apiUrl}/buildings/${building.id}/`, bodyContent, {
-          headers: headersList,
-        });
-        toast.success("تم تعديل البيانات بنجاح");
-        router.replace(`/buildings/${building.id}`);
-      } catch (error) {
-        console.error("Error updating data:", error);
-        toast.error("فشل في ارسال البيانات");
-      }
-    });
-  };
-
-  let imagee: any;
-  // if (building.photos.length !== 0) {
-    imagee = building.photos;
-  // } else {
-  //   imagee = ImagBuilding;
-  // }
+  } = useForm();
 
   const directionOptions = [
     { value: "N", label: "شمالي" },
@@ -110,45 +41,23 @@ export default function BBuilding({ building }: any) {
     { value: "SE", label: "جنوبي شرقي" },
     { value: "SW", label: "جنوبي غربي" },
   ];
-  let im = false;
-  if (building.photos.length === 0 || building.photos.length === 1) {
-    im = false;
-  } else {
-    im = true;
-  }
+
+  const onSubmit = (data: any) => {
+    console.log("Form Data:", data);
+    // هنا يمكنك معالجة البيانات أو إرسالها إلى API عند الحاجة
+  };
 
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
+    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
       <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
-          {imagee.map((index: any, id: any) => {
-           
-            return (
-              <div key={id} className="relative">
-                <Image
-                  src={index.photo}
-                  width={300}
-                  height={0}
-                  alt={`Gallery Image`}
-                  className="  object-center rounded-md cursor-pointer"
-                />
-                <button
-                  className={`${
-                    imagee === ImagBuilding ? "hidden" : ""
-                  } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-                >
-                  <PiTrashDuotone size={30} />
-                </button>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-2 mt-7 mx-2 gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6">
           <div className={`relative ${photo === "" ? "hidden" : "block"}`}>
             <Image
               src={photo}
               width={300}
               height={0}
               alt="user"
-              className={` rounded-md`}
+              className={`rounded-md`}
             />
             <button
               onClick={() => setPhoto("")}
@@ -175,9 +84,9 @@ export default function BBuilding({ building }: any) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-start items-start"
       >
-        <div className="w-full ">
-          <div className="mb-4 w-full ">
-            <label className="block text-white font-semibold text-sm mb-2 ">
+        <div className="w-full">
+          <div className="mb-4 w-full">
+            <label className="block text-white font-semibold text-sm mb-2">
               العنوان :
             </label>
             <input
@@ -209,6 +118,7 @@ export default function BBuilding({ building }: any) {
               className="w-80 xl:w-full h-11 border pr-2 rounded-lg bg-section border-section text-white"
               {...register("tabu", { required: true })}
             >
+              <option value="">اختر نوع الملكية</option>
               <option value="طابو أخضر ( السجل العقاري )">
                 طابو أخضر ( السجل العقاري )
               </option>
@@ -265,7 +175,7 @@ export default function BBuilding({ building }: any) {
                 <p className="text-red-500">هذا الحقل مطلوب</p>
               )}
             </div>
-            <div className="mb-4 ">
+            <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 الإتجاه :
               </label>
@@ -273,6 +183,7 @@ export default function BBuilding({ building }: any) {
                 className="w-40 xl:w-52 h-10 border pr-2 rounded-lg bg-section border-section text-white"
                 {...register("direction", { required: true })}
               >
+                <option value="">اختر الاتجاه</option>
                 {directionOptions.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -302,9 +213,9 @@ export default function BBuilding({ building }: any) {
         <div className="mb-4 flex justify-start items-center">
           <button
             type="submit"
-            className="w-full h-11 border p-2 rounded-md  bg-accent border-accent hover:bg-accent-hover text-white"
+            className="w-full h-11 border p-2 rounded-md bg-accent border-accent hover:bg-accent-hover text-white"
           >
-            تحديث البيانات
+            إضافة العقار
           </button>
         </div>
       </form>

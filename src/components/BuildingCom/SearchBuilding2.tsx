@@ -19,10 +19,9 @@ export default function SearchBuilding2({ bil }: any) {
   }
   return (
     <div>
-      {bil.map((house: any) => {
+      {bil.map((house: any) => {        
         let imageSrc = ImagBuilding;
-
-        switch (house.property_type?.en) {
+        switch (house.property_object.property_type?.en) {
           case "apartment":
             imageSrc = ImagApartment;
             break;

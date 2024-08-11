@@ -55,7 +55,7 @@ export default function AddBuilding(props: any) {
                     isCommercialproperty ? "إضافة محل تجاري جديد" : ""}
           </h1>
         </div>
-        {/* <div>
+        <div>
         <div className={`${isLand ? "block" : "hidden"}`}>
           <Land />
         </div>
@@ -71,7 +71,7 @@ export default function AddBuilding(props: any) {
         <div className={`${isHouse ? "block" : "hidden"}`}>
           <House />
         </div>
-      </div> */}
+      </div>
       </div>
     </>
   );
