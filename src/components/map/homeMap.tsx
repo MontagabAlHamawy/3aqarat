@@ -6,12 +6,11 @@ import {
   Marker,
   Popup,
   TileLayer,
+  useMap,
   useMapEvents,
 } from "react-leaflet";
 import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import Image from "next/image";
-import Link from "next/link";
 import MarkerIcon from "leaflet/dist/images/marker-icon.png";
 import MarkerShadow from "leaflet/dist/images/marker-shadow.png";
 import House from "../../../public/map/house.svg";
@@ -31,22 +30,62 @@ import {
   ImagLand,
   truncateText,
 } from "../links";
-import { PiInfinityDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
+import { PiMapPinLineDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
+import Image from "next/image";
+import Link from "next/link";
 
-function LocationMarker() {
-  const [position, setPosition] = useState<LatLngLiteral | null>(null);
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
+// مكون لمعالجة أحداث الخريطة
+function MapEventHandler({ locateUser }: { locateUser: boolean }) {
+  const map = useMap();
+  const [userPosition, setUserPosition] = useState<LatLngLiteral | null>(null);
+
+  useEffect(() => {
+    if (locateUser) {
+      map.locate({ setView: true, maxZoom: 16 });
+    }
+  }, [locateUser, map]);
+
+  useMapEvents({
     locationfound(e) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
+      setUserPosition(e.latlng);
+      map.setView(e.latlng, map.getZoom(), { animate: true });
     },
-    locationerror(e) {
+    locationerror() {
       mapErrorSweet();
     },
   });
+
+  return userPosition ? (
+    <Marker
+      position={userPosition}
+      icon={
+        new L.Icon({
+          iconUrl: MarkerIcon.src,
+          iconRetinaUrl: MarkerIcon.src,
+          iconSize: [21, 35],
+          iconAnchor: [12.5, 41],
+          popupAnchor: [0, -41],
+          shadowUrl: MarkerShadow.src,
+          shadowSize: [41, 41],
+        })
+      }
+    >
+      <Popup>
+        <p className="text-accent">You are here</p>
+      </Popup>
+    </Marker>
+  ) : null;
+}
+
+function LocationMarker() {
+  const [position, setPosition] = useState<LatLngLiteral | null>(null);
+  const map = useMap();
+
+  useEffect(() => {
+    if (position) {
+      map.flyTo(position, map.getZoom());
+    }
+  }, [position, map]);
 
   return position === null ? null : (
     <Marker
@@ -74,6 +113,7 @@ export default function HomeMap({ building }: { building: any[] }) {
   const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
     {}
   );
+  const [locateUser, setLocateUser] = useState(false);
 
   useEffect(() => {
     const newLocations: { [key: string]: LatLngLiteral } = {};
@@ -95,10 +135,15 @@ export default function HomeMap({ building }: { building: any[] }) {
     return <MapLoade />;
   }
 
+  const handleLocateUser = () => {
+    setLocateUser(true);
+    setTimeout(() => setLocateUser(false), 100); // إعادة تعيين locateUser بعد فترة قصيرة
+  };
+
   return (
-    <div className="z-30 font-cairo">
+    <div className="relative z-30 font-cairo">
       <MapContainer
-        className="w-[98vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md "
+        className="w-[98vw] h-[300px] md:w-[95vw] md:h-[60vh] xl:w-[90vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: 34.6985, lng: 36.7237 }}
         zoom={7}
         scrollWheelZoom={false}
@@ -107,6 +152,7 @@ export default function HomeMap({ building }: { building: any[] }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <MapEventHandler locateUser={locateUser} />
         <LocationMarker />
         {building.map((houss) => {
           const location = locations[houss.id];
@@ -152,12 +198,12 @@ export default function HomeMap({ building }: { building: any[] }) {
               }
               position={location}
             >
-              <Popup className="w-72 font-cairo ">
+              <Popup className="w-72 font-cairo">
                 <Link
                   href={`/propertys/${houss.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
-                  <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col mt-5 justify-center items-center ">
+                  <div className="relative bg-body rounded-md h-24 min-w-32 flex flex-col mt-5 justify-center items-center">
                     <Image
                       src={
                         houss.photos.length !== 0
@@ -167,7 +213,7 @@ export default function HomeMap({ building }: { building: any[] }) {
                       width={150}
                       height={100}
                       alt="montagab"
-                      className=" rounded-md z-20 h-full"
+                      className="rounded-md z-20 h-full"
                     />
                     <PiSpinnerGapDuotone size={20} className="text-accent !z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
                   </div>
@@ -190,6 +236,13 @@ export default function HomeMap({ building }: { building: any[] }) {
           );
         })}
       </MapContainer>
+
+      <div
+        onClick={handleLocateUser}
+        className="absolute bottom-4 right-4 z-50 p-2 bg-accent text-white rounded-md shadow-md cursor-pointer"
+      >
+        <PiMapPinLineDuotone size={22} />
+      </div>
     </div>
   );
 }

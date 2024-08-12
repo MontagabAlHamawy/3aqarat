@@ -6,12 +6,11 @@ import {
   Marker,
   Popup,
   TileLayer,
+  useMap,
   useMapEvents,
 } from "react-leaflet";
 import { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import Image from "next/image";
-import Link from "next/link";
 import MarkerIcon from "leaflet/dist/images/marker-icon.png";
 import MarkerShadow from "leaflet/dist/images/marker-shadow.png";
 import House from "../../../public/map/house.svg";
@@ -20,8 +19,8 @@ import Apartment from "../../../public/map/flar.svg";
 import Land from "../../../public/map/land.svg";
 import Commercialproperty from "../../../public/map/store.svg";
 import Tower from "../../../public/map/tower.svg";
-import { PiInfinityDuotone, PiMapPinDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
 import MapLoade from "../loade/MapLoade";
+import mapErrorSweet from "../sweetalert/mapErrorSweet";
 import {
   formatNumber,
   ImagApartment,
@@ -31,23 +30,62 @@ import {
   ImagLand,
   truncateText,
 } from "../links";
-import mapErrorSweet from "../sweetalert/mapErrorSweet";
+import { PiMapPinLineDuotone, PiSpinnerGapDuotone } from "react-icons/pi";
+import Image from "next/image";
+import Link from "next/link";
 
-function LocationMarker() {
-  const [position, setPosition] = useState<LatLngLiteral | null>(null);
+// مكون لمعالجة أحداث الخريطة
+function MapEventHandler({ locateUser }: { locateUser: boolean }) {
+  const map = useMap();
+  const [userPosition, setUserPosition] = useState<LatLngLiteral | null>(null);
 
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
+  useEffect(() => {
+    if (locateUser) {
+      map.locate({ setView: true, maxZoom: 16 });
+    }
+  }, [locateUser, map]);
+
+  useMapEvents({
     locationfound(e) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
+      setUserPosition(e.latlng);
+      map.setView(e.latlng, map.getZoom(), { animate: true });
     },
-    locationerror(e) {
+    locationerror() {
       mapErrorSweet();
     },
   });
+
+  return userPosition ? (
+    <Marker
+      position={userPosition}
+      icon={
+        new L.Icon({
+          iconUrl: MarkerIcon.src,
+          iconRetinaUrl: MarkerIcon.src,
+          iconSize: [21, 35],
+          iconAnchor: [12.5, 41],
+          popupAnchor: [0, -41],
+          shadowUrl: MarkerShadow.src,
+          shadowSize: [41, 41],
+        })
+      }
+    >
+      <Popup>
+        <p className="text-accent">You are here</p>
+      </Popup>
+    </Marker>
+  ) : null;
+}
+
+function LocationMarker() {
+  const [position, setPosition] = useState<LatLngLiteral | null>(null);
+  const map = useMap();
+
+  useEffect(() => {
+    if (position) {
+      map.flyTo(position, map.getZoom());
+    }
+  }, [position, map]);
 
   return position === null ? null : (
     <Marker
@@ -71,42 +109,39 @@ function LocationMarker() {
   );
 }
 
-export default function Map({ building }: { building: any[] }) {
+export default function HomeMap({ building }: { building: any[] }) {
   const [locations, setLocations] = useState<{ [key: string]: LatLngLiteral }>(
     {}
   );
+  const [locateUser, setLocateUser] = useState(false);
 
   useEffect(() => {
-    if (building) {
-      const newLocations: { [key: string]: LatLngLiteral } = {};
+    const newLocations: { [key: string]: LatLngLiteral } = {};
 
-      building.forEach((houss) => {
-        if (houss.address && houss.address.geo_address) {
-          const coords = houss.address.geo_address.split(", ");
+    building?.forEach((houss) => {
+      if (houss.address.geo_address) {
+        const [x, y] = houss.address.geo_address.split(", ");
+        const lat = x === "x" ? 34.69498 : parseFloat(x);
+        const lng = y === "y" ? 36.7237 : parseFloat(y);
 
-          if (coords.length === 2) {
-            const lat = parseFloat(coords[0]) || 34.69498; // Default latitude
-            const lng = parseFloat(coords[1]) || 36.7237; // Default longitude
+        newLocations[houss.id] = { lat, lng };
+      }
+    });
 
-            newLocations[houss.id] = { lat, lng };
-          } else {
-            console.warn(
-              `Invalid geo_address format for house ID ${houss.id}: ${houss.address.geo_address}`
-            );
-          }
-        }
-      });
-
-      setLocations(newLocations);
-    }
+    setLocations(newLocations);
   }, [building]);
 
   if (!building) {
     return <MapLoade />;
   }
 
+  const handleLocateUser = () => {
+    setLocateUser(true);
+    setTimeout(() => setLocateUser(false), 100); // إعادة تعيين locateUser بعد فترة قصيرة
+  };
+
   return (
-    <div className="z-30 mt-10 xl:mt-[-5px] font-cairo">
+    <div className="relative z-30 mt-10 xl:mt-[-5px] font-cairo">
       <MapContainer
         className="w-full h-[300px] md:h-[60vh] xl:w-[62vw] xl:h-[68vh] z-10 rounded-md"
         center={{ lat: 34.6985, lng: 36.7237 }}
@@ -117,9 +152,9 @@ export default function Map({ building }: { building: any[] }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <MapEventHandler locateUser={locateUser} />
         <LocationMarker />
         {building.map((houss) => {
-           console.log("houss: ",houss);
           const location = locations[houss.id];
 
           if (!location) return null;
@@ -127,16 +162,18 @@ export default function Map({ building }: { building: any[] }) {
           let iconee;
           let imagee = ImagBuilding;
 
-          if (houss.property_object.property_type?.en === "apartment") {
+          if (houss.property_object?.property_type?.en === "apartment") {
             iconee = Apartment;
             imagee = ImagApartment;
-          } else if (houss.property_object.property_type?.en === "commercialproperty") {
+          } else if (
+            houss.property_object?.property_type?.en === "commercialproperty"
+          ) {
             iconee = Commercialproperty;
             imagee = ImagCommercials;
-          } else if (houss.property_object.property_type?.en === "house") {
+          } else if (houss.property_object?.property_type?.en === "house") {
             iconee = House;
             imagee = ImagHouse;
-          } else if (houss.property_object.property_type?.en === "building") {
+          } else if (houss.property_object?.property_type?.en === "building") {
             iconee = BuildingIcon;
             imagee = ImagBuilding;
           } else {
@@ -166,7 +203,7 @@ export default function Map({ building }: { building: any[] }) {
                   href={`/propertys/${houss.id}`}
                   className="flex flex-col font-cairo justify-center gap-0 items-center mx-[-20px]"
                 >
-                  <div className=" relative bg-body rounded-md h-24 min-w-32 flex flex-col mt-5 justify-center items-center ">
+                  <div className="relative bg-body rounded-md h-24 min-w-32 flex flex-col mt-5 justify-center items-center">
                     <Image
                       src={
                         houss.photos.length !== 0
@@ -181,9 +218,7 @@ export default function Map({ building }: { building: any[] }) {
                     <PiSpinnerGapDuotone size={20} className="text-accent !z-0 absolute animate-waving-hand2 opacity-100 transform translate-y-0 duration-100" />
                   </div>
                   <div className="flex flex-col justify-center items-center mt-[-10px]">
-                    <p className="text-lg xl:text-xl text-accent">
-                      {truncatedTitle}
-                    </p>
+                    <p className="text-lg xl:text-xl text-accent">{truncatedTitle}</p>
                     <div className="flex flex-row justify-between items-center mt-[-40px]">
                       <p className="text-white w-full text-center text-base font-thin">
                         {truncatedText}
@@ -199,6 +234,13 @@ export default function Map({ building }: { building: any[] }) {
           );
         })}
       </MapContainer>
+
+      <div
+        onClick={handleLocateUser}
+        className="absolute bottom-4 right-4 z-50 p-2 bg-accent text-white rounded-md shadow-md cursor-pointer"
+      >
+        <PiMapPinLineDuotone size={22} />
+      </div>
     </div>
   );
 }
