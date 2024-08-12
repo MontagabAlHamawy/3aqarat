@@ -217,7 +217,7 @@ export default function Apartment() {
               >
                 {city.map((c: any) => (
                   <option key={c.id} value={c.id}>
-                    {c.name}
+                    {c.name_ar}
                   </option>
                 ))}
               </select>
