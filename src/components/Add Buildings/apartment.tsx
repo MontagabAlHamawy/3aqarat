@@ -1,35 +1,51 @@
 "use client";
-import { PiTrashDuotone } from "react-icons/pi";
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { ApiCities, ApiOfferTypes, GetToken } from "@/utils/API";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import apiUrl from "@/utils/apiConfig";
+import { ApiCities, ApiOfferTypes, GetToken } from "@/utils/API";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { useConfirmationAlert } from "../sweetalert/useConfirmationAlert";
 import dynamic from "next/dynamic";
 const MapForProperty = dynamic(() => import("../map/MapForProperty"), {
   ssr: false,
 });
 
 export default function Apartment() {
-  const [offer, setOffer] = useState<any>([]);
-  const [city, setCity] = useState<any>([]);
+  const [offer, setOffer] = useState<any[]>([]);
+  const [city, setCity] = useState<any[]>([]);
   const [selectedOffer, setSelectedOffer] = useState<any>(1);
-  const [geoAddress, setGeoAddress] = useState<string | null>(null); // State to store geo address
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    area: "",
-    price: "",
-    rooms: "",
-    floorNumber: "",
-    direction: "N",
-    city: 1,
-    region: "",
-    street: "",
-    addressDescription: "",
-    duration: "",
-    tabu: 1,
+  const [geoAddress, setGeoAddress] = useState<string | null>(null);
+  const { showConfirmation } = useConfirmationAlert();
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+    control
+  } = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+      area: "",
+      price: "",
+      rooms: "",
+      floorNumber: "",
+      direction: "N",
+      city: 1,
+      offer: 1,
+      region: "",
+      street: "",
+      addressDescription: "",
+      duration: "",
+      tabu: 1,
+    },
   });
 
+  const formData = watch();
 
   useEffect(() => {
     async function fetchData() {
@@ -45,98 +61,82 @@ export default function Apartment() {
     setSelectedOffer(Number(e.target.value));
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const onSubmit = async (data: any) => {
+    await showConfirmation(async () => {
+      let token = GetToken();
+      let headersList = {
+        Accept: "*/*",
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json",
+      };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Prepare data for API
-    const data = {
-      property: {
-        area: Number(formData.area),
-        price: Number(formData.price),
-        title: formData.title,
-        duration_in_months: selectedOffer === 1 ? 0 : Number(formData.duration),
-        description: formData.description,
-        tabu: formData.tabu,
-        offer: selectedOffer,
-        address: {
-          region: formData.region,
-          street: formData.street,
-          description: formData.addressDescription,
-          geo_address: geoAddress, // Set the geo address
-          city: Number(formData.city),
+      let bodyContent = {
+        property: {
+          area: Number(data.area),
+          price: Number(data.price),
+          title: data.title,
+          duration_in_months: selectedOffer === 1 ? 0 : Number(data.duration),
+          description: data.description,
+          tabu: data.tabu,
+          offer: selectedOffer,
+          address: {
+            region: data.region,
+            street: data.street,
+            description: data.addressDescription,
+            geo_address: geoAddress,
+            city: Number(data.city),
+          },
         },
-      },
-      number_of_rooms: Number(formData.rooms),
-      direction: formData.direction,
-      floor_number: Number(formData.floorNumber),
-    };
-    console.log("data: ", JSON.stringify(data));
+        number_of_rooms: Number(data.rooms),
+        direction: data.direction,
+        floor_number: Number(data.floorNumber),
+      };
 
-    let token = GetToken();
-    try {
-      // Send data to API
-      const response = await fetch(`${apiUrl}/apartments/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `JWT ${token}`
-        },
-        body: JSON.stringify(data),
-      });
+      try {
+        const response = await axios.post(`${apiUrl}/apartments/`, bodyContent, {
+          headers: headersList,
+        });
 
-      if (response.ok) {
-        alert("تم إضافة الشقة بنجاح!");
-      } else {
-        alert("حدث خطأ أثناء إضافة الشقة.");
+        if (response.status === 201) {
+          toast.success("تم إضافة الشقة بنجاح!");
+          router.push(`/propertys/${response.data.property.id}`);
+        } else {
+          toast.error("حدث خطأ أثناء إضافة الشقة.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("حدث خطأ أثناء إضافة الشقة.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("حدث خطأ أثناء إضافة الشقة.");
-    }
+    });
   };
 
   return (
     <div className="">
-      <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
+      <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit(onSubmit)}>
         <div className="">
-          <div className="mb-4 ">
-            <label className="block text-white font-semibold text-sm mb-2">
-              العنوان :
-            </label>
+          <div className="mb-4">
+            <label className="block text-white font-semibold text-sm mb-2">العنوان :</label>
             <input
               type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
+              {...register("title", { required: "هذا الحقل مطلوب" })}
               placeholder="العنوان"
               className="w-80 xl:w-[850px] border p-2 rounded-lg bg-section border-section text-white"
             />
+            {errors.title && <p className="text-red-500">{errors.title.message}</p>}
           </div>
           <div className="mb-4">
-            <label className="block text-white font-semibold text-sm mb-2">
-              الوصف :
-            </label>
+            <label className="block text-white font-semibold text-sm mb-2">الوصف :</label>
             <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
+              {...register("description", { required: "هذا الحقل مطلوب" })}
               placeholder="الوصف"
               className="w-80 xl:w-[850px] border p-2 rounded-lg bg-section border-section text-white"
             />
+            {errors.description && <p className="text-red-500">{errors.description.message}</p>}
           </div>
           <div className="mb-4">
-            <label className="block text-white font-semibold text-sm mb-2">
-              الملكية :
-            </label>
+            <label className="block text-white font-semibold text-sm mb-2">الملكية :</label>
             <select
-              name="tabu"
-              value={formData.tabu}
-              onChange={handleInputChange}
+              {...register("tabu", { required: "هذا الحقل مطلوب" })}
               className="w-80 xl:w-[850px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
             >
               <option value="1">طابو أخضر ( السجل العقاري )</option>
@@ -145,57 +145,45 @@ export default function Apartment() {
               <option value="4">حكم قطعي</option>
               <option value="5">سجل مؤقت</option>
             </select>
+            {errors.tabu && <p className="text-red-500">{errors.tabu.message}</p>}
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                المساحة :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">المساحة :</label>
               <input
                 type="text"
-                name="area"
-                value={formData.area}
-                onChange={handleInputChange}
+                {...register("area", { required: "هذا الحقل مطلوب" })}
                 placeholder="المساحة"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
+              {errors.area && <p className="text-red-500">{errors.area.message}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                عدد الغرف :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">عدد الغرف :</label>
               <input
                 type="text"
-                name="rooms"
-                value={formData.rooms}
-                onChange={handleInputChange}
+                {...register("rooms", { required: "هذا الحقل مطلوب" })}
                 placeholder="عدد الغرف"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
+              {errors.rooms && <p className="text-red-500">{errors.rooms.message}</p>}
             </div>
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                رقم الطابق :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">رقم الطابق :</label>
               <input
                 type="text"
-                name="floorNumber"
-                value={formData.floorNumber}
-                onChange={handleInputChange}
+                {...register("floorNumber", { required: "هذا الحقل مطلوب" })}
                 placeholder="الطابق الأرضي 0"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
+              {errors.floorNumber && <p className="text-red-500">{errors.floorNumber.message}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2 ">
-                الاتجاه :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">الاتجاه :</label>
               <select
-                name="direction"
-                value={formData.direction}
-                onChange={handleInputChange}
+                {...register("direction", { required: "هذا الحقل مطلوب" })}
                 className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
               >
                 <option value="N">شمالي</option>
@@ -207,30 +195,24 @@ export default function Apartment() {
                 <option value="SE">جنوبي شرقي</option>
                 <option value="SW">جنوبي غربي</option>
               </select>
+              {errors.direction && <p className="text-red-500">{errors.direction.message}</p>}
             </div>
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                السعر :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">السعر :</label>
               <input
                 type="text"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
+                {...register("price", { required: "هذا الحقل مطلوب" })}
                 placeholder="السعر"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
+              {errors.price && <p className="text-red-500">{errors.price.message}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                المدينة :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">المدينة :</label>
               <select
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
+                {...register("city", { required: "هذا الحقل مطلوب" })}
                 className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
               >
                 {city.map((c: any) => (
@@ -239,57 +221,48 @@ export default function Apartment() {
                   </option>
                 ))}
               </select>
+              {errors.city && <p className="text-red-500">{errors.city.message}</p>}
             </div>
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                المنطقة :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">المنطقة :</label>
               <input
                 type="text"
-                name="region"
-                value={formData.region}
-                onChange={handleInputChange}
+                {...register("region", { required: "هذا الحقل مطلوب" })}
                 placeholder="المنطقة"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
+              {errors.region && <p className="text-red-500">{errors.region.message}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                الشارع :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">الشارع :</label>
               <input
                 type="text"
-                name="street"
-                value={formData.street}
-                onChange={handleInputChange}
+                {...register("street", { required: "هذا الحقل مطلوب" })}
                 placeholder="الشارع"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
+              {errors.street && <p className="text-red-500">{errors.street.message}</p>}
             </div>
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                أقرب نقطة :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">أقرب نقطة :</label>
               <input
                 type="text"
-                name="addressDescription"
-                value={formData.addressDescription}
-                onChange={handleInputChange}
+                {...register("addressDescription", { required: "هذا الحقل مطلوب" })}
                 placeholder="أقرب نقطة "
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
+              {errors.addressDescription && <p className="text-red-500">{errors.addressDescription.message}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                نوع العرض :
-              </label>
+              <label className="block text-white font-semibold text-sm mb-2">نوع العرض :</label>
               <select
+                {...register("offer", { required: "هذا الحقل مطلوب" })}
                 value={selectedOffer}
-                onChange={handleOfferChange}
+                onChange={(e) => setSelectedOffer(Number(e.target.value))}
                 className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
               >
                 {offer.map((o: any) => (
@@ -298,13 +271,13 @@ export default function Apartment() {
                   </option>
                 ))}
               </select>
+              {errors.offer && <p className="text-red-500">{errors.offer.message}</p>}
             </div>
-
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className={`${selectedOffer === 1 ? "hidden" : ""} mb-4`}>
               <label className="block text-white font-semibold text-sm mb-2">
-                مدة {selectedOffer === 2 ? "الإجار" : "الرهن"} :{" "}
+                مدة {selectedOffer === 2 ? "الإيجار" : "الرهن"} :{" "}
                 <span className="text-gray-400 text-sm">
                   {" "}
                   {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
@@ -312,11 +285,11 @@ export default function Apartment() {
               </label>
               <input
                 type="text"
+                {...register("duration", { required: selectedOffer === 2 ? "هذا الحقل مطلوب" : false })}
                 placeholder="مدة العرض"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
-
               />
-
+              {errors.duration && <p className="text-red-500">{errors.duration.message}</p>}
             </div>
           </div>
         </div>

@@ -9,10 +9,10 @@ export function useConfirmationAlert() {
     try {
       const result = await MySwal.fire({
         title: "هل أنت متأكد؟",
-        text: "هل تريد تعديل المعلومات؟",
+        text: "هل تريد إرسال المعلومات؟",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "تعديل المعلومات",
+        confirmButtonText: "إرسال المعلومات",
         cancelButtonText: "تراجع",
         customClass: {
           confirmButton:
