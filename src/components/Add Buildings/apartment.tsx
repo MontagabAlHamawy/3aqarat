@@ -3,8 +3,11 @@ import { PiTrashDuotone } from "react-icons/pi";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ApiCities, ApiOfferTypes, GetToken } from "@/utils/API";
-import MapForProperty from "../map/MapForProperty";
 import apiUrl from "@/utils/apiConfig";
+import dynamic from "next/dynamic";
+const MapForProperty = dynamic(() => import("../map/MapForProperty"), {
+  ssr: false,
+});
 
 export default function Apartment() {
   const [offer, setOffer] = useState<any>([]);
