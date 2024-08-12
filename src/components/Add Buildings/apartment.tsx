@@ -91,6 +91,8 @@ export default function Apartment() {
         direction: data.direction,
         floor_number: Number(data.floorNumber),
       };
+      console.log("bodyContent: ", bodyContent);
+
 
       try {
         const response = await axios.post(`${apiUrl}/apartments/`, bodyContent, {
