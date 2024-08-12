@@ -1,93 +1,117 @@
 "use client";
-import { PiPlusCircleDuotone, PiTrashDuotone } from "react-icons/pi";
-import { useRef, useState } from "react";
+import { PiTrashDuotone } from "react-icons/pi";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ApiCities, ApiOfferTypes, GetToken } from "@/utils/API";
+import MapForProperty from "../map/MapForProperty";
+import apiUrl from "@/utils/apiConfig";
 
 export default function Apartment() {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [photos, setPhotos] = useState<string[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [offer, setOffer] = useState<any>([]);
+  const [city, setCity] = useState<any>([]);
+  const [selectedOffer, setSelectedOffer] = useState<any>(1);
+  const [geoAddress, setGeoAddress] = useState<string | null>(null); // State to store geo address
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    area: "",
+    price: "",
+    rooms: "",
+    floorNumber: "",
+    direction: "N",
+    city: 1,
+    region: "",
+    street: "",
+    addressDescription: "",
+    duration: "",
+    tabu: 1,
+  });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files ? Array.from(e.target.files) : [];
-    setSelectedFiles(files);
-    const fileReaders = files.map((file) => {
-      const reader = new FileReader();
-      return new Promise<string>((resolve) => {
-        reader.onload = () => resolve(reader.result as string);
-        reader.readAsDataURL(file);
+
+  useEffect(() => {
+    async function fetchData() {
+      const offerData = await ApiOfferTypes();
+      const City = await ApiCities();
+      setOffer(offerData);
+      setCity(City);
+    }
+    fetchData();
+  }, []);
+
+  const handleOfferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOffer(Number(e.target.value));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Prepare data for API
+    const data = {
+      property: {
+        area: Number(formData.area),
+        price: Number(formData.price),
+        title: formData.title,
+        duration_in_months: selectedOffer === 1 ? 0 : Number(formData.duration),
+        description: formData.description,
+        tabu: formData.tabu,
+        offer: selectedOffer,
+        address: {
+          region: formData.region,
+          street: formData.street,
+          description: formData.addressDescription,
+          geo_address: geoAddress, // Set the geo address
+          city: Number(formData.city),
+        },
+      },
+      number_of_rooms: Number(formData.rooms),
+      direction: formData.direction,
+      floor_number: Number(formData.floorNumber),
+    };
+    console.log("data: ", JSON.stringify(data));
+
+    let token = GetToken();
+    try {
+      // Send data to API
+      const response = await fetch(`${apiUrl}/apartments/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `JWT ${token}`
+        },
+        body: JSON.stringify(data),
       });
-    });
-    Promise.all(fileReaders).then((loadedPhotos) => setPhotos(loadedPhotos));
+
+      if (response.ok) {
+        alert("تم إضافة الشقة بنجاح!");
+      } else {
+        alert("حدث خطأ أثناء إضافة الشقة.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("حدث خطأ أثناء إضافة الشقة.");
+    }
   };
-
-  const handleIconClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const directionOptions = [
-    { value: "N", label: "شمالي" },
-    { value: "E", label: "شرقي" },
-    { value: "S", label: "جنوبي" },
-    { value: "W", label: "غربي" },
-    { value: "NE", label: "شمالي شرقي" },
-    { value: "NW", label: "شمالي غربي" },
-    { value: "SE", label: "جنوبي شرقي" },
-    { value: "SW", label: "جنوبي غربي" },
-  ];
-
-  const cities = [
-    { id: 1, name: "مدينة 1" },
-    { id: 2, name: "مدينة 2" },
-    { id: 3, name: "مدينة 3" },
-  ];
 
   return (
-    <div className="flex flex-col xl:flex-row justify-center xl:justify-start items-center xl:items-start mt-10 gap-x-2 xl:gap-4">
-      <div>
-        <div className="flex flex-wrap items-start gap-2">
-          {photos.map((photo, index) => (
-            <div key={index} className="relative">
-              <Image
-                src={photo}
-                width={300}
-                height={200}
-                alt="user"
-                className="rounded-md"
-              />
-              <button
-                onClick={() => setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index))}
-                className="p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1"
-              >
-                <PiTrashDuotone size={30} />
-              </button>
-            </div>
-          ))}
-          <button
-            onClick={handleIconClick}
-            className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
-          >
-            <PiPlusCircleDuotone size={50} />
-          </button>
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            multiple
-            onChange={handleFileChange}
-          />
-        </div>
-      </div>
-      <form className="flex flex-col justify-start items-start">
-        <div className="w-full">
-          <div className="mb-4 w-full">
+    <div className="">
+      <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
+        <div className="">
+          <div className="mb-4 ">
             <label className="block text-white font-semibold text-sm mb-2">
               العنوان :
             </label>
             <input
               type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
               placeholder="العنوان"
-              className="w-80 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] border p-2 rounded-lg bg-section border-section text-white"
             />
           </div>
           <div className="mb-4">
@@ -95,8 +119,11 @@ export default function Apartment() {
               الوصف :
             </label>
             <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
               placeholder="الوصف"
-              className="w-80 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] border p-2 rounded-lg bg-section border-section text-white"
             />
           </div>
           <div className="mb-4">
@@ -104,26 +131,30 @@ export default function Apartment() {
               الملكية :
             </label>
             <select
-              className="w-80 xl:w-full h-11 border pr-2 rounded-lg bg-section border-section text-white"
+              name="tabu"
+              value={formData.tabu}
+              onChange={handleInputChange}
+              className="w-80 xl:w-[850px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
             >
-              <option value="طابو أخضر ( السجل العقاري )">
-                طابو أخضر ( السجل العقاري )
-              </option>
-              <option value="إقرار محكمة">إقرار محكمة</option>
-              <option value="كاتب عدل">كاتب عدل</option>
-              <option value="حكم قطعي">حكم قطعي</option>
-              <option value="سجل مؤقت">سجل مؤقت</option>
+              <option value="1">طابو أخضر ( السجل العقاري )</option>
+              <option value="2">إقرار محكمة</option>
+              <option value="3">كاتب عدل</option>
+              <option value="4">حكم قطعي</option>
+              <option value="5">سجل مؤقت</option>
             </select>
           </div>
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 المساحة :
               </label>
               <input
                 type="text"
+                name="area"
+                value={formData.area}
+                onChange={handleInputChange}
                 placeholder="المساحة"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
             <div className="mb-4">
@@ -132,68 +163,96 @@ export default function Apartment() {
               </label>
               <input
                 type="text"
+                name="rooms"
+                value={formData.rooms}
+                onChange={handleInputChange}
                 placeholder="عدد الغرف"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
           </div>
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
-                الطابق :
+                رقم الطابق :
+                <span className="text-gray-400 text-xs">
+                  ( الصفر يشير إلى الطابق الأرضي)
+                </span>
               </label>
               <input
                 type="text"
+                name="floorNumber"
+                value={formData.floorNumber}
+                onChange={handleInputChange}
                 placeholder="الطابق"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
+              <label className="block text-white font-semibold text-sm mb-2 ">
                 الاتجاه :
               </label>
               <select
-                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                name="direction"
+                value={formData.direction}
+                onChange={handleInputChange}
+                className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
               >
-                {directionOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                <option value="N">شمالي</option>
+                <option value="E">شرقي</option>
+                <option value="S">جنوبي</option>
+                <option value="W">غربي</option>
+                <option value="NE">شمالي شرقي</option>
+                <option value="NW">شمالي غربي</option>
+                <option value="SE">جنوبي شرقي</option>
+                <option value="SW">جنوبي غربي</option>
               </select>
             </div>
           </div>
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 السعر :
               </label>
               <input
                 type="text"
+                name="price"
+                value={formData.price}
+                onChange={handleInputChange}
                 placeholder="السعر"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
-                عدد الشهور :
+                المدينة :
               </label>
-              <input
-                type="text"
-                placeholder="عدد الشهور"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
-              />
+              <select
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+                className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
+              >
+                {city.map((c: any) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name_ar}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 المنطقة :
               </label>
               <input
                 type="text"
+                name="region"
+                value={formData.region}
+                onChange={handleInputChange}
                 placeholder="المنطقة"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
             <div className="mb-4">
@@ -202,59 +261,78 @@ export default function Apartment() {
               </label>
               <input
                 type="text"
+                name="street"
+                value={formData.street}
+                onChange={handleInputChange}
                 placeholder="الشارع"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
           </div>
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
-                وصف العنوان :
+                أقرب نقطة :
               </label>
               <input
                 type="text"
-                placeholder="وصف العنوان"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                name="addressDescription"
+                value={formData.addressDescription}
+                onChange={handleInputChange}
+                placeholder="أقرب نقطة "
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
-                المدينة :
+                نوع العرض :
               </label>
               <select
-                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                value={selectedOffer}
+                onChange={handleOfferChange}
+                className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
               >
-                {cities.map((city) => (
-                  <option key={city.id} value={city.id}>
-                    {city.name}
+                {offer.map((o: any) => (
+                  <option key={o.id} value={o.id}>
+                    {o.offer}
                   </option>
                 ))}
               </select>
             </div>
+
           </div>
-          <div className="flex flex-row justify-center items-center gap-1 xl:gap-4">
-            <div className="mb-4">
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
+            <div className={`${selectedOffer === 1 ? "hidden" : ""} mb-4`}>
               <label className="block text-white font-semibold text-sm mb-2">
-                اللات :
+                مدة {selectedOffer === 2 ? "الإجار" : "الرهن"} :{" "}
+                <span className="text-gray-400 text-sm">
+                  {" "}
+                  {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
+                </span>
               </label>
               <input
                 type="text"
-                placeholder="اللات"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                placeholder="مدة العرض"
+                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
+
               />
-            </div>
-            <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                اللونج :
-              </label>
-              <input
-                type="text"
-                placeholder="اللونج"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
-              />
+
             </div>
           </div>
+        </div>
+        <div className="w-full m-0 my-6 flex flex-col gap-2">
+          <span className="text-gray-400 text-base mb-[-2px]">
+            قم بالنقر على الخارطة لتحديد مكان العقار
+          </span>
+          <MapForProperty onAddressSelect={setGeoAddress} />
+        </div>
+        <div className="mb-4 flex justify-start items-center">
+          <button
+            type="submit"
+            className="w-[40] h-11 border p-2 rounded-md bg-accent border-accent hover:bg-accent-hover text-white"
+          >
+            إضافة الشقة
+          </button>
         </div>
       </form>
     </div>
