@@ -212,6 +212,7 @@ export default function Apartment() {
               {errors.addressDescription && <p className="text-red-500">{errors.addressDescription.message}</p>}
             </div>
           </div>
+          <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
           <div className="mb-4">
             <label className="block text-white font-semibold text-sm mb-2">نوع العرض :</label>
             <select
@@ -245,6 +246,7 @@ export default function Apartment() {
               {errors.duration && <p className="text-red-500">{errors.duration.message}</p>}
             </div>
           )}
+          </div>
         </div>
         <div className="w-full m-0 my-6 flex flex-col gap-2">
           <span className="text-gray-400 text-base mb-[-2px]">
