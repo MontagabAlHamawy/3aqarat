@@ -178,16 +178,13 @@ export default function Apartment() {
             <div className="mb-4">
               <label className="block text-white font-semibold text-sm mb-2">
                 رقم الطابق :
-                <span className="text-gray-400 text-xs">
-                  ( الصفر يشير إلى الطابق الأرضي)
-                </span>
               </label>
               <input
                 type="text"
                 name="floorNumber"
                 value={formData.floorNumber}
                 onChange={handleInputChange}
-                placeholder="الطابق"
+                placeholder="الطابق الأرضي 0"
                 className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
               />
             </div>
