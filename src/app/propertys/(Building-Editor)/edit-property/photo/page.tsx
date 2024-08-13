@@ -6,9 +6,12 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { GetToken } from '@/utils/API';
 import apiUrl from '@/utils/apiConfig';
-import { HandleDeletePhoto } from '@/components/sweetalert/handleDeletePhoto';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
+
+const MySwal = withReactContent(Swal);
 
 interface Photo {
     id: number;
@@ -26,7 +29,8 @@ export default function Page({ searchParams }: PageProps) {
     const propertyId = searchParams.url;
     const [photos, setPhotos] = useState<Photo[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    let token = GetToken() || '';
+    const token = GetToken() || '';
+
     useEffect(() => {
         const fetchPhotos = async () => {
             try {
@@ -35,13 +39,13 @@ export default function Page({ searchParams }: PageProps) {
                         'Authorization': `JWT ${token}`,
                     }
                 });
-                if (Array.isArray(response.data.results) || response.data.count === 0) {
+                if (Array.isArray(response.data.results)) {
                     setPhotos(response.data.results);
                 } else {
                     toast.error("شكل استجابة غير متوقع من الخادم.");
                 }
             } catch (error) {
-                toast.error("خطأ في جلب الصور. الرجاء المحاولة مرة أخرى لاحقًا.");
+                toast.error("حدث خطأ أثناء جلب الصور.");
             }
         };
 
@@ -89,13 +93,56 @@ export default function Page({ searchParams }: PageProps) {
             toast.error(`خطأ في رفع الصورة`);
         }
     };
+
     const triggerDeleteConfirmation = (photoId: number) => {
-        HandleDeletePhoto({
-            photoId,
-            propertyId,
-            token,
-            onSuccess: () => {
-                setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoId));
+        MySwal.fire({
+            title: "هل أنت متأكد؟",
+            text: "لن تتمكن من التراجع عن هذا!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "حذف الصورة",
+            cancelButtonText: "تراجع",
+            customClass: {
+                confirmButton: "bg-red-600 mx-3 font-cairo flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300",
+                cancelButton: "bg-accent font-cairo flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
+                popup: "text-white font-cairo",
+            },
+            buttonsStyling: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`${apiUrl}/properties/${propertyId}/photos/${photoId}/`, {
+                    headers: {
+                        'Authorization': `JWT ${token}`,
+                    },
+                })
+                .then(() => {
+                    MySwal.fire({
+                        title: "تم الحذف!",
+                        text: "تم حذف الصورة بنجاح.",
+                        confirmButtonText: "تم",
+                        icon: "success",
+                        customClass: {
+                            confirmButton: "bg-accent font-cairo flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
+                            popup: "text-white font-cairo",
+                        },
+                        buttonsStyling: false,
+                    }).then(() => {
+                        setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoId));
+                    });
+                })
+                .catch(() => {
+                    MySwal.fire({
+                        title: "خطأ!",
+                        text: "حدث خطأ أثناء حذف الصورة.",
+                        confirmButtonText: "تم",
+                        icon: "error",
+                        customClass: {
+                            confirmButton: "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
+                            popup: "text-white font-cairo",
+                        },
+                        buttonsStyling: false,
+                    });
+                });
             }
         });
     };
@@ -139,11 +186,10 @@ export default function Page({ searchParams }: PageProps) {
                 </div>
             </div>
             <Link href={`/propertys/${propertyId}`} className='flex justify-center mt-5 xl:mt-0 xl:justify-start xl:px-14'>
-                <p className=" bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover">
-                تم التعديل
+                <p className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-hover">
+                    تم التعديل
                 </p>
             </Link>
         </div>
-
     );
 }
