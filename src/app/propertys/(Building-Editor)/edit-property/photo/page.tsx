@@ -29,7 +29,7 @@ export default function Page({ searchParams }: PageProps) {
     const propertyId = searchParams.url;
     const [photos, setPhotos] = useState<Photo[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const token = GetToken() || '';
+    const token = GetToken();
 
     useEffect(() => {
         const fetchPhotos = async () => {
