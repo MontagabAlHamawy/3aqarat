@@ -11,12 +11,13 @@ import { GetToken, MyProfile, SingelBuildingApi } from "@/utils/API";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import BuildingLoade from "@/components/loade/BuildingLoade";
 
-export default function EditBuilding(props: any) {
-
-  const page = props.searchParams.url;
+export default function EditBuilding() {
+  const route = usePathname();
+  const searchParams = useSearchParams();
+  const page = searchParams.get('url');
   const token = GetToken();
   const [building, setBuilding] = useState<any>(null);
   const router = useRouter();

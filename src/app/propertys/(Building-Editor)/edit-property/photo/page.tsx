@@ -35,7 +35,7 @@ export default function Page({ searchParams }: PageProps) {
                         'Authorization': `JWT ${token}`,
                     }
                 });
-                if (Array.isArray(response.data.results)) {
+                if (Array.isArray(response.data.results) || response.data.count === 0) {
                     setPhotos(response.data.results);
                 } else {
                     toast.error("شكل استجابة غير متوقع من الخادم.");
