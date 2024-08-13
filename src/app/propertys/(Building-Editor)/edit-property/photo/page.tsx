@@ -34,11 +34,7 @@ export default function Page({ searchParams }: PageProps) {
     useEffect(() => {
         const fetchPhotos = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/properties/${propertyId}/photos/`, {
-                    headers: {
-                        'Authorization': `JWT ${token}`,
-                    }
-                });
+                const response = await axios.get(`${apiUrl}/properties/${propertyId}/photos/`);
                 if (Array.isArray(response.data.results)) {
                     setPhotos(response.data.results);
                 } else {
@@ -115,34 +111,34 @@ export default function Page({ searchParams }: PageProps) {
                         'Authorization': `JWT ${token}`,
                     },
                 })
-                .then(() => {
-                    MySwal.fire({
-                        title: "تم الحذف!",
-                        text: "تم حذف الصورة بنجاح.",
-                        confirmButtonText: "تم",
-                        icon: "success",
-                        customClass: {
-                            confirmButton: "bg-accent font-cairo flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
-                            popup: "text-white font-cairo",
-                        },
-                        buttonsStyling: false,
-                    }).then(() => {
-                        setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoId));
+                    .then(() => {
+                        MySwal.fire({
+                            title: "تم الحذف!",
+                            text: "تم حذف الصورة بنجاح.",
+                            confirmButtonText: "تم",
+                            icon: "success",
+                            customClass: {
+                                confirmButton: "bg-accent font-cairo flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
+                                popup: "text-white font-cairo",
+                            },
+                            buttonsStyling: false,
+                        }).then(() => {
+                            setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoId));
+                        });
+                    })
+                    .catch(() => {
+                        MySwal.fire({
+                            title: "خطأ!",
+                            text: "حدث خطأ أثناء حذف الصورة.",
+                            confirmButtonText: "تم",
+                            icon: "error",
+                            customClass: {
+                                confirmButton: "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
+                                popup: "text-white font-cairo",
+                            },
+                            buttonsStyling: false,
+                        });
                     });
-                })
-                .catch(() => {
-                    MySwal.fire({
-                        title: "خطأ!",
-                        text: "حدث خطأ أثناء حذف الصورة.",
-                        confirmButtonText: "تم",
-                        icon: "error",
-                        customClass: {
-                            confirmButton: "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
-                            popup: "text-white font-cairo",
-                        },
-                        buttonsStyling: false,
-                    });
-                });
             }
         });
     };
