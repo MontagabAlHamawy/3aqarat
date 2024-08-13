@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { PiTrashDuotone, PiPlusCircleDuotone } from 'react-icons/pi';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { GetToken } from '@/utils/API';
 import apiUrl from '@/utils/apiConfig';
 import Swal from 'sweetalert2';
@@ -18,15 +18,10 @@ interface Photo {
     photo: string;
 }
 
-interface PageProps {
-    searchParams: {
-        url: string;
-    };
-}
 
-export default function Page({ searchParams }: PageProps) {
-    const router = useRouter();
-    const propertyId = searchParams.url;
+export default function Page() {
+    const searchParams = useSearchParams();
+    const propertyId = searchParams.get('url');
     const [photos, setPhotos] = useState<Photo[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const token = GetToken();
