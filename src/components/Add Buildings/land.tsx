@@ -94,7 +94,7 @@ export default function Apartment() {
 
         if (response.status === 201) {
           toast.success("تم إضافة الأرض بنجاح!");
-          router.push(`/propertys/${response.data.property.id}`);
+          router.push(`/propertys/edit-property/photo?url=${response.data.property.id}`);
         } else {
           toast.error("حدث خطأ أثناء إضافة الأرض.");
         }
@@ -213,39 +213,39 @@ export default function Apartment() {
             </div>
           </div>
           <div className="flex flex-row justify-center items-center gap-1 xl:gap-14">
-          <div className="mb-4">
-            <label className="block text-white font-semibold text-sm mb-2">نوع العرض :</label>
-            <select
-              {...register("offer", { required: "هذا الحقل مطلوب" })}
-              value={selectedOffer}
-              onChange={handleOfferChange}
-              className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
-            >
-              {offer.map((o: any) => (
-                <option key={o.id} value={o.id}>
-                  {o.offer}
-                </option>
-              ))}
-            </select>
-            {errors.offer && <p className="text-red-500">{errors.offer.message}</p>}
-          </div>
-          {selectedOffer !== 1 && (
             <div className="mb-4">
-              <label className="block text-white font-semibold text-sm mb-2">
-                مدة {selectedOffer === 2 ? "الإيجار" : "الرهن"} :{" "}
-                <span className="text-gray-400 text-sm">
-                  {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
-                </span>
-              </label>
-              <input
-                type="text"
-                {...register("duration", { required: "هذا الحقل مطلوب" })}
-                placeholder="مدة العرض"
-                className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
-              />
-              {errors.duration && <p className="text-red-500">{errors.duration.message}</p>}
+              <label className="block text-white font-semibold text-sm mb-2">نوع العرض :</label>
+              <select
+                {...register("offer", { required: "هذا الحقل مطلوب" })}
+                value={selectedOffer}
+                onChange={handleOfferChange}
+                className="w-40 xl:w-[397px] h-11 border pr-2 rounded-lg bg-section border-section text-white"
+              >
+                {offer.map((o: any) => (
+                  <option key={o.id} value={o.id}>
+                    {o.offer}
+                  </option>
+                ))}
+              </select>
+              {errors.offer && <p className="text-red-500">{errors.offer.message}</p>}
             </div>
-          )}
+            {selectedOffer !== 1 && (
+              <div className="mb-4">
+                <label className="block text-white font-semibold text-sm mb-2">
+                  مدة {selectedOffer === 2 ? "الإيجار" : "الرهن"} :{" "}
+                  <span className="text-gray-400 text-sm">
+                    {selectedOffer === 2 ? "(بالأشهر)" : "(بالسنوات)"}
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  {...register("duration", { required: "هذا الحقل مطلوب" })}
+                  placeholder="مدة العرض"
+                  className="w-40 xl:w-[397px] border p-2 rounded-lg bg-section border-section text-white"
+                />
+                {errors.duration && <p className="text-red-500">{errors.duration.message}</p>}
+              </div>
+            )}
           </div>
         </div>
         <div className="w-full m-0 my-6 flex flex-col gap-2">

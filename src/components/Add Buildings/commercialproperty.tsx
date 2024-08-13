@@ -96,7 +96,7 @@ export default function CommercialProperty() {
 
         if (response.status === 201) {
           toast.success("تم إضافة المحل بنجاح!");
-          router.push(`/propertys/${response.data.property.id}`);
+          router.push(`/propertys/edit-property/photo?url=${response.data.property.id}`);
         } else {
           toast.error("حدث خطأ أثناء إضافة المحل.");
         }

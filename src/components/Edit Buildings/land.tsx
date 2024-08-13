@@ -136,60 +136,8 @@ export default function Land({ apartment }: any) {
   }
 
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
-      <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
-          {imagee.map((index: any, id: any) => {
-            
-
-            return (
-              <div key={id} className="relative">
-                <Image
-                  src={index.photo}
-                  width={300}
-                  height={0}
-                  alt={`Gallery Image`}
-                  className={`object-center rounded-md cursor-pointer`}
-                />
-                <button
-                  className={`${
-                    imagee === ImagLand ? "hidden" : ""
-                  } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-                >
-                  <PiTrashDuotone size={30} />
-                </button>
-              </div>
-            );
-          })}
-          <div className={`relative ${photo === "" ? "hidden" : "block"}`}>
-            <Image
-              src={photo}
-              width={300}
-              height={0}
-              alt="user"
-              className={` rounded-md`}
-            />
-            <button
-              onClick={() => setPhoto("")}
-              className={`p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-            >
-              <PiTrashDuotone size={30} />
-            </button>
-          </div>
-          <button
-            onClick={handleIconClick}
-            className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
-          >
-            <PiPlusCircleDuotone size={50} />
-          </button>
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-          />
-        </div>
-      </div>
+    <div className="flex flex-col xl:flex-row  justify-center  items-center  mt-10 gap-10">
+      
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-start items-start"
@@ -202,7 +150,7 @@ export default function Land({ apartment }: any) {
             <input
               type="text"
               placeholder="العنوان"
-              className="w-80 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] border p-2 rounded-lg bg-body border-body text-white"
               {...register("title", { required: true })}
             />
             {errors.title && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -213,7 +161,7 @@ export default function Land({ apartment }: any) {
             </label>
             <textarea
               placeholder="الوصف"
-              className="w-80 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] border p-2 rounded-lg bg-body border-body text-white"
               {...register("description", { required: true })}
             />
             {errors.description && (
@@ -225,7 +173,7 @@ export default function Land({ apartment }: any) {
               الملكية :
             </label>
             <select
-              className="w-80 xl:w-full h-11 border pr-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] h-11 border pr-2 rounded-lg bg-body border-body text-white"
               {...register("tabu", { required: true })}
             >
               <option value="طابو أخضر ( السجل العقاري )">
@@ -249,7 +197,7 @@ export default function Land({ apartment }: any) {
               <input
                 type="text"
                 placeholder="المساحة"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("area", { required: true })}
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -260,7 +208,7 @@ export default function Land({ apartment }: any) {
               </label>
               <div>
                 <select
-                  className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                  className="w-40 xl:w-[417px] h-11 border pr-2 rounded-lg bg-body border-body text-white"
                   value={selectedOffer}
                   onChange={handleOfferChange}
                 >
@@ -285,7 +233,7 @@ export default function Land({ apartment }: any) {
               <input
                 type="text"
                 placeholder="مدة العرض"
-                className="w-40  xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("months", { required: true })}
               />
               {errors.months && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -297,14 +245,12 @@ export default function Land({ apartment }: any) {
               <input
                 type="text"
                 placeholder="السعر"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("price", { required: true })}
               />
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
             </div>
           </div>
-        </div>
-        <div className="xl:w-full xl:flex xl:justify-center">
           <button
             type="submit"
             className=" xl:w-40 bg-accent hover:bg-accent-hover text-white  py-2 px-4 rounded"

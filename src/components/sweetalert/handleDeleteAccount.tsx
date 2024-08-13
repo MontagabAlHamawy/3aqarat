@@ -24,7 +24,7 @@ export function handleDeleteAccount(logout: () => void) {
         "bg-red-600 mx-3 flex justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-red-500 ease-in duration-300",
       cancelButton:
         "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
-      popup: "text-white",
+      popup: "text-white font-cairo",
     },
     buttonsStyling: false,
     preConfirm: (password) => {
@@ -46,7 +46,7 @@ export function handleDeleteAccount(logout: () => void) {
             customClass: {
               confirmButton:
                 "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
-              popup: "text-white",
+              popup: "text-white font-cairo",
             },
             buttonsStyling: false,
           }).then(() => {
@@ -62,7 +62,7 @@ export function handleDeleteAccount(logout: () => void) {
             customClass: {
               confirmButton:
                 "bg-accent flex mx-3 justify-start items-center gap-1 xl:gap-2 cursor-pointer text-white px-3 py-2 xl:px-4 xl:py-2 rounded hover:bg-accent-hover ease-in duration-300",
-              popup: "text-white",
+              popup: "text-white font-cairo",
             },
             buttonsStyling: false,
           });

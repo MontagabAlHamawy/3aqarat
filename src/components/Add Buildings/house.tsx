@@ -102,7 +102,7 @@ export default function PropertyForm() {
 
         if (response.status === 201) {
           toast.success("تم إضافة المنزل بنجاح!");
-          router.push(`/propertys/${response.data.property.id}`);
+          router.push(`/propertys/edit-property/photo?url=${response.data.property.id}`);
         } else {
           toast.error("حدث خطأ أثناء إضافة المنزل.");
         }

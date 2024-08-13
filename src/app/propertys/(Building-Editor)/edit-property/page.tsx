@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import BuildingLoade from "@/components/loade/BuildingLoade";
 
 export default function EditBuilding(props: any) {
 
@@ -62,7 +63,7 @@ export default function EditBuilding(props: any) {
     }
   }, [page, router, warning]);
   if (loading) {
-    return <SingleBuildingLoade />;
+    return <BuildingLoade />;
   }
 
   const type = building?.property_object?.property_type?.en || null;
@@ -89,13 +90,8 @@ export default function EditBuilding(props: any) {
   }
   return (
     <>
-      <div className={`relative ${token || MyBuilding ? "hidden" : ""}`}><SingleBuildingLoade /></div>
+      <div className={`relative ${token || MyBuilding ? "hidden" : ""}`}><BuildingLoade /></div>
       <div className={`relative ${token || MyBuilding ? "" : "hidden"}`}>
-        <div>
-          <h1 className="text-3xl text-accent text-center xl:text-right font-bold mb-9">
-            تعديل معلومات العقار
-          </h1>
-        </div>
         <div>
           <div className={`${isLand ? "block" : "hidden"}`}>
             <Land apartment={building} />

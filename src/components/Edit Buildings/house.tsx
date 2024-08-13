@@ -112,7 +112,7 @@ export default function House({ apartment }: any) {
         garden_area: Number(data.garden_area),
         direction: data.direction,
       };
-    
+
 
       try {
         await axios.patch(`${apiUrl}/houses/${apartment.id}/`, bodyContent, {
@@ -148,59 +148,7 @@ export default function House({ apartment }: any) {
   ];
 
   return (
-    <div className="flex flex-col xl:flex-row  justify-center xl:justify-start items-center xl:items-start mt-10 gap-10">
-      <div>
-        <div className="grid  grid-cols-2 mt-7 mx-2  gap-x-2 gap-y-2 md:gap-x-3 xl:gap-x-3 xl:mb-6 ">
-          {imagee.map((index: any, id: any) => {
-            
-            return (
-              <div key={id} className="relative">
-                <Image
-                  src={index.photo}
-                  width={300}
-                  height={0}
-                  alt={`Gallery Image`}
-                  className="  object-center rounded-md cursor-pointer"
-                />
-                <button
-                  className={`${
-                    imagee === ImagHouse ? "hidden" : ""
-                  } p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-                >
-                  <PiTrashDuotone size={30} />
-                </button>
-              </div>
-            );
-          })}
-          <div className={`relative ${photo === "" ? "hidden" : "block"}`}>
-            <Image
-              src={photo}
-              width={300}
-              height={0}
-              alt="user"
-              className={` rounded-md`}
-            />
-            <button
-              onClick={() => setPhoto("")}
-              className={`p-1 w-max h-max bg-red-600 cursor-pointer rounded-md absolute top-1 right-1`}
-            >
-              <PiTrashDuotone size={30} />
-            </button>
-          </div>
-          <button
-            onClick={handleIconClick}
-            className="flex justify-center items-center w-40 h-28 xl:w-72 xl:h-40 rounded-md bg-sidpar text-4xl text-accent cursor-pointer"
-          >
-            <PiPlusCircleDuotone size={50} />
-          </button>
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-          />
-        </div>
-      </div>
+    <div className="flex flex-col xl:flex-row  justify-center items-center mt-10 gap-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-start items-start"
@@ -213,7 +161,7 @@ export default function House({ apartment }: any) {
             <input
               type="text"
               placeholder="العنوان"
-              className="w-80 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] border p-2 rounded-lg bg-body border-body text-white"
               {...register("title", { required: true })}
             />
             {errors.title && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -224,7 +172,7 @@ export default function House({ apartment }: any) {
             </label>
             <textarea
               placeholder="الوصف"
-              className="w-80 xl:w-full border p-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] border p-2 rounded-lg bg-body border-body text-white"
               {...register("description", { required: true })}
             />
             {errors.description && (
@@ -236,7 +184,7 @@ export default function House({ apartment }: any) {
               الملكية :
             </label>
             <select
-              className="w-80 xl:w-full h-11 border pr-2 rounded-lg bg-section border-section text-white"
+              className="w-80 xl:w-[850px] h-11 border pr-2 rounded-lg bg-body border-body text-white"
               {...register("tabu", { required: true })}
             >
               <option value="طابو أخضر ( السجل العقاري )">
@@ -260,7 +208,7 @@ export default function House({ apartment }: any) {
               <input
                 type="text"
                 placeholder="المساحة"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("area", { required: true })}
               />
               {errors.area && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -272,7 +220,7 @@ export default function House({ apartment }: any) {
               <input
                 type="text"
                 placeholder="عدد الغرف"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("number_of_rooms", { required: true })}
               />
               {errors.number_of_rooms && (
@@ -288,7 +236,7 @@ export default function House({ apartment }: any) {
               <input
                 type="text"
                 placeholder="رقم الطابق"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("floor_number", { required: true })}
               />
               {errors.floor_number && (
@@ -300,7 +248,7 @@ export default function House({ apartment }: any) {
                 الإتجاه :
               </label>
               <select
-                className="w-40 xl:w-52 h-10 border pr-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] h-10 border pr-2 rounded-lg bg-body border-body text-white"
                 {...register("direction", { required: true })}
               >
                 {directionOptions.map((option) => (
@@ -322,7 +270,7 @@ export default function House({ apartment }: any) {
               <input
                 type="text"
                 placeholder="السعر"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("garden_area", { required: true })}
               />
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -332,7 +280,7 @@ export default function House({ apartment }: any) {
                 نوع العرض :
               </label>
               <select
-                className="w-40 xl:w-52 h-11 border pr-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] h-11 border pr-2 rounded-lg bg-body border-body text-white"
                 value={selectedOffer}
                 onChange={handleOfferChange}
               >
@@ -356,7 +304,7 @@ export default function House({ apartment }: any) {
               <input
                 type="text"
                 placeholder="مدة العرض"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("months", { required: selectedOffer !== "1" })}
               />
               {errors.months && <p className="text-red-500">هذا الحقل مطلوب</p>}
@@ -368,7 +316,7 @@ export default function House({ apartment }: any) {
               <input
                 type="text"
                 placeholder="السعر"
-                className="w-40 xl:w-52 border p-2 rounded-lg bg-section border-section text-white"
+                className="w-40 xl:w-[417px] border p-2 rounded-lg bg-body border-body text-white"
                 {...register("price", { required: true })}
               />
               {errors.price && <p className="text-red-500">هذا الحقل مطلوب</p>}
